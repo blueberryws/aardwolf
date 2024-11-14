@@ -1,5 +1,9 @@
 export const EditColorsEvent = "editColors";
-export function emitEditColors() {
-    const editColorsEvent = new CustomEvent(EditColorsEvent);
-    document.dispatchEvent(editColorsEvent);
+export const SetDocumentEditable = "setDocumentEditable";
+export const UnsetDocumentEditable = "unsetDocumentEditable";
+
+export function dispatch(eventName) {
+    console.log(eventName);
+    const newEvent = new CustomEvent(eventName);
+    document.dispatchEvent(newEvent);
 }

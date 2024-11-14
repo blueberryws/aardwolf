@@ -1,4 +1,4 @@
-export function samBuilder() { // startfold
+export function modalBuilder() { // startfold
   const builder = new AdminModal();
   return builder;
 } // endfold
@@ -12,6 +12,7 @@ export class AdminModal extends HTMLDialogElement { // startfold
     super();
     this.beforeCancel = () => {};
     this.beforeAction = () => {};
+    this.content = document.createElement("div");
   } // endfold
   connectedCallback() { // startfold
     this.render();
@@ -32,8 +33,7 @@ export class AdminModal extends HTMLDialogElement { // startfold
     this.createActionBtn();
   } // endfold
   getContent() { // startfold
-    const content = document.createElement("div");
-    return content
+    return this.content;
   } // endfold
   createActionBtn() { // startfold
       this.actionBtn = document.createElement("button");
