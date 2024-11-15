@@ -6,6 +6,7 @@ export class LinkButtonEditor extends ElementEditor {
         super();
         this.link = link;
         this.button = button;
+        this.clickHandler = (e) => this.editLinkButton(e);
     }
   getHTMLContent() { // startfold
     return `<${this.link.elementType} is="${this.link.elementName}" href="${this.link.href || ""}"><button>${this.button.innerText}</button></${this.link.elementType}>`;
@@ -19,10 +20,10 @@ export class LinkButtonEditor extends ElementEditor {
     }
   } // endfold
   setEditable() { // startfold
-    this.link.addEventListener("click", (e) => this.editLinkButton(e));
+    this.link.addEventListener("click", this.clickHandler);
   } // endfold
   unsetEditable() { // startfold
-    this.link.removeEventListener("click", (e) => this.editLinkButton(e));
+    this.link.removeEventListener("click", this.clickHandler);
   } // endfold
   clean() { // startfold
   } // endfold

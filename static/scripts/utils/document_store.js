@@ -50,4 +50,10 @@ export class DocumentStore { // startfold
                 .get(key).onsuccess = (event) => callback(event.target.result);
         }
     } // endfold
+    deleteSrc(key) { // startfold
+      this.db
+         .transaction(this.storeName, "readwrite")
+         .objectStore(this.storeName)
+         .delete(key);
+    } // endfold
 } // endfold
