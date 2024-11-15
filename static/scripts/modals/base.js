@@ -37,7 +37,7 @@ export class AdminModal extends HTMLDialogElement { // startfold
   } // endfold
   createActionBtn() { // startfold
       this.actionBtn = document.createElement("button");
-      this.actionBtn.innerText = this.actionText;;
+      this.actionBtn.innerText = this.actionText;
     
       this.actionBtn.addEventListener("click", (e) => {
         this.beforeAction(e);
@@ -59,10 +59,20 @@ export class AdminModal extends HTMLDialogElement { // startfold
   } // endfold
   contentHTML(html) { // startfold
     this.content.innerHTML = html
+    return this
   } // endfold
   contentNode(node) { // startfold
     this.content.innerHTML = "";
     this.content.appendChild(node);
+    return this
+  } // endfold
+  setHeaderText(text) { // startfold
+    this.headerText = text;
+    return this;
+  } // endfold
+  setActionText(text) { // startfold
+    this.actionText = text;
+    return this
   } // endfold
   actionFunc(func) { // startfold
     this.beforeAction = func

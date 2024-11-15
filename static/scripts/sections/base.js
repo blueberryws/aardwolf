@@ -1,6 +1,12 @@
+import { HeroSection } from "./hero.js";
+import { EditableSectionEditor, SECTION_CHOICES } from "../editors/section_editor.js";
+
+
 export class EditableSection extends HTMLElement { // startfold
+  classes = ["default"]
   constructor() { // startfold
     super();
+    this.editor = new EditableSectionEditor(this);
   } // endfold
   getOrDefault(elementType) { // startfold
     const defaultElement = new elementType();
@@ -21,4 +27,5 @@ export class EditableSection extends HTMLElement { // startfold
         this.appendChild(child);
     }
   } // endfold
+
 }

@@ -9,10 +9,19 @@ import { EditableParagraph } from "../elements/editable_paragraph.js";
 import { EditableLinkButton } from "../elements/editable_link_button.js";
 import { EditablePicture } from "../elements/editable_picture.js";
 
+export function makeHero() {
+    const hero = new HeroSection();
+    hero.editor.setEditable();
+    hero.classList.add(hero.classes[0]);
+    return hero;
+}
+
 // Data Element
 export const HeroSectionName = "hero-section";
 
 export class HeroSection extends EditableSection { // startfold
+  classes = ["default", "alternate"];
+
   elementName = HeroSectionName;
   elementType = "section";
 
@@ -23,6 +32,7 @@ export class HeroSection extends EditableSection { // startfold
 
   constructor() { // startfold
     super();
+    this.setAttribute("is", HeroSectionName);
     this.heirs = [
         this.getOrDefaultText(EditableH1, this.defaultPageTitleText),
         this.getOrDefaultText(EditableH2, this.defaultPageSubtitleText),

@@ -67,8 +67,46 @@ export class HeadEditorModal extends AdminModal { // startfold
     this.beforeAction = () => {
         this.head.siteTitle.innerText = this.titleText.value; 
         this.head.description.content = this.descriptionText.value;
+        this.head.getEditableChildren().forEach(child => child.remove());
+        for (let child of this.metaChildren.children) {
+            const selector = child.querySelector("select");
+            const content = child.querySelector("input");
+            if (content.value != "" && content.value != null) {
+              const newMeta = document.createElement("meta");
+              newMeta.name = selector.value;
+              newMeta.content = content.value;
+              this.head.appendChild(newMeta);
+            }
+        }
     };
+    this.metaChildren = null;
     this.render();
+  } // endfold
+  makeMetaSelector(name, content) { // startfold
+    const container = document.createElement("div");
+    const selector = document.createElement("select");
+    for (let opt of this.head.supportedNames) {
+        const option = document.createElement("option");
+        option.value = opt;
+        option.innerText = opt;
+        selector.appendChild(option);
+    }
+    if (name != null) {
+        selector.value = name;
+    }
+    container.appendChild(selector);
+
+    const input = document.createElement("input");
+    input.value = content;
+    container.appendChild(input);
+
+    const removeButton = document.createElement("button");
+    removeButton.innerText = "x";
+    removeButton.addEventListener("click", () => {
+        container.remove();
+    })
+    container.appendChild(removeButton);
+    return container;
   } // endfold
   getContent() { // startfold
     const content = document.createElement("div");
@@ -92,6 +130,21 @@ export class HeadEditorModal extends AdminModal { // startfold
     this.descriptionText.type = "text";
     this.descriptionText.value = this.head.description.content || "";
     content.appendChild(this.descriptionText);
+
+    this.metaChildren = document.createElement("div");
+    for (let meta of this.head.getEditableChildren()) {
+        const metaLine = this.makeMetaSelector(meta.name, meta.content);
+        this.metaChildren.appendChild(metaLine);
+    }
+    content.appendChild(this.metaChildren);
+
+    const addButton = document.createElement("button");
+    addButton.innerText = "Add Metadata";
+    addButton.addEventListener("click", () => {
+        const newMeta = this.makeMetaSelector(null, "");
+        this.metaChildren.appendChild(newMeta);
+    });
+    content.appendChild(addButton);
 
     return content
   } // endfold
