@@ -19,6 +19,9 @@ export class FontStyle extends HTMLStyleElement { // startfold
     Roboto: {
         url: "/static/fonts/Roboto/Roboto-Regular.ttf",
     },
+    Jost: {
+        url: "/static/fonts/jost/Jost-VariableFont_wght.ttf",
+    },
   }
   bodyFonts = {
     Arial: "local",
@@ -27,6 +30,9 @@ export class FontStyle extends HTMLStyleElement { // startfold
     },
     Roboto: {
         url: "/static/fonts/Roboto/Roboto-Regular.ttf",
+    },
+    Jost: {
+        url: "/static/fonts/jost/Jost-VariableFont_wght.ttf",
     },
   }
 

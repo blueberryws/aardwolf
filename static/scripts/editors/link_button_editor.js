@@ -29,7 +29,7 @@ export class LinkButtonEditor extends ElementEditor {
   } // endfold
   editLinkButton(e) { // startfold
     e.preventDefault();
-    e.stopPropagation();
+    // e.stopPropagation();
 
     const modalContent = document.createElement("div");
 

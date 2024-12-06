@@ -11,6 +11,7 @@ export class PictureEditor extends ElementEditor {
     constructor(element) { // startfold
         super();
         this.element = element;
+        this.clickHandler = () => this.launchEditorModal();
 
         // TODO: Refactor candidate.
         // Not sure what the right pattern is here.
@@ -67,10 +68,10 @@ export class PictureEditor extends ElementEditor {
         // endfold
     } // endfold
   setEditable() { // startfold
-    this.element.addEventListener("click", () => this.launchEditorModal());
+    this.element.addEventListener("click", this.clickHandler);
   } // endfold
   unsetEditable() { // startfold
-    this.element.removeEventListener("click", () => this.launchEditorModal());
+    this.element.removeEventListener("click", this.clickHandler);
   } // endfold
   clean() { // startfold
       const text = this.element.innerText.replaceAll("\n", "<br>");

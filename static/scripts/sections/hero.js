@@ -20,7 +20,7 @@ export function makeHero() {
 export const HeroSectionName = "hero-section";
 
 export class HeroSection extends EditableSection { // startfold
-  classes = ["default", "alternate"];
+  classes = ["default", "left-align"];
 
   elementName = HeroSectionName;
   elementType = "section";

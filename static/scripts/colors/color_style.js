@@ -103,6 +103,7 @@ export class ColorStyle extends HTMLStyleElement { // startfold
       ["#ff0000", "#af0000", "#8f0000", "#4f0000", "#0f0000"],
       ["#00ff00", "#00aa00", "#008800", "#004400", "#000000"],
       ["#0000ff", "#0000aa", "#000088", "#000044", "#000000"],
+      ["#ffffff", "#aaaaaa", "#777777", "#333333", "#000000"],
       [this.dataset.primaryColor, this.dataset.secondaryColor, "#000000", "#ffffff", "#000000"],
     ]
   } // endfold

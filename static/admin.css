@@ -75,3 +75,10 @@
 }
 /* endfold */
 /* endfold */
+.section-add-btn, .section-delete-btn, .section-up-btn, .section-down-btn, .section-next-btn, .section-prev-btn {
+    position: absolute;
+}
+.section-add-btn {
+    bottom: -10px;
+    left: 50%;
+}
