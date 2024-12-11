@@ -5,7 +5,6 @@ import { ResetButton } from "./save/reset_button.js";
 import { dispatch, SetDocumentEditable, UnsetDocumentEditable } from "./interfaces/events.js";
 import { IS_LOCAL, GET_STORE } from "./globals.js";
 
-window.IS_LOCAL = true;
 const saveBtn = new SaveButton();
 const resetBtn = new ResetButton();
 if (IS_LOCAL) {

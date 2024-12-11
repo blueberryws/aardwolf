@@ -9,6 +9,7 @@ export class SaveButton extends HTMLButtonElement {
         this.innerText = "save";
         this.addEventListener("click", () => this.save());
         this.store = GET_STORE();
+        this.getChildren = (node) => this.processChildren(node);
     }
     save() {
         if (IS_LOCAL()) {
@@ -17,15 +18,38 @@ export class SaveButton extends HTMLButtonElement {
             this.saveToCloud();
         }
     }
-    saveToLocal() {
+    getContent() {
         // UnsetDocumentEditable.
         const main = document.querySelector("main");
-        this.store.saveSrc("main", main.outerHTML);
         const head = document.querySelector("head");
-        this.store.saveSrc("head", head.outerHTML);
+        const content = {
+            "main": main.outerHTML,
+            "head": head.outerHTML,
+        }
+        return content
+    }
+    saveToLocal() {
+        const content = this.getContent();
+        this.store.saveSrc("main", content.main);
+        this.store.saveSrc("head", content.head);
     }
     saveToCloud() {
-        console.error("not implemented!");
+        const main = document.querySelector("main").outerHTML;
+        const head = document.querySelector("head").outerHTML;
+        const content = {
+            "head": head,
+            "main": main,
+            "site_json": "{}",
+        }
+
+        fetch("", {
+            method: "PUT",    
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(content),
+        })
+        .then(resp => resp.json())
+        .then(r => console.log(r))
+        .catch(e => console.error(e));
     }
 }
 
