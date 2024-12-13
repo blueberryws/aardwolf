@@ -12,9 +12,12 @@ export class SaveButton extends HTMLButtonElement {
         this.getChildren = (node) => this.processChildren(node);
     }
     save() {
+        console.log("Hi");
         if (IS_LOCAL()) {
+            console.log("saving to local");
             this.saveToLocal();
         } else {
+            console.log("saving to cloud");
             this.saveToCloud();
         }
     }
@@ -34,6 +37,7 @@ export class SaveButton extends HTMLButtonElement {
         this.store.saveSrc("head", content.head);
     }
     saveToCloud() {
+        console.log("saving to cloud");
         const main = document.querySelector("main").outerHTML;
         const head = document.querySelector("head").outerHTML;
         const content = {

@@ -1,6 +1,7 @@
-function htmlToNode(html) {
+export function fromHTML(html) {
     const template = document.createElement('template');
-    template.innerHTML = html;
+    console.log(html);
+    template.innerHTML = html.trim();
     const nNodes = template.content.childNodes.length;
     if (nNodes !== 1) {
         throw new Error(

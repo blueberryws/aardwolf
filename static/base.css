@@ -33,9 +33,14 @@ button {
   outline: 20px;
   border-radius: 3px;
 }
+
 img {
   object-fit: cover;
   object-position: center;
+}
+
+dialog img {
+    width: 150px;
 }
 
 /* typography settings startfold */

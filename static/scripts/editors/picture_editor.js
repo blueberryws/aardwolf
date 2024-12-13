@@ -12,6 +12,9 @@ export class PictureEditor extends ElementEditor {
     constructor(element) { // startfold
         super();
         this.element = element;
+        if (this.element.dataset.uuid == null || this.element.dataset.uuid == "") {
+            this.element.dataset.uuid = crypto.randomUUID();
+        }
         this.clickHandler = () => this.launchEditorModal();
 
         // TODO: Refactor candidate.
@@ -24,7 +27,7 @@ export class PictureEditor extends ElementEditor {
         // with impunity, and decide to save or cancel later.
         //   Make a two-way-data-binding sorta thing here.
         // Read from altText, Write to altTextInput.
-        this.altText = this.element.dataset.altText;
+        this.altText = this.element.img.alt;
         this.altTextInput = document.createElement("input");
         this.altTextInput.value = this.altText;
         this.altTextInput.addEventListener("change", (e) => {
@@ -45,10 +48,9 @@ export class PictureEditor extends ElementEditor {
             this.attributionHref= e.target.value;
         });
 
-        this.imgPreviewSrc = this.element.dataset.imgSrc;
+        this.imgPreviewSrc = this.element.img.src;
         this.imgPreview = document.createElement("img");
         this.imgPreview.src = this.imgPreviewSrc;
-
     } // endfold
     makeForm() { // startfold
         // startfold photo metadata form
@@ -94,6 +96,7 @@ export class PictureEditor extends ElementEditor {
       this.altTextInput.value = selected.dataset.altText;
       this.attributionTextInput.value = selected.dataset.attributionText;
       this.attributionHrefInput.value = selected.dataset.attributionHref;
+      this.imgPreview.originalSrc = selected.originalSrc;
       this.imgPreview.src = selected.src;
   } // endfold
   launchEditorModal() { // startfold
@@ -148,8 +151,8 @@ export class PictureEditor extends ElementEditor {
       pexelsPreviews.innerHTML = "";
       for (let result of results) {
           const newPreview = document.createElement("img"); 
-          console.log(result.src);
-          newPreview.src = result.src.original;
+          newPreview.originalSrc = result.src.original;
+          newPreview.src = result.src.small || result.src.original;
           newPreview.dataset.altText = result.alt;
           newPreview.dataset.attributionText = `Photo Credit ${result.photographer}`;
           newPreview.dataset.attributionHref = result.photographer_url;
@@ -160,9 +163,9 @@ export class PictureEditor extends ElementEditor {
       }
   } // endfold
   saveChanges() { // startfold
-      this.element.dataset.altText = this.altText;
+      this.element.img.alt = this.altText;
       this.element.dataset.attributionText = this.attributionText;
       this.element.dataset.attributionHref = this.attributionHref;
-      this.element.dataset.imgSrc = this.imgPreview.src;
+      this.element.setSrc(this.imgPreview.originalSrc || this.imgPreview.src);
   } // endfold
 }
