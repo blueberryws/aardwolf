@@ -1,4 +1,5 @@
 import { EditableSection } from "./base.js";
+import { EditableSectionEditor } from "../editors/section_editor.js";
 import { 
     EditableH1,
     EditableH1Name,
@@ -11,6 +12,7 @@ import { EditablePicture } from "../elements/editable_picture.js";
 
 export function makeHero() {
     const hero = new HeroSection();
+
     hero.editor.setEditable();
     hero.classList.add(hero.classes[0]);
     return hero;
@@ -32,6 +34,7 @@ export class HeroSection extends EditableSection { // startfold
 
   constructor() { // startfold
     super();
+    this.editor = new EditableSectionEditor(this);
     this.setAttribute("is", HeroSectionName);
     this.heirs = [
         this.getOrDefaultText(EditableH1, this.defaultPageTitleText),

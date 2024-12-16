@@ -1,10 +1,12 @@
 import { modalBuilder } from "../modals/base.js";
 import { ElementEditor } from "./element_editor.js";
 import { makeHero } from "../sections/hero.js";
+import { makeCallToAction } from "../sections/call_to_action.js";
 import { dispatch, SetDocumentEditable } from "../interfaces/events.js";
 
 export const SECTION_CHOICES = {
     "hero": makeHero,
+    "call-to-action": makeCallToAction,
 }
 
 export class EditableSectionEditor extends ElementEditor {
