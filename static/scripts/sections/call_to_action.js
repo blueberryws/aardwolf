@@ -7,6 +7,7 @@ import {
 import { EditableParagraph } from "../elements/editable_paragraph.js";
 import { EditableLinkButton } from "../elements/editable_link_button.js";
 import { EditablePicture } from "../elements/editable_picture.js";
+import { SECTION_CHOICES } from "../interfaces/sections.js";
 
 export function makeCallToAction() {
     const callToAction = new CallToActionSection();
@@ -17,6 +18,8 @@ export function makeCallToAction() {
 
 // Data Element
 export const CallToActionSectionName = "call-to-action-section";
+
+SECTION_CHOICES["call-to-action"] = makeCallToAction;
 
 export class CallToActionSection extends EditableSection { // startfold
   classes = ["default"];

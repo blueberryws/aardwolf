@@ -7,12 +7,12 @@ export class SaveButton extends HTMLButtonElement {
     constructor() {
         super();
         this.innerText = "save";
+        this.setAttribute("is", SaveButtonName);
         this.addEventListener("click", () => this.save());
         this.store = GET_STORE();
         this.getChildren = (node) => this.processChildren(node);
     }
     save() {
-        console.log("Hi");
         if (IS_LOCAL()) {
             console.log("saving to local");
             this.saveToLocal();

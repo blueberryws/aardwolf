@@ -8,6 +8,7 @@ import { EditableParagraph } from "../elements/editable_paragraph.js";
 import { EditableListItem } from "../elements/editable_list_item.js";
 import { EditableLinkButton } from "../elements/editable_link_button.js";
 import { EditablePicture } from "../elements/editable_picture.js";
+import { SECTION_CHOICES } from "../interfaces/sections.js";
 
 export function makeTestimonials() {
     const testimonials = new TestimonialsSection();
@@ -19,6 +20,8 @@ export function makeTestimonials() {
 // Data Element
 export const TestimonialsSectionName = "testimonials-section";
 
+SECTION_CHOICES["testimonials"] = makeTestimonials;
+
 export class TestimonialsSection extends EditableSection { // startfold
     classes = ["default"];
 
@@ -26,7 +29,6 @@ export class TestimonialsSection extends EditableSection { // startfold
     elementType = "section";
 
     defaultSectionTitleText = "Section Title Here";
-    defaultSubsectionTitleText = "Subsection Title Here";
     defaultParagraphText = "Lorem Ipsum";
     defaultButtonText = "GO!";
 

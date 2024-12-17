@@ -9,6 +9,7 @@ import {
 import { EditableParagraph } from "../elements/editable_paragraph.js";
 import { EditableLinkButton } from "../elements/editable_link_button.js";
 import { EditablePicture } from "../elements/editable_picture.js";
+import { SECTION_CHOICES } from "../interfaces/sections.js";
 
 export function makeHero() {
     const hero = new HeroSection();
@@ -20,6 +21,8 @@ export function makeHero() {
 
 // Data Element
 export const HeroSectionName = "hero-section";
+
+SECTION_CHOICES["hero"] = makeHero;
 
 export class HeroSection extends EditableSection { // startfold
   classes = ["default", "left-align"];
@@ -33,6 +36,7 @@ export class HeroSection extends EditableSection { // startfold
   defaultButtonText = "BUTTON";
 
   constructor() { // startfold
+
     super();
     this.editor = new EditableSectionEditor(this);
     this.setAttribute("is", HeroSectionName);

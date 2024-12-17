@@ -7,6 +7,7 @@ export class ResetButton extends HTMLButtonElement {
     constructor() {
         super();
         this.innerText = "reset";
+        this.setAttribute("is", ResetButtonName);
         this.store = GET_STORE();
         this.addEventListener("click", () => {
             this.store.deleteSrc("head");
