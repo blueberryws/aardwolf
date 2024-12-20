@@ -1,0 +1,138 @@
+// we're using bootstrap breakpoints for everything:
+$s-phone: 576px;
+$phone: 576px;
+$tablet: 768px;
+$notebook: 992px;
+$laptop: 1200px;
+$desktop: 1400px;
+$cdn-base-url: "http://my.localhost/cdn";
+
+:root {
+  --normal-border-radius: 12px;
+  --small-border-radius: 7px;
+
+  --section-margin-bottom: 45px;
+  --color-one: var(--palette-color-one);
+  --color-two: var(--palette-color-two);
+  --color-three: var(--palette-color-three);
+  --color-four: var(--palette-color-four);
+
+  --narrow-padding: 60px 15px;
+  --standard-padding: 60px 30px;
+}
+
+@media screen and (min-width: $tablet) {
+  :root {
+    --section-margin-bottom: 80px;
+    --standard-padding: 90px 65px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-one: var(--palette-color-four);
+    --color-two: var(--palette-color-three);
+    --color-three: var(--palette-color-two);
+    --color-four: var(--palette-color-one);
+  }
+}
+
+* {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+html, body {
+  background-color: var(--color-one);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--header-font-family);
+}
+
+p, blockquote, label, figcaption {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-medium);
+}
+
+button {
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+  padding: 12px 25px;
+  border: 20px;
+  outline: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+img {
+  object-fit: cover;
+  object-position: center;
+  max-width: 100%;
+}
+
+dialog img {
+    width: 150px;
+}
+/* sections layout settings startfold */
+section {
+  max-width: min(1400px, 100%);
+  padding: var(--standard-padding);;
+  margin: auto;
+}
+
+/* endfold */
+/* typography settings startfold */
+h1, .page-title {
+    font-weight: 800;
+    font-size: 36px;
+}
+@mixin section-heading {
+    font-weight: var(--header-font-weight-large);
+    font-size: var(--header-font-size-large);
+    text-align: center;
+    margin-bottom: var(--section-margin-bottom);
+    line-height:  calc(var(--header-font-size-large) * 1.5);
+    color: var(--color-four);
+}
+h2 {
+  @include section-heading;
+}
+
+.callout-text {
+    font-weight: 400;
+    font-size: 16px;
+}
+.testimonial-text {
+  font-size: var(--body-font-size-small);
+  font-weight: 400;
+  text-align: center;
+}
+@mixin alternate-paragraph {
+  font-size: var(--body-font-size-small);
+  font-weight: 400;
+  line-height: calc(var(--body-font-size-small) * 1.5);
+  color: var(--color-four);
+}
+@mixin form-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+}
+@media (width >= 992px) {
+  h1, .page-title {
+    font-weight: 600;
+    font-size: 128px;
+  }
+  h2, .page-subtitle {
+    font-weight: 600;
+    font-size: 64px;
+  }
+  .callout-text {
+    font-weight: 300;
+    font-size: 24px;
+  }
+}
+/* endfold */

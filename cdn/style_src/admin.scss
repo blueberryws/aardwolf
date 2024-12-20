@@ -1,0 +1,130 @@
+.admin-modal { /* startfold */
+    display: grid;
+    position: fixed;
+    margin: auto;
+    padding: 50px;
+    border-radius: 12px;
+}
+.admin-modal h2 {
+  text-align: center;
+  width: 100%;
+  grid-row: 1;
+  grid-column: 1 / span 2;
+}
+.modal-content {
+  grid-row: 2;
+  grid-column: 1 / span 2;
+  display: grid;
+  gap: 25px;
+}
+/* color modal startfold */
+.modal-content .selectors {
+  grid-row: 1;
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-items: start;
+  align-items: center;
+}
+.modal-content .current-palette {
+  grid-row: 1;
+  grid-column: 2;
+}
+.modal-content .prospective-palettes {
+  grid-row: 2;
+  grid-column: 1 / span 2;
+  display: grid;
+  gap: 25px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.modal-content .color-palette {
+  display: grid;
+  height: 75px;
+  width: 150px;
+  border-top: gray 1px solid;
+  border-bottom: gray 1px solid;
+  border-left: gray 1px solid;
+}
+.modal-content .color-palette * {
+  grid-row: 1;
+  border-right: rgba(0, 0, 0, .2) 1px solid;
+}
+.modal-content input[type='radio'] {
+  display: none;
+}
+.modal-content .color-palette:has(input:checked) {
+  outline: 12px solid rgba(0, 255, 0, .3);
+} /* endfold */
+/* font modal startfold */
+.font-modal label {
+  grid-column: 1;
+}
+.font-modal select {
+  grid-column: 2;
+}
+/* endfold
+/* metadata modal startfold */
+.metadata-modal {
+  grid-template-columns: repeat(auto, 3);
+}
+.metadata-modal label {
+  grid-column: 1;
+}
+.metadata-modal input {
+  grid-column: 2;
+}
+.metadata-modal h3 {
+  grid-column: 1 / span 3; 
+  text-align: center;
+}
+/* endfold */
+/* endfold */
+.section-add-btn, .section-delete-btn, .section-up-btn, .section-down-btn, .section-next-btn, .section-prev-btn {
+    position: absolute;
+}
+.section-add-btn {
+    bottom: -10px;
+    left: 50%;
+}
+
+.admin-modal img {
+    width: 150px;
+}
+
+aside[is="admin-aside"] {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    transform: translateX(-95%);
+    transition: transform 1s;
+    background-color: lightgray;
+    box-sizing: border-box;
+    padding: 25px;
+    gap: 25px;
+}
+ 
+aside[is="admin-aside"]:hover {
+    transform: translateX(0px);
+}
+
+aside[is="admin-aside"] button {
+}
+
+button[is="save-button"] {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+}
+
+button[is="reset-button"] {
+    position: fixed;
+    bottom: 25px;
+    right: 150px;
+    z-index: 9999;
+}

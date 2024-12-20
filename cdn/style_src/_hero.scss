@@ -1,0 +1,110 @@
+section[is='hero-section'].default { /* startfold */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 27vh 5vh 18vh 50vh;
+    justify-items: center;
+    align-items: center;
+}
+
+section[is='hero-section'].default > * {
+    z-index: 10;
+    grid-column: 1;
+    text-align: center;
+}
+
+section[is='hero-section'].default h1 {
+    grid-row: 1;
+    color: var(--color-one);
+    align-self: end;
+}
+
+section[is='hero-section'].default h2 {
+    grid-row: 2;
+    color: var(--color-one);
+}
+
+section[is='hero-section'].default p {
+    grid-row: 3;
+    color: var(--color-one);
+}
+
+section[is='hero-section'].default > a {
+    grid-row: 4;
+}
+
+section[is='hero-section'].default button {
+}
+
+section[is='hero-section'].default picture {
+    grid-row: 1 / span 4;
+    z-index: 1;
+}
+
+section[is='hero-section'].default picture img {
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    filter: grayscale(1) brightness(75%);
+}
+
+section[is='hero-section'].default picture a {
+    position: absolute;    
+    bottom: 25px;
+    right: 25px;
+} /* endfold */
+section[is='hero-section'].left-align { /* startfold */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 27vh 5vh 18vh 50vh;
+    justify-items: start;
+    align-items: center;
+}
+
+section[is='hero-section'].left-align > * {
+    z-index: 10;
+    grid-column: 1;
+    text-align: start;
+    margin-left: 10vw;
+}
+
+section[is='hero-section'].left-align h1 {
+    grid-row: 1;
+    color: var(--color-one);
+    align-self: end;
+}
+
+section[is='hero-section'].left-align h2 {
+    grid-row: 2;
+    color: var(--color-one);
+}
+
+section[is='hero-section'].left-align p {
+    grid-row: 3;
+    color: var(--color-one);
+}
+
+section[is='hero-section'].left-align > a {
+    grid-row: 4;
+}
+
+section[is='hero-section'].left-align button {
+}
+
+section[is='hero-section'].left-align picture {
+    grid-row: 1 / span 4;
+    z-index: 1;
+    margin-left: 0;
+}
+
+section[is='hero-section'].left-align picture img {
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    filter: grayscale(1) brightness(75%);
+}
+
+section[is='hero-section'].left-align picture a {
+    position: absolute;    
+    bottom: 25px;
+    right: 25px;
+} /* endfold */

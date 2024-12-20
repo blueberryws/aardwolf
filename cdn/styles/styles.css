@@ -1,0 +1,1043 @@
+:root {
+  --normal-border-radius: 12px;
+  --small-border-radius: 7px;
+  --section-margin-bottom: 45px;
+  --color-one: var(--palette-color-one);
+  --color-two: var(--palette-color-two);
+  --color-three: var(--palette-color-three);
+  --color-four: var(--palette-color-four);
+  --narrow-padding: 60px 15px;
+  --standard-padding: 60px 30px;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --section-margin-bottom: 80px;
+    --standard-padding: 90px 65px;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-one: var(--palette-color-four);
+    --color-two: var(--palette-color-three);
+    --color-three: var(--palette-color-two);
+    --color-four: var(--palette-color-one);
+  }
+}
+* {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--color-one);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--header-font-family);
+}
+
+p, blockquote, label, figcaption {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-medium);
+}
+
+button {
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+  padding: 12px 25px;
+  border: 20px;
+  outline: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+img {
+  object-fit: cover;
+  object-position: center;
+  max-width: 100%;
+}
+
+dialog img {
+  width: 150px;
+}
+
+/* sections layout settings startfold */
+section {
+  max-width: min(1400px, 100%);
+  padding: var(--standard-padding);
+  margin: auto;
+}
+
+/* endfold */
+/* typography settings startfold */
+h1, .page-title {
+  font-weight: 800;
+  font-size: 36px;
+}
+
+h2 {
+  font-weight: var(--header-font-weight-large);
+  font-size: var(--header-font-size-large);
+  text-align: center;
+  margin-bottom: var(--section-margin-bottom);
+  line-height: calc(var(--header-font-size-large) * 1.5);
+  color: var(--color-four);
+}
+
+.callout-text {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.testimonial-text {
+  font-size: var(--body-font-size-small);
+  font-weight: 400;
+  text-align: center;
+}
+
+@media (width >= 992px) {
+  h1, .page-title {
+    font-weight: 600;
+    font-size: 128px;
+  }
+  h2, .page-subtitle {
+    font-weight: 600;
+    font-size: 64px;
+  }
+  .callout-text {
+    font-weight: 300;
+    font-size: 24px;
+  }
+}
+/* endfold */
+section[is=hero-section].default { /* startfold */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 27vh 5vh 18vh 50vh;
+  justify-items: center;
+  align-items: center;
+}
+
+section[is=hero-section].default > * {
+  z-index: 10;
+  grid-column: 1;
+  text-align: center;
+}
+
+section[is=hero-section].default h1 {
+  grid-row: 1;
+  color: var(--color-one);
+  align-self: end;
+}
+
+section[is=hero-section].default h2 {
+  grid-row: 2;
+  color: var(--color-one);
+}
+
+section[is=hero-section].default p {
+  grid-row: 3;
+  color: var(--color-one);
+}
+
+section[is=hero-section].default > a {
+  grid-row: 4;
+}
+
+section[is=hero-section].default picture {
+  grid-row: 1/span 4;
+  z-index: 1;
+}
+
+section[is=hero-section].default picture img {
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+  filter: grayscale(1) brightness(75%);
+}
+
+section[is=hero-section].default picture a {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+} /* endfold */
+section[is=hero-section].left-align { /* startfold */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 27vh 5vh 18vh 50vh;
+  justify-items: start;
+  align-items: center;
+}
+
+section[is=hero-section].left-align > * {
+  z-index: 10;
+  grid-column: 1;
+  text-align: start;
+  margin-left: 10vw;
+}
+
+section[is=hero-section].left-align h1 {
+  grid-row: 1;
+  color: var(--color-one);
+  align-self: end;
+}
+
+section[is=hero-section].left-align h2 {
+  grid-row: 2;
+  color: var(--color-one);
+}
+
+section[is=hero-section].left-align p {
+  grid-row: 3;
+  color: var(--color-one);
+}
+
+section[is=hero-section].left-align > a {
+  grid-row: 4;
+}
+
+section[is=hero-section].left-align picture {
+  grid-row: 1/span 4;
+  z-index: 1;
+  margin-left: 0;
+}
+
+section[is=hero-section].left-align picture img {
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+  filter: grayscale(1) brightness(75%);
+}
+
+section[is=hero-section].left-align picture a {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+} /* endfold */
+section[is=contact-form-section] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: unset;
+}
+section[is=contact-form-section] h2 {
+  margin-top: 50px;
+  margin-bottom: unset;
+  color: var(--color-three);
+}
+section[is=contact-form-section] form {
+  display: grid;
+  row-gap: 5px;
+  margin-top: 50px;
+  align-self: center;
+  box-sizing: border-box;
+  margin-bottom: 150px;
+  width: 80%;
+}
+section[is=contact-form-section] form * {
+  grid-column: 1;
+}
+section[is=contact-form-section] form label {
+  z-index: 12;
+  justify-self: start;
+  align-self: start;
+  padding-top: 5px;
+  padding-left: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+}
+section[is=contact-form-section] form input {
+  height: 50px;
+}
+section[is=contact-form-section] form textarea {
+  height: 150px;
+  resize: none;
+}
+section[is=contact-form-section] form input, section[is=contact-form-section] form textarea {
+  border-radius: var(--small-border-radius);
+  background-color: var(--color-two);
+  outline: none;
+  border: none;
+  font-size: var(--body-font-size-small);
+  font-weight: 400;
+  line-height: calc(var(--body-font-size-small) * 1.5);
+  color: var(--color-four);
+  box-sizing: border-box;
+  padding: 15px 0 0 20px;
+  display: flex;
+  align-content: end;
+}
+section[is=contact-form-section] form button {
+  background-color: var(--color-three);
+  color: var(--color-one);
+}
+section[is=contact-form-section] form label[for=name], section[is=contact-form-section] form input[name=name] {
+  grid-row: 1;
+}
+section[is=contact-form-section] form label[for=email], section[is=contact-form-section] form input[name=email] {
+  grid-row: 2;
+}
+section[is=contact-form-section] form label[for=message], section[is=contact-form-section] form textarea[name=message] {
+  grid-row: 3;
+}
+section[is=contact-form-section] form textarea[name=message] {
+  padding-top: 20px;
+}
+@media (prefers-color-scheme: dark) {
+  section[is=contact-form-section] p {
+    color: var(--color-four);
+  }
+  section[is=contact-form-section] form input, section[is=contact-form-section] form textarea {
+    background-color: var(--color-four);
+    color: var(--color-one);
+  }
+  section[is=contact-form-section] form button {
+    color: var(--color-one);
+  }
+}
+@media screen and (min-width: 768px) {
+  section[is=contact-form-section] form {
+    width: 650px;
+    gap: 15px;
+  }
+  section[is=contact-form-section] form label[for=name], section[is=contact-form-section] form input[name=name] {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  section[is=contact-form-section] form label[for=email], section[is=contact-form-section] form input[name=email] {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  section[is=contact-form-section] form label[for=message], section[is=contact-form-section] form textarea[name=message] {
+    grid-row: 2;
+    grid-column: 1/span 2;
+  }
+  section[is=contact-form-section] form button {
+    width: 60%;
+    justify-self: end;
+    grid-column: 2;
+    border-radius: var(--small-border-radius);
+  }
+}
+
+section[is=contact-form-section].default picture {
+  display: none;
+}
+
+section[is=contact-form-section].alternate {
+  background-color: var(--color-four);
+}
+section[is=contact-form-section].alternate * {
+  z-index: 10;
+  color: var(--color-one);
+}
+section[is=contact-form-section].alternate picture {
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 45%;
+}
+section[is=contact-form-section].alternate picture img {
+  height: 100%;
+  width: 100%;
+}
+section[is=contact-form-section].alternate form input, section[is=contact-form-section].alternate form textarea {
+  background-color: var(--color-one);
+  color: var(--color-four);
+}
+section[is=contact-form-section].alternate form label {
+  z-index: 12;
+  color: var(--color-four);
+}
+section[is=contact-form-section].alternate form button {
+  color: var(--color-one);
+}
+@media (prefers-color-scheme: dark) {
+  section[is=contact-form-section].alternate {
+    background-color: var(--color-one);
+  }
+  section[is=contact-form-section].alternate h2 {
+    color: var(--color-four);
+  }
+  section[is=contact-form-section].alternate p {
+    color: var(--color-four);
+  }
+  section[is=contact-form-section].alternate form label {
+    color: var(--color-one);
+  }
+  section[is=contact-form-section].alternate form input, section[is=contact-form-section].alternate form textarea {
+    background-color: var(--color-four);
+    color: var(--color-one);
+  }
+  section[is=contact-form-section].alternate form button {
+    color: var(--color-one);
+  }
+}
+
+section[is=testimonials-section] {
+  display: grid;
+  justify-items: center;
+  padding: var(--narrow-padding);
+}
+section[is=testimonials-section] > * {
+  grid-column: 1;
+}
+section[is=testimonials-section] h2 {
+  padding-left: 15px;
+  justify-self: start;
+}
+section[is=testimonials-section] ul {
+  grid-row: 2;
+  align-self: start;
+  height: 80%;
+  position: relative;
+}
+section[is=testimonials-section] ul li.testimonials-content {
+  display: none;
+}
+section[is=testimonials-section] ul li.testimonials-content.focus {
+  display: grid;
+}
+section[is=testimonials-section] blockquote::before {
+  content: '"';
+}
+section[is=testimonials-section] blockquote::after {
+  content: '"';
+}
+section[is=testimonials-section] button {
+  min-width: unset;
+  width: 15px;
+  height: 35px;
+  padding: unset;
+  background: none;
+}
+section[is=testimonials-section].default li.testimonials-content {
+  list-style-type: none;
+  background-color: var(--color-two);
+  border-radius: var(--normal-border-radius);
+  padding: 30px 20px 25px 20px;
+  max-width: 486px;
+}
+section[is=testimonials-section].default blockquote.testimonial-text {
+  font-size: var(--body-font-size-small);
+  font-weight: 400;
+  line-height: calc(var(--body-font-size-small) * 1.5);
+  color: var(--color-four);
+}
+section[is=testimonials-section].default figcaption.testimonial-attribution {
+  text-align: center;
+  font-size: var(--body-font-size-small);
+  font-weight: 700;
+  padding: 20px;
+}
+section[is=testimonials-section].default ul object {
+  width: 100px;
+  justify-self: center;
+}
+section[is=testimonials-section].default svg {
+  justify-self: center;
+  width: 100px;
+}
+section[is=testimonials-section].default svg path {
+  fill: var(--color-three);
+}
+section[is=testimonials-section].default button {
+  grid-row: 3;
+  margin: 50px 15px 0 15px;
+}
+section[is=testimonials-section].default button > object {
+  width: 100%;
+  height: 100%;
+}
+section[is=testimonials-section].default button > svg {
+  width: 100%;
+  height: 100%;
+}
+section[is=testimonials-section].default button > svg path {
+  fill: var(--color-three);
+  stroke: var(--color-three);
+}
+section[is=testimonials-section].default .previous-button {
+  justify-self: start;
+}
+section[is=testimonials-section].default .next-button {
+  justify-self: end;
+}
+section[is=testimonials-section].default .testimonials-attribution-picture {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  section[is=testimonials-section].default li.testimonials-content {
+    background-color: var(--color-three);
+  }
+  section[is=testimonials-section].default blockquote.testimonial-text {
+    color: var(--color-one);
+  }
+  section[is=testimonials-section].default svg path {
+    fill: var(--color-two);
+  }
+  section[is=testimonials-section].default button > svg path {
+    fill: var(--color-four);
+    stroke: var(--color-four);
+  }
+}
+@media screen and (min-width: 992px) {
+  section[is=testimonials-section].default ul.testimonials {
+    grid-row: 2;
+    grid-column: 2;
+    display: grid;
+  }
+  section[is=testimonials-section].default li.testimonials-content {
+    display: none;
+    grid-column: 1;
+    grid-row: 1;
+  }
+  section[is=testimonials-section].default li.testimonials-content.previous {
+    display: grid;
+    opacity: 60%;
+    transform: scale(0.65) translateX(-70%);
+    z-index: 1;
+  }
+  section[is=testimonials-section].default li.testimonials-content.focus {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 2;
+  }
+  section[is=testimonials-section].default li.testimonials-content.next {
+    display: grid;
+    opacity: 60%;
+    transform: scale(0.65) translateX(70%);
+    z-index: 1;
+  }
+  section[is=testimonials-section].default h2 {
+    grid-column: 1/span 3;
+  }
+  section[is=testimonials-section].default button {
+    grid-row: 2;
+    margin: unset;
+    align-self: center;
+  }
+  section[is=testimonials-section].default .previous-button {
+    grid-column: 1;
+    justify-self: center;
+  }
+  section[is=testimonials-section].default .next-button {
+    grid-column: 3;
+    justify-self: center;
+  }
+}
+
+section[is=testimonials-section].alternate-one li.testimonials-content {
+  list-style-type: none;
+  background-color: var(--color-two);
+  border-radius: var(--normal-border-radius);
+  padding: 0 20px 25px 20px;
+  max-width: 486px;
+}
+section[is=testimonials-section].alternate-one blockquote.testimonial-text {
+  font-size: var(--body-font-size-small);
+  font-weight: 400;
+  line-height: calc(var(--body-font-size-small) * 1.5);
+  color: var(--color-four);
+  margin-top: -25px;
+}
+section[is=testimonials-section].alternate-one figcaption.testimonial-attribution {
+  text-align: center;
+  font-size: var(--body-font-size-small);
+  font-weight: 700;
+  padding: 20px;
+}
+section[is=testimonials-section].alternate-one ul object {
+  width: 100px;
+  justify-self: center;
+}
+section[is=testimonials-section].alternate-one svg {
+  justify-self: center;
+  width: 100px;
+}
+section[is=testimonials-section].alternate-one svg path {
+  fill: var(--color-three);
+}
+section[is=testimonials-section].alternate-one button {
+  grid-row: 3;
+  margin: 50px 15px 0 15px;
+}
+section[is=testimonials-section].alternate-one button > object {
+  width: 100%;
+  height: 100%;
+}
+section[is=testimonials-section].alternate-one button > svg {
+  width: 100%;
+  height: 100%;
+}
+section[is=testimonials-section].alternate-one button > svg path {
+  fill: var(--color-three);
+  stroke: var(--color-three);
+}
+section[is=testimonials-section].alternate-one .previous-button {
+  justify-self: start;
+}
+section[is=testimonials-section].alternate-one .next-button {
+  justify-self: end;
+}
+section[is=testimonials-section].alternate-one .testimonials-attribution-picture {
+  justify-self: center;
+  transform: translateY(-50%);
+  display: block;
+  margin: auto;
+  width: 100px;
+  aspect-ratio: 1/1;
+  border: solid 4px var(--color-one);
+  border-radius: 50%;
+  padding: 0;
+}
+@media (prefers-color-scheme: dark) {
+  section[is=testimonials-section].alternate-one li.testimonials-content {
+    background-color: var(--color-three);
+  }
+  section[is=testimonials-section].alternate-one blockquote.testimonial-text {
+    color: var(--color-one);
+  }
+  section[is=testimonials-section].alternate-one svg path {
+    fill: var(--color-two);
+  }
+  section[is=testimonials-section].alternate-one button > svg path {
+    fill: var(--color-four);
+    stroke: var(--color-four);
+  }
+  section[is=testimonials-section].alternate-one .testimonials-attribution-picture {
+    border: solid 4px var(--color-four);
+  }
+}
+@media screen and (min-width: 992px) {
+  section[is=testimonials-section].alternate-one ul.testimonials {
+    grid-row: 2;
+    grid-column: 2;
+    display: grid;
+  }
+  section[is=testimonials-section].alternate-one li.testimonials-content {
+    display: none;
+    grid-column: 1;
+    grid-row: 1;
+  }
+  section[is=testimonials-section].alternate-one li.testimonials-content.previous {
+    display: grid;
+    opacity: 60%;
+    transform: scale(0.65) translateX(-70%);
+    z-index: 1;
+  }
+  section[is=testimonials-section].alternate-one li.testimonials-content.focus {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 2;
+  }
+  section[is=testimonials-section].alternate-one li.testimonials-content.next {
+    display: grid;
+    opacity: 60%;
+    transform: scale(0.65) translateX(70%);
+    z-index: 1;
+  }
+  section[is=testimonials-section].alternate-one h2 {
+    grid-column: 1/span 3;
+  }
+  section[is=testimonials-section].alternate-one button {
+    grid-row: 2;
+    margin: unset;
+    align-self: center;
+  }
+  section[is=testimonials-section].alternate-one .previous-button {
+    grid-column: 1;
+    justify-self: center;
+  }
+  section[is=testimonials-section].alternate-one .next-button {
+    grid-column: 3;
+    justify-self: center;
+  }
+  section[is=testimonials-section].alternate-one .testimonials-attribution-picture {
+    width: 146px;
+  }
+}
+
+section[is=testimonials-section].alternate-two {
+  /* Adjust direction as needed. For a horizontal band, use "to right" or "to left". */
+  background: linear-gradient(to bottom, transparent 225px, var(--color-two) 225px, var(--color-two) calc(100% - 175px), transparent calc(100% - 175px));
+}
+section[is=testimonials-section].alternate-two ul.testimonials {
+  margin-top: 30px;
+}
+section[is=testimonials-section].alternate-two li.testimonials-content {
+  list-style-type: none;
+  background-color: var(--color-three);
+  border-radius: var(--normal-border-radius);
+  padding: 0 20px 25px 20px;
+  max-width: 486px;
+  justify-items: start;
+}
+section[is=testimonials-section].alternate-two blockquote.testimonial-text::before {
+  content: unset;
+}
+section[is=testimonials-section].alternate-two blockquote.testimonial-text::after {
+  content: unset;
+}
+section[is=testimonials-section].alternate-two blockquote.testimonial-text {
+  font-size: var(--body-font-size-small);
+  font-weight: 400;
+  line-height: calc(var(--body-font-size-small) * 1.5);
+  color: var(--color-four);
+  margin-top: -25px;
+  text-align: left;
+  color: var(--color-one);
+}
+section[is=testimonials-section].alternate-two figcaption.testimonial-attribution {
+  text-align: left;
+  font-size: var(--body-font-size-small);
+  font-weight: 700;
+  padding: 20px 0;
+  color: var(--color-one);
+}
+section[is=testimonials-section].alternate-two ul object {
+  width: 100px;
+  justify-self: start;
+}
+section[is=testimonials-section].alternate-two svg {
+  justify-self: start;
+  width: 100px;
+}
+section[is=testimonials-section].alternate-two svg path {
+  fill: var(--color-one);
+}
+section[is=testimonials-section].alternate-two button {
+  grid-row: 3;
+  margin: 50px 15px 0 15px;
+}
+section[is=testimonials-section].alternate-two button > object {
+  width: 100%;
+  height: 100%;
+}
+section[is=testimonials-section].alternate-two button > svg {
+  width: 100%;
+  height: 100%;
+}
+section[is=testimonials-section].alternate-two button > svg path {
+  fill: var(--color-three);
+  stroke: var(--color-three);
+}
+section[is=testimonials-section].alternate-two .previous-button {
+  justify-self: start;
+}
+section[is=testimonials-section].alternate-two .next-button {
+  justify-self: end;
+}
+section[is=testimonials-section].alternate-two .testimonials-attribution-picture {
+  justify-self: start;
+  transform: translateY(-50%);
+  display: block;
+  width: 100px;
+  aspect-ratio: 1/1;
+  border: solid 4px var(--color-one);
+  border-radius: 50%;
+  padding: 0;
+}
+@media (prefers-color-scheme: dark) {
+  section[is=testimonials-section].alternate-two li.testimonials-content {
+    background-color: var(--color-three);
+  }
+  section[is=testimonials-section].alternate-two blockquote.testimonial-text {
+    color: var(--color-one);
+  }
+  section[is=testimonials-section].alternate-two svg path {
+    fill: var(--color-two);
+  }
+  section[is=testimonials-section].alternate-two button > svg path {
+    fill: var(--color-four);
+    stroke: var(--color-four);
+  }
+  section[is=testimonials-section].alternate-two .testimonials-attribution-picture {
+    border: solid 4px var(--color-four);
+  }
+}
+@media screen and (min-width: 768px) {
+  section[is=testimonials-section].alternate-two {
+    background: linear-gradient(to bottom, transparent 300px, var(--color-two) 300px, var(--color-two) calc(100% - 175px), transparent calc(100% - 175px));
+  }
+}
+@media screen and (min-width: 992px) {
+  section[is=testimonials-section].alternate-two {
+    background: linear-gradient(to bottom, transparent 325px, var(--color-three) 325px);
+  }
+  section[is=testimonials-section].alternate-two ul.testimonials {
+    grid-row: 2;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(30%, 3);
+    justify-items: center;
+    gap: 3%;
+    margin: 0 2% 150px 2%;
+  }
+  section[is=testimonials-section].alternate-two li.testimonials-content {
+    display: none;
+    grid-row: 1;
+    background-color: var(--color-two);
+  }
+  section[is=testimonials-section].alternate-two li.testimonials-content.previous {
+    display: grid;
+    grid-column: 1;
+  }
+  section[is=testimonials-section].alternate-two li.testimonials-content.focus {
+    display: grid;
+    grid-column: 2;
+  }
+  section[is=testimonials-section].alternate-two li.testimonials-content.next {
+    display: grid;
+    grid-column: 3;
+  }
+  section[is=testimonials-section].alternate-two blockquote.testimonial-text {
+    color: var(--color-four);
+  }
+  section[is=testimonials-section].alternate-two figcaption.testimonial-attribution {
+    color: var(--color-four);
+  }
+  section[is=testimonials-section].alternate-two svg path {
+    fill: var(--color-four);
+  }
+  section[is=testimonials-section].alternate-two h2 {
+    grid-column: 1/span 3;
+  }
+  section[is=testimonials-section].alternate-two button {
+    grid-row: 2;
+    margin: unset;
+    align-self: center;
+  }
+  section[is=testimonials-section].alternate-two button svg path {
+    fill: var(--color-one);
+    stroke: var(--color-one);
+  }
+  section[is=testimonials-section].alternate-two .previous-button {
+    grid-column: 1;
+    justify-self: center;
+  }
+  section[is=testimonials-section].alternate-two .next-button {
+    grid-column: 3;
+    justify-self: center;
+  }
+  section[is=testimonials-section].alternate-two .testimonials-attribution-picture {
+    width: 146px;
+  }
+}
+
+section[is=testimonials-section].alternate-four li.testimonials-content {
+  list-style-type: none;
+  background-color: var(--color-two);
+  border-radius: var(--normal-border-radius);
+  max-width: 486px;
+  justify-items: center;
+  padding: 20px 20px 25px 20px;
+}
+section[is=testimonials-section].alternate-four blockquote.testimonial-text::before {
+  content: unset;
+}
+section[is=testimonials-section].alternate-four blockquote.testimonial-text::after {
+  content: unset;
+}
+section[is=testimonials-section].alternate-four blockquote.testimonial-text {
+  font-size: var(--body-font-size-small);
+  font-weight: 400;
+  line-height: calc(var(--body-font-size-small) * 1.5);
+  color: var(--color-four);
+  text-align: left;
+}
+section[is=testimonials-section].alternate-four figcaption.testimonial-attribution {
+  text-align: left;
+  font-size: var(--body-font-size-small);
+  font-weight: 700;
+  padding: 20px 0;
+}
+section[is=testimonials-section].alternate-four ul object {
+  width: 100px;
+  justify-self: start;
+}
+section[is=testimonials-section].alternate-four svg {
+  justify-self: start;
+  width: 100px;
+}
+section[is=testimonials-section].alternate-four svg path {
+  fill: var(--color-four);
+}
+section[is=testimonials-section].alternate-four button {
+  grid-row: 3;
+  margin: 50px 15px 0 15px;
+}
+section[is=testimonials-section].alternate-four button > object {
+  width: 100%;
+  height: 100%;
+}
+section[is=testimonials-section].alternate-four button > svg {
+  width: 100%;
+  height: 100%;
+}
+section[is=testimonials-section].alternate-four button > svg path {
+  fill: var(--color-three);
+  stroke: var(--color-three);
+}
+section[is=testimonials-section].alternate-four .previous-button {
+  justify-self: start;
+}
+section[is=testimonials-section].alternate-four .next-button {
+  justify-self: end;
+}
+section[is=testimonials-section].alternate-four .testimonials-attribution-picture {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  section[is=testimonials-section].alternate-four li.testimonials-content {
+    background-color: var(--color-three);
+  }
+  section[is=testimonials-section].alternate-four blockquote.testimonial-text {
+    color: var(--color-one);
+  }
+  section[is=testimonials-section].alternate-four svg path {
+    fill: var(--color-two);
+  }
+  section[is=testimonials-section].alternate-four button > svg path {
+    fill: var(--color-four);
+    stroke: var(--color-four);
+  }
+}
+@media screen and (min-width: 768px) {
+  section[is=testimonials-section].alternate-four {
+    background: linear-gradient(to bottom, transparent 300px, var(--color-two) 300px, var(--color-two) calc(100% - 175px), transparent calc(100% - 175px));
+  }
+}
+@media screen and (min-width: 992px) {
+  section[is=testimonials-section].alternate-four {
+    background: linear-gradient(to bottom, transparent 325px, var(--color-three) 325px);
+  }
+  section[is=testimonials-section].alternate-four ul.testimonials {
+    grid-row: 2;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(30%, 3);
+    justify-items: center;
+    gap: 3%;
+    margin: 0 2% 150px 2%;
+  }
+  section[is=testimonials-section].alternate-four li.testimonials-content {
+    display: none;
+    grid-row: 1;
+    background-color: var(--color-two);
+  }
+  section[is=testimonials-section].alternate-four li.testimonials-content.previous {
+    display: grid;
+    grid-column: 1;
+  }
+  section[is=testimonials-section].alternate-four li.testimonials-content.focus {
+    display: grid;
+    grid-column: 2;
+  }
+  section[is=testimonials-section].alternate-four li.testimonials-content.next {
+    display: grid;
+    grid-column: 3;
+  }
+  section[is=testimonials-section].alternate-four blockquote.testimonial-text {
+    color: var(--color-four);
+  }
+  section[is=testimonials-section].alternate-four figcaption.testimonial-attribution {
+    color: var(--color-four);
+  }
+  section[is=testimonials-section].alternate-four svg path {
+    fill: var(--color-four);
+  }
+  section[is=testimonials-section].alternate-four h2 {
+    grid-column: 1/span 3;
+  }
+  section[is=testimonials-section].alternate-four button {
+    grid-row: 2;
+    margin: unset;
+    align-self: center;
+  }
+  section[is=testimonials-section].alternate-four button svg path {
+    fill: var(--color-one);
+    stroke: var(--color-one);
+  }
+  section[is=testimonials-section].alternate-four .previous-button {
+    grid-column: 1;
+    justify-self: center;
+  }
+  section[is=testimonials-section].alternate-four .next-button {
+    grid-column: 3;
+    justify-self: center;
+  }
+}
+
+section[is=faqs-section] {
+  background-color: var(--color-one);
+}
+section[is=faqs-section] ul.faqs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+}
+section[is=faqs-section] ul.faqs li.faq-list-item {
+  width: 100%;
+}
+section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container summary.question::-webkit-details-marker {
+  display: none;
+}
+section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container summary.question {
+  padding: 8px 10px;
+  list-style: none;
+  border: solid var(--color-three) 1px;
+  border-radius: var(--small-border-radius);
+}
+section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container summary.question h3.question-text {
+  font-size: calc(var(--header-font-size-small) * 0.8);
+  font-weight: 600;
+}
+section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container p.answer {
+  padding: 10px 8px;
+  font-size: var(--body-font-size-small);
+  font-weight: 400;
+  line-height: calc(var(--body-font-size-small) * 1.5);
+  color: var(--color-four);
+}
+@media screen and (min-width: 1200px) {
+  section[is=faqs-section] ul.faqs {
+    width: 65%;
+    margin: auto;
+  }
+}
+
+section[is=faqs-section].default h3.question-text {
+  color: var(--color-three);
+}
+
+section[is=faqs-section].alternate summary.question {
+  background-color: var(--color-three);
+}
+
+section[is=faqs-section].alternate h3.question-text {
+  color: var(--color-one);
+}
+
+@media (prefers-color-scheme: dark) {
+  section[is=faqs-section].alternate ul.faqs li.faq-list-item details.faq-container summary.question {
+    border-color: var(--color-two);
+    background-color: var(--color-two);
+  }
+  section[is=faqs-section].alternate h3.question-text {
+    color: var(--color-four);
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

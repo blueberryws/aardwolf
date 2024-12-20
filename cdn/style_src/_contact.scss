@@ -1,0 +1,186 @@
+@use 'base';
+
+
+section[is="contact-form-section"] { // startfold
+  // startfold
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: unset;
+
+  h2 {
+    margin-top: 50px;
+    margin-bottom: unset;
+    color: var(--color-three);
+  }
+  
+  form {
+    display: grid;
+    row-gap: 5px;
+    margin-top: 50px;
+    align-self: center;
+    box-sizing: border-box;
+    margin-bottom: 150px;
+    width: 80%;
+
+    * {
+      grid-column: 1;
+    }
+
+    label {
+      z-index: 12;
+      justify-self: start;
+      align-self: start;
+      padding-top: 5px;
+      padding-left: 20px;
+      @include base.form-label;
+    }
+
+    input {
+      height: 50px;
+    }
+
+    textarea {
+      height: 150px;
+      resize: none;
+    }
+
+    input, textarea {
+      border-radius: var(--small-border-radius);
+      background-color: var(--color-two);
+      outline: none;
+      border: none;
+      @include base.alternate-paragraph;
+      box-sizing: border-box;
+      padding: 15px 0 0 20px;
+      display: flex;
+      align-content: end;
+    }
+
+    button {
+      background-color: var(--color-three);
+      color: var(--color-one);
+    }
+
+    label[for="name"], input[name="name"] {
+      grid-row: 1;
+    }
+
+    label[for="email"], input[name="email"] {
+      grid-row: 2;
+    }
+  
+    label[for="message"], textarea[name="message"] {
+      grid-row: 3;
+    }
+    
+    textarea[name="message"] {
+      padding-top: 20px;
+    }
+  } // endfold
+  @media (prefers-color-scheme: dark) { // startfold
+    p {
+      color: var(--color-four);
+    }
+
+    form {
+      input, textarea {
+        background-color: var(--color-four);
+        color: var(--color-one);
+      }
+      button {
+        color: var(--color-one);
+      }
+    }
+  } // endfold
+  @media screen and (min-width: base.$tablet) { // startfold
+    form {
+      width: 650px;
+      gap: 15px;
+
+      label[for="name"], input[name="name"] {
+        grid-row: 1;
+        grid-column: 1;
+      }
+  
+      label[for="email"], input[name="email"] {
+        grid-row: 1;
+        grid-column: 2;
+      }
+    
+      label[for="message"], textarea[name="message"] {
+        grid-row: 2;
+        grid-column: 1 / span 2;
+      }
+      button {
+        width: 60%;
+        justify-self: end;
+        grid-column: 2;
+        border-radius: var(--small-border-radius);
+      }
+    }
+  } // endfold
+} // endfold
+section[is="contact-form-section"].default { // startfold
+  picture {
+    display: none;
+  }
+} // endfold
+section[is="contact-form-section"].alternate { // startfold
+  // startfold
+  background-color: var(--color-four);
+
+  * {
+    z-index: 10;
+    color: var(--color-one);
+  }
+
+  picture {
+    z-index: 1; 
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 45%;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  form {
+    input, textarea {
+      background-color: var(--color-one);
+      color: var(--color-four);
+    }
+    label {
+      z-index: 12;
+      color: var(--color-four);
+    }
+    button {
+      color: var(--color-one);
+    }
+  } // endfold
+  @media (prefers-color-scheme: dark) { // startfold
+    background-color: var(--color-one);
+    h2 {
+      color: var(--color-four);
+    }
+    p {
+      color: var(--color-four);
+    }
+
+    form {
+      label {
+        color: var(--color-one);
+      }
+      input, textarea {
+        background-color: var(--color-four);
+        color: var(--color-one);
+      }
+      button {
+        color: var(--color-one);
+      }
+    }
+  } // endfold
+} // endfold
