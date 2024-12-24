@@ -41,6 +41,7 @@ h1, h2, h3, h4, h5, h6 {
 p, blockquote, label, figcaption {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-medium);
+  font-weight: 300;
 }
 
 button {
@@ -474,27 +475,93 @@ section[is=contact-form-section].alternate form button {
   }
 }
 
+section[is=embed-section] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+section[is=embed-section] iframe {
+  max-width: 100%;
+}
+section[is=embed-section] p {
+  margin-bottom: 15px;
+  color: var(--color-four);
+}
+@media screen and (min-width: 768px) {
+  section[is=embed-section] iframe {
+    margin-bottom: 100px;
+  }
+  section[is=embed-section] p {
+    margin-bottom: 35px;
+  }
+}
+
+section[is=embed-section].alternate-one {
+  display: grid;
+  justify-items: center;
+}
+section[is=embed-section].alternate-one h2 {
+  grid-row: 1;
+}
+section[is=embed-section].alternate-one iframe {
+  grid-row: 3;
+}
+section[is=embed-section].alternate-one p {
+  grid-row: 2;
+}
+
+section[is=embed-section].alternate-two p {
+  display: none;
+}
+
+section[is=embed-section].alternate-three h2 {
+  display: none;
+}
+section[is=embed-section].alternate-three p {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  section[is=raw-heading-section].alternate-one h2 {
+    text-align: start;
+  }
+}
+
+section[is=raw-paragraph-section] p {
+  color: var(--color-four);
+}
+
+@media screen and (min-width: 992px) {
+  section[is=raw-paragraph-section].alternate-one p {
+    column-count: 2;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  section[is=raw-paragraph-section].alternate-two p {
+    column-count: 3;
+  }
+}
+
 /* Questions:
 - No dark mode, so need manual eyeballs on all the color balance
  - This actually made it a bit faster to have "programatic dark mode"
 - default
   h2:
-   - margin-bottom 35px?
+   - margin-bottom 35px? -- nope, this is 45px
   p:
-   - 60px bottom padding?
-   - is the left-padding/indent thing on purpose?
+   - 60px bottom padding? -- yes, but added a min-height rule to allow for a tall section when the text is short.
+   - is the left-padding/indent thing on purpose? -- yes
   button:
-   - border-radius 10px?
-   - Is the color set right?
-   - desktop padding is something like 10px 50px in the mockup, but this doesn't match the button generally. Is the mockup right?
+   - border-radius 10px? -- no, 12px
+   - Is the color set right? -- yes
+   - desktop padding is something like 10px 50px in the mockup, but this doesn't match the button generally. Is the mockup right? -- yes, changed alt button to match
   picture:
-   - How does it scale? I coded it as "tablet and larger" scale responsively.
+   - How does it scale? I coded it as "tablet and larger" scale responsively. -- this looks fine
    - It looked like it was about half of the section after accounting for padding, so I made it a square that was 50% wide. Is that right?
 - alternate-one
-  p:
-   - font-weight is 300? Is that right?
   h3:
-   - just double checking -- 200px bottom margin?
+   - just double checking -- 200px bottom margin? -- as implemented is fine.
    - update: changed this to 1fr in the grid-template-columns. I think it resizes better.
      - also change the breakpoint to notebook on this.
   picture:
@@ -502,29 +569,27 @@ section[is=contact-form-section].alternate form button {
 - alternate-two:
   picture:
    - aspect ratio looks to be 12 / 7. Just double checking
-   - on desktop this is really large.
+   - on desktop this is really large. -- that's fine.
   button:
-   - I didn't add as much top padding/margin as sort of suggested by the mockup. Wanted to double check that this was right.
+   - I didn't add as much top padding/margin as sort of suggested by the mockup. Wanted to double check that this was right. -- that's fine.
 - alternate-three:
   picture:
-   - how is this supposed to scale? What if they put lots of text?
-   - for desktop, I picked 12/7, but what if they put more text than that?
-   - desktop appears to use a different opacity than the mobile? I kept the vibe of mobile for both, but I can update this if desired.
-  button:
-   - mobile version is using the 10px 50px ratios.
+   - how is this supposed to scale? What if they put lots of text? -- it scales right atm.
+   - for desktop, I picked 12/7, but what if they put more text than that? -- zoom in on pic, like mobile.
+   - desktop appears to use a different opacity than the mobile? I kept the vibe of mobile for both, but I can update this if desired. -- matching is good.
 - alternate-four:
-  - The desktop arrangement is sort of awkward with a long paragraph. 
-  - note: I set notebook as the breakpoint, rather than tablet.
-  - tablet arrangement is weird bc the breakpoint is set to notebook, but the h2 resizes at tablet size. Need advice here.
+  - The desktop arrangement is sort of awkward with a long paragraph.  -- revisit maybe
+  - note: I set notebook as the breakpoint, rather than tablet.  -- this is fine, but revisit
+  - tablet arrangement is weird bc the breakpoint is set to notebook, but the h2 resizes at tablet size. Need advice here. -- this is fine.
 - alternate-five:
-  - has similar arrangement oddities as alternate-four (lowkey, I dig it. But it should be double-checked in the morning)
+  - has similar arrangement oddities as alternate-four (lowkey, I dig it. But it should be double-checked in the morning) -- mod'd, but fine.
 - alternate-six/seven:
-  h3: Is not present on mobile?
+  h3: Is not present on mobile? -- this needs to get fixed
   picture:
-   - ratio looks great, but how should it respond to very long text? (shorter text looks fine!)
+   - ratio looks great, but how should it respond to very long text? (shorter text looks fine!) -- changed breakpoint
 - alternate-seven:
   paragraph:
-   - it looks "shorter" than on other layouts. Should it float to the top or the center? Or something else?
+   - it looks "shorter" than on other layouts. Should it float to the top or the center? Or something else? -- nah, it's fine
 */
 section[is=call-to-action-section] {
   display: flex;
@@ -543,7 +608,6 @@ section[is=call-to-action-section] h3 {
 }
 section[is=call-to-action-section] p {
   color: var(--color-four);
-  font-weight: 300;
 }
 section[is=call-to-action-section] img {
   width: 100%;
@@ -552,7 +616,7 @@ section[is=call-to-action-section] img {
 section[is=call-to-action-section] button {
   color: var(--color-one);
   background-color: var(--color-three);
-  border-radius: 10px;
+  border-radius: var(--normal-border-radius);
 }
 @media screen and (min-width: 768px) {
   section[is=call-to-action-section] {
@@ -574,9 +638,6 @@ section[is=call-to-action-section] button {
   }
 }
 
-section[is=call-to-action-section].default h2 {
-  margin-bottom: 35px;
-}
 section[is=call-to-action-section].default picture:nth-of-type(even) {
   display: none;
 }
@@ -585,6 +646,8 @@ section[is=call-to-action-section].default h3 {
 }
 section[is=call-to-action-section].default p {
   padding: 20px 0 60px 20px;
+  min-height: 250px;
+  margin-bottom: 20px;
 }
 @media screen and (min-width: 992px) {
   section[is=call-to-action-section].default {
@@ -618,9 +681,6 @@ section[is=call-to-action-section].default p {
   }
 }
 
-section[is=call-to-action-section].alternate-one h2 {
-  margin-bottom: 35px;
-}
 section[is=call-to-action-section].alternate-one picture:nth-of-type(even) {
   display: none;
 }
@@ -663,9 +723,6 @@ section[is=call-to-action-section].alternate-one p {
 
 section[is=call-to-action-section].alternate-two {
   align-content: center;
-}
-section[is=call-to-action-section].alternate-two h2 {
-  margin-bottom: 35px;
 }
 section[is=call-to-action-section].alternate-two picture {
   width: 100%;
@@ -720,7 +777,7 @@ section[is=call-to-action-section].alternate-three > * {
   position: relative;
   z-index: 10;
   text-align: center;
-  max-width: 60%;
+  max-width: calc(100% - 30px);
 }
 section[is=call-to-action-section].alternate-three h2 {
   margin-top: 25px;
@@ -743,25 +800,39 @@ section[is=call-to-action-section].alternate-three picture:nth-of-type(even) {
 section[is=call-to-action-section].alternate-three h3 {
   grid-row: 2;
   margin: 50px 0;
+  font-size: calc(var(--header-font-size-small) * 1.2);
+  font-weight: 900;
 }
 section[is=call-to-action-section].alternate-three p {
   grid-row: 3;
   margin-bottom: 60px;
+  font-weight: 500;
 }
 section[is=call-to-action-section].alternate-three a {
   grid-row: 4;
   margin-bottom: 40px;
 }
 section[is=call-to-action-section].alternate-three a button {
-  padding: 10px 50px;
+  width: 100%;
 }
 @media screen and (min-width: 768px) {
+  section[is=call-to-action-section].alternate-three > * {
+    max-width: 60%;
+  }
+  section[is=call-to-action-section].alternate-three h3 {
+    font-size: calc(var(--header-font-size-medium) * 1.5);
+    font-weight: 500;
+  }
   section[is=call-to-action-section].alternate-three picture {
     height: unset;
+    max-width: unset;
   }
   section[is=call-to-action-section].alternate-three img {
     height: unset;
     aspect-ratio: 12/7;
+  }
+  section[is=call-to-action-section].alternate-three button {
+    width: unset;
   }
 }
 
@@ -821,6 +892,7 @@ section[is=call-to-action-section].alternate-four button {
   section[is=call-to-action-section].alternate-four p {
     grid-column: 3;
     grid-row: 2;
+    font-weight: 300;
   }
   section[is=call-to-action-section].alternate-four a {
     grid-column: 3;
@@ -901,13 +973,23 @@ section[is=call-to-action-section].alternate-five button {
     width: unset;
     align-self: end;
   }
+  section[is=call-to-action-section].alternate-five img {
+    width: 100%;
+    height: 100%;
+  }
   section[is=call-to-action-section].alternate-five picture:first-of-type {
     grid-column: 3;
     grid-row: 3/span 2;
+    aspect-ratio: unset;
+    width: 100%;
+    height: 100%;
   }
   section[is=call-to-action-section].alternate-five picture:nth-of-type(even) {
     grid-column: 3;
     grid-row: 1/span 2;
+    aspect-ratio: unset;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -941,7 +1023,7 @@ section[is=call-to-action-section].alternate-six picture:nth-of-type(even) img {
 section[is=call-to-action-section].alternate-six button {
   width: 100%;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   section[is=call-to-action-section].alternate-six {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -978,7 +1060,7 @@ section[is=call-to-action-section].alternate-seven {
   gap: 30px;
 }
 section[is=call-to-action-section].alternate-seven h2 {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 section[is=call-to-action-section].alternate-seven h3 {
   display: none;
@@ -997,23 +1079,27 @@ section[is=call-to-action-section].alternate-seven picture img {
 section[is=call-to-action-section].alternate-seven button {
   width: 100%;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   section[is=call-to-action-section].alternate-seven {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: unset;
     column-gap: 5%;
   }
   section[is=call-to-action-section].alternate-seven h2 {
     grid-column: 1/span 2;
+    margin-bottom: 45px;
   }
   section[is=call-to-action-section].alternate-seven h3 {
     display: block;
     grid-column: 2;
     grid-row: 2;
+    margin-bottom: 30px;
   }
   section[is=call-to-action-section].alternate-seven p {
     grid-column: 2;
     grid-row: 3/span 2;
+    margin-bottom: 30px;
   }
   section[is=call-to-action-section].alternate-seven a {
     grid-column: 2;
@@ -1029,6 +1115,9 @@ section[is=call-to-action-section].alternate-seven button {
   section[is=call-to-action-section].alternate-seven picture:nth-of-type(even) {
     grid-column: 1;
     grid-row: 4/span 2;
+    align-self: end;
+    display: grid;
+    align-items: end;
   }
 }
 

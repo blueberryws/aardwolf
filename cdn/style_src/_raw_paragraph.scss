@@ -1,0 +1,27 @@
+@use "base";
+
+
+section[is="raw-paragraph-section"] {
+  p {
+    color: var(--color-four);
+  }
+}
+
+section[is="raw-paragraph-section"].default {
+}
+
+section[is="raw-paragraph-section"].alternate-one {
+  
+  @media screen and (min-width: base.$notebook) {
+    p {
+      column-count: 2;
+    }
+  }
+}
+section[is="raw-paragraph-section"].alternate-two {
+  @media screen and (min-width: base.$notebook) {
+    p {
+      column-count: 3;
+    }
+  }
+}

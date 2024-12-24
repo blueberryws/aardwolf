@@ -5,22 +5,20 @@
  - This actually made it a bit faster to have "programatic dark mode"
 - default
   h2:
-   - margin-bottom 35px?
+   - margin-bottom 35px? -- nope, this is 45px
   p:
-   - 60px bottom padding?
-   - is the left-padding/indent thing on purpose?
+   - 60px bottom padding? -- yes, but added a min-height rule to allow for a tall section when the text is short.
+   - is the left-padding/indent thing on purpose? -- yes
   button:
-   - border-radius 10px?
-   - Is the color set right?
-   - desktop padding is something like 10px 50px in the mockup, but this doesn't match the button generally. Is the mockup right?
+   - border-radius 10px? -- no, 12px
+   - Is the color set right? -- yes
+   - desktop padding is something like 10px 50px in the mockup, but this doesn't match the button generally. Is the mockup right? -- yes, changed alt button to match
   picture:
-   - How does it scale? I coded it as "tablet and larger" scale responsively.
+   - How does it scale? I coded it as "tablet and larger" scale responsively. -- this looks fine
    - It looked like it was about half of the section after accounting for padding, so I made it a square that was 50% wide. Is that right?
 - alternate-one
-  p:
-   - font-weight is 300? Is that right?
   h3:
-   - just double checking -- 200px bottom margin?
+   - just double checking -- 200px bottom margin? -- as implemented is fine.
    - update: changed this to 1fr in the grid-template-columns. I think it resizes better.
      - also change the breakpoint to notebook on this.
   picture:
@@ -28,29 +26,27 @@
 - alternate-two:
   picture:
    - aspect ratio looks to be 12 / 7. Just double checking
-   - on desktop this is really large.
+   - on desktop this is really large. -- that's fine.
   button:
-   - I didn't add as much top padding/margin as sort of suggested by the mockup. Wanted to double check that this was right.
+   - I didn't add as much top padding/margin as sort of suggested by the mockup. Wanted to double check that this was right. -- that's fine.
 - alternate-three:
   picture:
-   - how is this supposed to scale? What if they put lots of text?
-   - for desktop, I picked 12/7, but what if they put more text than that?
-   - desktop appears to use a different opacity than the mobile? I kept the vibe of mobile for both, but I can update this if desired.
-  button:
-   - mobile version is using the 10px 50px ratios.
+   - how is this supposed to scale? What if they put lots of text? -- it scales right atm.
+   - for desktop, I picked 12/7, but what if they put more text than that? -- zoom in on pic, like mobile.
+   - desktop appears to use a different opacity than the mobile? I kept the vibe of mobile for both, but I can update this if desired. -- matching is good.
 - alternate-four:
-  - The desktop arrangement is sort of awkward with a long paragraph. 
-  - note: I set notebook as the breakpoint, rather than tablet.
-  - tablet arrangement is weird bc the breakpoint is set to notebook, but the h2 resizes at tablet size. Need advice here.
+  - The desktop arrangement is sort of awkward with a long paragraph.  -- revisit maybe
+  - note: I set notebook as the breakpoint, rather than tablet.  -- this is fine, but revisit
+  - tablet arrangement is weird bc the breakpoint is set to notebook, but the h2 resizes at tablet size. Need advice here. -- this is fine.
 - alternate-five:
-  - has similar arrangement oddities as alternate-four (lowkey, I dig it. But it should be double-checked in the morning)
+  - has similar arrangement oddities as alternate-four (lowkey, I dig it. But it should be double-checked in the morning) -- mod'd, but fine.
 - alternate-six/seven:
-  h3: Is not present on mobile?
+  h3: Is not present on mobile? -- this needs to get fixed
   picture:
-   - ratio looks great, but how should it respond to very long text? (shorter text looks fine!)
+   - ratio looks great, but how should it respond to very long text? (shorter text looks fine!) -- changed breakpoint
 - alternate-seven:
   paragraph:
-   - it looks "shorter" than on other layouts. Should it float to the top or the center? Or something else?
+   - it looks "shorter" than on other layouts. Should it float to the top or the center? Or something else? -- nah, it's fine
 */
 
 section[is="call-to-action-section"] { // startfold
@@ -73,7 +69,6 @@ section[is="call-to-action-section"] { // startfold
 
   p {
     color: var(--color-four);
-    font-weight: 300;
   }
 
   img {
@@ -84,9 +79,8 @@ section[is="call-to-action-section"] { // startfold
   button {
     color: var(--color-one);
     background-color: var(--color-three);
-    border-radius: 10px;
+    border-radius: var(--normal-border-radius);
   }
-
 
   @media screen and (min-width: base.$tablet) {
     display: grid;
@@ -108,9 +102,6 @@ section[is="call-to-action-section"] { // startfold
   }
 } // endfold
 section[is="call-to-action-section"].default { // startfold
-  h2 {
-    margin-bottom: 35px;
-  }
 
   picture:nth-of-type(even) {
     display: none;
@@ -122,6 +113,8 @@ section[is="call-to-action-section"].default { // startfold
 
   p {
     padding: 20px 0 60px 20px;
+    min-height: 250px;
+    margin-bottom: 20px;
   }
 
   @media screen and (min-width: base.$notebook) {
@@ -157,9 +150,6 @@ section[is="call-to-action-section"].default { // startfold
   }
 } // endfold
 section[is="call-to-action-section"].alternate-one { // startfold
-  h2 {
-    margin-bottom: 35px;
-  }
 
   picture:nth-of-type(even) {
     display: none;
@@ -205,10 +195,6 @@ section[is="call-to-action-section"].alternate-one { // startfold
 } // endfold
 section[is="call-to-action-section"].alternate-two { // startfold
   align-content: center;
-
-  h2 {
-    margin-bottom: 35px;
-  }
 
   picture {
     width: 100%;
@@ -268,7 +254,7 @@ section[is="call-to-action-section"].alternate-three { // startfold
     position: relative;
     z-index: 10;
     text-align: center;
-    max-width: 60%;
+    max-width: calc(100% - 30px);
   }
 
   h2 {
@@ -296,11 +282,14 @@ section[is="call-to-action-section"].alternate-three { // startfold
   h3 {
     grid-row: 2;
     margin: 50px 0;
+    font-size: calc(var(--header-font-size-small) * 1.2);
+    font-weight: 900;
   }
 
   p {
     grid-row: 3;
     margin-bottom: 60px;
+    font-weight: 500;
   }
 
   a {
@@ -308,17 +297,28 @@ section[is="call-to-action-section"].alternate-three { // startfold
     margin-bottom: 40px;
 
     button {
-      padding: 10px 50px; 
+      width: 100%;
     }
   }
 
   @media screen and (min-width: base.$tablet) {
+    > * {
+      max-width: 60%;
+    }
+    h3 {
+      font-size: calc(var(--header-font-size-medium) * 1.5);
+      font-weight: 500;
+    }
     picture {
       height: unset;
+      max-width: unset;
     }
     img {
       height: unset;
       aspect-ratio: 12/7;
+    }
+    button {
+      width: unset;
     }
   }
 } // endfold
@@ -378,10 +378,12 @@ section[is="call-to-action-section"].alternate-four { // startfold
     h3 {
       grid-column: 3;
       grid-row: 1;
+
     }
     p {
       grid-column: 3;
       grid-row: 2;
+      font-weight: 300;
     }
     a {
       grid-column: 3;
@@ -467,13 +469,25 @@ section[is="call-to-action-section"].alternate-five { // startfold
       align-self: end;
     }
 
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
     picture:first-of-type {
       grid-column: 3;
       grid-row: 3 / span 2;
+      aspect-ratio: unset;
+      width: 100%;
+      height: 100%;
+
     }
     picture:nth-of-type(even) {
       grid-column: 3;
       grid-row: 1 / span 2;
+      aspect-ratio: unset;
+      width: 100%;
+      height: 100%;
     }
   }
 
@@ -511,7 +525,7 @@ section[is="call-to-action-section"].alternate-six { // startfold
     width: 100%;
   }
 
-  @media screen and (min-width: base.$tablet) {
+  @media screen and (min-width: base.$notebook) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
@@ -546,7 +560,7 @@ section[is="call-to-action-section"].alternate-six { // startfold
 section[is="call-to-action-section"].alternate-seven { // startfold
   gap: 30px;
   h2 {
-    margin-bottom: 5px;
+    margin-bottom: 15px;
   }
   h3 {
     display: none;  
@@ -568,22 +582,26 @@ section[is="call-to-action-section"].alternate-seven { // startfold
     width: 100%;
   }
 
-  @media screen and (min-width: base.$tablet) {
+  @media screen and (min-width: base.$notebook) {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: unset;
     column-gap: 5%;
 
     h2 {
       grid-column: 1 / span 2;
+      margin-bottom: 45px;
     }
     h3 {
       display: block;
       grid-column: 2;
       grid-row: 2;
+      margin-bottom: 30px;
     }
     p {
       grid-column: 2;
       grid-row: 3 / span 2;
+      margin-bottom: 30px;
     }
     a {
       grid-column: 2;
@@ -599,6 +617,9 @@ section[is="call-to-action-section"].alternate-seven { // startfold
     picture:nth-of-type(even) {
       grid-column: 1;
       grid-row: 4 / span 2;
+      align-self: end;
+      display: grid;
+      align-items: end;
     }
   }
 } // endfold

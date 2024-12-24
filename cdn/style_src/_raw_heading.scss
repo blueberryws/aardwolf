@@ -1,0 +1,14 @@
+@use "base";
+
+
+section[is="raw-heading-section"].default {
+
+}
+
+section[is="raw-heading-section"].alternate-one {
+  @media screen and (min-width: base.$tablet) {
+    h2 {
+      text-align: start;
+    }
+  }
+}
