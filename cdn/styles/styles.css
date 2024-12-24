@@ -218,6 +218,99 @@ section[is=hero-section].left-align picture a {
   bottom: 25px;
   right: 25px;
 } /* endfold */
+section[is=hours-section] ul {
+  width: min(650px, 90%);
+  margin: auto;
+}
+section[is=hours-section] p {
+  font-size: var(--body-font-size-x-large);
+  font-weight: 400;
+  height: calc(var(--body-font-size-x-large) * 1.2);
+  line-height: calc(var(--body-font-size-x-large) * 1.2);
+}
+
+section[is=hours-section].default {
+  padding-bottom: 150px;
+}
+section[is=hours-section].default h2 {
+  color: var(--color-three);
+}
+section[is=hours-section].default ul {
+  display: grid;
+  width: min(650px, 90%);
+  margin: auto;
+  list-style-type: none;
+}
+section[is=hours-section].default ul li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+section[is=hours-section].default ul li p {
+  font-size: var(--body-font-size-small);
+  font-weight: 400;
+  line-height: calc(var(--body-font-size-small) * 1.5);
+  color: var(--color-four);
+  height: calc(var(--body-font-size-small) * 1.2);
+  margin: 6px 0;
+}
+section[is=hours-section].default ul li p.day {
+  grid-column: 1;
+  display: flex;
+  gap: 8px;
+  margin-right: 8px;
+  color: var(--color-four);
+}
+section[is=hours-section].default ul li p.day::after {
+  content: "";
+  flex-grow: 1;
+  border-bottom: 1.5px solid var(--color-four);
+}
+section[is=hours-section].default ul li p.time {
+  grid-column: 2;
+  color: var(--color-four);
+}
+@media (prefers-color-scheme: dark) {
+  section[is=hours-section].default {
+    background-color: var(--color-two);
+  }
+  section[is=hours-section].default h2 {
+    color: var(--color-four);
+  }
+}
+@media screen and (min-width: 768px) {
+  section[is=hours-section].default ul li p {
+    font-size: var(--body-font-size-x-large);
+    font-weight: 400;
+    margin: 12px 0;
+  }
+}
+
+section[is=hours-section].alternate {
+  background-color: var(--color-two);
+  border-radius: var(--normal-border-radius);
+  margin: 15px;
+}
+section[is=hours-section].alternate ul {
+  display: flex;
+  justify-content: center;
+}
+section[is=hours-section].alternate li {
+  display: none;
+}
+section[is=hours-section].alternate li:first-of-type {
+  display: flex;
+  flex-direction: column;
+}
+section[is=hours-section].alternate li p {
+  text-align: center;
+  color: var(--color-four);
+}
+@media screen and (min-width: 768px) {
+  section[is=hours-section].alternate {
+    margin: 30px auto;
+  }
+}
+
 section[is=contact-form-section] {
   display: flex;
   flex-direction: column;
@@ -378,6 +471,564 @@ section[is=contact-form-section].alternate form button {
   }
   section[is=contact-form-section].alternate form button {
     color: var(--color-one);
+  }
+}
+
+/* Questions:
+- No dark mode, so need manual eyeballs on all the color balance
+ - This actually made it a bit faster to have "programatic dark mode"
+- default
+  h2:
+   - margin-bottom 35px?
+  p:
+   - 60px bottom padding?
+   - is the left-padding/indent thing on purpose?
+  button:
+   - border-radius 10px?
+   - Is the color set right?
+   - desktop padding is something like 10px 50px in the mockup, but this doesn't match the button generally. Is the mockup right?
+  picture:
+   - How does it scale? I coded it as "tablet and larger" scale responsively.
+   - It looked like it was about half of the section after accounting for padding, so I made it a square that was 50% wide. Is that right?
+- alternate-one
+  p:
+   - font-weight is 300? Is that right?
+  h3:
+   - just double checking -- 200px bottom margin?
+   - update: changed this to 1fr in the grid-template-columns. I think it resizes better.
+     - also change the breakpoint to notebook on this.
+  picture:
+   - is the vibe here "resize to match content length?" or "keep a ~3/4 aspect ratio?"
+- alternate-two:
+  picture:
+   - aspect ratio looks to be 12 / 7. Just double checking
+   - on desktop this is really large.
+  button:
+   - I didn't add as much top padding/margin as sort of suggested by the mockup. Wanted to double check that this was right.
+- alternate-three:
+  picture:
+   - how is this supposed to scale? What if they put lots of text?
+   - for desktop, I picked 12/7, but what if they put more text than that?
+   - desktop appears to use a different opacity than the mobile? I kept the vibe of mobile for both, but I can update this if desired.
+  button:
+   - mobile version is using the 10px 50px ratios.
+- alternate-four:
+  - The desktop arrangement is sort of awkward with a long paragraph. 
+  - note: I set notebook as the breakpoint, rather than tablet.
+  - tablet arrangement is weird bc the breakpoint is set to notebook, but the h2 resizes at tablet size. Need advice here.
+- alternate-five:
+  - has similar arrangement oddities as alternate-four (lowkey, I dig it. But it should be double-checked in the morning)
+- alternate-six/seven:
+  h3: Is not present on mobile?
+  picture:
+   - ratio looks great, but how should it respond to very long text? (shorter text looks fine!)
+- alternate-seven:
+  paragraph:
+   - it looks "shorter" than on other layouts. Should it float to the top or the center? Or something else?
+*/
+section[is=call-to-action-section] {
+  display: flex;
+  flex-direction: column;
+}
+section[is=call-to-action-section] h2 {
+  grid-row: 1;
+}
+section[is=call-to-action-section] img {
+  border-radius: var(--normal-border-radius);
+}
+section[is=call-to-action-section] h3 {
+  font-size: var(--header-font-size-small);
+  font-weight: 900;
+  color: var(--color-three);
+}
+section[is=call-to-action-section] p {
+  color: var(--color-four);
+  font-weight: 300;
+}
+section[is=call-to-action-section] img {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+section[is=call-to-action-section] button {
+  color: var(--color-one);
+  background-color: var(--color-three);
+  border-radius: 10px;
+}
+@media screen and (min-width: 768px) {
+  section[is=call-to-action-section] {
+    display: grid;
+  }
+  section[is=call-to-action-section] h3 {
+    font-size: calc(var(--header-font-size-medium) * 1.5);
+    font-weight: 500;
+  }
+  section[is=call-to-action-section] p {
+    font-size: var(--body-font-size-small);
+  }
+  section[is=call-to-action-section] button {
+    padding: 10px 50px;
+  }
+  section[is=call-to-action-section] picture {
+    width: 100%;
+    aspect-ratio: 11/7;
+  }
+}
+
+section[is=call-to-action-section].default h2 {
+  margin-bottom: 35px;
+}
+section[is=call-to-action-section].default picture:nth-of-type(even) {
+  display: none;
+}
+section[is=call-to-action-section].default h3 {
+  margin-top: 13px;
+}
+section[is=call-to-action-section].default p {
+  padding: 20px 0 60px 20px;
+}
+@media screen and (min-width: 992px) {
+  section[is=call-to-action-section].default {
+    column-gap: 10%;
+    padding-right: 120px;
+    padding-left: 120px;
+    box-sizing: border-box;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 1fr 1fr;
+  }
+  section[is=call-to-action-section].default h2 {
+    grid-column: 1/span 2;
+  }
+  section[is=call-to-action-section].default h3 {
+    margin: 0 0 50px 0;
+    grid-column: 2;
+    grid-row: 2;
+  }
+  section[is=call-to-action-section].default picture:first-of-type {
+    grid-column: 1;
+    grid-row: 2/span 3;
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+  section[is=call-to-action-section].default picture:first-of-type img {
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+  section[is=call-to-action-section].default p {
+    padding: 0;
+  }
+}
+
+section[is=call-to-action-section].alternate-one h2 {
+  margin-bottom: 35px;
+}
+section[is=call-to-action-section].alternate-one picture:nth-of-type(even) {
+  display: none;
+}
+section[is=call-to-action-section].alternate-one h3 {
+  margin-top: 35px;
+}
+section[is=call-to-action-section].alternate-one p {
+  margin-bottom: 60px;
+  font-weight: 300;
+}
+@media screen and (min-width: 992px) {
+  section[is=call-to-action-section].alternate-one {
+    column-gap: 10%;
+    padding-right: 120px;
+    padding-left: 120px;
+    box-sizing: border-box;
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-columns: 1fr 1fr;
+  }
+  section[is=call-to-action-section].alternate-one h2 {
+    grid-column: 1/span 2;
+  }
+  section[is=call-to-action-section].alternate-one h3 {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  section[is=call-to-action-section].alternate-one picture:first-of-type {
+    grid-column: 1;
+    grid-row: 2/span 3;
+    width: 100%;
+  }
+  section[is=call-to-action-section].alternate-one picture:first-of-type img {
+    width: 100%;
+    aspect-ratio: 11/14;
+  }
+  section[is=call-to-action-section].alternate-one p {
+    padding: 0;
+  }
+}
+
+section[is=call-to-action-section].alternate-two {
+  align-content: center;
+}
+section[is=call-to-action-section].alternate-two h2 {
+  margin-bottom: 35px;
+}
+section[is=call-to-action-section].alternate-two picture {
+  width: 100%;
+}
+section[is=call-to-action-section].alternate-two picture img {
+  width: 100%;
+  aspect-ratio: 12/7;
+}
+section[is=call-to-action-section].alternate-two picture:nth-of-type(even) {
+  display: none;
+}
+section[is=call-to-action-section].alternate-two h3 {
+  margin: 15px 0;
+  text-align: center;
+}
+section[is=call-to-action-section].alternate-two p {
+  margin-bottom: 60px;
+  font-weight: 300;
+  text-align: center;
+}
+section[is=call-to-action-section].alternate-two button {
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  section[is=call-to-action-section].alternate-two h2 {
+    margin-bottom: 90px;
+  }
+  section[is=call-to-action-section].alternate-two h3 {
+    margin-top: 35px;
+    margin-bottom: 60px;
+  }
+  section[is=call-to-action-section].alternate-two p {
+    text-align: start;
+    width: 85%;
+    justify-self: center;
+  }
+  section[is=call-to-action-section].alternate-two a {
+    justify-self: center;
+    width: unset;
+  }
+}
+
+section[is=call-to-action-section].alternate-three {
+  display: grid;
+  grid-template-columns: 100%;
+  padding: unset;
+  justify-items: center;
+  align-items: center;
+}
+section[is=call-to-action-section].alternate-three > * {
+  grid-column: 1;
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 60%;
+}
+section[is=call-to-action-section].alternate-three h2 {
+  margin-top: 25px;
+}
+section[is=call-to-action-section].alternate-three picture:first-of-type {
+  grid-row: 2/span 3;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  max-width: unset;
+}
+section[is=call-to-action-section].alternate-three picture:first-of-type img {
+  width: 100%;
+  height: 100%;
+  opacity: 35%;
+}
+section[is=call-to-action-section].alternate-three picture:nth-of-type(even) {
+  display: none;
+}
+section[is=call-to-action-section].alternate-three h3 {
+  grid-row: 2;
+  margin: 50px 0;
+}
+section[is=call-to-action-section].alternate-three p {
+  grid-row: 3;
+  margin-bottom: 60px;
+}
+section[is=call-to-action-section].alternate-three a {
+  grid-row: 4;
+  margin-bottom: 40px;
+}
+section[is=call-to-action-section].alternate-three a button {
+  padding: 10px 50px;
+}
+@media screen and (min-width: 768px) {
+  section[is=call-to-action-section].alternate-three picture {
+    height: unset;
+  }
+  section[is=call-to-action-section].alternate-three img {
+    height: unset;
+    aspect-ratio: 12/7;
+  }
+}
+
+section[is=call-to-action-section].alternate-four {
+  display: grid;
+  row-gap: 10px;
+  grid-template-columns: calc(var(--header-font-size-large) * 2) 1fr;
+}
+section[is=call-to-action-section].alternate-four * {
+  grid-column: 1/span 2;
+}
+section[is=call-to-action-section].alternate-four h2 {
+  grid-column: 1;
+  grid-row: 3;
+  transform: rotate(-90deg);
+  text-wrap: nowrap;
+  aspect-ratio: 1/1;
+  min-height: 100%;
+  text-align: center;
+  width: fit-content;
+}
+section[is=call-to-action-section].alternate-four h3 {
+  grid-column: 2;
+  color: var(--color-three);
+}
+section[is=call-to-action-section].alternate-four p {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: center;
+}
+section[is=call-to-action-section].alternate-four picture:first-of-type img {
+  aspect-ratio: 12/7;
+}
+section[is=call-to-action-section].alternate-four picture:nth-of-type(even) img {
+  aspect-ratio: 11/14;
+}
+section[is=call-to-action-section].alternate-four button {
+  width: 100%;
+  margin: 25px 0;
+}
+@media screen and (min-width: 992px) {
+  section[is=call-to-action-section].alternate-four {
+    grid-template-columns: 1fr calc(var(--header-font-size-large) * 3) 1fr;
+  }
+  section[is=call-to-action-section].alternate-four * {
+    grid-column: 3;
+  }
+  section[is=call-to-action-section].alternate-four h2 {
+    grid-column: 2;
+    grid-row: 1/span 4;
+    margin-left: calc(var(--header-font-size-large) * 0.75);
+  }
+  section[is=call-to-action-section].alternate-four h3 {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  section[is=call-to-action-section].alternate-four p {
+    grid-column: 3;
+    grid-row: 2;
+  }
+  section[is=call-to-action-section].alternate-four a {
+    grid-column: 3;
+    grid-row: 3;
+  }
+  section[is=call-to-action-section].alternate-four button {
+    width: unset;
+  }
+  section[is=call-to-action-section].alternate-four picture:nth-of-type(even) {
+    grid-column: 1;
+    grid-row: 1/span 4;
+  }
+}
+
+section[is=call-to-action-section].alternate-five {
+  display: grid;
+  row-gap: 10px;
+  grid-template-columns: calc(var(--header-font-size-large) * 2) 1fr;
+}
+section[is=call-to-action-section].alternate-five * {
+  grid-column: 1/span 2;
+}
+section[is=call-to-action-section].alternate-five h2 {
+  grid-column: 1;
+  grid-row: 3;
+  transform: rotate(-90deg);
+  text-wrap: nowrap;
+  aspect-ratio: 1/1;
+  min-height: 100%;
+  text-align: center;
+  width: fit-content;
+}
+section[is=call-to-action-section].alternate-five h3 {
+  grid-column: 2;
+  color: var(--color-three);
+}
+section[is=call-to-action-section].alternate-five p {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: center;
+}
+section[is=call-to-action-section].alternate-five picture:first-of-type img {
+  aspect-ratio: 12/7;
+}
+section[is=call-to-action-section].alternate-five picture:nth-of-type(even) img {
+  aspect-ratio: 12/7;
+}
+section[is=call-to-action-section].alternate-five button {
+  width: 100%;
+  margin: 25px 0;
+}
+@media screen and (min-width: 992px) {
+  section[is=call-to-action-section].alternate-five {
+    grid-template-columns: calc(var(--header-font-size-large) * 3) 1fr 1fr;
+    column-gap: 5%;
+  }
+  section[is=call-to-action-section].alternate-five * {
+    grid-column: 2;
+  }
+  section[is=call-to-action-section].alternate-five h2 {
+    grid-column: 1;
+    grid-row: 1/span 4;
+    margin-left: calc(var(--header-font-size-large) * 0.75);
+  }
+  section[is=call-to-action-section].alternate-five h3 {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  section[is=call-to-action-section].alternate-five p {
+    grid-column: 2;
+    grid-row: 2/span 2;
+  }
+  section[is=call-to-action-section].alternate-five a {
+    grid-column: 2;
+    grid-row: 4;
+  }
+  section[is=call-to-action-section].alternate-five button {
+    width: unset;
+    align-self: end;
+  }
+  section[is=call-to-action-section].alternate-five picture:first-of-type {
+    grid-column: 3;
+    grid-row: 3/span 2;
+  }
+  section[is=call-to-action-section].alternate-five picture:nth-of-type(even) {
+    grid-column: 3;
+    grid-row: 1/span 2;
+  }
+}
+
+section[is=call-to-action-section].alternate-six {
+  gap: 30px;
+}
+section[is=call-to-action-section].alternate-six h2 {
+  margin-bottom: 5px;
+}
+section[is=call-to-action-section].alternate-six h3 {
+  display: none;
+}
+section[is=call-to-action-section].alternate-six p {
+  font-size: var(--body-font-size-small);
+  font-weight: 300;
+}
+section[is=call-to-action-section].alternate-six picture:first-of-type {
+  width: 100%;
+}
+section[is=call-to-action-section].alternate-six picture:first-of-type img {
+  width: 100%;
+  aspect-ratio: 12/7;
+}
+section[is=call-to-action-section].alternate-six picture:nth-of-type(even) {
+  width: 100%;
+}
+section[is=call-to-action-section].alternate-six picture:nth-of-type(even) img {
+  width: 100%;
+  aspect-ratio: 11/14;
+}
+section[is=call-to-action-section].alternate-six button {
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  section[is=call-to-action-section].alternate-six {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto 1fr auto;
+    column-gap: 5%;
+  }
+  section[is=call-to-action-section].alternate-six * {
+    grid-column: 2;
+  }
+  section[is=call-to-action-section].alternate-six h2 {
+    grid-column: 1/span 2;
+  }
+  section[is=call-to-action-section].alternate-six h3 {
+    display: block;
+    grid-row: 2;
+  }
+  section[is=call-to-action-section].alternate-six p {
+    grid-row: 3;
+  }
+  section[is=call-to-action-section].alternate-six a {
+    grid-row: 4;
+  }
+  section[is=call-to-action-section].alternate-six button {
+    width: unset;
+  }
+  section[is=call-to-action-section].alternate-six picture:nth-of-type(even) {
+    grid-column: 1;
+    grid-row: 2/span 4;
+  }
+}
+
+section[is=call-to-action-section].alternate-seven {
+  gap: 30px;
+}
+section[is=call-to-action-section].alternate-seven h2 {
+  margin-bottom: 5px;
+}
+section[is=call-to-action-section].alternate-seven h3 {
+  display: none;
+}
+section[is=call-to-action-section].alternate-seven p {
+  font-size: var(--body-font-size-small);
+  font-weight: 300;
+}
+section[is=call-to-action-section].alternate-seven picture {
+  width: 100%;
+}
+section[is=call-to-action-section].alternate-seven picture img {
+  width: 100%;
+  aspect-ratio: 12/7;
+}
+section[is=call-to-action-section].alternate-seven button {
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  section[is=call-to-action-section].alternate-seven {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5%;
+  }
+  section[is=call-to-action-section].alternate-seven h2 {
+    grid-column: 1/span 2;
+  }
+  section[is=call-to-action-section].alternate-seven h3 {
+    display: block;
+    grid-column: 2;
+    grid-row: 2;
+  }
+  section[is=call-to-action-section].alternate-seven p {
+    grid-column: 2;
+    grid-row: 3/span 2;
+  }
+  section[is=call-to-action-section].alternate-seven a {
+    grid-column: 2;
+    grid-row: 5;
+  }
+  section[is=call-to-action-section].alternate-seven button {
+    width: unset;
+  }
+  section[is=call-to-action-section].alternate-seven picture:first-of-type {
+    grid-column: 1;
+    grid-row: 2/span 2;
+  }
+  section[is=call-to-action-section].alternate-seven picture:nth-of-type(even) {
+    grid-column: 1;
+    grid-row: 4/span 2;
   }
 }
 

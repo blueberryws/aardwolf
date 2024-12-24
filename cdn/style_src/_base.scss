@@ -84,6 +84,7 @@ section {
 }
 
 /* endfold */
+
 /* typography settings startfold */
 h1, .page-title {
     font-weight: 800;
@@ -101,6 +102,10 @@ h2 {
   @include section-heading;
 }
 
+@mixin subsection-heading {
+  font-weight: 500;
+}
+
 .callout-text {
     font-weight: 400;
     font-size: 16px;
@@ -115,6 +120,10 @@ h2 {
   font-weight: 400;
   line-height: calc(var(--body-font-size-small) * 1.5);
   color: var(--color-four);
+}
+@mixin enlarged-text {
+  font-size: var(--body-font-size-x-large);
+  font-weight: 400;
 }
 @mixin form-label {
   font-size: 12px;
