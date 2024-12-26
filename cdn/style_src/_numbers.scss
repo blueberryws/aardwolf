@@ -1,0 +1,82 @@
+@use "base";
+
+/* 
+- How does mobile spacing work on longer screens?
+- Light mode looks very off.
+*/
+
+section[is="numbers-section"] {
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 40px;
+    height: 75vh;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+  picture {
+    margin: auto;
+    width: 33%;
+  }
+  h3 {
+    font-size: var(--header-font-size-x-large);
+    font-weight: 800;
+    color: var(--color-three);
+    text-align: center;
+  }
+  h4 {
+    text-align: center;
+    color: var(--color-four);
+    font-size: calc(var(--header-font-size-small) * .8);
+    font-weight: 400;
+  }
+
+  @media screen and (min-width: base.$tablet) {
+    ul {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+      align-items: start;
+      justify-items: center;
+      height: fit-content;
+    }
+    picture {
+      width: 75%;
+      margin-bottom: 20px;
+    }
+    h3 {
+      font-size: calc(var(--header-font-size-x-large) * .75);
+    }
+    h4 {
+      font-size: var(--header-font-size-medium);
+    }
+  }
+}
+
+section[is="numbers-section"].default {
+}
+
+section[is="numbers-section"].alternate-one {
+  background-color: var(--color-two);
+  li {
+    background-color: var(--color-one);
+    border-radius: 200px;
+    width: 80%;
+    padding: 20px 10px;
+  }
+  @media screen and (min-width: base.$tablet) {
+    ul {
+    }
+    li {
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+      padding: 0;
+    }
+  }
+}

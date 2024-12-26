@@ -521,6 +521,144 @@ section[is=embed-section].alternate-three p {
   display: none;
 }
 
+section[is=at-a-glance-section] ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 40px;
+}
+section[is=at-a-glance-section] li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+section[is=at-a-glance-section] picture {
+  margin: auto;
+  width: 33%;
+}
+section[is=at-a-glance-section] h3 {
+  text-align: center;
+  color: var(--color-three);
+  font-size: var(--header-font-size-small);
+}
+@media screen and (min-width: 768px) {
+  section[is=at-a-glance-section] ul {
+    flex-direction: row;
+  }
+  section[is=at-a-glance-section] picture {
+    width: 75%;
+    margin-bottom: 20px;
+  }
+  section[is=at-a-glance-section] h3 {
+    font-size: var(--header-font-size-medium);
+  }
+}
+
+section[is=at-a-glance-section].default img {
+  border-radius: 50%;
+}
+
+section[is=at-a-glance-section].alternate-one img {
+  border-radius: var(--normal-border-radius);
+}
+
+section[is=at-a-glance-section].alternate-two li {
+  background-color: var(--color-two);
+  border-radius: var(--normal-border-radius);
+  padding: 30px;
+  width: 65%;
+  justify-content: space-around;
+}
+section[is=at-a-glance-section].alternate-two picture {
+  width: 65%;
+  margin-bottom: 15px;
+}
+section[is=at-a-glance-section].alternate-two img {
+  border-radius: 50%;
+}
+section[is=at-a-glance-section].alternate-two h3 {
+  color: var(--color-four);
+}
+@media screen and (min-width: 768px) {
+  section[is=at-a-glance-section].alternate-two li {
+    padding: 30px 15px;
+  }
+}
+
+/* 
+- How does mobile spacing work on longer screens?
+- Light mode looks very off.
+*/
+section[is=numbers-section] ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 40px;
+  height: 75vh;
+}
+section[is=numbers-section] li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+section[is=numbers-section] picture {
+  margin: auto;
+  width: 33%;
+}
+section[is=numbers-section] h3 {
+  font-size: var(--header-font-size-x-large);
+  font-weight: 800;
+  color: var(--color-three);
+  text-align: center;
+}
+section[is=numbers-section] h4 {
+  text-align: center;
+  color: var(--color-four);
+  font-size: calc(var(--header-font-size-small) * 0.8);
+  font-weight: 400;
+}
+@media screen and (min-width: 768px) {
+  section[is=numbers-section] ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    align-items: start;
+    justify-items: center;
+    height: fit-content;
+  }
+  section[is=numbers-section] picture {
+    width: 75%;
+    margin-bottom: 20px;
+  }
+  section[is=numbers-section] h3 {
+    font-size: calc(var(--header-font-size-x-large) * 0.75);
+  }
+  section[is=numbers-section] h4 {
+    font-size: var(--header-font-size-medium);
+  }
+}
+
+section[is=numbers-section].alternate-one {
+  background-color: var(--color-two);
+}
+section[is=numbers-section].alternate-one li {
+  background-color: var(--color-one);
+  border-radius: 200px;
+  width: 80%;
+  padding: 20px 10px;
+}
+@media screen and (min-width: 768px) {
+  section[is=numbers-section].alternate-one li {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    padding: 0;
+  }
+}
+
 @media screen and (min-width: 768px) {
   section[is=raw-heading-section].alternate-one h2 {
     text-align: start;
