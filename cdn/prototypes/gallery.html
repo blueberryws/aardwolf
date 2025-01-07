@@ -55,22 +55,94 @@
     const doc = target.getSVGDocument();
     target.replaceWith(doc.children[0]);
   }
+  function showAllGalleryImages(target) {
+    const section = target.closest("section[is='gallery-section']"); 
+    const gallery = section.querySelector("ul");
+    gallery.classList.add("show-all");
+    target.classList.add("hidden");
+  }
 </script>
 <body>
-<section is="numbers-section" class="alternate-one">
-  <h2 is="editable-h2" class="section-heading">Numbers Don't Lie</h2>
+<section is="gallery-section" class="alternate-one">
+  <h2 is="editable-h2" class="section-heading">Image Gallery</h2>
+  <button class="previous-button"></button>
+  <button class="next-button"></button>
+  <button class="show-all" onclick="showAllGalleryImages(this)">See More</button>
   <ul>
     <li>
-      <h3 is="editable-h3">26%</h3>
-      <h4 is="editable-h4">Good Words</h4>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
     </li>
     <li>
-      <h3 is="editable-h3">26%</h3>
-      <h4 is="editable-h4">A Bit Of Description</h4>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
     </li>
     <li>
-      <h3 is="editable-h3">26%</h3>
-      <h4 is="editable-h4">Things shouldn't be longer than this</h4>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
+    </li>
+    <li>
+      <picture is="editable-picture">
+        <img src="/cdn/images/default.png">
+      </picture>
     </li>
   </ul>
 </section>

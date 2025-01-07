@@ -5,8 +5,9 @@ section[is="embed-section"] {
   flex-direction: column;
   align-items: center;
 
-  iframe {
+  div[is="editable-iframe"] {
     max-width: 100%;
+    position: relative;
   }
 
   p {
@@ -15,7 +16,7 @@ section[is="embed-section"] {
   }
 
   @media screen and (min-width: base.$tablet) {
-    iframe {
+    div[is="editable-iframe"] {
       margin-bottom: 100px;
     }
     p {
@@ -34,7 +35,7 @@ section[is="embed-section"].alternate-one {
   h2 {
     grid-row: 1; 
   }
-  iframe {
+  div[is="editable-iframe"] {
     grid-row: 3;
   }
   p {

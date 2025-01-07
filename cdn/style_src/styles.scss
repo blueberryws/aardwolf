@@ -5,8 +5,43 @@
 @use 'embed';
 @use 'at_a_glance';
 @use 'numbers';
+@use 'gallery';
 @use 'raw_heading';
 @use 'raw_paragraph';
 @use 'call_to_action';
 @use 'testimonials';
 @use 'faqs';
+
+/* move these to the web component ... later */
+:root { /* startfold */
+  --palette-color-one: white;
+  --palette-color-two: #B8B8B8;
+  --palette-color-three: #4F4F4F;
+  --palette-color-four: black;
+
+  --header-font-size-x-large: 36px;
+  --header-font-weight-x-large: 500;
+  --header-font-size-large: 32px;
+  --header-font-weight-large: 500;
+  --header-font-size-medium: 32px;
+  --header-font-weight-medium: 500;
+  --header-font-size-small: 20px;
+  --header-font-weight-small: 500;
+
+  --body-font-size-large: 24px;
+  --body-font-size-medium: 16px;
+  --body-font-size-small: 14px;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --header-font-size-x-large: 128px;
+    --header-font-size-large: 64px;
+    --header-font-size-medium: 32px;
+    --header-font-size-small: 24px;
+
+    --body-font-size-large: 24px;
+    --body-font-size-medium: 20px;
+    --body-font-size-small: 16px;
+  }
+} /* endfold */

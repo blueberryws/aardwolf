@@ -1,7 +1,34 @@
-section[is='hero-section'].default { /* startfold */
+@use "base";
+/* Questions:
+- border-radius on buttons doesn't match. I'm assuming go with 12px?
+- pardon me, one more time. I'm writing it down this time: Which of these are grayscale? None, and all are just "low opacity with background color"?
+- there is a strange case where the h1 is smaller than h2 on tablet size bc the tablet switches sizes earlier. Talk throught this.
+- alternate-three:
+- need overlay for the "bubble" thing.
+*/
+
+section[is='hero-section'] { /* startfold */
     display: grid;
+    height: 100vh;
+    padding: 0;
+}
+
+section[is='hero-section'] picture {
+    grid-row: 1 / -1;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-four);
+}
+
+section[is='hero-section'] picture img {
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+} /* endfold */
+section[is='hero-section'].default { /* startfold */
     grid-template-columns: 1fr;
-    grid-template-rows: 27vh 5vh 18vh 50vh;
+    grid-template-rows: 1fr auto auto 2fr;
     justify-items: center;
     align-items: center;
 }
@@ -10,101 +37,191 @@ section[is='hero-section'].default > * {
     z-index: 10;
     grid-column: 1;
     text-align: center;
+    color: var(--color-one);
 }
 
 section[is='hero-section'].default h1 {
-    grid-row: 1;
-    color: var(--color-one);
     align-self: end;
+    grid-row: 1;
 }
 
 section[is='hero-section'].default h2 {
     grid-row: 2;
-    color: var(--color-one);
 }
 
 section[is='hero-section'].default p {
     grid-row: 3;
-    color: var(--color-one);
 }
 
-section[is='hero-section'].default > a {
+section[is='hero-section'].default a {
     grid-row: 4;
-}
-
-section[is='hero-section'].default button {
 }
 
 section[is='hero-section'].default picture {
-    grid-row: 1 / span 4;
     z-index: 1;
 }
-
 section[is='hero-section'].default picture img {
     z-index: 1;
-    height: 100vh;
-    width: 100vw;
-    filter: grayscale(1) brightness(75%);
+    opacity: 65%;
+    filter: brightness(75%);
 }
 
-section[is='hero-section'].default picture a {
-    position: absolute;    
-    bottom: 25px;
-    right: 25px;
-} /* endfold */
-section[is='hero-section'].left-align { /* startfold */
-    display: grid;
+/* endfold */
+section[is='hero-section'].alternate-one { /* startfold */
     grid-template-columns: 1fr;
-    grid-template-rows: 27vh 5vh 18vh 50vh;
+    grid-template-rows: auto auto auto 1fr;
     justify-items: start;
     align-items: center;
-}
 
-section[is='hero-section'].left-align > * {
+  > * {
     z-index: 10;
     grid-column: 1;
-    text-align: start;
-    margin-left: 10vw;
-}
-
-section[is='hero-section'].left-align h1 {
-    grid-row: 1;
+    text-align: center;
     color: var(--color-one);
+    padding-left: 50px;
+  }
+  h1 {
     align-self: end;
-}
-
-section[is='hero-section'].left-align h2 {
+    grid-row: 1;
+    padding-top: 50px;
+  }
+  h2 {
     grid-row: 2;
-    color: var(--color-one);
-}
-
-section[is='hero-section'].left-align p {
+  }
+  p {
     grid-row: 3;
-    color: var(--color-one);
-}
-
-section[is='hero-section'].left-align > a {
+  }
+  a {
     grid-row: 4;
-}
-
-section[is='hero-section'].left-align button {
-}
-
-section[is='hero-section'].left-align picture {
-    grid-row: 1 / span 4;
+    align-self: end;
+    padding-bottom: 50px;
+  }
+  picture {
     z-index: 1;
-    margin-left: 0;
-}
+    padding-left: 0;
 
-section[is='hero-section'].left-align picture img {
+    img {
+      z-index: 1;
+      opacity: 65%;
+      filter: brightness(75%);
+    }
+  }
+
+  @media screen and (min-width: base.$notebook) {
+    grid-template-rows: 1fr auto auto 2fr;
+
+    > * {
+      padding-left: 100px;
+    }
+
+    a {
+        align-self: unset;
+        padding-bottom: unset;
+    }
+  }
+}
+/* endfold */
+section[is='hero-section'].alternate-three { /* startfold */
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--color-four);
+
+  > * {
+    z-index: 10;
+    grid-column: 1;
+    text-align: center;
+    color: var(--color-one);
+  }
+  h1 {
+    align-self: end;
+    grid-row: 1;
+  }
+  h2 {
+    grid-row: 2;
+  }
+  p {
+    grid-row: 4;
+  }
+  a {
+    grid-row: 5;
+    align-self: end;
+    padding-bottom: 50px;
+  }
+  picture {
+    grid-row: 3;
     z-index: 1;
-    height: 100vh;
-    width: 100vw;
-    filter: grayscale(1) brightness(75%);
-}
+    padding-left: 0;
+    height: unset;
+    aspect-ratio: 1 / 1;
 
-section[is='hero-section'].left-align picture a {
-    position: absolute;    
-    bottom: 25px;
-    right: 25px;
+    img {
+      z-index: 1;
+      opacity: 65%;
+      filter: brightness(75%);
+    }
+  }
+
+  @media screen and (min-width: base.$notebook) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto auto 1fr;
+    justify-items: start;
+
+    > * {
+        grid-column: 1;
+        padding-left: 50px;
+    }
+    h2 {
+        margin-bottom: 0;
+    }
+    p {
+      grid-row: 3;
+    }
+    a {
+      grid-row: 4;
+      align-self: center;
+    }
+    picture {
+      grid-row: 1 / span 4;
+      grid-column: 2;
+      height: 100%;
+      width: 100%;
+      aspect-ratio: unset;
+
+      img {
+      }
+    }
+  }
+}
+/* endfold */
+section[is='hero-section'].alternate-four { /* startfold */
+  h1, h2, p, a, button {
+    display: none;
+  }
+} /* endfold */
+section[is='hero-section'].alternate-five { /* startfold */
+  h2, p, a, button {
+    display: none;
+  }
+  h1 {
+    grid-row: 1;
+    grid-column: 1;
+    z-index: 10;
+    color: var(--color-one);
+    padding: 30px 5px; 
+  }
+  picture {
+    grid-row: 1;
+    grid-column: 1;
+    img {
+      opacity: 65%;
+      filter: brightness(75%);
+    }
+  }
+  @media screen and (min-width: base.$notebook) {
+    h1 {
+      padding: 50px 100px;
+    }
+  }
+
 } /* endfold */

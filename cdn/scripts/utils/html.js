@@ -19,3 +19,26 @@ function htmlToNodes(html) {
     template.innerHTML = html;
     return template.content.childNodes;
 }
+
+export function htmlFromJSON(json, registry) {
+  if (json.element == "raw") {
+    const element = fromHTML(json.content);
+    return element;
+  }
+  const elClass = registry[json.element];
+  const element = new elClass();
+  if (json.text != null) {
+    element.innerText = json.text;
+  }
+  if (json.classes != null) {
+    console.log(json.classes)
+    json.classes.forEach(e => {element.classList.add(e)});
+  }
+  if (json.children != null) {
+    for (const child of json.children) {
+        element.appendChild(htmlFromJSON(child, registry));
+    }
+  }
+  return element
+  // have to add "children" support
+}

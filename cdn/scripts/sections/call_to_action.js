@@ -1,50 +1,45 @@
 import { EditableSection } from "./base.js";
-import { EditableSectionEditor } from "../editors/section_editor.js";
-import { 
-    EditableH2,
-    EditableH3,
-} from "../elements/editable_heading.js";
-import { EditableParagraph } from "../elements/editable_paragraph.js";
-import { EditableLinkButton } from "../elements/editable_link_button.js";
-import { EditablePicture } from "../elements/editable_picture.js";
-import { SECTION_CHOICES } from "../interfaces/sections.js";
-
-export function makeCallToAction() {
-    const callToAction = new CallToActionSection();
-    callToAction.editor.setEditable();
-    callToAction.classList.add(callToAction.classes[0]);
-    return callToAction;
-}
-
-// Data Element
-export const CallToActionSectionName = "call-to-action-section";
-
-SECTION_CHOICES["call-to-action"] = makeCallToAction;
+import { register, ELEMENT_NAMES } from "../element_registry.js";
 
 export class CallToActionSection extends EditableSection { // startfold
-  classes = ["default"];
+  classes = [
+    "default",
+    "alternate-one",
+    "alternate-two",
+    "alternate-three",
+    "alternate-four",
+    "alternate-five",
+    "alternate-six",
+    "alternate-seven",
+  ];
 
-  elementName = CallToActionSectionName;
-  elementType = "section";
+  static elementName = "call-to-action-section";
+  static sectionName = "call-to-action";
 
-  defaultSectionTitleText = "Section Title Here";
-  defaultSubsectionTitleText = "Subsection Title Here";
-  defaultParagraphText = "Lorem Ipsum";
-  defaultButtonText = "GO!";
-
-  constructor() { // startfold
-    super();
-    this.editor = new EditableSectionEditor(this);
-    this.setAttribute("is", CallToActionSectionName);
-    this.heirs = [
-        this.getOrDefaultText(EditableH2, this.defaultSectionTitleText),
-        this.getOrDefaultText(EditableH3, this.defaultSubsectionTitleText),
-        this.getOrDefaultText(EditableParagraph, this.defaultParagraphText),
-        this.getOrDefault(EditableLinkButton),
-        this.getOrDefault(EditablePicture),
-    ]
-    this.clean();
-  } // endfold
+  defaultContent = [
+    {
+      "element": ELEMENT_NAMES.editableH2,
+      "text": "Section Title Here",
+    },
+    {
+      "element": ELEMENT_NAMES.editableH3,
+      "text": "Subsection Title Here",
+    },
+    {
+      "element": ELEMENT_NAMES.editableParagraph,
+      "text": "A one-or-two sentence blurb about your or your business",
+    },
+    {
+      "element": ELEMENT_NAMES.editablePicture,
+    },
+    {
+      "element": ELEMENT_NAMES.editableLinkButton,
+    },
+  ];
+  constructor() {
+    super()
+    this.editor.ensureDefaults();
+  };
 }
-customElements.define(CallToActionSectionName, CallToActionSection, {extends: "section"});
+register(CallToActionSection);
 // endfold

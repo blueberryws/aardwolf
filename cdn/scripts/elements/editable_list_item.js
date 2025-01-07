@@ -1,18 +1,17 @@
 import { ListItemEditor } from "../editors/list_item_editor.js";
+import { register, ELEMENT_NAMES } from "../element_registry.js";
 
 // Data Element
-export const EditableListItemName = "editable-list-item";
-
 export class EditableListItem extends HTMLLIElement { // startfold
-  elementName = "editable-list-item";
-  elementType = "li";
+  static elementName = ELEMENT_NAMES.editableListItem;
+  static elementType = "li";
 
   constructor() { // startfold
     super();
+    this.setAttribute("is", EditableListItem.elementName);
   } // endfold
   connectedCallback() {
     this.editor = new ListItemEditor(this);
   }
 } // endfold
-
-customElements.define(EditableListItemName, EditableListItem, {extends: "li"});
+register(EditableListItem);

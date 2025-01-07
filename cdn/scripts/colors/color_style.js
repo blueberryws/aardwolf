@@ -10,11 +10,11 @@ export function getColorStyle() {
 export class ColorStyle extends HTMLStyleElement { // startfold
   // This is how the component communicates with itself between edits.
   static observedAttributes = ["data-palette", "data-primary-color", "data-secondary-color"];
-  paletteSize = 5;
+  paletteSize = 4;
   colorValidationRegex = /^#[0-9A-Fa-f]{6}/g;
-  defaultPrimaryColor = "#999900"
+  defaultPrimaryColor = "#ffffff"
   defaultSecondaryColor = "#000000"
-  defaultPalette = ["#ff0000", "#aaaaaa", "#777777", "#333333", "#000000"];
+  defaultPalette = ["#ffffff", "#aaaaaa", "#555555", "#000000"];
   userErrorMessage = "Unable to set color palette.\nIf this persists, please contact support."
 
   constructor() { // startfold
@@ -79,11 +79,10 @@ export class ColorStyle extends HTMLStyleElement { // startfold
     const palette = JSON.parse(this.dataset.palette);
     this.innerHTML = `
   :root {
-    --color-one: ${palette[0]};
-    --color-two: ${palette[1]};
-    --color-three: ${palette[2]};
-    --color-four: ${palette[3]};
-    --color-five: ${palette[4]};
+    --palette-color-one: ${palette[0]};
+    --palette-color-two: ${palette[1]};
+    --palette-color-three: ${palette[2]};
+    --palette-color-four: ${palette[3]};
   }
 `
   } // endfold
@@ -99,13 +98,95 @@ export class ColorStyle extends HTMLStyleElement { // startfold
     }
   } // endfold
   generatePaletteChoices() { // startfold
+    console.log(parseHexColor(this.dataset.primaryColor));
+    // primary: off-white mid-color dark-color off-black
+    // secondary: off-white mid-color dark-color off-black
+    // grayscale: white light-gray dark-gray black
+    // brownscale: ivory tan mid-brown dark-brown (#755E4A)
+    // 
+    // 0 1 2 3 4 5 6 7 8 9 a b c d e f
+    // 0         5         a         f
+    const grayscale = ["#ffffff", "#aaaaaa", "#555555", "#000000"]; // pure grayscale
+    const brownscale = genStraight("#895129");
+    const primary = genStraight(this.dataset.primaryColor);
+    const secondary = genStraight(this.dataset.secondaryColor);
     return [
-      ["#ff0000", "#af0000", "#8f0000", "#4f0000", "#0f0000"],
-      ["#00ff00", "#00aa00", "#008800", "#004400", "#000000"],
-      ["#0000ff", "#0000aa", "#000088", "#000044", "#000000"],
-      ["#ffffff", "#aaaaaa", "#777777", "#333333", "#000000"],
-      [this.dataset.primaryColor, this.dataset.secondaryColor, "#000000", "#ffffff", "#000000"],
+      primary,
+      [primary[0], secondary[1], primary[2], secondary[3]],
+      [primary[0], primary[1], brownscale[2], secondary[3]],
+      [brownscale[0], secondary[1], primary[2], brownscale[3]],
+      secondary,
+      grayscale,
+      brownscale,
     ]
   } // endfold
 } // endfold
 customElements.define(ColorStyleElementName, ColorStyle, {extends: "style"});
+
+
+function genStraight(hex) {
+  const base = parseHexColor(hex);
+  const baseSum = base.r + base.g + base.b;
+  const rWhiteDist = 256 - base.r;
+  const gWhiteDist = 256 - base.g;
+  const bWhiteDist = 256 - base.b;
+  if      (baseSum < 192) { // close enough to be black
+      return [
+      rgbToHex(base.r + rWhiteDist * .9, base.g + gWhiteDist * .9, base.b + bWhiteDist * .9),
+      rgbToHex(base.r + rWhiteDist * .6, base.g + gWhiteDist * .6, base.b + bWhiteDist * .6),
+      rgbToHex(base.r + rWhiteDist * .3, base.g + gWhiteDist * .3, base.b + bWhiteDist * .3),
+      hex,
+    ]
+  
+  }
+  else if (baseSum < 384) {
+    return [
+      rgbToHex(base.r + rWhiteDist * .9, base.g + gWhiteDist * .9, base.b + bWhiteDist * .9),
+      rgbToHex(base.r + rWhiteDist * .45, base.g + gWhiteDist * .45, base.b + bWhiteDist * .45),
+      hex,
+      rgbToHex(base.r * .1, base.g * .1, base.b * .1),
+    ]
+  }
+  else if (baseSum < 668) {
+    return [
+      rgbToHex(base.r + rWhiteDist * .9, base.g + gWhiteDist * .9, base.b + bWhiteDist * .9),
+      hex,
+      rgbToHex(base.r * .45, base.g * .45, base.b * .45),
+      rgbToHex(base.r * .1, base.g * .1, base.b * .1),
+    ]
+  }
+  else { // close enough to be white
+    return [
+      hex,
+      rgbToHex(base.r * .65, base.g * .65, base.b * .65),
+      rgbToHex(base.r * .4, base.g * .4, base.b * .4),
+      rgbToHex(base.r * .1, base.g * .1, base.b * .1),
+    ]
+  }
+}
+
+function parseHexColor(hex) {
+  // Remove the '#' if present
+  hex = hex.replace("#", "");
+
+  // Check if it's a shorthand hex value (e.g., #f00)
+  if (hex.length === 3) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+
+  // Convert to RGB values
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+
+  return { r, g, b };
+}
+
+function componentToHex(c) {
+  var hex = Math.floor(c).toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}

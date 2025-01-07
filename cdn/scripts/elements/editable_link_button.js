@@ -1,17 +1,16 @@
 import { LinkButtonEditor } from "../editors/link_button_editor.js";
-
-// Data Element
-export const EditableLinkButtonName = "editable-link-button";
+import { register, ELEMENT_NAMES } from "../element_registry.js";
 
 export class EditableLinkButton extends HTMLAnchorElement { // startfold
-  elementName = "editable-link-button";
-  elementType = "a";
+  static elementName = ELEMENT_NAMES.editableLinkButton;
+  static elementType = "a";
   buttonDefault = "GO";
 
   constructor() { // startfold
     super();
     this.ensureButton()
     this.editor = new LinkButtonEditor(this, this.button);
+    this.setAttribute("is", EditableLinkButton.elementName);
   } // endfold
   ensureButton() {
     this.button = this.querySelector("button");
@@ -22,5 +21,4 @@ export class EditableLinkButton extends HTMLAnchorElement { // startfold
     }
   }
 } // endfold
-
-customElements.define(EditableLinkButtonName, EditableLinkButton, {extends: "a"});
+register(EditableLinkButton);

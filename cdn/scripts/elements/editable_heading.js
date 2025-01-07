@@ -1,52 +1,51 @@
 import { TextEditor } from "../editors/text_editor.js";
-
-// Data Element
-export const EditableH1Name = "editable-h1";
-export const EditableH2Name = "editable-h2";
-export const EditableH3Name = "editable-h3";
-export const EditableH4Name = "editable-h4";
-export const EditableH5Name = "editable-h5";
-export const EditableH6Name = "editable-h6";
+import { register, ELEMENT_NAMES } from "../element_registry.js";
 
 export class EditableHeading extends HTMLHeadingElement { // startfold
-  // This is how the component communicates with itself between edits.
-  static elementName = ""
-  static elementType = ""
+  static elementName = "ABSTRACT_HEADING_NAME"
+  static elementType =  "ABSTRACT_HEADING_TYPE"
 
   constructor() { // startfold
     super();
     this.editor = new TextEditor(this);
+    this.setAttribute("is", this.constructor.elementName);
   } // endfold
+
 } // endfold
 
 export class EditableH1 extends EditableHeading {
-    elementName = EditableH1Name;
-    elementType = "h1";
-}
-export class EditableH2 extends EditableHeading {
-    elementName = EditableH2Name;
-    elementType = "h2";
-}
-export class EditableH3 extends EditableHeading {
-    elementName = EditableH3Name;
-    elementType = "h3";
-}
-export class EditableH4 extends EditableHeading {
-    elementName = EditableH4Name;
-    elementType = "h4";
-}
-export class EditableH5 extends EditableHeading {
-    elementName = EditableH5Name;
-    elementType = "h5";
-}
-export class EditableH6 extends EditableHeading {
-    elementName = EditableH6Name;
-    elementType = "h6";
+    static elementName = ELEMENT_NAMES.editableH1;
+    static elementType =  "h1";
 }
 
-customElements.define(EditableH1Name, EditableH1, {extends: "h1"});
-customElements.define(EditableH2Name, EditableH2, {extends: "h2"});
-customElements.define(EditableH3Name, EditableH3, {extends: "h3"});
-customElements.define(EditableH4Name, EditableH4, {extends: "h4"});
-customElements.define(EditableH5Name, EditableH5, {extends: "h5"});
-customElements.define(EditableH6Name, EditableH6, {extends: "h6"});
+export class EditableH2 extends EditableHeading {
+    static elementName = ELEMENT_NAMES.editableH2;
+    static elementType =  "h2";
+}
+
+export class EditableH3 extends EditableHeading {
+    static elementName = ELEMENT_NAMES.editableH3;
+    static elementType =  "h3";
+}
+
+export class EditableH4 extends EditableHeading {
+    static elementName = ELEMENT_NAMES.editableH4;
+    static elementType =  "h4";
+}
+
+export class EditableH5 extends EditableHeading {
+    static elementName = ELEMENT_NAMES.editableH5;
+    static elementType =  "h5";
+}
+
+export class EditableH6 extends EditableHeading {
+    static elementName = ELEMENT_NAMES.editableH6;
+    static elementType =  "h6";
+}
+
+register(EditableH1);
+register(EditableH2);
+register(EditableH3);
+register(EditableH4);
+register(EditableH5);
+register(EditableH6);

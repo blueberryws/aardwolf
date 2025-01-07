@@ -19,6 +19,8 @@ $cdn-base-url: "http://my.localhost/cdn";
 
   --narrow-padding: 60px 15px;
   --standard-padding: 60px 30px;
+
+  --alt-button-padding: 12px 50px;
 }
 
 @media screen and (min-width: $tablet) {
@@ -64,7 +66,7 @@ button {
   padding: 12px 25px;
   border: 20px;
   outline: 20px;
-  border-radius: 3px;
+  border-radius: 12px;
   cursor: pointer;
 }
 
@@ -89,7 +91,7 @@ section {
 /* typography settings startfold */
 h1, .page-title {
     font-weight: 800;
-    font-size: 36px;
+    font-size: var(--header-font-size-x-large);
 }
 @mixin section-heading {
     font-weight: var(--header-font-weight-large);
@@ -146,3 +148,6 @@ h2 {
   }
 }
 /* endfold */
+.hidden {
+  display: none !important;
+}

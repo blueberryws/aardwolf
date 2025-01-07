@@ -1,17 +1,15 @@
 import { TextEditor } from "../editors/text_editor.js";
-
-// Data Element
-export const EditableParagraphName = "editable-paragraph";
+import { register, ELEMENT_NAMES } from "../element_registry.js";
 
 export class EditableParagraph extends HTMLParagraphElement { // startfold
-  // This is how the component communicates with itself between edits.
-  elementName = "editable-paragraph"
-  elementType = "p"
+  static elementName = ELEMENT_NAMES.editableParagraph;
+  static elementType = "p"
 
   constructor() { // startfold
     super();
     this.editor = new TextEditor(this);
+    this.setAttribute("is", EditableParagraph.elementName);
   } // endfold
 } // endfold
 
-customElements.define(EditableParagraphName, EditableParagraph, {extends: "p"});
+register(EditableParagraph);

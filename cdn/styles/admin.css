@@ -108,7 +108,7 @@
 }
 
 aside[is=admin-aside] {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-content: center;

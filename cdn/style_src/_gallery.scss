@@ -1,0 +1,60 @@
+@use "base";
+
+
+section[is="gallery-section"] {
+  ul {
+    list-style: none;
+  }
+}
+section[is="gallery-section"].default { // startfold
+  display: grid;
+  padding: var(--narrow-padding);
+
+  h2 {
+    color: var(--color-three);
+    text-align: start;
+  }
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    gap: 10px;
+  }
+
+  .previous-button, .next-button {
+    display: none; 
+  }
+  button.show-all {
+    grid-row: 3;
+    justify-self: end;
+    background: none;
+    outline: none;
+    text-decoration: underline;
+    width: fit-content;
+    padding: 10px 0;
+    font-size: var(--body-font-small);
+    font-weight: 400;
+    color: var(--color-four);
+    display: none;
+  }
+  ul.show-all {
+    aspect-ratio: unset;
+  }
+
+  @media screen and (min-width: base.$tablet) {
+    h2 {
+      text-align: center;
+    }
+    ul {
+      grid-template-columns: repeat(4, 1fr);
+      aspect-ratio: 4 / 2;
+    }
+  }
+}
+section[is="gallery-section"].default:has(li:nth-child(n+7)) button.show-all {
+  display: block;
+} // endfold
+section[is="gallery-section"].alternate-one {
+  
+}

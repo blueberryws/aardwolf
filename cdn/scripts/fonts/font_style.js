@@ -14,25 +14,25 @@ export class FontStyle extends HTMLStyleElement { // startfold
   headerFonts = {
     Arial: "local",
     Montserrat: {
-        url: "/static/fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
+        url: "/cdn/fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
     },
     Roboto: {
-        url: "/static/fonts/Roboto/Roboto-Regular.ttf",
+        url: "/cdn/fonts/Roboto/Roboto-Regular.ttf",
     },
     Jost: {
-        url: "/static/fonts/jost/Jost-VariableFont_wght.ttf",
+        url: "/cdn/fonts/jost/Jost-VariableFont_wght.ttf",
     },
   }
   bodyFonts = {
     Arial: "local",
     Montserrat: {
-        url: "/static/fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
+        url: "/cdn/fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
     },
     Roboto: {
-        url: "/static/fonts/Roboto/Roboto-Regular.ttf",
+        url: "/cdn/fonts/Roboto/Roboto-Regular.ttf",
     },
     Jost: {
-        url: "/static/fonts/jost/Jost-VariableFont_wght.ttf",
+        url: "/cdn/fonts/jost/Jost-VariableFont_wght.ttf",
     },
   }
 

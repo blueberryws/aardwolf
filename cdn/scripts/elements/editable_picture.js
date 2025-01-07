@@ -1,15 +1,13 @@
 import { PictureEditor } from "../editors/picture_editor.js";
 import { fromHTML } from "../utils/html.js";
-
-// Data Element
-export const EditablePictureName = "editable-picture";
+import { register, ELEMENT_NAMES } from "../element_registry.js";
 
 export class EditablePicture extends HTMLPictureElement { // startfold
   static observedAttributes = ["data-attribution-text", "data-attribution-href"]
-  elementName = "editable-picture"
-  elementType = "picture"
+  static elementName = ELEMENT_NAMES.editablePicture;
+  static elementType = "picture"
 
-  defaultImgSrc = "/static/images/default.png"
+  defaultImgSrc = "/cdn/images/default.png"
   defaultAltText = "A mountain silhouette placeholder image"
   defaultAttributionText = "Photo Credit: Flanoz, CC0, via Wikimedia Commons"
   defaultAttributionHref = "https://commons.wikimedia.org/wiki/File:Placeholder_view_vector.svg"
@@ -17,6 +15,7 @@ export class EditablePicture extends HTMLPictureElement { // startfold
 
   constructor() { // startfold
     super();
+    this.setAttribute("is", EditablePicture.elementName);
 
     // Set some defaults
     if (this.dataset.attributionText == null) {this.dataset.attributionText = this.defaultAttributionText }
@@ -37,5 +36,4 @@ export class EditablePicture extends HTMLPictureElement { // startfold
   } // endfold
 
 } // endfold
-
-customElements.define(EditablePictureName, EditablePicture, {extends: "picture"});
+register(EditablePicture);

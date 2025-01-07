@@ -50,79 +50,72 @@
 
   <link href="/cdn/styles/styles.css" rel="stylesheet" type="text/css">
 </head>
-<script>
-  function loadSVG(target) {
-    const doc = target.getSVGDocument();
-    target.replaceWith(doc.children[0]);
-  }
-</script>
+
 <body>
 <section is="embed-section" class="alternate-one">
   <h2 is="editable-h2">IMPRESSIVE H2 TITLE</h2>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/J_DV65rmXbM?si=yW1lOoukxLznXA5B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <div is="editable-iframe">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/J_DV65rmXbM?si=yW1lOoukxLznXA5B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
   <p is="editable-p">Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that's what you see at a toy store. And you must think you're in a toy store, because you're here shopping for an infant named Jeb.
 <br><br>
 The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother's keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.</p>
 </section>
 </body>
 <script>
-  function prevTestimonial(target) { // startfold
-    const testimonialSection = target.closest("section[is='testimonials-section']");
-    const testimonials = testimonialSection.querySelector("ul.testimonials");
-    const prev = testimonials.querySelectorAll("li.previous");
-    for (let t of prev) { t.classList.remove("previous")};
-    const next = testimonials.querySelectorAll("li.next");
-    for (let t of next) { t.classList.remove("next")};
-    const focus = testimonials.querySelector("li.focus");
-    focus.classList.remove("focus");
-    const siblings = Array.from(testimonials.children);
-    const curIdx = siblings.indexOf(focus);
-    let focusIdx = curIdx - 1;
-    if (focusIdx < 0) {
-      focusIdx = siblings.length - 1;
-    }
-    siblings[focusIdx].classList.add("focus");
-    if (siblings.length > 1) {
-      const nextIdx = curIdx;
-      siblings[nextIdx].classList.add("next");
-    }
-    if (siblings.length > 2) {
-      let prevIdx = focusIdx - 1;
-      if (prevIdx < 0) {
-        prevIdx = siblings.length - 1;
+  class IframeEditor { // startfold
+    constructor(editableIframe) {
+      this.editableIframe = editableIframe;
+      this.openModal = (e) => {
+        console.log("here");
       }
-      siblings[prevIdx].classList.add("previous");
+      this.editableIframe.clicker.addEventListener("click", this.openModal);
+    }
+    setEditable() {
+      this.editableIframe.clicker.style.display = "block";
+    }
+    unsetEditable() {
+      this.editableIframe.clicker.style.display = "none";
     }
   } // endfold
-  function nextTestimonial(target) { // startfold
-    const testimonialSection = target.closest("section[is='testimonials-section']");
-    const testimonials = testimonialSection.querySelector("ul.testimonials");
-    const prev = testimonials.querySelectorAll("li.previous");
-    for (let t of prev) { t.classList.remove("previous")};
-    const next = testimonials.querySelectorAll("li.next");
-    for (let t of next) { t.classList.remove("next")};
-    const focus = testimonials.querySelector("li.focus");
-    focus.classList.remove("focus");
-    const siblings = Array.from(testimonials.children);
-    const curIdx = siblings.indexOf(focus);
-    let focusIdx = curIdx + 1;
-    if (focusIdx >= siblings.length) {
-      focusIdx = 0;
+  class EditableIframe extends HTMLDivElement { // startfold
+    static observedAttributes = ["embed"]; 
+    constructor() {
+      super();
+      this.frame = this.ensureIframe();
+      this.clicker = this.ensureClicker();
+      this.editor = new IframeEditor(this);
     }
-    siblings[focusIdx].classList.add("focus");
-
-    if (siblings.length > 1) {
-      const prevIdx = curIdx;
-      siblings[prevIdx].classList.add("previous");
-    }
-
-    if (siblings.length > 2) {
-      let nextIdx = focusIdx + 1;
-      if (nextIdx >= siblings.length) {
-        nextIdx = 0;
+    ensureIframe() {
+      let frame = this.querySelector("iframe");
+      if (frame == null) {
+        frame = document.createElement("iframe");
+        this.appendChild(frame);
       }
-      siblings[nextIdx].classList.add("next");
+      return frame;
     }
-  } //endfold
+    ensureClicker() {
+      let clicker = this.querySelector("div");
+      if (clicker == null) {
+        clicker = document.createElement("div");
+        clicker.style.position = "absolute";
+        clicker.style.top = "0";
+        clicker.style.left = "0";
+        clicker.style.width = "100%";
+        clicker.style.height = "100%";
+        clicker.style["z-index"] = "10";
+        clicker.style.display = "none";
+        this.appendChild(clicker);
+      }
+      return clicker;
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.frame.outerHTML = newValue; 
+    }
+  }
+  customElements.define("editable-iframe", EditableIframe, {extends: "div"});
+  // endfold
+  const i = document.querySelector("[is='editable-iframe']");
+  i.editor.setEditable();
 </script>
 </html>
