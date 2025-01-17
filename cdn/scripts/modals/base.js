@@ -37,6 +37,7 @@ export class AdminModal extends HTMLDialogElement { // startfold
   } // endfold
   createActionBtn() { // startfold
       this.actionBtn = document.createElement("button");
+      this.actionBtn.classList.add("admin-modal-action-btn");
       this.actionBtn.innerText = this.actionText;
     
       this.actionBtn.addEventListener("click", (e) => {
@@ -48,6 +49,7 @@ export class AdminModal extends HTMLDialogElement { // startfold
   } // endfold
   createCancelBtn() { // startfold
       this.cancelBtn = document.createElement("button");
+      this.cancelBtn.classList.add("admin-modal-cancel-btn");
       this.cancelBtn.innerText = this.cancelText;
     
       this.cancelBtn.addEventListener("click", (e) => {

@@ -7,6 +7,7 @@ export const ELEMENT_NAMES = {
     "listItem": "list-item",
     "detailsElement": "details-element",
     "summaryElement": "summary-element",
+    "dialogElement": "dialog-element",
 
     "editableH1": "editable-h1",
     "editableH2": "editable-h2",
@@ -15,10 +16,13 @@ export const ELEMENT_NAMES = {
     "editableH5": "editable-h5",
     "editableH6": "editable-h6",
     "editableLinkButton": "editable-link-button",
+    "editableLinkModal": "editable-link-modal",
     "editableListItem": "editable-list-item",
     "editablePicture": "editable-picture",
     "editableParagraph": "editable-paragraph",
     "editableIframe": "editable-iframe",
+
+    "imageAttributionSet": "image-attribution-set",
 }
 
 export const SECTIONS = {};

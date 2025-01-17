@@ -83,7 +83,7 @@ export class ListItemEditor extends ElementEditor {
     buildDeleteButton() {  // startfold
         const btn = document.createElement("button");
         btn.innerText = "x";
-        btn.classList.add("list-clone-btn");
+        btn.classList.add("list-delete-btn");
         btn.addEventListener("click", () => {
             const modal = modalBuilder()
                 .contentHTML(`<p>Are you sure you want to delete this item?</p>`)

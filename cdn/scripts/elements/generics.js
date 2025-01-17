@@ -39,3 +39,13 @@ export class SummaryElement extends HTMLElement { // startfold
   } // endfold
 } // endfold
 register(SummaryElement);
+
+export class DialogElement extends HTMLDialogElement { // startfold
+  static elementName = ELEMENT_NAMES.dialogElement
+  static elementType = "dialog"
+
+  constructor() { // startfold
+    super();
+  } // endfold
+} // endfold
+register(DialogElement);

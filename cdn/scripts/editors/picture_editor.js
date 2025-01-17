@@ -106,6 +106,7 @@ export class PictureEditor extends ElementEditor {
 
     let content = document.createElement("div");
     content.id = "edit-image-modal-content";
+    content.classList.add("modal-content");
 
     this.imgPreview.remove();
     content.appendChild(this.imgPreview);
@@ -139,7 +140,10 @@ export class PictureEditor extends ElementEditor {
   } // endfold
   searchPexels(pexelsPreviews) { // startfold
       const colorStyle = getColorStyle();
-      const palette = JSON.parse(colorStyle.dataset.palette);
+      const palette = [
+        colorStyle.dataset.primaryColor,
+        colorStyle.dataset.secondaryColor,
+      ];
       let searchParams = new URLSearchParams(palette.map(color => ["color", color]));
       searchParams.append("query", this.pexelsQuery.value);
       // TODO: error handling?

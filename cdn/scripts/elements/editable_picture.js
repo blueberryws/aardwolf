@@ -2,6 +2,8 @@ import { PictureEditor } from "../editors/picture_editor.js";
 import { fromHTML } from "../utils/html.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
+import { dispatch, ImageSetChanged } from "../interfaces/events.js";
+
 export class EditablePicture extends HTMLPictureElement { // startfold
   static observedAttributes = ["data-attribution-text", "data-attribution-href"]
   static elementName = ELEMENT_NAMES.editablePicture;
@@ -34,6 +36,10 @@ export class EditablePicture extends HTMLPictureElement { // startfold
     this.img.src = src;
     this.appendChild(this.img);
   } // endfold
+   
+  attributeChangedCallback(name, oldValue, newValue) {
+    dispatch(ImageSetChanged);
+  }
 
 } // endfold
 register(EditablePicture);

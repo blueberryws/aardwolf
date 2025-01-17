@@ -83,6 +83,7 @@ export class ColorStyle extends HTMLStyleElement { // startfold
     --palette-color-two: ${palette[1]};
     --palette-color-three: ${palette[2]};
     --palette-color-four: ${palette[3]};
+    --palette-brand-color: ${this.dataset.primaryColor};
   }
 `
   } // endfold
@@ -98,7 +99,6 @@ export class ColorStyle extends HTMLStyleElement { // startfold
     }
   } // endfold
   generatePaletteChoices() { // startfold
-    console.log(parseHexColor(this.dataset.primaryColor));
     // primary: off-white mid-color dark-color off-black
     // secondary: off-white mid-color dark-color off-black
     // grayscale: white light-gray dark-gray black
@@ -107,17 +107,14 @@ export class ColorStyle extends HTMLStyleElement { // startfold
     // 0 1 2 3 4 5 6 7 8 9 a b c d e f
     // 0         5         a         f
     const grayscale = ["#ffffff", "#aaaaaa", "#555555", "#000000"]; // pure grayscale
-    const brownscale = genStraight("#895129");
-    const primary = genStraight(this.dataset.primaryColor);
-    const secondary = genStraight(this.dataset.secondaryColor);
+    const brownscale =["#F6E4D5", "#D3C0AD", "#39332C", "#201A15"]; 
+    const monochrome = genStraight(this.dataset.secondaryColor);
     return [
-      primary,
-      [primary[0], secondary[1], primary[2], secondary[3]],
-      [primary[0], primary[1], brownscale[2], secondary[3]],
-      [brownscale[0], secondary[1], primary[2], brownscale[3]],
-      secondary,
       grayscale,
+      [grayscale[0], monochrome[1], monochrome[2], grayscale[3]],
       brownscale,
+      [brownscale[0], monochrome[1], monochrome[2], brownscale[3]],
+      monochrome,
     ]
   } // endfold
 } // endfold
@@ -126,42 +123,76 @@ customElements.define(ColorStyleElementName, ColorStyle, {extends: "style"});
 
 function genStraight(hex) {
   const base = parseHexColor(hex);
-  const baseSum = base.r + base.g + base.b;
-  const rWhiteDist = 256 - base.r;
-  const gWhiteDist = 256 - base.g;
-  const bWhiteDist = 256 - base.b;
-  if      (baseSum < 192) { // close enough to be black
-      return [
-      rgbToHex(base.r + rWhiteDist * .9, base.g + gWhiteDist * .9, base.b + bWhiteDist * .9),
-      rgbToHex(base.r + rWhiteDist * .6, base.g + gWhiteDist * .6, base.b + bWhiteDist * .6),
-      rgbToHex(base.r + rWhiteDist * .3, base.g + gWhiteDist * .3, base.b + bWhiteDist * .3),
-      hex,
-    ]
-  
+  console.log(base);
+  const largest = getLargest(base);
+  const smallest = getSmallest(base);
+  let white = genWhite(base); 
+  let colorTwo = {
+    r: Math.floor((192 / largest) * base.r), 
+    g: Math.floor((192 / largest) * base.g), 
+    b: Math.floor((192 / largest) * base.b), 
   }
-  else if (baseSum < 384) {
-    return [
-      rgbToHex(base.r + rWhiteDist * .9, base.g + gWhiteDist * .9, base.b + bWhiteDist * .9),
-      rgbToHex(base.r + rWhiteDist * .45, base.g + gWhiteDist * .45, base.b + bWhiteDist * .45),
-      hex,
-      rgbToHex(base.r * .1, base.g * .1, base.b * .1),
-    ]
+  let colorThree = {
+    r: Math.floor((96 / largest) * base.r), 
+    g: Math.floor((96 / largest) * base.g), 
+    b: Math.floor((96 / largest) * base.b), 
   }
-  else if (baseSum < 668) {
-    return [
-      rgbToHex(base.r + rWhiteDist * .9, base.g + gWhiteDist * .9, base.b + bWhiteDist * .9),
-      hex,
-      rgbToHex(base.r * .45, base.g * .45, base.b * .45),
-      rgbToHex(base.r * .1, base.g * .1, base.b * .1),
-    ]
+  let black = {
+    r: Math.floor((28 / largest) * base.r),
+    g: Math.floor((28 / largest) * base.g), 
+    b: Math.floor((28 / largest) * base.b), 
   }
-  else { // close enough to be white
-    return [
-      hex,
-      rgbToHex(base.r * .65, base.g * .65, base.b * .65),
-      rgbToHex(base.r * .4, base.g * .4, base.b * .4),
-      rgbToHex(base.r * .1, base.g * .1, base.b * .1),
-    ]
+  if (largest > 220 && smallest > 200) {
+    white = base;
+  } else if (largest > 136) {
+    colorTwo = base;
+  } else if (largest > 64) {
+    colorThree = base;
+  } else {
+    black = base;
+  }
+  const palette = [
+    rgbToHex(white.r, white.g, white.b),
+    rgbToHex(colorTwo.r, colorTwo.g, colorTwo.b),
+    rgbToHex(colorThree.r, colorThree.g, colorThree.b),
+    rgbToHex(black.r, black.g, black.b),
+  ]
+  return palette;
+}
+
+function genWhite(base) {
+    const smallest = getSmallest(base);
+    return {
+      r: base.r + genWhiteComponent(base.r, smallest),
+      g: base.g + genWhiteComponent(base.g, smallest),
+      b: base.b + genWhiteComponent(base.b, smallest),
+    }
+}
+
+function genWhiteComponent(component, smallest) {
+    const maxSize = 255;
+    const stepSize = (maxSize - component) / (maxSize - smallest);
+    const stepCount = 220 - smallest;
+    return Math.floor(stepSize * stepCount);
+}
+
+function getLargest(base) {
+  if (base.r >= base.g && base.r >= base.b) {
+    return base.r;
+  } else if (base.g >= base.r && base.g >= base.b) {
+    return base.g;
+  } else {
+    return base.b;
+  }
+}
+
+function getSmallest(base) {
+  if (base.r <= base.g && base.r <= base.b) {
+    return base.r;
+  } else if (base.g <= base.r && base.g <= base.b) {
+    return base.g;
+  } else {
+    return base.b;
   }
 }
 

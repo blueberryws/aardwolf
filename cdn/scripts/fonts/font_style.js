@@ -4,38 +4,205 @@ export const FontStyleElementName = "font-style";
 export function getFontStyle() {
     return document.querySelector(`style[is='${FontStyleElementName}']`)
 }
+const STANDARD_HEADER_STYLE = {
+  "x-large": {
+    size: "36px",
+    weight: 500,
+  },
+  large: {
+    size: "32px",
+    weight: 500,
+  },
+  medium: {
+    size: "32px",
+    weight: 500,
+  },
+  small: {
+    size: "20px",
+    weight: 500,
+  },
+}
+const STANDARD_BODY_STYLE = {
+  large: {
+    size: "24px",
+    weight: 500,
+  },
+  medium: {
+    size: "16px",
+    weight: 500,
+  },
+  small: {
+    size: "14px",
+    weight: 500,
+  },
+}
+
 
 export class FontStyle extends HTMLStyleElement { // startfold
   // This is how the component communicates with itself between edits.
   static observedAttributes = ["data-header-font", "data-body-font"];
-  defaultHeaderFont = "Roboto"
-  defaultBodyFont = "Arial"
-  userErrorMessage = "Unable to set fonts.\nIf this persists, please contact support."
-  headerFonts = {
-    Arial: "local",
-    Montserrat: {
-        url: "/cdn/fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
-    },
-    Roboto: {
-        url: "/cdn/fonts/Roboto/Roboto-Regular.ttf",
-    },
-    Jost: {
-        url: "/cdn/fonts/jost/Jost-VariableFont_wght.ttf",
-    },
-  }
-  bodyFonts = {
-    Arial: "local",
-    Montserrat: {
-        url: "/cdn/fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
-    },
-    Roboto: {
-        url: "/cdn/fonts/Roboto/Roboto-Regular.ttf",
-    },
-    Jost: {
-        url: "/cdn/fonts/jost/Jost-VariableFont_wght.ttf",
-    },
-  }
+  defaultHeaderFont = "Open Sans Condensed";
+  defaultBodyFont = "Lora"
 
+  userErrorMessage = "Unable to set fonts.\nIf this persists, please contact support."
+  fonts = [  // startfold
+    {
+      header: {
+          name: "Great Vibes",
+          url: "/cdn/fonts/GreatVibes/GreatVibes-Regular.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Montserrat",
+          url: "/cdn/fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Elegant, Inviting, Contemporary",
+    },
+    {
+      header: {
+          name: "Fjalla One",
+          url: "/cdn/fonts/Fjalla_One/FjallaOne-Regular.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Nunito",
+          url: "/cdn/fonts/Nunito/Nunito-VariableFont_wght.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Clean, Modern, Friendly",
+    },
+    {
+      header: {
+          name: "Raleway",
+          url: "/cdn/fonts/Raleway/Raleway-VariableFont_wght.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Libre Baskerville",
+          url: "/cdn/fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Bold, Elegant, Timeless",
+    },
+    {
+      header: {
+          name: "Quicksand",
+          url: "/cdn/fonts/Quicksand/Quicksand-VariableFont_wght.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Source Sans",
+          url: "/cdn/fonts/SourceSans/SourceSans3-VariableFont_wght.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Friendly, Modern, Approachable",
+    },
+    {
+      header: {
+          name: "Kalnia",
+          url: "/cdn/fonts/Kalnia/Kalnia-VariableFont_wdth,wght.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Montserrat",
+          url: "/cdn/fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Whimsical, Warm, Versitile",
+    },
+    {
+      header: {
+          name: "Oswald",
+          url: "/cdn/fonts/Oswald/Oswald-VariableFont_wdth,wght.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Noto Serif",
+          url: "/cdn/fonts/Noto_Serif/NotoSerif-VariableFont_wdth,wght.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Strong, Minimal, Classic",
+    },
+    {
+      header: {
+          name: "Playfair Display",
+          url: "/cdn/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Quattrocento Sans",
+          url: "/cdn/fonts/Quattrocento_Sans/QuattrocentoSans-regular.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Dramatic, Refined, Confident",
+    },
+    {
+      header: {
+          name: "Yellowtail",
+          url: "/cdn/fonts/Yellowtail/Yellowtail-Regular.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Lato",
+          url: "/cdn/fonts/Lato/Lato-regular.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Dramatic, Refined, Confident",
+    },
+    {
+      header: {
+          name: "Bangers",
+          url: "/cdn/fonts/Bangers/Bangers-Regular.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Montserrat",
+          url: "/cdn/fonts/Montserrat/Montserrat-VariableFont_wght.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Bold, Energetic, Fun",
+    },
+    {
+      header: {
+          name: "Lora",
+          url: "/cdn/fonts/Lora/Lora-VariableFont_wght.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Poppins",
+          url: "/cdn/fonts/Poppins/Poppins-Regular.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Creative, Stylish, Balanced",
+    },
+    {
+      header: {
+          name: "Merriweather Sans",
+          url: "/cdn/fonts/Merriweather_Sans/MerriweatherSans_VariableFont_wght.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Merriweather Italic",
+          url: "/cdn/fonts/Merriweather/Merriweather-Italic.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Trustworthy, Professional, Thoughtful",
+    },
+    {
+      header: {
+          name: "Open Sans Condensed",
+          url: "/cdn/fonts/Open_Sans/OpenSans_VariableFont_wdth,wght.ttf",
+          style: STANDARD_HEADER_STYLE,
+      },
+      body: {
+          name: "Lora",
+          url: "/cdn/fonts/Lora/Lora_VariableFont_wght.ttf",
+          style: STANDARD_BODY_STYLE,
+      },
+      description: "Sleek, Sophisticated, Versatile",
+    },
+  ] // endfold
   constructor() { // startfold
     super();
     this.ensureDefaults();
@@ -59,37 +226,47 @@ export class FontStyle extends HTMLStyleElement { // startfold
     }
   } // endfold
   render() { // startfold
-    let headerFontFace = "";
-    const headerFontInfo = this.headerFonts[this.dataset.headerFont];
-    if (headerFontInfo != "local" && headerFontInfo != null) {
-      headerFontFace = `
-  @font-face {
-    font-family: '${this.dataset.headerFont}';
-    src: url('${headerFontInfo.url}');
-  }
-`
+    let fontPair = this.fonts.find((fp) => fp.header.name == this.dataset.headerFont && fp.body.name == this.dataset.bodyFont);
+    if (fontPair == null) {
+        console.error("Unable to set fonts!");
+        return
     }
-    let bodyFontFace = "";
-    const bodyFontInfo = this.bodyFonts[this.dataset.bodyFont];
-    if (bodyFontInfo != "local" && bodyFontInfo != null) {
-      bodyFontFace = `
-  @font-face {
-    font-family: '${this.dataset.bodyFont}';
-    src: url('${bodyFontInfo.url}');
-  }
-`
+
+    let headerFontVars = "";
+    for (const size in fontPair.header.style) {
+      for (const prop in fontPair.header.style[size]) {
+        headerFontVars += `\n--header-font-${prop}-${size}: ${fontPair.header.style[size][prop]};`;
+      }
+    }
+
+    let bodyFontVars = "";
+    for (const size in fontPair.body.style) {
+      for (const prop in fontPair.body.style[size]) {
+        bodyFontVars += `\n--body-font-${prop}-${size}: ${fontPair.body.style[size][prop]};`;
+      }
     }
     this.innerHTML = `
-  ${headerFontFace}
-  ${bodyFontFace}
+  @font-face {
+    font-family: '${fontPair.header.name}';
+    src: url('${fontPair.header.url}');
+  }
+  @font-face {
+    font-family: '${fontPair.body.name}';
+    src: url('${fontPair.body.url}');
+  }
   :root {
-    --header-font-family: "${this.dataset.headerFont}";
-    --body-font-family: "${this.dataset.bodyFont}";
+    --header-font-family: '${fontPair.header.name}';
+    ${headerFontVars}
+    --body-font-family: '${fontPair.body.name}';
+    ${bodyFontVars}
   }
 `
   } // endfold
   attributeChangedCallback(name, oldValue, newValue) { // startfold
-    this.render();
+    // Body font change comes second.
+    if (name == "data-body-font") {
+      this.render();
+    }
   } // endfold
 }
 customElements.define(FontStyleElementName, FontStyle, {extends: "style"});
@@ -114,42 +291,24 @@ export class FontEditorModal extends AdminModal { // startfold
     content.classList.add("modal-content");
     content.classList.add("font-modal");
 
-    const headerLabel = document.createElement("label");
-    headerLabel.innerText = "Header Font:";
-    content.appendChild(headerLabel);
-
-    const headerFontChoice = document.createElement("select");
-    headerFontChoice.value = this.fontStyle.dataset.headerFont;
-    // Add listener here.
-    headerFontChoice.addEventListener("change", () => {
-        this.fontStyle.dataset.headerFont = headerFontChoice.value;
-    });
-    for (const fontName in this.fontStyle.headerFonts) {
-        const fontOption = document.createElement("option");
-        fontOption.value = fontName;
-        fontOption.innerText = fontName;
-        headerFontChoice.appendChild(fontOption);
+    for (let fontPair of this.fontStyle.fonts) {
+        const card = document.createElement("div");
+        const headerFont = fontPair.header.name;
+        const bodyFont = fontPair.body.name;
+        card.classList.add("font-card");
+        card.addEventListener("click", (e) => {
+            this.fontStyle.dataset.headerFont = headerFont;
+            this.fontStyle.dataset.bodyFont = bodyFont;
+        });
+        card.innerHTML = `<h3 style="font-family: '${headerFont}';font-weight: ${fontPair.header.style.medium.weight};">${headerFont}</h3>
+  <p style="font-family: '${bodyFont}'; font-weight: ${fontPair.body.style.medium.weight};">${bodyFont}</p>
+  <p style="font-family: '${bodyFont}'; font-weight: ${fontPair.body.style.medium.weight};">${fontPair.description}</p>
+`
+        if (this.fontStyle.dataset.headerFont == headerFont && this.fontStyle.dataset.bodyFont == bodyFont) {
+          // Add selected class here.
+        }
+        content.appendChild(card);
     }
-    headerFontChoice.value = this.fontStyle.dataset.headerFont;
-    content.appendChild(headerFontChoice);
-
-    const bodyLabel = document.createElement("label");
-    bodyLabel.innerText = "Body Font:";
-    content.appendChild(bodyLabel);
-
-    const bodyFontChoice = document.createElement("select");
-    // Add listener here.
-    bodyFontChoice.addEventListener("change", () => {
-        this.fontStyle.dataset.bodyFont = bodyFontChoice.value;
-    })
-    for (const fontName in this.fontStyle.bodyFonts) {
-        const fontOption = document.createElement("option");
-        fontOption.value = fontName;
-        fontOption.innerText = fontName;
-        bodyFontChoice.appendChild(fontOption);
-    }
-    bodyFontChoice.value = this.fontStyle.dataset.bodyFont;
-    content.appendChild(bodyFontChoice);
 
     return content
   } // endfold
