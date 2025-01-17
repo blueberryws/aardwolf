@@ -6,15 +6,35 @@
   --color-two: var(--palette-color-two);
   --color-three: var(--palette-color-three);
   --color-four: var(--palette-color-four);
-  --narrow-padding: 60px 15px;
-  --standard-padding: 60px 30px;
+  --brand-color: var(--palette-brand-color);
+  --brand-contrast-color: var(--palette-brand-contrast-color);
+  --narrow-padding-side: 15px;
+  --narrow-padding-right: var(--narrow-padding-side);
+  --narrow-padding-left: var(--narrow-padding-side);
+  --narrow-padding-top: 60px;
+  --narrow-padding-bottom: 60px;
+  --narrow-padding: var(--narrow-padding-top) var(--narrow-padding-right) var(--narrow-padding-bottom) var(--narrow-padding-left);
+  --standard-padding-side: 30px;
+  --standard-padding-right: var(--standard-padding-side);
+  --standard-padding-left: var(--standard-padding-side);
+  --standard-padding-top: 60px;
+  --standard-padding-bottom: 60px;
+  --standard-padding: var(--standard-padding-top) var(--standard-padding-right) var(--standard-padding-bottom) var(--standard-padding-left);
   --alt-button-padding: 12px 50px;
 }
 
+@media screen and (min-width: 1400px) {
+  :root {
+    --standard-padding-right: calc(calc(50vw - 720px) + var(--standard-padding-side));
+    --standard-padding-left: calc(calc(50vw - 720px) + var(--standard-padding-side));
+    --narrow-padding-left: calc(calc(50vw - 720px) + var(--narrow-padding-side));
+    --narrow-padding-right: calc(calc(50vw - 720px) + var(--narrow-padding-side));
+  }
+}
 @media screen and (min-width: 768px) {
   :root {
     --section-margin-bottom: 80px;
-    --standard-padding: 90px 65px;
+    --standard-padding-side: 65px;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -55,6 +75,8 @@ button {
   outline: 20px;
   border-radius: 12px;
   cursor: pointer;
+  color: var(--brand-contrast-color);
+  background-color: var(--brand-color);
 }
 
 img {
@@ -63,13 +85,22 @@ img {
   max-width: 100%;
 }
 
+dialog {
+  position: fixed;
+  margin: auto;
+}
+
 dialog img {
   width: 150px;
 }
 
+li {
+  list-style: none;
+}
+
 /* sections layout settings startfold */
 section {
-  max-width: min(1400px, 100%);
+  max-width: 100%;
   padding: var(--standard-padding);
   margin: auto;
 }
@@ -86,7 +117,6 @@ h2 {
   font-size: var(--header-font-size-large);
   text-align: center;
   margin-bottom: var(--section-margin-bottom);
-  line-height: calc(var(--header-font-size-large) * 1.5);
   color: var(--color-four);
 }
 
@@ -341,6 +371,771 @@ section[is=hero-section].alternate-five picture img {
 }
 
 /* endfold */
+/* alternate-one:
+   - what typography for p? (also check this for alternate-two)
+   - notebook -> li -> *: how should the width on this scale for notebook -> desktop sized screens?
+*/
+section[is=about-section] {
+  color: var(--color-four);
+}
+section[is=about-section] img {
+  border-radius: var(--normal-border-radius);
+}
+section[is=about-section] h3 {
+  color: var(--color-three);
+  font-size: var(--header-font-size-small);
+  font-weight: 500;
+}
+section[is=about-section] p {
+  font-size: var(--body-font-size-medium);
+}
+@media screen and (min-width: 992px) {
+  section[is=about-section] h3 {
+    font-size: var(--header-font-size-medium);
+  }
+  section[is=about-section] p {
+    font-size: var(--body-font-size-small);
+  }
+}
+
+section[is=about-section].default {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+section[is=about-section].default > p {
+  display: none;
+}
+section[is=about-section].default > * {
+  box-sizing: border-box;
+  padding-left: var(--standard-padding-left);
+  padding-right: var(--standard-padding-right);
+  width: 100%;
+}
+section[is=about-section].default ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 10%;
+  row-gap: 20px;
+}
+section[is=about-section].default li {
+  flex: 0 0 45%;
+  display: grid;
+  justify-items: center;
+  column-gap: 50px;
+  text-align: center;
+}
+@media screen and (min-width: 992px) {
+  section[is=about-section].default li {
+    display: grid;
+    justify-items: start;
+    align-items: start;
+    text-align: start;
+  }
+  section[is=about-section].default li picture {
+    grid-column: 1;
+    grid-row: 1/span 2;
+  }
+  section[is=about-section].default li h3 {
+    grid-column: 2;
+  }
+  section[is=about-section].default li p {
+    grid-column: 2;
+  }
+}
+
+section[is=about-section].alternate-one {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+section[is=about-section].alternate-one > p {
+  display: none;
+}
+section[is=about-section].alternate-one > * {
+  box-sizing: border-box;
+  padding-left: var(--standard-padding-left);
+  padding-right: var(--standard-padding-right);
+  width: 100%;
+}
+section[is=about-section].alternate-one ul {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+section[is=about-section].alternate-one ul ::-webkit-scrollbar {
+  display: none;
+}
+section[is=about-section].alternate-one li {
+  flex: 0 0 90%;
+  scroll-snap-align: center;
+  row-gap: 20px;
+  display: grid;
+  justify-items: center;
+}
+section[is=about-section].alternate-one li:first-of-type {
+  flex: 0 0 100%;
+}
+section[is=about-section].alternate-one li:last-of-type {
+  flex: 0 0 100%;
+}
+section[is=about-section].alternate-one li * {
+  grid-column: 1;
+  width: 90%;
+}
+@media screen and (min-width: 768px) {
+  section[is=about-section].alternate-one ul {
+    justify-content: center;
+    row-gap: 50px;
+    overflow-x: unset;
+    flex-wrap: wrap;
+  }
+  section[is=about-section].alternate-one li, section[is=about-section].alternate-one li:first-of-type, section[is=about-section].alternate-one li:last-of-type {
+    flex: 0 0 33%;
+    display: grid;
+  }
+  section[is=about-section].alternate-one li *, section[is=about-section].alternate-one li:first-of-type *, section[is=about-section].alternate-one li:last-of-type * {
+    width: 90%;
+  }
+}
+
+section[is=about-section].alternate-two > p {
+  display: none;
+}
+section[is=about-section].alternate-two ul {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+section[is=about-section].alternate-two ul ::-webkit-scrollbar {
+  display: none;
+}
+section[is=about-section].alternate-two li {
+  flex: 0 0 90%;
+  scroll-snap-align: center;
+  row-gap: 20px;
+  text-align: center;
+  display: grid;
+  justify-items: center;
+}
+section[is=about-section].alternate-two li:first-of-type {
+  flex: 0 0 100%;
+}
+section[is=about-section].alternate-two li:last-of-type {
+  flex: 0 0 100%;
+}
+section[is=about-section].alternate-two li * {
+  grid-column: 1;
+  width: 80%;
+}
+section[is=about-section].alternate-two li img {
+  border-radius: 50%;
+}
+section[is=about-section].alternate-two h3 {
+  text-align: center;
+}
+@media screen and (min-width: 992px) {
+  section[is=about-section].alternate-two ul {
+    justify-content: center;
+    row-gap: 50px;
+    overflow-x: unset;
+    flex-wrap: wrap;
+  }
+  section[is=about-section].alternate-two li, section[is=about-section].alternate-two li:first-of-type, section[is=about-section].alternate-two li:last-of-type {
+    flex: 0 0 33%;
+    display: grid;
+  }
+  section[is=about-section].alternate-two li *, section[is=about-section].alternate-two li:first-of-type *, section[is=about-section].alternate-two li:last-of-type * {
+    width: 90%;
+  }
+}
+
+section[is=about-section].alternate-three > p {
+  display: none;
+}
+section[is=about-section].alternate-three ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10%;
+}
+section[is=about-section].alternate-three li {
+  flex: 0 1 min(200px, 45%);
+  display: grid;
+  justify-items: center;
+  column-gap: 20px;
+  margin-bottom: 10%;
+  text-align: center;
+}
+section[is=about-section].alternate-three li picture {
+  grid-row: 1;
+}
+
+section[is=about-section].alternate-four {
+  background-color: var(--brand-color);
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+section[is=about-section].alternate-four > * {
+  box-sizing: border-box;
+  padding-left: var(--standard-padding-left);
+  padding-right: var(--standard-padding-right);
+  width: 100%;
+}
+section[is=about-section].alternate-four > h2, section[is=about-section].alternate-four > p {
+  padding-right: var(--narrow-padding-right);
+  padding-left: var(--narrow-padding-left);
+  color: var(--brand-contrast-color);
+  margin: auto;
+}
+section[is=about-section].alternate-four > h2 {
+  margin-bottom: 25px;
+}
+section[is=about-section].alternate-four > p {
+  margin-bottom: 60px;
+  font-size: var(--body-font-size-large);
+}
+section[is=about-section].alternate-four ul {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  max-width: 100%;
+  scrollbar-width: none;
+  background: linear-gradient(to bottom, transparent 125px, var(--color-one) 125px, var(--color-one) 100%);
+}
+section[is=about-section].alternate-four ul ::-webkit-scrollbar {
+  display: none;
+}
+section[is=about-section].alternate-four li {
+  flex: 0 0 90%;
+  scroll-snap-align: center;
+  row-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 60px;
+}
+section[is=about-section].alternate-four li:first-of-type {
+  flex: 0 0 100%;
+}
+section[is=about-section].alternate-four li:last-of-type {
+  flex: 0 0 100%;
+}
+section[is=about-section].alternate-four li h3, section[is=about-section].alternate-four li p {
+  max-width: 300px;
+}
+section[is=about-section].alternate-four li picture {
+  width: 250px;
+}
+section[is=about-section].alternate-four li picture img {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+@media screen and (min-width: 768px) {
+  section[is=about-section].alternate-four > h2, section[is=about-section].alternate-four > p {
+    width: 85%;
+  }
+  section[is=about-section].alternate-four ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: unset;
+    padding-left: var(--narrow-padding-left);
+    padding-right: var(--narrow-padding-right);
+  }
+  section[is=about-section].alternate-four li, section[is=about-section].alternate-four li:first-of-type, section[is=about-section].alternate-four li:last-of-type {
+    flex: 0 1 375px;
+  }
+}
+@media screen and (min-width: 1400px) {
+  section[is=about-section].alternate-four > h2, section[is=about-section].alternate-four > p {
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+  }
+  section[is=about-section].alternate-four ul {
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+  }
+  section[is=about-section].alternate-four li, section[is=about-section].alternate-four li:first-of-type, section[is=about-section].alternate-four li:last-of-type {
+    flex-basis: 400px;
+  }
+}
+
+section[is=about-section].alternate-five {
+  background-color: var(--brand-color);
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+section[is=about-section].alternate-five > * {
+  box-sizing: border-box;
+  padding-left: var(--standard-padding-left);
+  padding-right: var(--standard-padding-right);
+  width: 100%;
+}
+section[is=about-section].alternate-five > h2, section[is=about-section].alternate-five > p {
+  padding-right: var(--narrow-padding-right);
+  padding-left: var(--narrow-padding-left);
+  color: var(--brand-contrast-color);
+}
+section[is=about-section].alternate-five > h2 {
+  margin-bottom: 25px;
+}
+section[is=about-section].alternate-five > p {
+  margin-bottom: 60px;
+  font-size: var(--body-font-size-large);
+}
+section[is=about-section].alternate-five ul {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  max-width: 100%;
+  scrollbar-width: none;
+  background: linear-gradient(to bottom, transparent 125px, var(--color-one) 125px, var(--color-one) 100%);
+  padding-right: var(--narrow-padding-right);
+  padding-left: var(--narrow-padding-left);
+}
+section[is=about-section].alternate-five ul ::-webkit-scrollbar {
+  display: none;
+}
+section[is=about-section].alternate-five li {
+  flex: 0 0 90%;
+  scroll-snap-align: center;
+  row-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 60px;
+  background-color: var(--color-two);
+  border-radius: var(--normal-border-radius);
+  padding: 40px 0;
+  flex-basis: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+section[is=about-section].alternate-five li:first-of-type {
+  flex: 0 0 100%;
+}
+section[is=about-section].alternate-five li:last-of-type {
+  flex: 0 0 100%;
+}
+section[is=about-section].alternate-five li h3, section[is=about-section].alternate-five li p {
+  text-align: center;
+  max-width: 250px;
+}
+section[is=about-section].alternate-five li picture {
+  width: 250px;
+}
+section[is=about-section].alternate-five li picture img {
+  aspect-ratio: 1/1;
+}
+@media screen and (min-width: 768px) {
+  section[is=about-section].alternate-five ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: unset;
+  }
+  section[is=about-section].alternate-five li, section[is=about-section].alternate-five li:first-of-type, section[is=about-section].alternate-five li:last-of-type {
+    flex: 1 0 28%;
+  }
+  section[is=about-section].alternate-five h3 {
+    max-width: 80%;
+  }
+}
+@media screen and (min-width: 992px) {
+  section[is=about-section].alternate-five ul {
+    gap: 40px;
+  }
+  section[is=about-section].alternate-five li, section[is=about-section].alternate-five li:first-of-type, section[is=about-section].alternate-five li:last-of-type {
+    margin: unset;
+    flex: 0 0 400px;
+  }
+}
+
+section[is=about-section].alternate-six {
+  --picture-height: min(45vw, 225px);
+  background-color: var(--color-two);
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+section[is=about-section].alternate-six > * {
+  box-sizing: border-box;
+  padding-left: var(--standard-padding-left);
+  padding-right: var(--standard-padding-right);
+  width: 100%;
+}
+section[is=about-section].alternate-six > p {
+  display: none;
+}
+section[is=about-section].alternate-six > h2 {
+  text-align: start;
+  margin-bottom: 30px;
+}
+section[is=about-section].alternate-six ul {
+  background: linear-gradient(to bottom, transparent var(--picture-height), var(--color-one) var(--picture-height), var(--color-one) 100%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 75px;
+}
+section[is=about-section].alternate-six li {
+  flex: 0 0 calc(var(--picture-height) * 2);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 15px;
+}
+section[is=about-section].alternate-six li picture {
+  width: 90%;
+  min-width: 250px;
+  align-self: center;
+}
+section[is=about-section].alternate-six li picture img {
+  aspect-ratio: 1/1;
+}
+section[is=about-section].alternate-six li h3, section[is=about-section].alternate-six li p {
+  width: 90%;
+}
+@media screen and (min-width: 768px) {
+  section[is=about-section].alternate-six h2 {
+    text-align: center;
+  }
+  section[is=about-section].alternate-six ul {
+    gap: 5%;
+    row-gap: 40px;
+  }
+  section[is=about-section].alternate-six li {
+    justify-content: center;
+  }
+  section[is=about-section].alternate-six li picture {
+    width: 100%;
+  }
+  section[is=about-section].alternate-six li picture img {
+    width: 100%;
+  }
+}
+
+section[is=about-section].alternate-seven {
+  --picture-height: min(45vw, 180px);
+  background-color: var(--color-two);
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+section[is=about-section].alternate-seven > * {
+  box-sizing: border-box;
+  padding-left: var(--standard-padding-left);
+  padding-right: var(--standard-padding-right);
+  width: 100%;
+}
+section[is=about-section].alternate-seven > p {
+  display: none;
+}
+section[is=about-section].alternate-seven > h2 {
+  text-align: start;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 30px;
+}
+section[is=about-section].alternate-seven ul {
+  background: linear-gradient(to bottom, transparent calc(var(--picture-height) * 0.65), var(--color-one) calc(var(--picture-height) * 0.65), var(--color-one) 100%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 75px;
+  gap: 25px;
+}
+section[is=about-section].alternate-seven li {
+  flex: 0 0 calc(var(--picture-height) * 2);
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  justify-content: start;
+  row-gap: 15px;
+}
+section[is=about-section].alternate-seven li picture {
+  width: 100%;
+  min-width: 250px;
+  align-self: center;
+}
+section[is=about-section].alternate-seven li picture img {
+  width: 100%;
+  aspect-ratio: 11/7;
+}
+section[is=about-section].alternate-seven li h3, section[is=about-section].alternate-seven li p {
+  width: 90%;
+}
+section[is=about-section].alternate-seven li p {
+  font-size: var(--body-font-size-medium);
+}
+@media screen and (min-width: 768px) {
+  section[is=about-section].alternate-seven h2 {
+    text-align: center;
+  }
+  section[is=about-section].alternate-seven h3 {
+    text-align: center;
+  }
+  section[is=about-section].alternate-seven ul {
+    display: grid;
+    grid-template-columns: repeat(2, calc(var(--picture-height) * 2));
+    justify-items: center;
+    gap: 5%;
+  }
+  section[is=about-section].alternate-seven li p {
+    font-size: var(--body-font-size-small);
+  }
+}
+
+section[is=about-section].alternate-eight {
+  --picture-height: min(max(30vw, 250px), 350px);
+  background-color: var(--color-two);
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+section[is=about-section].alternate-eight > * {
+  box-sizing: border-box;
+  padding-left: var(--standard-padding-left);
+  padding-right: var(--standard-padding-right);
+  width: 100%;
+}
+section[is=about-section].alternate-eight > p {
+  display: none;
+}
+section[is=about-section].alternate-eight > h2 {
+  text-align: start;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 30px;
+}
+section[is=about-section].alternate-eight ul {
+  background: linear-gradient(to bottom, transparent calc(var(--picture-height) * 0.5), var(--color-one) calc(var(--picture-height) * 0.5), var(--color-one) 100%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+  row-gap: 75px;
+}
+section[is=about-section].alternate-eight li {
+  flex: 0 0 var(--picture-height);
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  justify-content: start;
+  row-gap: 15px;
+}
+section[is=about-section].alternate-eight li picture {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 250px;
+  align-self: center;
+}
+section[is=about-section].alternate-eight li picture img {
+  aspect-ratio: 1/1;
+}
+section[is=about-section].alternate-eight li h3, section[is=about-section].alternate-eight li p {
+  width: 90%;
+}
+section[is=about-section].alternate-eight li p {
+  font-size: var(--body-font-size-medium);
+}
+@media screen and (min-width: 768px) {
+  section[is=about-section].alternate-eight h2 {
+    text-align: center;
+  }
+  section[is=about-section].alternate-eight li p {
+    font-size: var(--body-font-size-small);
+  }
+}
+
+section[is=about-section].alternate-nine {
+  --picture-height: min(max(30vw, 250px), 350px);
+  background-color: var(--color-two);
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+section[is=about-section].alternate-nine > * {
+  box-sizing: border-box;
+  padding-left: var(--standard-padding-left);
+  padding-right: var(--standard-padding-right);
+  width: 100%;
+}
+section[is=about-section].alternate-nine > p {
+  display: none;
+}
+section[is=about-section].alternate-nine > h2 {
+  text-align: start;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 30px;
+}
+section[is=about-section].alternate-nine ul {
+  background: linear-gradient(to bottom, transparent calc(var(--picture-height) * 0.5), var(--color-one) calc(var(--picture-height) * 0.5), var(--color-one) 100%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+  row-gap: 75px;
+}
+section[is=about-section].alternate-nine li {
+  flex: 0 0 var(--picture-height);
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  justify-content: start;
+  row-gap: 15px;
+}
+section[is=about-section].alternate-nine li picture {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 250px;
+  align-self: center;
+}
+section[is=about-section].alternate-nine li picture img {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+section[is=about-section].alternate-nine li h3, section[is=about-section].alternate-nine li p {
+  width: 90%;
+}
+section[is=about-section].alternate-nine li p {
+  font-size: var(--body-font-size-medium);
+}
+@media screen and (min-width: 768px) {
+  section[is=about-section].alternate-nine h2 {
+    text-align: center;
+  }
+  section[is=about-section].alternate-nine li p {
+    font-size: var(--body-font-size-small);
+  }
+}
+
+section[is=about-section].alternate-ten {
+  --picture-height: min(45vw, 180px);
+  background-color: var(--color-one);
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+section[is=about-section].alternate-ten > * {
+  box-sizing: border-box;
+  padding-left: var(--standard-padding-left);
+  padding-right: var(--standard-padding-right);
+  width: 100%;
+}
+section[is=about-section].alternate-ten > p {
+  display: none;
+}
+section[is=about-section].alternate-ten > h2 {
+  text-align: start;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 30px;
+}
+section[is=about-section].alternate-ten ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 75px;
+  gap: 25px;
+}
+section[is=about-section].alternate-ten li {
+  flex: 0 0 calc(var(--picture-height) * 2);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  justify-content: start;
+  row-gap: 15px;
+}
+section[is=about-section].alternate-ten li picture {
+  width: 100%;
+  min-width: 250px;
+  align-self: center;
+}
+section[is=about-section].alternate-ten li picture img {
+  width: 100%;
+  aspect-ratio: 6/5;
+}
+section[is=about-section].alternate-ten li h3, section[is=about-section].alternate-ten li p {
+  width: 90%;
+}
+section[is=about-section].alternate-ten li p {
+  font-size: var(--body-font-size-medium);
+}
+@media screen and (min-width: 768px) {
+  section[is=about-section].alternate-ten h2 {
+    text-align: center;
+  }
+  section[is=about-section].alternate-ten h3 {
+    text-align: start;
+    margin-top: 50px;
+  }
+  section[is=about-section].alternate-ten ul {
+    row-gap: 50px;
+  }
+  section[is=about-section].alternate-ten li, section[is=about-section].alternate-ten li:first-of-type, section[is=about-section].alternate-ten li:last-of-type {
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: 47.5% 47.5%;
+    grid-template-rows: auto 1fr;
+    justify-items: start;
+    align-items: start;
+    gap: 5%;
+  }
+  section[is=about-section].alternate-ten li h3, section[is=about-section].alternate-ten li:first-of-type h3, section[is=about-section].alternate-ten li:last-of-type h3 {
+    grid-row: 1;
+  }
+  section[is=about-section].alternate-ten li picture, section[is=about-section].alternate-ten li:first-of-type picture, section[is=about-section].alternate-ten li:last-of-type picture {
+    grid-row: 1/span 2;
+  }
+  section[is=about-section].alternate-ten li p, section[is=about-section].alternate-ten li:first-of-type p, section[is=about-section].alternate-ten li:last-of-type p {
+    font-size: var(--body-font-size-small);
+  }
+  section[is=about-section].alternate-ten li:nth-child(odd) > * {
+    grid-column: 2;
+  }
+  section[is=about-section].alternate-ten li:nth-child(odd) picture {
+    grid-column: 1;
+  }
+  section[is=about-section].alternate-ten li:nth-child(even) > * {
+    grid-column: 1;
+  }
+  section[is=about-section].alternate-ten li:nth-child(even) picture {
+    grid-column: 2;
+  }
+}
+
 section[is=hours-section] ul {
   width: min(650px, 90%);
   margin: auto;
@@ -371,7 +1166,6 @@ section[is=hours-section].default ul li {
 section[is=hours-section].default ul li p {
   font-size: var(--body-font-size-small);
   font-weight: 400;
-  line-height: calc(var(--body-font-size-small) * 1.5);
   color: var(--color-four);
   height: calc(var(--body-font-size-small) * 1.2);
   margin: 6px 0;
@@ -482,7 +1276,6 @@ section[is=contact-form-section] form input, section[is=contact-form-section] fo
   border: none;
   font-size: var(--body-font-size-small);
   font-weight: 400;
-  line-height: calc(var(--body-font-size-small) * 1.5);
   color: var(--color-four);
   box-sizing: border-box;
   padding: 15px 0 0 20px;
@@ -927,8 +1720,8 @@ section[is=call-to-action-section] img {
   aspect-ratio: 1/1;
 }
 section[is=call-to-action-section] button {
-  color: var(--color-one);
-  background-color: var(--color-three);
+  color: var(--brand-contrast-color);
+  background-color: var(--brand-color);
   border-radius: var(--normal-border-radius);
 }
 @media screen and (min-width: 768px) {
@@ -1481,7 +2274,6 @@ section[is=testimonials-section].default li.testimonials-content {
 section[is=testimonials-section].default blockquote.testimonial-text {
   font-size: var(--body-font-size-small);
   font-weight: 400;
-  line-height: calc(var(--body-font-size-small) * 1.5);
   color: var(--color-four);
 }
 section[is=testimonials-section].default figcaption.testimonial-attribution {
@@ -1598,7 +2390,6 @@ section[is=testimonials-section].alternate-one li.testimonials-content {
 section[is=testimonials-section].alternate-one blockquote.testimonial-text {
   font-size: var(--body-font-size-small);
   font-weight: 400;
-  line-height: calc(var(--body-font-size-small) * 1.5);
   color: var(--color-four);
   margin-top: -25px;
 }
@@ -1744,7 +2535,6 @@ section[is=testimonials-section].alternate-two blockquote.testimonial-text::afte
 section[is=testimonials-section].alternate-two blockquote.testimonial-text {
   font-size: var(--body-font-size-small);
   font-weight: 400;
-  line-height: calc(var(--body-font-size-small) * 1.5);
   color: var(--color-four);
   margin-top: -25px;
   text-align: left;
@@ -1904,7 +2694,6 @@ section[is=testimonials-section].alternate-four blockquote.testimonial-text::aft
 section[is=testimonials-section].alternate-four blockquote.testimonial-text {
   font-size: var(--body-font-size-small);
   font-weight: 400;
-  line-height: calc(var(--body-font-size-small) * 1.5);
   color: var(--color-four);
   text-align: left;
 }
@@ -2061,7 +2850,6 @@ section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container p.answer
   padding: 10px 8px;
   font-size: var(--body-font-size-small);
   font-weight: 400;
-  line-height: calc(var(--body-font-size-small) * 1.5);
   color: var(--color-four);
 }
 @media screen and (min-width: 1200px) {
@@ -2092,35 +2880,120 @@ section[is=faqs-section].alternate h3.question-text {
     color: var(--color-four);
   }
 }
-/* move these to the web component ... later */
-:root { /* startfold */
-  --palette-color-one: white;
-  --palette-color-two: #B8B8B8;
-  --palette-color-three: #4F4F4F;
-  --palette-color-four: black;
-  --header-font-size-x-large: 36px;
-  --header-font-weight-x-large: 500;
-  --header-font-size-large: 32px;
-  --header-font-weight-large: 500;
-  --header-font-size-medium: 32px;
-  --header-font-weight-medium: 500;
-  --header-font-size-small: 20px;
-  --header-font-weight-small: 500;
-  --body-font-size-large: 24px;
-  --body-font-size-medium: 16px;
-  --body-font-size-small: 14px;
+/*
+
+- default: how should the image scale around "tablet" size.
+  - wanna double check the aspect ratios
+*/
+section[is=more-information-section] {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+section[is=more-information-section] picture {
+  margin-bottom: 25px;
+  width: 100%;
+}
+section[is=more-information-section] picture img {
+  width: 100%;
+  aspect-ratio: 3/2;
+  border-radius: var(--normal-border-radius);
+}
+@media screen and (min-width: 992px) {
+  section[is=more-information-section] picture {
+    margin-bottom: 40px;
+  }
+  section[is=more-information-section] picture img {
+    aspect-ratio: 19/10;
+  }
 }
 
-@media screen and (min-width: 768px) {
-  :root {
-    --header-font-size-x-large: 128px;
-    --header-font-size-large: 64px;
-    --header-font-size-medium: 32px;
-    --header-font-size-small: 24px;
-    --body-font-size-large: 24px;
-    --body-font-size-medium: 20px;
-    --body-font-size-small: 16px;
+section[is=more-information-section].default {
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+section[is=more-information-section].default picture {
+  margin-bottom: 25px;
+}
+section[is=more-information-section].default picture img {
+  aspect-ratio: 3/2;
+}
+@media screen and (min-width: 992px) {
+  section[is=more-information-section].default {
+    grid-template-columns: 1fr 1fr;
   }
-} /* endfold */
+  section[is=more-information-section].default h2 {
+    grid-column: 1/span 2;
+  }
+  section[is=more-information-section].default picture {
+    width: 90%;
+    margin-bottom: unset;
+  }
+  section[is=more-information-section].default picture img {
+    aspect-ratio: 6/5;
+  }
+}
+
+section[is=more-information-section].alternate-two h2 {
+  grid-row: 2;
+  margin-bottom: 25px;
+}
+
+section[is=more-information-section].alternate-three h2 {
+  margin-bottom: 25px;
+}
+section[is=more-information-section].alternate-three picture {
+  margin-top: 50px;
+  grid-row: 3;
+}
+
+section[is=footer-section] {
+  background-color: var(--color-two);
+  display: grid;
+  grid-template-columns: auto auto auto 1fr auto;
+  gap: 20px;
+}
+section[is=footer-section] > a {
+  grid-row: 2;
+  cursor: pointer;
+}
+section[is=footer-section] > ul {
+  grid-row: 1;
+  grid-column: 5;
+  align-self: end;
+}
+section[is=footer-section] dialog {
+  position: fixed;
+  width: 90%;
+  border: none;
+  outline: none;
+  margin: auto;
+  padding: 30px 15px 10px 15px;
+  box-sizing: border-box;
+  background-color: var(--color-four);
+  color: var(--color-one);
+}
+section[is=footer-section] dialog h2 {
+  color: var(--color-one);
+}
+section[is=footer-section] dialog p {
+  margin: auto;
+  width: 90%;
+}
+section[is=footer-section] dialog button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: none;
+}
+@media screen and (min-width: 768px) {
+  section[is=footer-section] dialog {
+    padding: 60px 90px;
+  }
+  section[is=footer-section] dialog button {
+    top: 25px;
+    right: 25px;
+  }
+}
 
 /*# sourceMappingURL=styles.css.map */

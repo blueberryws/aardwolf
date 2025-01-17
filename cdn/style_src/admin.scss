@@ -1,3 +1,122 @@
+@use "base";
+
+// startfold fonts
+@font-face {
+  font-family: 'Bangers';
+  src: url("/cdn/fonts/Bangers/Bangers-Regular.ttf");
+}
+@font-face {
+  font-family: 'Fjalla One';
+  src: url("/cdn/fonts/Fjalla_One/FjallaOne-Regular.ttf");
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url("/cdn/fonts/Nunito/Nunito-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: 'Raleway';
+  src: url("/cdn/fonts/Raleway/Raleway-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url("/cdn/fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf");
+}
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url("/cdn/fonts/Libre_Baskerville/LibreBaskerville-Bold.ttf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url("/cdn/fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf");
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Quicksand';
+  src: url("/cdn/fonts/Quicksand/Quicksand-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: 'Source Sans';
+  src: url("/cdn/fonts/SourceSans/SourceSans3-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: 'Oswald';
+  src: url("/cdn/fonts/Oswald/Oswald-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: 'Noto Serif';
+  src: url("/cdn/fonts/Noto_Serif/NotoSerif-VariableFont_wdth,wght.ttf");
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url("/cdn/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: 'Quattrocento Sans';
+  src: url("/cdn/fonts/Quattrocento_Sans/QuattrocentoSans-Regular.ttf");
+}
+@font-face {
+  font-family: 'Quattrocento Sans';
+  src: url("/cdn/fonts/Quattrocento_Sans/QuattrocentoSans-Italic.ttf");
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Quattrocento Sans';
+  src: url("/cdn/fonts/Quattrocento_Sans/QuattrocentoSans-Bold.ttf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'Quattrocento Sans';
+  src: url("/cdn/fonts/Quattrocento_Sans/QuattrocentoSans-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Yellowtail";
+  src: url("/cdn/fonts/Yellowtail/Yellowtail-Regular.ttf");
+}
+@font-face {
+  font-family: "Lato";
+  src: url("/cdn/fonts/Lato/Lato-Regular.ttf");
+}
+@font-face {
+  font-family: "Lora";
+  src: url("/cdn/fonts/Lora/Lora-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/cdn/fonts/Poppins/Poppins-Regular.ttf");
+}
+@font-face {
+  font-family: "Merriweather Sans";
+  src: url("/cdn/fonts/Merriweather_Sans/MerriweatherSans-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Merriweather Italic";
+  src: url("/cdn/fonts/Merriweather/Merriweather-Italic.ttf");
+}
+@font-face {
+  font-family: "Open Sans Condensed";
+  src: url("/cdn/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf");
+}
+
+@font-face {
+  font-family: 'Great Vibes';
+  src: url("/cdn/fonts/GreatVibes/GreatVibes-Regular.ttf");
+}         
+@font-face {
+  font-family: 'Kalnia';
+  src: url("/cdn/fonts/Kalnia/Kalnia-VariableFont_wdth,wght.ttf");
+}
+@font-face {
+  font-family: 'Jost';
+  src: url('/cdn/fonts/jost/Jost-VariableFont_wght.ttf');
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url("/cdn/fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+// endfold
 .admin-modal { /* startfold */
     display: grid;
     position: fixed;
@@ -11,11 +130,21 @@
   grid-row: 1;
   grid-column: 1 / span 2;
 }
+.admin-modal button {
+    background-color: gray;
+    align-self: center;
+}
 .modal-content {
   grid-row: 2;
   grid-column: 1 / span 2;
   display: grid;
   gap: 25px;
+  margin-bottom: 30px;
+}
+
+.modal-content form {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
 }
 /* color modal startfold */
 .modal-content .selectors {
@@ -56,11 +185,30 @@
   outline: 12px solid rgba(0, 255, 0, .3);
 } /* endfold */
 /* font modal startfold */
-.font-modal label {
-  grid-column: 1;
+.font-modal {
+    min-width: 1100px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
-.font-modal select {
-  grid-column: 2;
+
+.font-modal .font-card {
+    flex: 0 0 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+    box-sizing: border-box;
+    padding: 45px 65px 45px 30px;
+    background-color: var(--color-four);;
+    color: var(--color-one);
+}
+
+.font-modal h3 {
+    font-size: var(--header-font-size-medium);
+}
+.font-modal p {
+    font-size: var(--body-font-size-medium);
 }
 /* endfold
 /* metadata modal startfold */
@@ -78,13 +226,82 @@
   text-align: center;
 }
 /* endfold */
+.admin-modal-action-btn {
+  justify-self: center;
+  width: fit-content;
+  grid-column: 2;
+}
+.admin-modal-cancel-btn {
+  justify-self: center;
+  width: fit-content;
+  grid-column: 1;
+}
 /* endfold */
-.section-add-btn, .section-delete-btn, .section-up-btn, .section-down-btn, .section-next-btn, .section-prev-btn {
-    position: absolute;
+.section-add-btn, .section-delete-btn, .section-up-btn, .section-down-btn, .section-next-btn, .section-prev-btn { /* startfold */
+    display: block !important;
+    position: absolute !important;
+    height: 50px !important;
+    width: 80px !important;
+    z-index: 9000;
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: gray !important;
+}
+.section-add-btn:hover, .section-delete-btn:hover, .section-up-btn:hover, .section-down-btn:hover, .section-next-btn:hover, .section-prev-btn:hover { /* startfold */
+    z-index: 9999;
 }
 .section-add-btn {
     bottom: -10px;
-    left: 50%;
+    left: calc(50% + 50px);
+}
+
+.section-delete-btn {
+    bottom: -10px;
+    left: calc(50% - 100px);
+}
+
+.section-next-btn {
+    top: calc(min(50%, 50vh) - 20px);
+    right: calc(var(--standard-padding-right) / 2);
+}
+.section-prev-btn {
+    top: calc(min(50%, 50vh) - 20px);
+    left: calc(var(--standard-padding-left) / 2);
+}
+
+.section-up-btn {
+    top: 0;
+    right: calc(var(--standard-padding-right) / 2);
+}
+.section-down-btn {
+    bottom: 0;
+    right: calc(var(--standard-padding-right) / 2);
+}
+// endfold
+
+.list-up-btn, .list-down-btn, .list-clone-btn, .list-delete-btn {
+    position: absolute !important;
+    background-color: blue !important;
+    z-index: 9000;
+}
+.list-up-btn:hover, .list-down-btn:hover, .list-clone-btn:hover, .list-delete-btn:hover {
+    z-index: 9999;
+}
+.list-up-btn {
+  top: 0 !important;
+  left: 0 !important;
+}
+.list-down-btn {
+  bottom: 0 !important;
+  left: 0 !important;
+}
+.list-clone-btn {
+  bottom: 0 !important;
+  right: 0 !important;
+}
+.list-delete-btn {
+  top: 0 !important;
+  right: 0 !important;
 }
 
 .admin-modal img {
@@ -106,6 +323,7 @@ aside[is="admin-aside"] {
     box-sizing: border-box;
     padding: 25px;
     gap: 25px;
+    z-index: 1000;
 }
  
 aside[is="admin-aside"]:hover {

@@ -16,17 +16,42 @@ $cdn-base-url: "http://my.localhost/cdn";
   --color-two: var(--palette-color-two);
   --color-three: var(--palette-color-three);
   --color-four: var(--palette-color-four);
+  --brand-color: var(--palette-brand-color);
+  --brand-contrast-color: var(--palette-brand-contrast-color);
 
-  --narrow-padding: 60px 15px;
-  --standard-padding: 60px 30px;
+  // Padding Settings
+  --narrow-padding-side: 15px;
+  --narrow-padding-right: var(--narrow-padding-side);
+  --narrow-padding-left: var(--narrow-padding-side);
+  --narrow-padding-top: 60px;
+  --narrow-padding-bottom: 60px;
+  --narrow-padding: var(--narrow-padding-top) var(--narrow-padding-right) var(--narrow-padding-bottom) var(--narrow-padding-left);
+
+  --standard-padding-side: 30px;
+  --standard-padding-right: var(--standard-padding-side);
+  --standard-padding-left: var(--standard-padding-side);
+  --standard-padding-top: 60px;
+  --standard-padding-bottom: 60px;
+  --standard-padding: var(--standard-padding-top) var(--standard-padding-right) var(--standard-padding-bottom) var(--standard-padding-left);
 
   --alt-button-padding: 12px 50px;
+}
+@media screen and (min-width: $desktop) {
+  :root {
+    // Using padding to center sections instead of width+margin:auto.
+    // This allows us to use background-color properties with full screen width.
+    --standard-padding-right: calc(calc(50vw - 720px) + var(--standard-padding-side));
+    --standard-padding-left: calc(calc(50vw - 720px) + var(--standard-padding-side));
+
+    --narrow-padding-left: calc(calc(50vw - 720px) + var(--narrow-padding-side));
+    --narrow-padding-right: calc(calc(50vw - 720px) + var(--narrow-padding-side));
+  }
 }
 
 @media screen and (min-width: $tablet) {
   :root {
     --section-margin-bottom: 80px;
-    --standard-padding: 90px 65px;
+    --standard-padding-side: 65px;
   }
 }
 
@@ -68,6 +93,8 @@ button {
   outline: 20px;
   border-radius: 12px;
   cursor: pointer;
+  color: var(--brand-contrast-color);
+  background-color: var(--brand-color);
 }
 
 img {
@@ -76,17 +103,52 @@ img {
   max-width: 100%;
 }
 
+dialog {
+    position: fixed;
+    margin: auto;
+}
+
 dialog img {
     width: 150px;
 }
+
+li {
+  list-style: none;
+}
+
 /* sections layout settings startfold */
 section {
-  max-width: min(1400px, 100%);
-  padding: var(--standard-padding);;
+  max-width: 100%;
+  padding: var(--standard-padding);
   margin: auto;
 }
 
 /* endfold */
+
+@mixin carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  max-width: 100%;
+  scrollbar-width: none;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+@mixin carousel-item {
+    flex: 0 0 90%;
+    scroll-snap-align: center;
+    row-gap: 20px;
+
+    &:first-of-type {
+      flex: 0 0 100%;
+    }
+    &:last-of-type {
+      flex: 0 0 100%;
+    }
+}
 
 /* typography settings startfold */
 h1, .page-title {
@@ -98,7 +160,6 @@ h1, .page-title {
     font-size: var(--header-font-size-large);
     text-align: center;
     margin-bottom: var(--section-margin-bottom);
-    line-height:  calc(var(--header-font-size-large) * 1.5);
     color: var(--color-four);
 }
 h2 {
@@ -121,7 +182,6 @@ h2 {
 @mixin alternate-paragraph {
   font-size: var(--body-font-size-small);
   font-weight: 400;
-  line-height: calc(var(--body-font-size-small) * 1.5);
   color: var(--color-four);
 }
 @mixin enlarged-text {
@@ -132,6 +192,18 @@ h2 {
   font-size: 12px;
   font-weight: 600;
   text-align: left;
+}
+@mixin flex-row-center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 }
 @media (width >= 992px) {
   h1, .page-title {

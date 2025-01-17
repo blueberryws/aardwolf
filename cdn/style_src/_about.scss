@@ -1,0 +1,668 @@
+@use "base";
+
+/* alternate-one:
+   - what typography for p? (also check this for alternate-two)
+   - notebook -> li -> *: how should the width on this scale for notebook -> desktop sized screens?
+*/
+
+@mixin hide-p {
+  > p {
+    display: none;
+  }
+}
+
+@mixin two-part-gradient($color-one, $color-two, $distance) {
+    background: linear-gradient(
+      to bottom,
+      $color-one $distance,
+      $color-two $distance,
+      $color-two 100%,
+    );
+}
+
+@mixin padded-children {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+
+  > * {
+    box-sizing: border-box;
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+    width: 100%;
+  }
+}
+
+section[is="about-section"] { // startfold
+  color: var(--color-four);
+  img {
+    border-radius: var(--normal-border-radius);
+  }
+  h3 {
+    color: var(--color-three);
+    font-size: var(--header-font-size-small);
+    font-weight: 500;
+  }
+  p {
+    font-size: var(--body-font-size-medium);
+  }
+  @media screen and (min-width: base.$notebook) {
+    h3 {
+      font-size: var(--header-font-size-medium);
+    }
+    p {
+      font-size: var(--body-font-size-small);
+    }
+  }
+} // endfold
+section[is="about-section"].default { // startfold
+  @include hide-p;
+  @include padded-children;
+
+  ul {
+    @include base.flex-row-center;
+    flex-wrap: wrap;
+    column-gap: 10%;
+    row-gap: 20px;
+  }
+  li {
+    flex: 0 0 45%;
+
+    display: grid;
+    justify-items: center;
+    column-gap: 50px;
+
+    text-align: center; // here for the cascade to the h3 and p element;
+  }
+
+  @media screen and (min-width: base.$notebook) {
+    li {
+      display: grid;
+      justify-items: start;
+      align-items: start;
+      text-align: start;
+
+      picture {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+      }
+      h3 {
+        grid-column: 2;
+      }
+      p {
+        grid-column: 2;
+      }
+    }
+  }
+} // endfold
+section[is="about-section"].alternate-one { // startfold
+  text-align: center;
+
+  @include hide-p;
+  @include padded-children;
+
+  ul {
+    @include base.carousel;
+  }
+
+  li {
+    @include base.carousel-item;
+
+    display: grid;
+    justify-items: center;
+
+    * {
+      grid-column: 1;
+      width: 90%;
+    }
+  }
+
+  @media screen and (min-width: base.$tablet) {
+    ul {
+      justify-content: center;
+      row-gap: 50px;
+      overflow-x: unset;
+      flex-wrap: wrap;
+    }
+    li, li:first-of-type, li:last-of-type {
+      flex: 0 0 33%;
+      display: grid;
+      * {
+        width: 90%;
+      }
+    }
+  }
+} // endfold
+section[is="about-section"].alternate-two { // startfold
+  @include hide-p;
+
+  ul {
+    @include base.carousel;
+  }
+
+  li {
+    @include base.carousel-item;
+
+    text-align: center;
+
+    display: grid;
+    justify-items: center;
+
+    * {
+      grid-column: 1;
+      width: 80%;
+    }
+
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  h3 {
+    text-align: center;
+  }
+ 
+  @media screen and (min-width: base.$notebook) {
+    ul {
+      justify-content: center;
+      row-gap: 50px;
+      overflow-x: unset;
+      flex-wrap: wrap;
+    }
+    li, li:first-of-type, li:last-of-type {
+      flex: 0 0 33%;
+      display: grid;
+      * {
+        width: 90%;
+      }
+    }
+  }
+} // endfold
+section[is="about-section"].alternate-three { // startfold
+  @include hide-p;
+
+  ul {
+    @include base.flex-row-center;
+    flex-wrap: wrap;
+    gap: 10%;
+  }
+
+  li {
+    flex: 0 1 min(200px, 45%);
+
+    display: grid;
+    justify-items: center;
+    column-gap: 20px;
+
+    margin-bottom: 10%;
+    text-align: center;
+
+    picture {
+      grid-row: 1;
+    }
+  }
+} // endfold
+section[is="about-section"].alternate-four { // startfold
+  background-color: var(--brand-color);
+  text-align: center;
+
+  @include padded-children;
+
+  > h2, > p {
+    padding-right: var(--narrow-padding-right);
+    padding-left: var(--narrow-padding-left);
+    color: var(--brand-contrast-color);
+    margin: auto;
+  }
+  
+  > h2 {
+    margin-bottom: 25px;
+  }
+
+  > p {
+    margin-bottom: 60px;
+    font-size: var(--body-font-size-large);
+  }
+
+  ul {
+    @include base.carousel;
+    @include two-part-gradient(transparent, var(--color-one), 125px);
+  }
+  li {
+    @include base.carousel-item;
+    @include base.flex-column-center;
+
+    margin-bottom: 60px;
+
+
+    h3, p {
+      max-width: 300px;
+    }
+    picture {
+      width: 250px;
+      img {
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  @media screen and (min-width: base.$tablet) {
+    > h2, > p {
+      width: 85%;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      overflow: unset; // unset the carousel
+
+      padding-left: var(--narrow-padding-left);
+      padding-right: var(--narrow-padding-right);
+    }
+    li, li:first-of-type, li:last-of-type {
+      flex: 0 1 375px; // unsets the carousel
+    }
+  }
+  @media screen and (min-width: base.$desktop) {
+    > h2, > p {
+      padding-left: var(--standard-padding-left);
+      padding-right: var(--standard-padding-right);
+    }
+    ul {
+      padding-left: var(--standard-padding-left);
+      padding-right: var(--standard-padding-right);
+    }
+    li, li:first-of-type, li:last-of-type {
+      flex-basis: 400px;
+    }
+  }
+} // endfold
+section[is="about-section"].alternate-five { // startfold
+  background-color: var(--brand-color);
+  text-align: center;
+
+  @include padded-children;
+
+  > h2, > p {
+    padding-right: var(--narrow-padding-right);
+    padding-left: var(--narrow-padding-left);
+    color: var(--brand-contrast-color);
+  }
+  
+  > h2 {
+    margin-bottom: 25px;
+  }
+
+  > p {
+    margin-bottom: 60px;
+    font-size: var(--body-font-size-large);
+  }
+
+  ul {
+    @include base.carousel;
+    @include two-part-gradient(transparent, var(--color-one), 125px);
+    padding-right: var(--narrow-padding-right);
+    padding-left: var(--narrow-padding-left);
+  }
+
+  li {
+    @include base.carousel-item;
+    @include base.flex-column-center;
+
+    margin-bottom: 60px;
+
+    background-color: var(--color-two);
+    border-radius: var(--normal-border-radius);
+    padding: 40px 0;
+    flex-basis: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    h3, p {
+      text-align: center;
+      max-width: 250px;
+    }
+    picture {
+      width: 250px;
+      img {
+        aspect-ratio: 1 / 1;
+      }
+    }
+  }
+  @media screen and (min-width: base.$tablet) {
+      ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow: unset;
+      }
+      li, li:first-of-type, li:last-of-type {
+        flex: 1 0 28%;
+      }
+      h3 {
+        max-width: 80%;
+      }
+  }
+
+  @media screen and (min-width: base.$notebook) {
+    ul {
+        gap: 40px;
+    }
+    li, li:first-of-type, li:last-of-type {
+      margin: unset;
+      flex: 0 0 400px;
+    }
+  }
+} // endfold
+section[is="about-section"].alternate-six { // startfold
+  --picture-height: min(45vw, 225px);
+  background-color: var(--color-two);
+
+  @include padded-children;
+  @include hide-p;
+
+  > h2 {
+    text-align: start;
+    margin-bottom: 30px;
+  }
+
+  ul {
+    @include two-part-gradient(transparent, var(--color-one), var(--picture-height));
+    @include base.flex-row-center;
+    row-gap: 75px;
+  }
+  li {
+    flex: 0 0 calc(var(--picture-height) * 2);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 15px;
+
+    picture {
+      width: 90%;
+      min-width: 250px;
+      align-self: center;
+      img {
+        aspect-ratio: 1 / 1;
+      }
+    }
+    h3, p {
+      width: 90%;
+    }
+  }
+  @media screen and (min-width: base.$tablet) {
+    h2 {
+      text-align: center;
+    }
+    ul {
+      gap: 5%;
+      row-gap: 40px;
+    }
+    li {
+      justify-content: center;
+      picture {
+        width: 100%;
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+} // endfold
+section[is="about-section"].alternate-seven { // startfold
+  --picture-height: min(45vw, 180px);
+  background-color: var(--color-two);
+
+  @include padded-children;
+  @include hide-p;
+
+
+  > h2 {
+    text-align: start;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  ul {
+    @include two-part-gradient(transparent, var(--color-one), calc(var(--picture-height) * .65));
+    @include base.flex-row-center;
+    row-gap: 75px;
+    gap: 25px;
+  } 
+  li {
+    flex: 0 0 calc(var(--picture-height) * 2);
+
+    @include base.flex-column-center;
+    justify-content: start;
+    row-gap: 15px;
+
+    picture {
+      width: 100%;
+      min-width: 250px;
+      align-self: center;
+      img {
+        width: 100%;
+        aspect-ratio: 11 / 7;
+      }
+    }
+    h3, p {
+      width: 90%;
+    }
+    p {
+      font-size: var(--body-font-size-medium);
+    }
+  }
+  @media screen and (min-width: base.$tablet) {
+    h2 {
+      text-align: center;
+    }
+    h3 {
+      text-align: center;
+    }
+    ul {
+        display: grid;
+        grid-template-columns: repeat(2, calc(var(--picture-height) * 2));
+        justify-items: center;
+        gap: 5%;
+    }
+    li {
+      p {
+        font-size: var(--body-font-size-small);
+      }
+    }
+  }
+} // endfold
+section[is="about-section"].alternate-eight { // startfold
+  --picture-height: min(max(30vw, 250px), 350px);
+  background-color: var(--color-two);
+  @include padded-children;
+  @include hide-p;
+
+  > h2 {
+    text-align: start;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  ul {
+    @include two-part-gradient(transparent, var(--color-one), calc(var(--picture-height) * .5));
+    @include base.flex-row-center;
+    gap: 5%;
+    row-gap: 75px;
+  }
+  li {
+    flex: 0 0 var(--picture-height);
+    @include base.flex-column-center;
+    justify-content: start;
+    row-gap: 15px;
+
+    picture {
+      width: 100%;
+      box-sizing: border-box;
+      min-width: 250px;
+      align-self: center;
+      img {
+        aspect-ratio: 1 / 1;
+      }
+    }
+    h3, p {
+      width: 90%;
+    }
+    p {
+      font-size: var(--body-font-size-medium);
+    }
+  }
+  @media screen and (min-width: base.$tablet) {
+    h2 {
+      text-align: center;
+    }
+    li p {
+      font-size: var(--body-font-size-small);
+    }
+  }
+} // endfold
+section[is="about-section"].alternate-nine { // startfold 
+  --picture-height: min(max(30vw, 250px), 350px);
+  background-color: var(--color-two);
+  @include padded-children;
+  @include hide-p;
+
+  > h2 {
+    text-align: start;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  ul {
+    @include two-part-gradient(transparent, var(--color-one), calc(var(--picture-height) * .5));
+    @include base.flex-row-center;
+    gap: 5%;
+    row-gap: 75px;
+  }
+  li {
+    flex: 0 0 var(--picture-height);
+    @include base.flex-column-center;
+    justify-content: start;
+    row-gap: 15px;
+
+    picture {
+      width: 100%;
+      box-sizing: border-box;
+      min-width: 250px;
+      align-self: center;
+      img {
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+      }
+    }
+    h3, p {
+      width: 90%;
+    }
+    p {
+      font-size: var(--body-font-size-medium);
+    }
+  }
+  @media screen and (min-width: base.$tablet) {
+    h2 {
+      text-align: center;
+    }
+    li p {
+      font-size: var(--body-font-size-small);
+    }
+  }
+} // endfold
+section[is="about-section"].alternate-ten { // startfold
+  --picture-height: min(45vw, 180px);
+  background-color: var(--color-one);
+
+  @include padded-children;
+  @include hide-p;
+
+
+  > h2 {
+    text-align: start;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  ul {
+    @include base.flex-row-center;
+    row-gap: 75px;
+    gap: 25px;
+  } 
+  li {
+    flex: 0 0 calc(var(--picture-height) * 2);
+
+    @include base.flex-row-center;
+    justify-content: start;
+    row-gap: 15px;
+
+    picture {
+      width: 100%;
+      min-width: 250px;
+      align-self: center;
+      img {
+        width: 100%;
+        aspect-ratio: 6 / 5;
+      }
+    }
+    h3, p {
+      width: 90%;
+    }
+    p {
+        font-size: var(--body-font-size-medium);
+    }
+  }
+  @media screen and (min-width: base.$tablet) {
+    h2 {
+      text-align: center;
+    }
+    h3 {
+      text-align: start;
+      margin-top: 50px;
+    }
+    ul {
+        row-gap: 50px;
+    }
+    li, li:first-of-type, li:last-of-type {
+        flex: 0 0 100%;
+        display: grid;
+        grid-template-columns: 47.5% 47.5%;
+        grid-template-rows: auto 1fr;
+        justify-items: start;
+        align-items: start;
+        gap: 5%;
+        h3 {
+            grid-row: 1;
+        }
+        picture {
+            grid-row: 1 / span 2;
+        }
+        p {
+          font-size: var(--body-font-size-small);
+        }
+    }
+    li:nth-child(odd) {
+        > * {
+            grid-column: 2;
+        }
+        picture {
+            grid-column: 1;
+        }
+    }
+    li:nth-child(even) {
+        > * {
+          grid-column: 1;
+        }
+        picture {
+            grid-column: 2;
+        }
+    }
+  }
+} // endfold

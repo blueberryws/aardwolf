@@ -1,0 +1,55 @@
+@use "base";
+
+section[is="footer-section"] {
+  background-color: var(--color-two);
+  display: grid;
+  grid-template-columns: auto auto auto 1fr auto;
+  gap: 20px;
+  > a {
+    grid-row: 2;
+    cursor: pointer;
+  }
+  > ul {
+    grid-row: 1;
+    grid-column: 5;
+    align-self: end;
+  }
+
+  dialog {
+    position: fixed;
+    width: 90%;
+    border: none;
+    outline: none;
+    margin: auto;
+    padding: 30px 15px 10px 15px;
+    box-sizing: border-box;
+    background-color: var(--color-four);
+    color: var(--color-one);
+
+    h2 {
+      color: var(--color-one);
+    }
+    p {
+      margin: auto;
+      width: 90%;
+    }
+    button {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      background: none;
+    }
+  }
+  @media screen and (min-width: base.$tablet) {
+    dialog {
+        padding: 60px 90px;
+        button {
+            top: 25px;
+            right: 25px;
+        }
+    }
+  }
+}
+
+section[is="footer-section"].default {
+}
