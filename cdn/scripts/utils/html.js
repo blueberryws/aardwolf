@@ -1,6 +1,5 @@
 export function fromHTML(html) {
     const template = document.createElement('template');
-    console.log(html);
     template.innerHTML = html.trim();
     const nNodes = template.content.childNodes.length;
     if (nNodes !== 1) {
@@ -25,10 +24,7 @@ export function htmlFromJSON(json, registry) {
     const element = fromHTML(json.content);
     return element;
   }
-  console.log(json.element);
-  console.log(registry);
   const elClass = registry[json.element];
-  console.log(elClass);
   const element = new elClass();
   if (json.text != null) {
     element.innerText = json.text;

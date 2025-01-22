@@ -9,6 +9,7 @@ export class HeroSection extends EditableSection { // startfold
   classes = [
       "default",
       "alternate-one",
+      "alternate-two",
       "alternate-three",
       "alternate-four",
       "alternate-five",

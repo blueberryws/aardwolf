@@ -1,6 +1,7 @@
 import { modalBuilder } from "../modals/base.js";
 import { ElementEditor } from "./element_editor.js";
 import { EditableListItem } from "../elements/editable_list_item.js";
+import { SetDocumentEditable, UnsetDocumentEditable, dispatch } from "../interfaces/events.js";
 
 export class ListItemEditor extends ElementEditor {
     constructor(element) {
@@ -11,32 +12,41 @@ export class ListItemEditor extends ElementEditor {
         this.downButton = this.buildDownButton();
         this.copyButton = this.buildCopyButton();
         this.deleteButton = this.buildDeleteButton();
+
+
+        this.enterListener = () => {
+          this.upButton.remove();
+          this.element.appendChild(this.upButton);
+
+          this.downButton.remove();
+          this.element.appendChild(this.downButton);
+
+          this.copyButton.remove();
+          this.element.appendChild(this.copyButton);
+
+          this.deleteButton.remove();
+          this.element.appendChild(this.deleteButton);
+        }
+
+        this.leaveListener = () => {
+          this.removeButtons();
+        }
     }
   setEditable() { // startfold
-    this.element.addEventListener("mouseover", () => {
-        this.upButton.remove();
-        this.element.appendChild(this.upButton);
-
-        this.downButton.remove();
-        this.element.appendChild(this.downButton);
-
-        this.copyButton.remove();
-        this.element.appendChild(this.copyButton);
-
-        this.deleteButton.remove();
-        this.element.appendChild(this.deleteButton);
-    });
-    this.element.addEventListener("mouseout", () => {
-        this.removeButtons();
-    });
+    this.element.addEventListener("mouseenter", this.enterListener);
+    this.element.addEventListener("mouseleave", this.leaveListener); 
   } // endfold
   removeButtons() { // startfold
+    console.log("called remove buttons");
     this.upButton.remove();
     this.downButton.remove();
     this.copyButton.remove();
     this.deleteButton.remove();
   } // endfold
   unsetEditable() { // startfold
+    this.element.removeEventListener("mouseenter", this.enterListener);
+    this.element.removeEventListener("mouseleave", this.leaveListener); 
+    this.removeButtons();
   } // endfold
     buildUpButton() {  // startfold
         const btn = document.createElement("button");
@@ -73,10 +83,15 @@ export class ListItemEditor extends ElementEditor {
         btn.innerText = "+";
         btn.classList.add("list-clone-btn");
         btn.addEventListener("click", () => {
-            this.removeButtons();
-            const newItem = this.element.cloneNode(true);;
+            dispatch(UnsetDocumentEditable);
+            const newItem = this.element.cloneNode(true);
             this.element.after(newItem);
-            newItem.editor.setEditable();
+            newItem.editor.removeButtons();
+            const newPictures = newItem.querySelectorAll("picture");
+            for (const pic of newPictures) {
+              pic.editor.newId();   
+            }
+            dispatch(SetDocumentEditable);
         });
         return btn
     }  // endfold

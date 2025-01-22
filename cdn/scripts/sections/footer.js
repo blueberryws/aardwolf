@@ -11,6 +11,9 @@ export class FooterSection extends EditableSection { // startfold
 
   defaultContent = [
     // Logo
+    {
+        "element": ELEMENT_NAMES.editablePicture,
+    },
     // Privacy Policy
     // - a
     //  - dialog

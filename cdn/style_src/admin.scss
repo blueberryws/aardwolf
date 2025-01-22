@@ -1,5 +1,19 @@
 @use "base";
 
+@mixin admin-button($btn-color) {
+  background-color: unset !important;
+  color: $btn-color !important;
+  border: 1px solid $btn-color !important;
+  text-align: center !important;
+  padding: 3px 20px 5px 20px !important;
+  width: fit-content !important;
+
+  &:hover {
+    background-color: $btn-color !important;
+    color: white !important;
+  }
+}
+
 // startfold fonts
 @font-face {
   font-family: 'Bangers';
@@ -131,10 +145,10 @@
   grid-column: 1 / span 2;
 }
 .admin-modal button {
-    background-color: gray;
-    align-self: center;
+  @include admin-button(gray);
+  align-self: center;
 }
-.modal-content {
+.admin-modal > div, modal-content {
   grid-row: 2;
   grid-column: 1 / span 2;
   display: grid;
@@ -185,7 +199,7 @@
   outline: 12px solid rgba(0, 255, 0, .3);
 } /* endfold */
 /* font modal startfold */
-.font-modal {
+.admin-modal > .font-modal {
     min-width: 1100px;
     display: flex;
     justify-content: center;
@@ -209,6 +223,14 @@
 }
 .font-modal p {
     font-size: var(--body-font-size-medium);
+}
+
+.link-button-modal {
+    display: grid;
+}
+
+.edit-image-modal-content {
+    display: grid;
 }
 /* endfold
 /* metadata modal startfold */
@@ -238,14 +260,11 @@
 }
 /* endfold */
 .section-add-btn, .section-delete-btn, .section-up-btn, .section-down-btn, .section-next-btn, .section-prev-btn { /* startfold */
-    display: block !important;
-    position: absolute !important;
-    height: 50px !important;
-    width: 80px !important;
-    z-index: 9000;
-    padding: 0 !important;
-    margin: 0 !important;
-    background-color: gray !important;
+  @include admin-button(gray);
+  display: block !important;
+  position: absolute !important;
+  z-index: 9000;
+  margin: 0 !important;
 }
 .section-add-btn:hover, .section-delete-btn:hover, .section-up-btn:hover, .section-down-btn:hover, .section-next-btn:hover, .section-prev-btn:hover { /* startfold */
     z-index: 9999;
@@ -280,8 +299,9 @@
 // endfold
 
 .list-up-btn, .list-down-btn, .list-clone-btn, .list-delete-btn {
+    
+    @include admin-button(blue);
     position: absolute !important;
-    background-color: blue !important;
     z-index: 9000;
 }
 .list-up-btn:hover, .list-down-btn:hover, .list-clone-btn:hover, .list-delete-btn:hover {

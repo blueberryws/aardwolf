@@ -32,6 +32,7 @@ export class LinkButtonEditor extends ElementEditor {
     // e.stopPropagation();
 
     const modalContent = document.createElement("div");
+    modalContent.classList.add("link-button-modal");
 
     const buttonLabel = document.createElement("label");
     buttonLabel.innerText = "Button Text:";
@@ -57,6 +58,7 @@ export class LinkButtonEditor extends ElementEditor {
     const modal = modalBuilder()
     modal.contentNode(modalContent)
     modal.actionFunc(updateLinkButton.bind(this));
+    modal.setHeaderText("Edit Link Button");
     modal.showMe();
   } // endfold
 }

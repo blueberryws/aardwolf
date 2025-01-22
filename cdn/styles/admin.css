@@ -280,11 +280,20 @@ h2 {
 }
 
 .admin-modal button {
-  background-color: gray;
+  background-color: unset !important;
+  color: gray !important;
+  border: 1px solid gray !important;
+  text-align: center !important;
+  padding: 3px 20px 5px 20px !important;
+  width: fit-content !important;
   align-self: center;
 }
+.admin-modal button:hover {
+  background-color: gray !important;
+  color: white !important;
+}
 
-.modal-content {
+.admin-modal > div, modal-content {
   grid-row: 2;
   grid-column: 1/span 2;
   display: grid;
@@ -342,7 +351,7 @@ h2 {
   outline: 12px solid rgba(0, 255, 0, 0.3);
 } /* endfold */
 /* font modal startfold */
-.font-modal {
+.admin-modal > .font-modal {
   min-width: 1100px;
   display: flex;
   justify-content: center;
@@ -367,6 +376,14 @@ h2 {
 
 .font-modal p {
   font-size: var(--body-font-size-medium);
+}
+
+.link-button-modal {
+  display: grid;
+}
+
+.edit-image-modal-content {
+  display: grid;
 }
 
 /* endfold
@@ -403,14 +420,20 @@ h2 {
 
 /* endfold */
 .section-add-btn, .section-delete-btn, .section-up-btn, .section-down-btn, .section-next-btn, .section-prev-btn { /* startfold */
+  background-color: unset !important;
+  color: gray !important;
+  border: 1px solid gray !important;
+  text-align: center !important;
+  padding: 3px 20px 5px 20px !important;
+  width: fit-content !important;
   display: block !important;
   position: absolute !important;
-  height: 50px !important;
-  width: 80px !important;
   z-index: 9000;
-  padding: 0 !important;
   margin: 0 !important;
+}
+.section-add-btn:hover, .section-delete-btn:hover, .section-up-btn:hover, .section-down-btn:hover, .section-next-btn:hover, .section-prev-btn:hover {
   background-color: gray !important;
+  color: white !important;
 }
 
 .section-add-btn:hover, .section-delete-btn:hover, .section-up-btn:hover, .section-down-btn:hover, .section-next-btn:hover, .section-prev-btn:hover { /* startfold */
@@ -448,9 +471,18 @@ h2 {
 }
 
 .list-up-btn, .list-down-btn, .list-clone-btn, .list-delete-btn {
+  background-color: unset !important;
+  color: blue !important;
+  border: 1px solid blue !important;
+  text-align: center !important;
+  padding: 3px 20px 5px 20px !important;
+  width: fit-content !important;
   position: absolute !important;
-  background-color: blue !important;
   z-index: 9000;
+}
+.list-up-btn:hover, .list-down-btn:hover, .list-clone-btn:hover, .list-delete-btn:hover {
+  background-color: blue !important;
+  color: white !important;
 }
 
 .list-up-btn:hover, .list-down-btn:hover, .list-clone-btn:hover, .list-delete-btn:hover {

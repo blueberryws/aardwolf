@@ -2,7 +2,13 @@ import { AdminModal } from "../modals/base.js";
 // Data Element
 export const EditableFaviconName = "editable-favicon";
 export function getEditableFavicon() {
-    const favicon = document.querySelector(`link[rel='icon']`);
+    let favicon = document.querySelector(`link[rel='icon']`);
+    if (favicon == null) {
+        const head = document.querySelector("head");
+        favicon = document.createElement("link");
+        favicon.rel = "icon";
+        head.appendChild(favicon);
+    }
     return favicon
 }
 

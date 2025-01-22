@@ -26,7 +26,7 @@ export class EditableSectionEditor extends ElementEditor {
         this.prevButton = this.buildPrevClass();
     }
   setEditable() { // startfold
-    this.element.addEventListener("mouseover", () => {
+    this.element.addEventListener("mouseenter", () => {
         this.addButton.remove();
         this.element.appendChild(this.addButton);
         this.deleteButton.remove();
@@ -41,7 +41,7 @@ export class EditableSectionEditor extends ElementEditor {
         this.prevButton.remove();
         this.element.appendChild(this.prevButton);
     });
-    this.element.addEventListener("mouseout", () => {
+    this.element.addEventListener("mouseleave", () => {
         this.addButton.remove();
         this.deleteButton.remove();
         this.upButton.remove();

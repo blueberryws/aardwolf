@@ -4,15 +4,23 @@ section[is="footer-section"] {
   background-color: var(--color-two);
   display: grid;
   grid-template-columns: auto auto auto 1fr auto;
-  gap: 20px;
+  gap: 10px;
+
+  > picture {
+    grid-column: 1;
+    width: 100%;
+    img {
+      object-fit: contain;
+      aspect-ratio: unset;
+    }
+  }
   > a {
-    grid-row: 2;
+    grid-row: 3;
     cursor: pointer;
   }
   > ul {
-    grid-row: 1;
-    grid-column: 5;
-    align-self: end;
+    grid-row: 2;
+    grid-column: 1 / span 3;
   }
 
   dialog {
@@ -41,12 +49,24 @@ section[is="footer-section"] {
     }
   }
   @media screen and (min-width: base.$tablet) {
+    gap: 20px;
     dialog {
         padding: 60px 90px;
         button {
             top: 25px;
             right: 25px;
         }
+    }
+    > picture {
+      grid-column: 1 / span 2;
+    }
+    > a {
+      grid-row: 2;
+    }
+    > ul {
+      grid-row: 1;
+      grid-column: 5;
+      justify-self: end;
     }
   }
 }

@@ -55,6 +55,96 @@ section[is="gallery-section"].default { // startfold
 section[is="gallery-section"].default:has(li:nth-child(n+7)) button.show-all {
   display: block;
 } // endfold
-section[is="gallery-section"].alternate-one {
-  
-}
+section[is="gallery-section"].alternate-one { // startfold
+  > .show-all {
+    display: none;
+  }
+
+  img {
+    width: unset;
+    aspect-ratio: unset;
+  }
+  svg {
+    height: 50px;
+    path {
+      fill: var(--color-two);
+    }
+  }
+
+
+  // using media query for carousel, bc it's cleaner here.
+  @media screen and (max-width: base.$tablet) {
+    .previous-button, .next-button {
+      display: none;
+    }
+    ul {
+      @include base.carousel;
+      gap: 10px;
+
+      li {
+        @include base.carousel-item;
+        img {
+          border-radius: var(--normal-border-radius);
+          width: 100%;
+        }
+      }
+      li:first-of-type {
+        flex: 0 0 90%;
+        margin-left: 5%;
+      }
+      li:last-of-type {
+        flex: 0 0 90%;
+        margin-right: 5%;
+      }
+    }
+  }
+  @media screen and (min-width: base.$tablet) {
+    .previous-button {
+      position: absolute;
+      bottom: 31%;
+      left: var(--narrow-padding-left);
+      z-index: 10;
+
+    }
+    .next-button {
+      position: absolute;
+      bottom: 31%;
+      right: var(--narrow-padding-right);
+      z-index: 10;
+    }
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      overflow: hidden;
+      align-items: center;
+      column-gap: 20px;
+
+      li {
+        display: none;
+        grid-row: 1;
+        justify-content: center;
+      }
+      img {
+        border-radius: var(--normal-border-radius);
+        height: 100%;
+        object-fit: contain;
+      }
+      .previous, .next {
+        display: grid;
+        opacity: .8;
+        transform: scale(80%);
+      }
+      .previous {
+        grid-column: 1;
+      }
+      .focus {
+        display: grid;
+        grid-column: 2;
+      }
+      .next {
+        grid-column: 3;
+      }
+    }
+  } 
+} // endfold

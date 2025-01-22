@@ -65,11 +65,16 @@
 <body>
 <section is="gallery-section" class="alternate-one">
   <h2 is="editable-h2" class="section-heading">Image Gallery</h2>
-  <button class="previous-button"></button>
-  <button class="next-button"></button>
+  <button class="previous-button" onclick="prevItem(this)">
+    <object data="/cdn/assets/testimonial-arrow-left.svg" type="image/svg+xml" onload="loadSVG(this)"></object>
+  </button>
+  <button class="next-button" onclick="nextItem(this)">
+    <object data="/cdn/assets/testimonial-arrow-right.svg" type="image/svg+xml" onload="loadSVG(this)"></object>
+  </button>
   <button class="show-all" onclick="showAllGalleryImages(this)">See More</button>
+
   <ul>
-    <li>
+    <li class="focus">
       <picture is="editable-picture">
         <img src="/cdn/images/default.png">
       </picture>
@@ -148,16 +153,16 @@
 </section>
 </body>
 <script>
-  function prevTestimonial(target) { // startfold
-    const testimonialSection = target.closest("section[is='testimonials-section']");
-    const testimonials = testimonialSection.querySelector("ul.testimonials");
-    const prev = testimonials.querySelectorAll("li.previous");
+  function prevItem(target) { // startfold
+    const section = target.closest("section");
+    const allItems = section.querySelector("ul");
+    const prev = allItems.querySelectorAll("li.previous");
     for (let t of prev) { t.classList.remove("previous")};
-    const next = testimonials.querySelectorAll("li.next");
+    const next = allItems.querySelectorAll("li.next");
     for (let t of next) { t.classList.remove("next")};
-    const focus = testimonials.querySelector("li.focus");
+    const focus = allItems.querySelector("li.focus");
     focus.classList.remove("focus");
-    const siblings = Array.from(testimonials.children);
+    const siblings = Array.from(allItems.children);
     const curIdx = siblings.indexOf(focus);
     let focusIdx = curIdx - 1;
     if (focusIdx < 0) {
@@ -176,16 +181,17 @@
       siblings[prevIdx].classList.add("previous");
     }
   } // endfold
-  function nextTestimonial(target) { // startfold
-    const testimonialSection = target.closest("section[is='testimonials-section']");
-    const testimonials = testimonialSection.querySelector("ul.testimonials");
-    const prev = testimonials.querySelectorAll("li.previous");
+  function nextItem(target) { // startfold
+    console.log(target);
+    const section = target.closest("section");
+    const allItems = section.querySelector("ul");
+    const prev = allItems.querySelectorAll("li.previous");
     for (let t of prev) { t.classList.remove("previous")};
-    const next = testimonials.querySelectorAll("li.next");
+    const next = allItems.querySelectorAll("li.next");
     for (let t of next) { t.classList.remove("next")};
-    const focus = testimonials.querySelector("li.focus");
+    const focus = allItems.querySelector("li.focus");
     focus.classList.remove("focus");
-    const siblings = Array.from(testimonials.children);
+    const siblings = Array.from(allItems.children);
     const curIdx = siblings.indexOf(focus);
     let focusIdx = curIdx + 1;
     if (focusIdx >= siblings.length) {

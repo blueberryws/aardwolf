@@ -13,7 +13,7 @@ export class PictureEditor extends ElementEditor {
         super();
         this.element = element;
         if (this.element.dataset.uuid == null || this.element.dataset.uuid == "") {
-            this.element.dataset.uuid = crypto.randomUUID();
+            this.newId();
         }
         this.clickHandler = () => this.launchEditorModal();
 
@@ -21,6 +21,9 @@ export class PictureEditor extends ElementEditor {
         // Not sure what the right pattern is here.
         this.pexelsQuery = document.createElement("input");
         this.pexelsQuery.placeholder = "Search for stock photos...";
+    } // endfold
+    newId() { // startfold
+        this.element.dataset.uuid = crypto.randomUUID();
     } // endfold
     loadFromElement() { // startfold
         //   We need to make a modal copy of the attributes, so we can modify
@@ -167,9 +170,9 @@ export class PictureEditor extends ElementEditor {
       }
   } // endfold
   saveChanges() { // startfold
-      this.element.img.alt = this.altText;
-      this.element.dataset.attributionText = this.attributionText;
-      this.element.dataset.attributionHref = this.attributionHref;
+      this.element.img.alt = this.altTextInput.value;
+      this.element.dataset.attributionText = this.attributionTextInput.value;
+      this.element.dataset.attributionHref = this.attributionHrefInput.value;
       this.element.setSrc(this.imgPreview.originalSrc || this.imgPreview.src);
   } // endfold
 }
