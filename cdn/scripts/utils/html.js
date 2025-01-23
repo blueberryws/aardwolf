@@ -24,6 +24,7 @@ export function htmlFromJSON(json, registry) {
     const element = fromHTML(json.content);
     return element;
   }
+  console.log(json.element);
   const elClass = registry[json.element];
   const element = new elClass();
   if (json.text != null) {
@@ -37,6 +38,18 @@ export function htmlFromJSON(json, registry) {
     for (const child of json.children) {
         element.appendChild(htmlFromJSON(child, registry));
     }
+  }
+  if (json.onclick != null) {
+    element.setAttribute("onclick", json.onclick);
+  }
+  if (json.data != null) {
+    element.setAttribute("data", json.data);
+  }
+  if (json.type != null) {
+    element.setAttribute("type", json.type);
+  }
+  if (json.onload != null) {
+    element.setAttribute("onload", json.onload);
   }
   return element
   // have to add "children" support

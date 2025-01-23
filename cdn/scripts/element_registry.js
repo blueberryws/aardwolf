@@ -8,6 +8,11 @@ export const ELEMENT_NAMES = {
     "detailsElement": "details-element",
     "summaryElement": "summary-element",
     "dialogElement": "dialog-element",
+    "buttonElement": "button-element",
+    "objectElement": "object-element",
+    "figureElement": "figure-element",
+    "blockquoteElement": "blockquote-element",
+    "figcaptionElement": "figcaption-element",
 
     "editableH1": "editable-h1",
     "editableH2": "editable-h2",
@@ -20,6 +25,8 @@ export const ELEMENT_NAMES = {
     "editableListItem": "editable-list-item",
     "editablePicture": "editable-picture",
     "editableParagraph": "editable-paragraph",
+    "editableBlockquote": "editable-blockquote",
+    "editableFigcaption": "editable-figcaption",
     "editableIframe": "editable-iframe",
 
     "imageAttributionSet": "image-attribution-set",

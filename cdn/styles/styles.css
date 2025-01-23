@@ -1718,7 +1718,7 @@ section[is=gallery-section].default:has(li:nth-child(n+7)) button.show-all {
   display: block;
 }
 
-section[is=gallery-section].alternate-one > .show-all {
+section[is=gallery-section].alternate-one > button.show-all {
   display: none;
 }
 section[is=gallery-section].alternate-one img {

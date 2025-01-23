@@ -49,3 +49,53 @@ export class DialogElement extends HTMLDialogElement { // startfold
   } // endfold
 } // endfold
 register(DialogElement);
+
+export class ButtonElement extends HTMLButtonElement { // startfold
+  static elementName = ELEMENT_NAMES.buttonElement
+  static elementType = "button"
+
+  constructor() { // startfold
+    super();
+  } // endfold
+} // endfold
+register(ButtonElement);
+
+export class ObjectElement extends HTMLObjectElement { // startfold
+  static elementName = ELEMENT_NAMES.objectElement
+  static elementType = "object"
+
+  constructor() { // startfold
+    super();
+  } // endfold
+} // endfold
+register(ObjectElement);
+
+export class FigureElement extends HTMLElement { // startfold
+  static elementName = ELEMENT_NAMES.figureElement
+  static elementType = "figure"
+
+  constructor() { // startfold
+    super();
+  } // endfold
+} // endfold
+register(FigureElement);
+
+export class BlockquoteElement extends HTMLElement { // startfold
+  static elementName = ELEMENT_NAMES.blockquoteElement
+  static elementType = "blockquote"
+
+  constructor() { // startfold
+    super();
+  } // endfold
+} // endfold
+register(BlockquoteElement);
+
+export class FigcaptionElement extends HTMLElement { // startfold
+  static elementName = ELEMENT_NAMES.figcaptionElement
+  static elementType = "figcaption"
+
+  constructor() { // startfold
+    super();
+  } // endfold
+} // endfold
+register(FigcaptionElement);
