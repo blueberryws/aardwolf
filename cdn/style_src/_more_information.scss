@@ -32,6 +32,30 @@ section[is="more-information-section"] { // startfold
         }
     }
   }
+  source.desktop {
+    max-width: 1300px;
+    max-height: 689px;
+  }
+  source.laptop {
+    max-width: 1269px;
+    max-height: 667px;
+  }
+  source.notebook {
+    max-width: 1069px;
+    max-height: 562px;
+  }
+  source.tablet {
+    max-width: 861px;
+    max-height: 574px;
+  }
+  source.phone {
+    max-width: 707px;
+    max-height: 471px;
+  }
+  source.x-small {
+    max-width: 515px;
+    max-height: 343px;
+  }
 } // endfold
 section[is="more-information-section"].default { // startfold
   grid-template-columns: 1fr;
@@ -57,8 +81,33 @@ section[is="more-information-section"].default { // startfold
 
       img {
         aspect-ratio: 6 / 5;
+        width: 100%;
       }
     }
+  }
+  source.desktop {
+    max-width: 589px;
+    max-height: 491px;
+  }
+  source.laptop {
+    max-width: 571px;
+    max-height: 475px;
+  }
+  source.notebook {
+    max-width: 481px;
+    max-height: 400px;
+  }
+  source.tablet {
+    max-width: 861px;
+    max-height: 574px;
+  }
+  source.phone {
+    max-width: 707px;
+    max-height: 471px;
+  }
+  source.x-small {
+    max-width: 515px;
+    max-height: 343px;
   }
 } // endfold
 section[is="more-information-section"].alternate-one { // startfold

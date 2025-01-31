@@ -77,10 +77,11 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--header-font-family);
 }
 
-p, blockquote, label, figcaption {
+p, blockquote, label, figcaption, a {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-medium);
   font-weight: 300;
+  color: var(--color-four);
 }
 
 button {

@@ -114,7 +114,7 @@ export class FontStyle extends HTMLStyleElement { // startfold
     {
       header: {
           name: "Oswald",
-          url: "/cdn/fonts/Oswald/Oswald-VariableFont_wdth,wght.ttf",
+          url: "/cdn/fonts/Oswald/Oswald-VariableFont_wght.ttf",
           style: STANDARD_HEADER_STYLE,
       },
       body: {
@@ -132,7 +132,7 @@ export class FontStyle extends HTMLStyleElement { // startfold
       },
       body: {
           name: "Quattrocento Sans",
-          url: "/cdn/fonts/Quattrocento_Sans/QuattrocentoSans-regular.ttf",
+          url: "/cdn/fonts/Quattrocento_Sans/QuattrocentoSans-Regular.ttf",
           style: STANDARD_BODY_STYLE,
       },
       description: "Dramatic, Refined, Confident",
@@ -145,7 +145,7 @@ export class FontStyle extends HTMLStyleElement { // startfold
       },
       body: {
           name: "Lato",
-          url: "/cdn/fonts/Lato/Lato-regular.ttf",
+          url: "/cdn/fonts/Lato/Lato-Regular.ttf",
           style: STANDARD_BODY_STYLE,
       },
       description: "Dramatic, Refined, Confident",
@@ -179,7 +179,7 @@ export class FontStyle extends HTMLStyleElement { // startfold
     {
       header: {
           name: "Merriweather Sans",
-          url: "/cdn/fonts/Merriweather_Sans/MerriweatherSans_VariableFont_wght.ttf",
+          url: "/cdn/fonts/Merriweather_Sans/MerriweatherSans-VariableFont_wght.ttf",
           style: STANDARD_HEADER_STYLE,
       },
       body: {
@@ -192,12 +192,12 @@ export class FontStyle extends HTMLStyleElement { // startfold
     {
       header: {
           name: "Open Sans Condensed",
-          url: "/cdn/fonts/Open_Sans/OpenSans_VariableFont_wdth,wght.ttf",
+          url: "/cdn/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf",
           style: STANDARD_HEADER_STYLE,
       },
       body: {
           name: "Lora",
-          url: "/cdn/fonts/Lora/Lora_VariableFont_wght.ttf",
+          url: "/cdn/fonts/Lora/Lora-VariableFont_wght.ttf",
           style: STANDARD_BODY_STYLE,
       },
       description: "Sleek, Sophisticated, Versatile",

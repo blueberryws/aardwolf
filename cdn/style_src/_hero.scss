@@ -12,12 +12,38 @@ section[is='hero-section'] { /* startfold */
     height: 100vh;
     max-height: 100vh;
     padding: 0;
+    * {
+      color: var(--color-one);
+    }
 
     picture {
         max-height: 100%;
         img {
             max-height: 100%;
         }
+    }
+    @media (prefers-color-scheme: dark) {
+        * {
+          color: var(--color-four);
+        }
+    }
+    source.desktop {
+      max-width: 1920px;
+    }
+    source.laptop {
+      max-width: 1200px;
+    }
+    source.notebook {
+      max-width: 992px;
+    }
+    source.tablet {
+      max-width: 768px;
+    }
+    source.phone {
+      max-width: 576px;
+    }
+    source.x-small {
+      max-width: 576px;
     }
 }
 
@@ -27,6 +53,9 @@ section[is='hero-section'] picture {
     height: 100%;
     width: 100%;
     background-color: var(--color-four);
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-one);
+    }
 }
 
 section[is='hero-section'] picture img {
@@ -45,7 +74,6 @@ section[is='hero-section'].default > * {
     z-index: 10;
     grid-column: 1;
     text-align: center;
-    color: var(--color-one);
 }
 
 section[is='hero-section'].default h1 {
@@ -85,7 +113,6 @@ section[is='hero-section'].alternate-one { /* startfold */
     z-index: 10;
     grid-column: 1;
     text-align: start;
-    color: var(--color-one);
     padding-left: 50px;
   }
   h1 {
@@ -141,7 +168,6 @@ section[is='hero-section'].alternate-two { /* startfold */
     z-index: 10;
     grid-column: 2;
     text-align: end;
-    color: var(--color-one);
     padding-left: 50px;
     padding-right: var(--standard-padding-right);
     box-sizing: border-box;
@@ -218,12 +244,14 @@ section[is='hero-section'].alternate-three { /* startfold */
     justify-items: center;
     align-items: center;
     background-color: var(--color-four);
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-one);
+    }
 
   > * {
     z-index: 10;
     grid-column: 1;
     text-align: start;
-    color: var(--color-one);
   }
   h1 {
     align-self: end;
@@ -282,6 +310,15 @@ section[is='hero-section'].alternate-three { /* startfold */
       }
     }
   }
+  source.desktop {
+    max-width: 960px;
+  }
+  source.laptop {
+    max-width: 600px;
+  }
+  source.notebook {
+    max-width: 496px;
+  }
 }
 /* endfold */
 section[is='hero-section'].alternate-four { /* startfold */
@@ -301,7 +338,6 @@ section[is='hero-section'].alternate-five { /* startfold */
     grid-row: 1;
     grid-column: 1;
     z-index: 10;
-    color: var(--color-one);
     padding: 30px 5px; 
   }
   picture {

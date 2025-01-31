@@ -20,16 +20,16 @@ import { ImageAttributionSet } from "./elements/image_attribution_set.js";
 import { HeroSection } from "./sections/hero.js";
 import { AboutSection } from "./sections/about.js";
 import { CallToActionSection } from "./sections/call_to_action.js";
-import { GallerySection } from "./sections/gallery.js";
-import { EmbedSection } from "./sections/embed.js";
+import { AtAGlanceSection } from "./sections/at_a_glance.js";
 import { NumbersSection } from "./sections/numbers.js";
 import { MoreInformationSection } from "./sections/more_information.js";
 import { HoursSection } from "./sections/hours.js";
-import { AtAGlanceSection } from "./sections/at_a_glance.js";
+import { TestimonialsSection } from "./sections/testimonials.js";
+import { GallerySection } from "./sections/gallery.js";
 import { FAQsSection } from "./sections/faqs.js";
 import { ContactFormSection } from "./sections/contact_form.js";
 import { FooterSection } from "./sections/footer.js";
-import { TestimonialsSection } from "./sections/testimonials.js";
+import { EmbedSection } from "./sections/embed.js";
 
 import { AdminAside } from "./admin/admin_aside.js";
 

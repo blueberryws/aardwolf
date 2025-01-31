@@ -51,6 +51,24 @@ section[is="gallery-section"].default { // startfold
       aspect-ratio: 4 / 2;
     }
   }
+  source.desktop {
+    max-width: 345px;
+  }
+  source.laptop {
+    max-width: 334px;
+  }
+  source.notebook {
+    max-width: 284px;
+  }
+  source.tablet {
+    max-width: 232px;
+  }
+  source.phone {
+    max-width: 239px;
+  }
+  source.x-small {
+    max-width: 175px;
+  }
 }
 section[is="gallery-section"].default:has(li:nth-child(n+7)) button.show-all {
   display: block;
@@ -58,6 +76,9 @@ section[is="gallery-section"].default:has(li:nth-child(n+7)) button.show-all {
 section[is="gallery-section"].alternate-one { // startfold
   > button.show-all {
     display: none;
+  }
+  button {
+    background: none;
   }
 
   img {
@@ -147,4 +168,22 @@ section[is="gallery-section"].alternate-one { // startfold
       }
     }
   } 
+  source.desktop {
+    max-width: 365px;
+  }
+  source.laptop {
+    max-width: 365px;
+  }
+  source.notebook {
+    max-width: 365px;
+  }
+  source.tablet {
+    max-width: 365px;
+  }
+  source.phone {
+    max-width: 636px;
+  }
+  source.x-small {
+    max-width: 463px;
+  }
 } // endfold

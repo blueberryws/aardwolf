@@ -20,10 +20,6 @@ section[is="numbers-section"] {
     justify-content: center;
     align-content: center;
   }
-  picture {
-    margin: auto;
-    width: 33%;
-  }
   h3 {
     font-size: var(--header-font-size-x-large);
     font-weight: 800;
@@ -46,10 +42,6 @@ section[is="numbers-section"] {
       justify-items: center;
       height: fit-content;
     }
-    picture {
-      width: 75%;
-      margin-bottom: 20px;
-    }
     h3 {
       font-size: calc(var(--header-font-size-x-large) * .75);
     }
@@ -65,10 +57,14 @@ section[is="numbers-section"].default {
 section[is="numbers-section"].alternate-one {
   background-color: var(--color-two);
   li {
-    background-color: var(--color-one);
+    background-color: var(--brand-color);
     border-radius: 200px;
     width: 80%;
     padding: 20px 10px;
+    
+    * {
+        color: var(--brand-contrast-color);
+    }
   }
   @media screen and (min-width: base.$tablet) {
     ul {

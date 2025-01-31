@@ -1,54 +1,5 @@
 @use "base";
 
-/* Questions:
-- No dark mode, so need manual eyeballs on all the color balance
- - This actually made it a bit faster to have "programatic dark mode"
-- default
-  h2:
-   - margin-bottom 35px? -- nope, this is 45px
-  p:
-   - 60px bottom padding? -- yes, but added a min-height rule to allow for a tall section when the text is short.
-   - is the left-padding/indent thing on purpose? -- yes
-  button:
-   - border-radius 10px? -- no, 12px
-   - Is the color set right? -- yes
-   - desktop padding is something like 10px 50px in the mockup, but this doesn't match the button generally. Is the mockup right? -- yes, changed alt button to match
-  picture:
-   - How does it scale? I coded it as "tablet and larger" scale responsively. -- this looks fine
-   - It looked like it was about half of the section after accounting for padding, so I made it a square that was 50% wide. Is that right?
-- alternate-one
-  h3:
-   - just double checking -- 200px bottom margin? -- as implemented is fine.
-   - update: changed this to 1fr in the grid-template-columns. I think it resizes better.
-     - also change the breakpoint to notebook on this.
-  picture:
-   - is the vibe here "resize to match content length?" or "keep a ~3/4 aspect ratio?"
-- alternate-two:
-  picture:
-   - aspect ratio looks to be 12 / 7. Just double checking
-   - on desktop this is really large. -- that's fine.
-  button:
-   - I didn't add as much top padding/margin as sort of suggested by the mockup. Wanted to double check that this was right. -- that's fine.
-- alternate-three:
-  picture:
-   - how is this supposed to scale? What if they put lots of text? -- it scales right atm.
-   - for desktop, I picked 12/7, but what if they put more text than that? -- zoom in on pic, like mobile.
-   - desktop appears to use a different opacity than the mobile? I kept the vibe of mobile for both, but I can update this if desired. -- matching is good.
-- alternate-four:
-  - The desktop arrangement is sort of awkward with a long paragraph.  -- revisit maybe
-  - note: I set notebook as the breakpoint, rather than tablet.  -- this is fine, but revisit
-  - tablet arrangement is weird bc the breakpoint is set to notebook, but the h2 resizes at tablet size. Need advice here. -- this is fine.
-- alternate-five:
-  - has similar arrangement oddities as alternate-four (lowkey, I dig it. But it should be double-checked in the morning) -- mod'd, but fine.
-- alternate-six/seven:
-  h3: Is not present on mobile? -- this needs to get fixed
-  picture:
-   - ratio looks great, but how should it respond to very long text? (shorter text looks fine!) -- changed breakpoint
-- alternate-seven:
-  paragraph:
-   - it looks "shorter" than on other layouts. Should it float to the top or the center? Or something else? -- nah, it's fine
-*/
-
 section[is="call-to-action-section"] { // startfold
   display: flex;
   flex-direction: column;
@@ -148,6 +99,34 @@ section[is="call-to-action-section"].default { // startfold
       padding: 0;
     }
   }
+  picture:first-of-type source.desktop {
+    max-width: 754px;
+    max-height: 754px;
+  }
+  picture:first-of-type source.laptop {
+    max-width: 521px;
+    max-height: 521px;
+  }
+  picture:first-of-type source.notebook {
+    max-width: 430px;
+    max-height: 430px;
+  }
+  picture:first-of-type source.tablet {
+    max-width: 861px;
+    max-height: 861px;
+  }
+  picture:first-of-type source.phone {
+    max-width: 707px;
+    max-height: 707px;
+  }
+  picture:first-of-type source.x-small {
+    max-width: 515px;
+    max-height: 515px;
+  }
+  picture:last-of-type source {
+    max-width: 1px;
+    max-height: 1px;
+  }
 } // endfold
 section[is="call-to-action-section"].alternate-one { // startfold
 
@@ -191,7 +170,34 @@ section[is="call-to-action-section"].alternate-one { // startfold
       padding: 0;
     }
   }
-
+  picture:first-of-type source.desktop {
+    max-width: 754px;
+    max-height: 960px;
+  }
+  picture:first-of-type source.laptop {
+    max-width: 520px;
+    max-height: 660px;
+  }
+  picture:first-of-type source.notebook {
+    max-width: 430px;
+    max-height: 550px;
+  }
+  picture:first-of-type source.tablet {
+    max-width: 861px;
+    max-height: 861px;
+  }
+  picture:first-of-type source.phone {
+    max-width: 707px;
+    max-height: 707px;
+  }
+  picture:first-of-type source.x-small {
+    max-width: 515px;
+    max-height: 515px;
+  }
+  picture:last-of-type source {
+    max-width: 1px;
+    max-height: 1px;
+  }
 } // endfold
 section[is="call-to-action-section"].alternate-two { // startfold
   align-content: center;
@@ -240,6 +246,34 @@ section[is="call-to-action-section"].alternate-two { // startfold
       justify-self: center;
       width: unset;
     }
+  }
+  picture:first-of-type source.desktop {
+    max-width: 1310px;
+    max-height: 764px;
+  }
+  picture:first-of-type source.laptop {
+    max-width: 1269px;
+    max-height: 740px;
+  }
+  picture:first-of-type source.notebook {
+    max-width: 1069px;
+    max-height: 623px;
+  }
+  picture:first-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px;
+  }
+  picture:first-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px;
+  }
+  picture:first-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px;
+  }
+  picture:last-of-type source {
+    max-width: 1px;
+    max-height: 1px;
   }
 } // endfold
 section[is="call-to-action-section"].alternate-three { // startfold
@@ -321,6 +355,28 @@ section[is="call-to-action-section"].alternate-three { // startfold
       width: unset;
     }
   }
+  picture:first-of-type source.desktop {
+    max-width: 1920px;
+  }
+  picture:first-of-type source.laptop {
+    max-width: 1400px;
+  }
+  picture:first-of-type source.notebook {
+    max-width: 1200px;
+  }
+  picture:first-of-type source.tablet {
+    max-width: 992px;
+  }
+  picture:first-of-type source.phone {
+    max-width: 768px;
+  }
+  picture:first-of-type source.x-small {
+    max-width: 575px;
+  }
+  picture:last-of-type source {
+    max-width: 1px;
+    max-height: 1px;
+  }
 } // endfold
 section[is="call-to-action-section"].alternate-four { // startfold
   display: grid;
@@ -397,6 +453,54 @@ section[is="call-to-action-section"].alternate-four { // startfold
       grid-column: 1;
       grid-row: 1 / span 4;
     }
+  }
+  picture:first-of-type source.desktop {
+    max-width: 607px;
+    max-height: 354px;
+  }
+  picture:last-of-type source.desktop {
+    max-width: 607px;
+    max-height: 772px;
+  }
+  picture:first-of-type source.laptop {
+    max-width: 586px;
+    max-height: 342px;
+  }
+  picture:last-of-type source.laptop {
+    max-width: 586px;
+    max-height: 746px;
+  }
+  picture:first-of-type source.notebook {
+    max-width: 486px;
+    max-height: 283px;
+  }
+  picture:last-of-type source.notebook {
+    max-width: 486px;
+    max-height: 619px;
+  }
+  picture:first-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px;
+  }
+  picture:last-of-type source.tablet {
+    max-width: 861px;
+    max-height: 1095px;
+  }
+  picture:first-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px;
+  }
+  picture:last-of-type source.phone {
+    max-width: 707px;
+    max-height: 899px;
+  }
+  picture:first-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px;
+  }
+  picture:last-of-type source.x-small {
+    max-width: 515px;
+    max-height: 655px;
   }
 } // endfold
 section[is="call-to-action-section"].alternate-five { // startfold
@@ -490,7 +594,54 @@ section[is="call-to-action-section"].alternate-five { // startfold
       height: 100%;
     }
   }
-
+  picture:first-of-type source.desktop {
+    max-width: 541px;
+    max-height: 319px;
+  }
+  picture:last-of-type source.desktop {
+    max-width: 541px;
+    max-height: 319px;
+  }
+  picture:first-of-type source.laptop {
+    max-width: 523px;
+    max-height: 309px;
+  }
+  picture:last-of-type source.laptop {
+    max-width: 523px;
+    max-height: 309px;
+  }
+  picture:first-of-type source.notebook {
+    max-width: 433px;
+    max-height: 306px;
+  }
+  picture:last-of-type source.notebook {
+    max-width: 433px;
+    max-height: 306px;
+  }
+  picture:first-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px;
+  }
+  picture:last-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px;
+  }
+  picture:first-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px;
+  }
+  picture:last-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px;
+  }
+  picture:first-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px;
+  }
+  picture:last-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px;
+  }
 } // endfold
 section[is="call-to-action-section"].alternate-six { // startfold
   gap: 30px;
@@ -555,6 +706,54 @@ section[is="call-to-action-section"].alternate-six { // startfold
       grid-column: 1;
       grid-row: 2 / span 4;
     }
+  }
+  picture:first-of-type source.desktop {
+    max-width: 622px;
+    max-height: 362px;
+  }
+  picture:last-of-type source.desktop {
+    max-width: 622px;
+    max-height: 791px;
+  }
+  picture:first-of-type source.laptop {
+    max-width: 602px;
+    max-height: 351px;
+  }
+  picture:last-of-type source.laptop {
+    max-width: 602px;
+    max-height: 767px;
+  }
+  picture:first-of-type source.notebook {
+    max-width: 507px;
+    max-height: 296px;
+  }
+  picture:last-of-type source.notebook {
+    max-width: 507px;
+    max-height: 646px;
+  }
+  picture:first-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px;
+  }
+  picture:last-of-type source.tablet {
+    max-width: 861px;
+    max-height: 1095px;
+  }
+  picture:first-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px;
+  }
+  picture:last-of-type source.phone {
+    max-width: 707px;
+    max-height: 899px;
+  }
+  picture:first-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px;
+  }
+  picture:last-of-type source.x-small {
+    max-width: 515px;
+    max-height: 655px;
   }
 } // endfold
 section[is="call-to-action-section"].alternate-seven { // startfold
@@ -621,5 +820,53 @@ section[is="call-to-action-section"].alternate-seven { // startfold
       display: grid;
       align-items: end;
     }
+  }
+  picture:first-of-type source.desktop {
+    max-width: 622px;
+    max-height: 362px;
+  }
+  picture:last-of-type source.desktop {
+    max-width: 622px;
+    max-height: 362px;
+  }
+  picture:first-of-type source.laptop {
+    max-width: 602px;
+    max-height: 351px;
+  }
+  picture:last-of-type source.laptop {
+    max-width: 602px;
+    max-height: 351px;
+  }
+  picture:first-of-type source.notebook {
+    max-width: 507px;
+    max-height: 296px;
+  }
+  picture:last-of-type source.notebook {
+    max-width: 507px;
+    max-height: 296px;
+  }
+  picture:first-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px;
+  }
+  picture:last-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px;
+  }
+  picture:first-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px;
+  }
+  picture:last-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px;
+  }
+  picture:first-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px;
+  }
+  picture:last-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px;
   }
 } // endfold

@@ -138,6 +138,7 @@ export class EditableSectionEditor extends ElementEditor {
             const nextClass = this.element.classes[nextIdx];
             this.element.classList.remove(curClass);
             this.element.classList.add(nextClass);
+            this.resetPictures();
         });
         return btn
   } // endfold
@@ -155,6 +156,7 @@ export class EditableSectionEditor extends ElementEditor {
           const nextClass = this.element.classes[nextIdx];
           this.element.classList.remove(curClass);
           this.element.classList.add(nextClass);
+          this.resetPictures();
       });
       return btn
   } // endfold
@@ -178,7 +180,12 @@ export class EditableSectionEditor extends ElementEditor {
         .contentNode(selector)
         .showMe()
   } // endfold
-
+  resetPictures() { // startfold
+    const pics = this.element.querySelectorAll("picture");
+    for (const pic of pics) {
+        pic.setSrc(pic.img.src);
+    }
+  } // endfold
   ensureDefaults() { // startfold
     /*
         For now, we're using position as THE CORRECT proxy here.

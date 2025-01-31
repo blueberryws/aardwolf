@@ -22,6 +22,9 @@ export class CallToActionSection extends EditableSection { // startfold
       "text": "Section Title Here",
     },
     {
+      "element": ELEMENT_NAMES.editablePicture,
+    },
+    {
       "element": ELEMENT_NAMES.editableH3,
       "text": "Subsection Title Here",
     },
@@ -30,10 +33,10 @@ export class CallToActionSection extends EditableSection { // startfold
       "text": "A one-or-two sentence blurb about your or your business",
     },
     {
-      "element": ELEMENT_NAMES.editablePicture,
+      "element": ELEMENT_NAMES.editableLinkButton,
     },
     {
-      "element": ELEMENT_NAMES.editableLinkButton,
+      "element": ELEMENT_NAMES.editablePicture,
     },
   ];
   constructor() {

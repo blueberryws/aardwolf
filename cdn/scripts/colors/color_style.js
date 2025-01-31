@@ -1,6 +1,7 @@
 import { MakeToast } from "../utils/make_toast.js";
 import { EditColorsEvent } from "../interfaces/events.js";
 import { ColorEditorModal } from "./color_editor_modal.js";
+import { contrast } from "../utils/colors.js";
 
 export const ColorStyleElementName = "color-style";
 export function getColorStyle() {
@@ -77,15 +78,20 @@ export class ColorStyle extends HTMLStyleElement { // startfold
   } // endfold
   render() { // startfold
     const palette = JSON.parse(this.dataset.palette);
+    const wContrast = contrast(parseHexColor(palette[0]), parseHexColor(this.dataset.primaryColor));
+    const bContrast = contrast(parseHexColor(palette[3]), parseHexColor(this.dataset.primaryColor));
+    const contrastColor = wContrast > bContrast ? palette[0] : palette[3];
     this.innerHTML = `
   :root {
     --palette-color-one: ${palette[0]};
     --palette-color-two: ${palette[1]};
     --palette-color-three: ${palette[2]};
     --palette-color-four: ${palette[3]};
+    --palette-brand-contrast-color: ${contrastColor};
     --palette-brand-color: ${this.dataset.primaryColor};
   }
 `
+  console.log("render complete");
   } // endfold
   attributeChangedCallback(name, oldValue, newValue) { // startfold
     if (name == "data-primary-color" || name == "data-secondary-color") {

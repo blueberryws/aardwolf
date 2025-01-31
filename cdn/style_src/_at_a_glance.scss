@@ -1,6 +1,6 @@
 @use "base";
 
-section[is="at-a-glance-section"] {
+section[is="at-a-glance-section"] { // startfold
   ul {
     display: flex;
     flex-direction: column;
@@ -17,6 +17,10 @@ section[is="at-a-glance-section"] {
   picture {
     margin: auto;
     width: 33%;
+    img {
+        width: 100%;
+        aspect-ratio: 1/1;
+    }
   }
   h3 {
     text-align: center;
@@ -28,6 +32,9 @@ section[is="at-a-glance-section"] {
     ul {
       flex-direction: row;
     }
+    li {
+      flex: 0 0 33%;
+    }
     picture {
       width: 75%;
       margin-bottom: 20px;
@@ -36,23 +43,44 @@ section[is="at-a-glance-section"] {
       font-size: var(--header-font-size-medium);
     }
   }
-}
-
-section[is="at-a-glance-section"].default {
+} // endfold
+section[is="at-a-glance-section"].default { // startfold
   img {
     border-radius: 50%;
   }
-}
-
-section[is="at-a-glance-section"].alternate-one {
+  source.desktop {
+    max-width: 324px;
+    max-height: 324px;
+  }
+  source.laptop {
+    max-width: 314px;
+    max-height: 314px;
+  }
+  source.notebook {
+    max-width: 265px;
+    max-height: 265px;
+  }
+  source.tablet {
+    max-width: 213px;
+    max-height: 213px;
+  }
+  source.phone {
+    max-width: 233px;
+    max-height: 233px;
+  }
+  source.x-small {
+    max-width: 169px;
+    max-height: 169px;
+  }
+} // endfold
+section[is="at-a-glance-section"].alternate-one { // startfold
   img {
     border-radius: var(--normal-border-radius);
   }
-}
-
-section[is="at-a-glance-section"].alternate-two {
+} // endfold
+section[is="at-a-glance-section"].alternate-two { // startfold
   li {
-    background-color: var(--color-two);
+    background-color: var(--brand-color);
     border-radius: var(--normal-border-radius);
     padding: 30px;
     width: 65%;
@@ -73,4 +101,28 @@ section[is="at-a-glance-section"].alternate-two {
       padding: 30px 15px;
     }
   }
-}
+  source.desktop {
+    max-width: 280px;
+    max-height: 280px;
+  }
+  source.laptop {
+    max-width: 272px;
+    max-height: 272px;
+  }
+  source.notebook {
+    max-width: 229px;
+    max-height: 229px;
+  }
+  source.tablet {
+    max-width: 184px;
+    max-height: 184px;
+  }
+  source.phone {
+    max-width: 300px;
+    max-height: 300px;
+  }
+  source.x-small {
+    max-width: 217px;
+    max-height: 217px;
+  }
+} // endfold

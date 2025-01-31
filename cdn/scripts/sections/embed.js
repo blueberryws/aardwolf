@@ -18,11 +18,11 @@ export class EmbedSection extends EditableSection { // startfold
       "text": "Embedded Section Title",
     },
     {
-      "element": ELEMENT_NAMES.editableParagraph,
-      "text": "A one or two sentence bit (or maybe a whole paragraph) about what you're embedding. Maybe it's a calendar, and you need to call people to action and sign-up. Or maybe it's a YouTube video, and it's a moving speech about your process making the video.",
+      "element": ELEMENT_NAMES.editableIframe,
     },
     {
-      "element": ELEMENT_NAMES.editableIframe,
+      "element": ELEMENT_NAMES.editableParagraph,
+      "text": "A one or two sentence bit (or maybe a whole paragraph) about what you're embedding. Maybe it's a calendar, and you need to call people to action and sign-up. Or maybe it's a YouTube video, and it's a moving speech about your process making the video.",
     },
   ];
   constructor() {

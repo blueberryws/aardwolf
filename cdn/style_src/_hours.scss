@@ -67,9 +67,12 @@ section[is='hours-section'].default {
 }
 
 section[is='hours-section'].alternate {
-  background-color: var(--color-two);
+  background-color: var(--brand-color);
   border-radius: var(--normal-border-radius);
   margin: 15px;
+  h2 {
+    color: var(--brand-contrast-color);
+  }
 
   ul {
     display: flex;
@@ -84,9 +87,9 @@ section[is='hours-section'].alternate {
   }
   li p {
     text-align: center;
-    color: var(--color-four);
+    color: var(--brand-contrast-color);
   }
   @media screen and (min-width: base.$tablet) {
-    margin: 30px auto;
+    margin: 0 auto;
   }
 }

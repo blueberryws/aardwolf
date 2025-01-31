@@ -59,10 +59,11 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--header-font-family);
 }
 
-p, blockquote, label, figcaption {
+p, blockquote, label, figcaption, a {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-medium);
   font-weight: 300;
+  color: var(--color-four);
 }
 
 button {
@@ -163,11 +164,37 @@ section[is=hero-section] { /* startfold */
   max-height: 100vh;
   padding: 0;
 }
+section[is=hero-section] * {
+  color: var(--color-one);
+}
 section[is=hero-section] picture {
   max-height: 100%;
 }
 section[is=hero-section] picture img {
   max-height: 100%;
+}
+@media (prefers-color-scheme: dark) {
+  section[is=hero-section] * {
+    color: var(--color-four);
+  }
+}
+section[is=hero-section] source.desktop {
+  max-width: 1920px;
+}
+section[is=hero-section] source.laptop {
+  max-width: 1200px;
+}
+section[is=hero-section] source.notebook {
+  max-width: 992px;
+}
+section[is=hero-section] source.tablet {
+  max-width: 768px;
+}
+section[is=hero-section] source.phone {
+  max-width: 576px;
+}
+section[is=hero-section] source.x-small {
+  max-width: 576px;
 }
 
 section[is=hero-section] picture {
@@ -176,6 +203,11 @@ section[is=hero-section] picture {
   height: 100%;
   width: 100%;
   background-color: var(--color-four);
+}
+@media (prefers-color-scheme: dark) {
+  section[is=hero-section] picture {
+    background-color: var(--color-one);
+  }
 }
 
 section[is=hero-section] picture img {
@@ -194,7 +226,6 @@ section[is=hero-section].default > * {
   z-index: 10;
   grid-column: 1;
   text-align: center;
-  color: var(--color-one);
 }
 
 section[is=hero-section].default h1 {
@@ -235,7 +266,6 @@ section[is=hero-section].alternate-one > * {
   z-index: 10;
   grid-column: 1;
   text-align: start;
-  color: var(--color-one);
   padding-left: 50px;
 }
 section[is=hero-section].alternate-one h1 {
@@ -289,7 +319,6 @@ section[is=hero-section].alternate-two > * {
   z-index: 10;
   grid-column: 2;
   text-align: end;
-  color: var(--color-one);
   padding-left: 50px;
   padding-right: var(--standard-padding-right);
   box-sizing: border-box;
@@ -363,11 +392,15 @@ section[is=hero-section].alternate-three { /* startfold */
   align-items: center;
   background-color: var(--color-four);
 }
+@media (prefers-color-scheme: dark) {
+  section[is=hero-section].alternate-three {
+    background-color: var(--color-one);
+  }
+}
 section[is=hero-section].alternate-three > * {
   z-index: 10;
   grid-column: 1;
   text-align: start;
-  color: var(--color-one);
 }
 section[is=hero-section].alternate-three h1 {
   align-self: end;
@@ -422,6 +455,15 @@ section[is=hero-section].alternate-three picture img {
     aspect-ratio: unset;
   }
 }
+section[is=hero-section].alternate-three source.desktop {
+  max-width: 960px;
+}
+section[is=hero-section].alternate-three source.laptop {
+  max-width: 600px;
+}
+section[is=hero-section].alternate-three source.notebook {
+  max-width: 496px;
+}
 
 /* endfold */
 section[is=hero-section].alternate-four { /* startfold */ }
@@ -442,7 +484,6 @@ section[is=hero-section].alternate-five h1 {
   grid-row: 1;
   grid-column: 1;
   z-index: 10;
-  color: var(--color-one);
   padding: 30px 5px;
 }
 section[is=hero-section].alternate-five picture {
@@ -468,6 +509,7 @@ section[is=hero-section].alternate-five picture img {
 */
 section[is=about-section] {
   color: var(--color-four);
+  padding-bottom: var(--standard-padding-bottom);
 }
 section[is=about-section] img {
   border-radius: var(--normal-border-radius);
@@ -492,7 +534,6 @@ section[is=about-section] p {
 section[is=about-section].default {
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 0;
 }
 section[is=about-section].default > p {
   display: none;
@@ -508,9 +549,10 @@ section[is=about-section].default ul {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  align-items: start;
   flex-wrap: wrap;
   column-gap: 10%;
-  row-gap: 20px;
+  row-gap: 50px;
 }
 section[is=about-section].default li {
   flex: 0 0 45%;
@@ -519,12 +561,41 @@ section[is=about-section].default li {
   column-gap: 50px;
   text-align: center;
 }
+section[is=about-section].default li source.desktop {
+  max-width: 210px;
+  max-height: 210px;
+}
+section[is=about-section].default li source.laptop {
+  max-width: 156px;
+  max-height: 156px;
+}
+section[is=about-section].default li source.notebook {
+  max-width: 110px;
+  max-height: 110px;
+}
+section[is=about-section].default li source.tablet {
+  max-width: 318px;
+  max-height: 318px;
+}
+section[is=about-section].default li source.phone {
+  max-width: 231px;
+  max-height: 231px;
+}
+section[is=about-section].default li source.x-small {
+  max-width: 231px;
+  max-height: 231px;
+}
+section[is=about-section].default li img {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
 @media screen and (min-width: 992px) {
   section[is=about-section].default li {
     display: grid;
     justify-items: start;
     align-items: start;
     text-align: start;
+    row-gap: 20px;
   }
   section[is=about-section].default li picture {
     grid-column: 1;
@@ -542,7 +613,6 @@ section[is=about-section].alternate-one {
   text-align: center;
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 0;
 }
 section[is=about-section].alternate-one > p {
   display: none;
@@ -581,6 +651,33 @@ section[is=about-section].alternate-one li * {
   grid-column: 1;
   width: 90%;
 }
+section[is=about-section].alternate-one li source.desktop {
+  max-width: 195px;
+  max-height: 195px;
+}
+section[is=about-section].alternate-one li source.laptop {
+  max-width: 160px;
+  max-height: 160px;
+}
+section[is=about-section].alternate-one li source.notebook {
+  max-width: 128px;
+  max-height: 128px;
+}
+section[is=about-section].alternate-one li source.tablet {
+  max-width: 572px;
+  max-height: 572px;
+}
+section[is=about-section].alternate-one li source.phone {
+  max-width: 417px;
+  max-height: 417px;
+}
+section[is=about-section].alternate-one li source.x-small {
+  max-width: 417px;
+  max-height: 417px;
+}
+section[is=about-section].alternate-one li img {
+  aspect-ratio: 1/1;
+}
 @media screen and (min-width: 768px) {
   section[is=about-section].alternate-one ul {
     justify-content: center;
@@ -588,12 +685,18 @@ section[is=about-section].alternate-one li * {
     overflow-x: unset;
     flex-wrap: wrap;
   }
+  section[is=about-section].alternate-one h3 {
+    margin-top: 15px;
+  }
   section[is=about-section].alternate-one li, section[is=about-section].alternate-one li:first-of-type, section[is=about-section].alternate-one li:last-of-type {
     flex: 0 0 33%;
     display: grid;
   }
   section[is=about-section].alternate-one li *, section[is=about-section].alternate-one li:first-of-type *, section[is=about-section].alternate-one li:last-of-type * {
     width: 90%;
+  }
+  section[is=about-section].alternate-one li img, section[is=about-section].alternate-one li:first-of-type img, section[is=about-section].alternate-one li:last-of-type img {
+    width: 50%;
   }
 }
 
@@ -631,6 +734,7 @@ section[is=about-section].alternate-two li * {
 }
 section[is=about-section].alternate-two li img {
   border-radius: 50%;
+  aspect-ratio: 1/1;
 }
 section[is=about-section].alternate-two h3 {
   text-align: center;
@@ -649,6 +753,33 @@ section[is=about-section].alternate-two h3 {
   section[is=about-section].alternate-two li *, section[is=about-section].alternate-two li:first-of-type *, section[is=about-section].alternate-two li:last-of-type * {
     width: 90%;
   }
+  section[is=about-section].alternate-two li img, section[is=about-section].alternate-two li:first-of-type img, section[is=about-section].alternate-two li:last-of-type img {
+    width: 45%;
+  }
+}
+section[is=about-section].alternate-two source.desktop {
+  max-width: 175px;
+  max-height: 175px;
+}
+section[is=about-section].alternate-two source.laptop {
+  max-width: 142px;
+  max-height: 142px;
+}
+section[is=about-section].alternate-two source.notebook {
+  max-width: 115px;
+  max-height: 115px;
+}
+section[is=about-section].alternate-two source.tablet {
+  max-width: 452px;
+  max-height: 452px;
+}
+section[is=about-section].alternate-two source.phone {
+  max-width: 325px;
+  max-height: 325px;
+}
+section[is=about-section].alternate-two source.x-small {
+  max-width: 325px;
+  max-height: 325px;
 }
 
 section[is=about-section].alternate-three > p {
@@ -659,6 +790,7 @@ section[is=about-section].alternate-three ul {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  align-items: start;
   flex-wrap: wrap;
   gap: 10%;
 }
@@ -673,13 +805,40 @@ section[is=about-section].alternate-three li {
 section[is=about-section].alternate-three li picture {
   grid-row: 1;
 }
+section[is=about-section].alternate-three li img {
+  width: 60%;
+  aspect-ratio: 1/1;
+}
+section[is=about-section].alternate-three source.desktop {
+  max-width: 120px;
+  max-height: 120px;
+}
+section[is=about-section].alternate-three source.laptop {
+  max-width: 120px;
+  max-height: 120px;
+}
+section[is=about-section].alternate-three source.notebook {
+  max-width: 120px;
+  max-height: 120px;
+}
+section[is=about-section].alternate-three source.tablet {
+  max-width: 120px;
+  max-height: 120px;
+}
+section[is=about-section].alternate-three source.phone {
+  max-width: 120px;
+  max-height: 120px;
+}
+section[is=about-section].alternate-three source.x-small {
+  max-width: 120px;
+  max-height: 120px;
+}
 
 section[is=about-section].alternate-four {
-  background-color: var(--brand-color);
   text-align: center;
+  background: linear-gradient(to bottom, var(--brand-color) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 0;
 }
 section[is=about-section].alternate-four > * {
   box-sizing: border-box;
@@ -736,6 +895,7 @@ section[is=about-section].alternate-four li picture {
 }
 section[is=about-section].alternate-four li picture img {
   aspect-ratio: 1/1;
+  width: 90%;
   border-radius: 50%;
 }
 @media screen and (min-width: 768px) {
@@ -767,13 +927,36 @@ section[is=about-section].alternate-four li picture img {
     flex-basis: 400px;
   }
 }
+section[is=about-section].alternate-four source.desktop {
+  max-width: 225px;
+  max-height: 225px;
+}
+section[is=about-section].alternate-four source.laptop {
+  max-width: 225px;
+  max-height: 225px;
+}
+section[is=about-section].alternate-four source.notebook {
+  max-width: 225px;
+  max-height: 225px;
+}
+section[is=about-section].alternate-four source.tablet {
+  max-width: 225px;
+  max-height: 225px;
+}
+section[is=about-section].alternate-four source.phone {
+  max-width: 225px;
+  max-height: 225px;
+}
+section[is=about-section].alternate-four source.x-small {
+  max-width: 225px;
+  max-height: 225px;
+}
 
 section[is=about-section].alternate-five {
-  background-color: var(--brand-color);
+  background: linear-gradient(to bottom, var(--brand-color) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
   text-align: center;
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 0;
 }
 section[is=about-section].alternate-five > * {
   box-sizing: border-box;
@@ -837,6 +1020,7 @@ section[is=about-section].alternate-five li picture {
   width: 250px;
 }
 section[is=about-section].alternate-five li picture img {
+  width: 100%;
   aspect-ratio: 1/1;
 }
 @media screen and (min-width: 768px) {
@@ -861,13 +1045,36 @@ section[is=about-section].alternate-five li picture img {
     flex: 0 0 400px;
   }
 }
+section[is=about-section].alternate-five source.desktop {
+  max-width: 250px;
+  max-height: 250px;
+}
+section[is=about-section].alternate-five source.laptop {
+  max-width: 250px;
+  max-height: 250px;
+}
+section[is=about-section].alternate-five source.notebook {
+  max-width: 250px;
+  max-height: 250px;
+}
+section[is=about-section].alternate-five source.tablet {
+  max-width: 250px;
+  max-height: 250px;
+}
+section[is=about-section].alternate-five source.phone {
+  max-width: 250px;
+  max-height: 250px;
+}
+section[is=about-section].alternate-five source.x-small {
+  max-width: 250px;
+  max-height: 250px;
+}
 
 section[is=about-section].alternate-six {
   --picture-height: min(45vw, 225px);
-  background-color: var(--color-two);
+  background: linear-gradient(to bottom, var(--color-two) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 0;
 }
 section[is=about-section].alternate-six > * {
   box-sizing: border-box;
@@ -905,6 +1112,7 @@ section[is=about-section].alternate-six li picture {
 }
 section[is=about-section].alternate-six li picture img {
   aspect-ratio: 1/1;
+  width: 100%;
 }
 section[is=about-section].alternate-six li h3, section[is=about-section].alternate-six li p {
   width: 90%;
@@ -927,13 +1135,36 @@ section[is=about-section].alternate-six li h3, section[is=about-section].alterna
     width: 100%;
   }
 }
+section[is=about-section].alternate-six source.desktop {
+  max-width: 450px;
+  max-height: 450px;
+}
+section[is=about-section].alternate-six source.laptop {
+  max-width: 450px;
+  max-height: 450px;
+}
+section[is=about-section].alternate-six source.notebook {
+  max-width: 450px;
+  max-height: 450px;
+}
+section[is=about-section].alternate-six source.tablet {
+  max-width: 450px;
+  max-height: 450px;
+}
+section[is=about-section].alternate-six source.phone {
+  max-width: 405px;
+  max-height: 405px;
+}
+section[is=about-section].alternate-six source.x-small {
+  max-width: 405px;
+  max-height: 405px;
+}
 
 section[is=about-section].alternate-seven {
   --picture-height: min(45vw, 180px);
-  background-color: var(--color-two);
+  background: linear-gradient(to bottom, var(--color-two) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 0;
 }
 section[is=about-section].alternate-seven > * {
   box-sizing: border-box;
@@ -956,6 +1187,7 @@ section[is=about-section].alternate-seven ul {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  align-items: start;
   row-gap: 75px;
   gap: 25px;
 }
@@ -1000,13 +1232,36 @@ section[is=about-section].alternate-seven li p {
     font-size: var(--body-font-size-small);
   }
 }
+section[is=about-section].alternate-seven source.desktop {
+  max-width: 360px;
+  max-height: 229px;
+}
+section[is=about-section].alternate-seven source.laptop {
+  max-width: 360px;
+  max-height: 229px;
+}
+section[is=about-section].alternate-seven source.notebook {
+  max-width: 360px;
+  max-height: 229px;
+}
+section[is=about-section].alternate-seven source.tablet {
+  max-width: 360px;
+  max-height: 229px;
+}
+section[is=about-section].alternate-seven source.phone {
+  max-width: 360px;
+  max-height: 229px;
+}
+section[is=about-section].alternate-seven source.x-small {
+  max-width: 360px;
+  max-height: 229px;
+}
 
 section[is=about-section].alternate-eight {
   --picture-height: min(max(30vw, 250px), 350px);
-  background-color: var(--color-two);
+  background: linear-gradient(to bottom, var(--color-two) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 0;
 }
 section[is=about-section].alternate-eight > * {
   box-sizing: border-box;
@@ -1029,6 +1284,7 @@ section[is=about-section].alternate-eight ul {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  align-items: start;
   gap: 5%;
   row-gap: 75px;
 }
@@ -1049,6 +1305,7 @@ section[is=about-section].alternate-eight li picture {
 }
 section[is=about-section].alternate-eight li picture img {
   aspect-ratio: 1/1;
+  width: 100%;
 }
 section[is=about-section].alternate-eight li h3, section[is=about-section].alternate-eight li p {
   width: 90%;
@@ -1064,13 +1321,36 @@ section[is=about-section].alternate-eight li p {
     font-size: var(--body-font-size-small);
   }
 }
+section[is=about-section].alternate-eight source.desktop {
+  max-width: 350px;
+  max-height: 350px;
+}
+section[is=about-section].alternate-eight source.laptop {
+  max-width: 350px;
+  max-height: 350px;
+}
+section[is=about-section].alternate-eight source.notebook {
+  max-width: 350px;
+  max-height: 350px;
+}
+section[is=about-section].alternate-eight source.tablet {
+  max-width: 297px;
+  max-height: 297px;
+}
+section[is=about-section].alternate-eight source.phone {
+  max-width: 250px;
+  max-height: 250px;
+}
+section[is=about-section].alternate-eight source.x-small {
+  max-width: 250px;
+  max-height: 250px;
+}
 
 section[is=about-section].alternate-nine {
   --picture-height: min(max(30vw, 250px), 350px);
-  background-color: var(--color-two);
+  background: linear-gradient(to bottom, var(--color-two) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 0;
 }
 section[is=about-section].alternate-nine > * {
   box-sizing: border-box;
@@ -1093,6 +1373,7 @@ section[is=about-section].alternate-nine ul {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  align-items: start;
   gap: 5%;
   row-gap: 75px;
 }
@@ -1113,6 +1394,7 @@ section[is=about-section].alternate-nine li picture {
 }
 section[is=about-section].alternate-nine li picture img {
   aspect-ratio: 1/1;
+  width: 100%;
   border-radius: 50%;
 }
 section[is=about-section].alternate-nine li h3, section[is=about-section].alternate-nine li p {
@@ -1129,13 +1411,36 @@ section[is=about-section].alternate-nine li p {
     font-size: var(--body-font-size-small);
   }
 }
+section[is=about-section].alternate-nine source.desktop {
+  max-width: 350px;
+  max-height: 350px;
+}
+section[is=about-section].alternate-nine source.laptop {
+  max-width: 350px;
+  max-height: 350px;
+}
+section[is=about-section].alternate-nine source.notebook {
+  max-width: 350px;
+  max-height: 350px;
+}
+section[is=about-section].alternate-nine source.tablet {
+  max-width: 297px;
+  max-height: 297px;
+}
+section[is=about-section].alternate-nine source.phone {
+  max-width: 250px;
+  max-height: 250px;
+}
+section[is=about-section].alternate-nine source.x-small {
+  max-width: 250px;
+  max-height: 250px;
+}
 
 section[is=about-section].alternate-ten {
   --picture-height: min(45vw, 180px);
   background-color: var(--color-one);
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 0;
 }
 section[is=about-section].alternate-ten > * {
   box-sizing: border-box;
@@ -1226,6 +1531,30 @@ section[is=about-section].alternate-ten li p {
     grid-column: 2;
   }
 }
+section[is=about-section].alternate-ten source.desktop {
+  max-width: 622px;
+  max-height: 518px;
+}
+section[is=about-section].alternate-ten source.laptop {
+  max-width: 602px;
+  max-height: 502px;
+}
+section[is=about-section].alternate-ten source.notebook {
+  max-width: 507px;
+  max-height: 423px;
+}
+section[is=about-section].alternate-ten source.tablet {
+  max-width: 408px;
+  max-height: 340px;
+}
+section[is=about-section].alternate-ten source.phone {
+  max-width: 360px;
+  max-height: 300px;
+}
+section[is=about-section].alternate-ten source.x-small {
+  max-width: 360px;
+  max-height: 300px;
+}
 
 section[is=hours-section] ul {
   width: min(650px, 90%);
@@ -1294,9 +1623,12 @@ section[is=hours-section].default ul li p.time {
 }
 
 section[is=hours-section].alternate {
-  background-color: var(--color-two);
+  background-color: var(--brand-color);
   border-radius: var(--normal-border-radius);
   margin: 15px;
+}
+section[is=hours-section].alternate h2 {
+  color: var(--brand-contrast-color);
 }
 section[is=hours-section].alternate ul {
   display: flex;
@@ -1311,11 +1643,11 @@ section[is=hours-section].alternate li:first-of-type {
 }
 section[is=hours-section].alternate li p {
   text-align: center;
-  color: var(--color-four);
+  color: var(--brand-contrast-color);
 }
 @media screen and (min-width: 768px) {
   section[is=hours-section].alternate {
-    margin: 30px auto;
+    margin: 0 auto;
   }
 }
 
@@ -1329,7 +1661,6 @@ section[is=contact-form-section] {
 section[is=contact-form-section] h2 {
   margin-top: 50px;
   margin-bottom: unset;
-  color: var(--color-three);
 }
 section[is=contact-form-section] form {
   display: grid;
@@ -1362,9 +1693,9 @@ section[is=contact-form-section] form textarea {
 }
 section[is=contact-form-section] form input, section[is=contact-form-section] form textarea {
   border-radius: var(--small-border-radius);
-  background-color: var(--color-two);
+  background-color: var(--color-one);
   outline: none;
-  border: none;
+  border: 1px solid var(--color-four);
   font-size: var(--body-font-size-small);
   font-weight: 400;
   color: var(--color-four);
@@ -1372,10 +1703,6 @@ section[is=contact-form-section] form input, section[is=contact-form-section] fo
   padding: 15px 0 0 20px;
   display: flex;
   align-content: end;
-}
-section[is=contact-form-section] form button {
-  background-color: var(--color-three);
-  color: var(--color-one);
 }
 section[is=contact-form-section] form label[for=name], section[is=contact-form-section] form input[name=name] {
   grid-row: 1;
@@ -1395,9 +1722,6 @@ section[is=contact-form-section] form textarea[name=message] {
   }
   section[is=contact-form-section] form input, section[is=contact-form-section] form textarea {
     background-color: var(--color-four);
-    color: var(--color-one);
-  }
-  section[is=contact-form-section] form button {
     color: var(--color-one);
   }
 }
@@ -1429,6 +1753,10 @@ section[is=contact-form-section] form textarea[name=message] {
 section[is=contact-form-section].default picture {
   display: none;
 }
+section[is=contact-form-section].default source {
+  max-width: 1px;
+  max-height: 1px;
+}
 
 section[is=contact-form-section].alternate {
   background-color: var(--color-four);
@@ -1451,6 +1779,7 @@ section[is=contact-form-section].alternate picture img {
 section[is=contact-form-section].alternate form input, section[is=contact-form-section].alternate form textarea {
   background-color: var(--color-one);
   color: var(--color-four);
+  border: none;
 }
 section[is=contact-form-section].alternate form label {
   z-index: 12;
@@ -1479,6 +1808,24 @@ section[is=contact-form-section].alternate form button {
   section[is=contact-form-section].alternate form button {
     color: var(--color-one);
   }
+}
+section[is=contact-form-section].alternate source.desktop {
+  max-width: 1920px;
+}
+section[is=contact-form-section].alternate source.laptop {
+  max-width: 1400px;
+}
+section[is=contact-form-section].alternate source.notebook {
+  max-width: 1200px;
+}
+section[is=contact-form-section].alternate source.tablet {
+  max-width: 992px;
+}
+section[is=contact-form-section].alternate source.phone {
+  max-width: 768px;
+}
+section[is=contact-form-section].alternate source.x-small {
+  max-width: 576px;
 }
 
 section[is=embed-section] {
@@ -1545,6 +1892,10 @@ section[is=at-a-glance-section] picture {
   margin: auto;
   width: 33%;
 }
+section[is=at-a-glance-section] picture img {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
 section[is=at-a-glance-section] h3 {
   text-align: center;
   color: var(--color-three);
@@ -1553,6 +1904,9 @@ section[is=at-a-glance-section] h3 {
 @media screen and (min-width: 768px) {
   section[is=at-a-glance-section] ul {
     flex-direction: row;
+  }
+  section[is=at-a-glance-section] li {
+    flex: 0 0 33%;
   }
   section[is=at-a-glance-section] picture {
     width: 75%;
@@ -1566,13 +1920,37 @@ section[is=at-a-glance-section] h3 {
 section[is=at-a-glance-section].default img {
   border-radius: 50%;
 }
+section[is=at-a-glance-section].default source.desktop {
+  max-width: 324px;
+  max-height: 324px;
+}
+section[is=at-a-glance-section].default source.laptop {
+  max-width: 314px;
+  max-height: 314px;
+}
+section[is=at-a-glance-section].default source.notebook {
+  max-width: 265px;
+  max-height: 265px;
+}
+section[is=at-a-glance-section].default source.tablet {
+  max-width: 213px;
+  max-height: 213px;
+}
+section[is=at-a-glance-section].default source.phone {
+  max-width: 233px;
+  max-height: 233px;
+}
+section[is=at-a-glance-section].default source.x-small {
+  max-width: 169px;
+  max-height: 169px;
+}
 
 section[is=at-a-glance-section].alternate-one img {
   border-radius: var(--normal-border-radius);
 }
 
 section[is=at-a-glance-section].alternate-two li {
-  background-color: var(--color-two);
+  background-color: var(--brand-color);
   border-radius: var(--normal-border-radius);
   padding: 30px;
   width: 65%;
@@ -1593,6 +1971,30 @@ section[is=at-a-glance-section].alternate-two h3 {
     padding: 30px 15px;
   }
 }
+section[is=at-a-glance-section].alternate-two source.desktop {
+  max-width: 280px;
+  max-height: 280px;
+}
+section[is=at-a-glance-section].alternate-two source.laptop {
+  max-width: 272px;
+  max-height: 272px;
+}
+section[is=at-a-glance-section].alternate-two source.notebook {
+  max-width: 229px;
+  max-height: 229px;
+}
+section[is=at-a-glance-section].alternate-two source.tablet {
+  max-width: 184px;
+  max-height: 184px;
+}
+section[is=at-a-glance-section].alternate-two source.phone {
+  max-width: 300px;
+  max-height: 300px;
+}
+section[is=at-a-glance-section].alternate-two source.x-small {
+  max-width: 217px;
+  max-height: 217px;
+}
 
 /* 
 - How does mobile spacing work on longer screens?
@@ -1611,10 +2013,6 @@ section[is=numbers-section] li {
   flex-direction: column;
   justify-content: center;
   align-content: center;
-}
-section[is=numbers-section] picture {
-  margin: auto;
-  width: 33%;
 }
 section[is=numbers-section] h3 {
   font-size: var(--header-font-size-x-large);
@@ -1637,10 +2035,6 @@ section[is=numbers-section] h4 {
     justify-items: center;
     height: fit-content;
   }
-  section[is=numbers-section] picture {
-    width: 75%;
-    margin-bottom: 20px;
-  }
   section[is=numbers-section] h3 {
     font-size: calc(var(--header-font-size-x-large) * 0.75);
   }
@@ -1653,10 +2047,13 @@ section[is=numbers-section].alternate-one {
   background-color: var(--color-two);
 }
 section[is=numbers-section].alternate-one li {
-  background-color: var(--color-one);
+  background-color: var(--brand-color);
   border-radius: 200px;
   width: 80%;
   padding: 20px 10px;
+}
+section[is=numbers-section].alternate-one li * {
+  color: var(--brand-contrast-color);
 }
 @media screen and (min-width: 768px) {
   section[is=numbers-section].alternate-one li {
@@ -1713,6 +2110,24 @@ section[is=gallery-section].default ul.show-all {
     aspect-ratio: 4/2;
   }
 }
+section[is=gallery-section].default source.desktop {
+  max-width: 345px;
+}
+section[is=gallery-section].default source.laptop {
+  max-width: 334px;
+}
+section[is=gallery-section].default source.notebook {
+  max-width: 284px;
+}
+section[is=gallery-section].default source.tablet {
+  max-width: 232px;
+}
+section[is=gallery-section].default source.phone {
+  max-width: 239px;
+}
+section[is=gallery-section].default source.x-small {
+  max-width: 175px;
+}
 
 section[is=gallery-section].default:has(li:nth-child(n+7)) button.show-all {
   display: block;
@@ -1720,6 +2135,9 @@ section[is=gallery-section].default:has(li:nth-child(n+7)) button.show-all {
 
 section[is=gallery-section].alternate-one > button.show-all {
   display: none;
+}
+section[is=gallery-section].alternate-one button {
+  background: none;
 }
 section[is=gallery-section].alternate-one img {
   width: unset;
@@ -1817,6 +2235,24 @@ section[is=gallery-section].alternate-one svg path {
     grid-column: 3;
   }
 }
+section[is=gallery-section].alternate-one source.desktop {
+  max-width: 365px;
+}
+section[is=gallery-section].alternate-one source.laptop {
+  max-width: 365px;
+}
+section[is=gallery-section].alternate-one source.notebook {
+  max-width: 365px;
+}
+section[is=gallery-section].alternate-one source.tablet {
+  max-width: 365px;
+}
+section[is=gallery-section].alternate-one source.phone {
+  max-width: 636px;
+}
+section[is=gallery-section].alternate-one source.x-small {
+  max-width: 463px;
+}
 
 @media screen and (min-width: 768px) {
   section[is=raw-heading-section].alternate-one h2 {
@@ -1840,54 +2276,6 @@ section[is=raw-paragraph-section] p {
   }
 }
 
-/* Questions:
-- No dark mode, so need manual eyeballs on all the color balance
- - This actually made it a bit faster to have "programatic dark mode"
-- default
-  h2:
-   - margin-bottom 35px? -- nope, this is 45px
-  p:
-   - 60px bottom padding? -- yes, but added a min-height rule to allow for a tall section when the text is short.
-   - is the left-padding/indent thing on purpose? -- yes
-  button:
-   - border-radius 10px? -- no, 12px
-   - Is the color set right? -- yes
-   - desktop padding is something like 10px 50px in the mockup, but this doesn't match the button generally. Is the mockup right? -- yes, changed alt button to match
-  picture:
-   - How does it scale? I coded it as "tablet and larger" scale responsively. -- this looks fine
-   - It looked like it was about half of the section after accounting for padding, so I made it a square that was 50% wide. Is that right?
-- alternate-one
-  h3:
-   - just double checking -- 200px bottom margin? -- as implemented is fine.
-   - update: changed this to 1fr in the grid-template-columns. I think it resizes better.
-     - also change the breakpoint to notebook on this.
-  picture:
-   - is the vibe here "resize to match content length?" or "keep a ~3/4 aspect ratio?"
-- alternate-two:
-  picture:
-   - aspect ratio looks to be 12 / 7. Just double checking
-   - on desktop this is really large. -- that's fine.
-  button:
-   - I didn't add as much top padding/margin as sort of suggested by the mockup. Wanted to double check that this was right. -- that's fine.
-- alternate-three:
-  picture:
-   - how is this supposed to scale? What if they put lots of text? -- it scales right atm.
-   - for desktop, I picked 12/7, but what if they put more text than that? -- zoom in on pic, like mobile.
-   - desktop appears to use a different opacity than the mobile? I kept the vibe of mobile for both, but I can update this if desired. -- matching is good.
-- alternate-four:
-  - The desktop arrangement is sort of awkward with a long paragraph.  -- revisit maybe
-  - note: I set notebook as the breakpoint, rather than tablet.  -- this is fine, but revisit
-  - tablet arrangement is weird bc the breakpoint is set to notebook, but the h2 resizes at tablet size. Need advice here. -- this is fine.
-- alternate-five:
-  - has similar arrangement oddities as alternate-four (lowkey, I dig it. But it should be double-checked in the morning) -- mod'd, but fine.
-- alternate-six/seven:
-  h3: Is not present on mobile? -- this needs to get fixed
-  picture:
-   - ratio looks great, but how should it respond to very long text? (shorter text looks fine!) -- changed breakpoint
-- alternate-seven:
-  paragraph:
-   - it looks "shorter" than on other layouts. Should it float to the top or the center? Or something else? -- nah, it's fine
-*/
 section[is=call-to-action-section] {
   display: flex;
   flex-direction: column;
@@ -1977,6 +2365,34 @@ section[is=call-to-action-section].default p {
     padding: 0;
   }
 }
+section[is=call-to-action-section].default picture:first-of-type source.desktop {
+  max-width: 754px;
+  max-height: 754px;
+}
+section[is=call-to-action-section].default picture:first-of-type source.laptop {
+  max-width: 521px;
+  max-height: 521px;
+}
+section[is=call-to-action-section].default picture:first-of-type source.notebook {
+  max-width: 430px;
+  max-height: 430px;
+}
+section[is=call-to-action-section].default picture:first-of-type source.tablet {
+  max-width: 861px;
+  max-height: 861px;
+}
+section[is=call-to-action-section].default picture:first-of-type source.phone {
+  max-width: 707px;
+  max-height: 707px;
+}
+section[is=call-to-action-section].default picture:first-of-type source.x-small {
+  max-width: 515px;
+  max-height: 515px;
+}
+section[is=call-to-action-section].default picture:last-of-type source {
+  max-width: 1px;
+  max-height: 1px;
+}
 
 section[is=call-to-action-section].alternate-one picture:nth-of-type(even) {
   display: none;
@@ -2016,6 +2432,34 @@ section[is=call-to-action-section].alternate-one p {
   section[is=call-to-action-section].alternate-one p {
     padding: 0;
   }
+}
+section[is=call-to-action-section].alternate-one picture:first-of-type source.desktop {
+  max-width: 754px;
+  max-height: 960px;
+}
+section[is=call-to-action-section].alternate-one picture:first-of-type source.laptop {
+  max-width: 520px;
+  max-height: 660px;
+}
+section[is=call-to-action-section].alternate-one picture:first-of-type source.notebook {
+  max-width: 430px;
+  max-height: 550px;
+}
+section[is=call-to-action-section].alternate-one picture:first-of-type source.tablet {
+  max-width: 861px;
+  max-height: 861px;
+}
+section[is=call-to-action-section].alternate-one picture:first-of-type source.phone {
+  max-width: 707px;
+  max-height: 707px;
+}
+section[is=call-to-action-section].alternate-one picture:first-of-type source.x-small {
+  max-width: 515px;
+  max-height: 515px;
+}
+section[is=call-to-action-section].alternate-one picture:last-of-type source {
+  max-width: 1px;
+  max-height: 1px;
 }
 
 section[is=call-to-action-section].alternate-two {
@@ -2060,6 +2504,34 @@ section[is=call-to-action-section].alternate-two button {
     justify-self: center;
     width: unset;
   }
+}
+section[is=call-to-action-section].alternate-two picture:first-of-type source.desktop {
+  max-width: 1310px;
+  max-height: 764px;
+}
+section[is=call-to-action-section].alternate-two picture:first-of-type source.laptop {
+  max-width: 1269px;
+  max-height: 740px;
+}
+section[is=call-to-action-section].alternate-two picture:first-of-type source.notebook {
+  max-width: 1069px;
+  max-height: 623px;
+}
+section[is=call-to-action-section].alternate-two picture:first-of-type source.tablet {
+  max-width: 861px;
+  max-height: 502px;
+}
+section[is=call-to-action-section].alternate-two picture:first-of-type source.phone {
+  max-width: 707px;
+  max-height: 412px;
+}
+section[is=call-to-action-section].alternate-two picture:first-of-type source.x-small {
+  max-width: 515px;
+  max-height: 300px;
+}
+section[is=call-to-action-section].alternate-two picture:last-of-type source {
+  max-width: 1px;
+  max-height: 1px;
 }
 
 section[is=call-to-action-section].alternate-three {
@@ -2132,6 +2604,28 @@ section[is=call-to-action-section].alternate-three a button {
     width: unset;
   }
 }
+section[is=call-to-action-section].alternate-three picture:first-of-type source.desktop {
+  max-width: 1920px;
+}
+section[is=call-to-action-section].alternate-three picture:first-of-type source.laptop {
+  max-width: 1400px;
+}
+section[is=call-to-action-section].alternate-three picture:first-of-type source.notebook {
+  max-width: 1200px;
+}
+section[is=call-to-action-section].alternate-three picture:first-of-type source.tablet {
+  max-width: 992px;
+}
+section[is=call-to-action-section].alternate-three picture:first-of-type source.phone {
+  max-width: 768px;
+}
+section[is=call-to-action-section].alternate-three picture:first-of-type source.x-small {
+  max-width: 575px;
+}
+section[is=call-to-action-section].alternate-three picture:last-of-type source {
+  max-width: 1px;
+  max-height: 1px;
+}
 
 section[is=call-to-action-section].alternate-four {
   display: grid;
@@ -2202,6 +2696,54 @@ section[is=call-to-action-section].alternate-four button {
     grid-column: 1;
     grid-row: 1/span 4;
   }
+}
+section[is=call-to-action-section].alternate-four picture:first-of-type source.desktop {
+  max-width: 607px;
+  max-height: 354px;
+}
+section[is=call-to-action-section].alternate-four picture:last-of-type source.desktop {
+  max-width: 607px;
+  max-height: 772px;
+}
+section[is=call-to-action-section].alternate-four picture:first-of-type source.laptop {
+  max-width: 586px;
+  max-height: 342px;
+}
+section[is=call-to-action-section].alternate-four picture:last-of-type source.laptop {
+  max-width: 586px;
+  max-height: 746px;
+}
+section[is=call-to-action-section].alternate-four picture:first-of-type source.notebook {
+  max-width: 486px;
+  max-height: 283px;
+}
+section[is=call-to-action-section].alternate-four picture:last-of-type source.notebook {
+  max-width: 486px;
+  max-height: 619px;
+}
+section[is=call-to-action-section].alternate-four picture:first-of-type source.tablet {
+  max-width: 861px;
+  max-height: 502px;
+}
+section[is=call-to-action-section].alternate-four picture:last-of-type source.tablet {
+  max-width: 861px;
+  max-height: 1095px;
+}
+section[is=call-to-action-section].alternate-four picture:first-of-type source.phone {
+  max-width: 707px;
+  max-height: 412px;
+}
+section[is=call-to-action-section].alternate-four picture:last-of-type source.phone {
+  max-width: 707px;
+  max-height: 899px;
+}
+section[is=call-to-action-section].alternate-four picture:first-of-type source.x-small {
+  max-width: 515px;
+  max-height: 300px;
+}
+section[is=call-to-action-section].alternate-four picture:last-of-type source.x-small {
+  max-width: 515px;
+  max-height: 655px;
 }
 
 section[is=call-to-action-section].alternate-five {
@@ -2289,6 +2831,54 @@ section[is=call-to-action-section].alternate-five button {
     height: 100%;
   }
 }
+section[is=call-to-action-section].alternate-five picture:first-of-type source.desktop {
+  max-width: 541px;
+  max-height: 319px;
+}
+section[is=call-to-action-section].alternate-five picture:last-of-type source.desktop {
+  max-width: 541px;
+  max-height: 319px;
+}
+section[is=call-to-action-section].alternate-five picture:first-of-type source.laptop {
+  max-width: 523px;
+  max-height: 309px;
+}
+section[is=call-to-action-section].alternate-five picture:last-of-type source.laptop {
+  max-width: 523px;
+  max-height: 309px;
+}
+section[is=call-to-action-section].alternate-five picture:first-of-type source.notebook {
+  max-width: 433px;
+  max-height: 306px;
+}
+section[is=call-to-action-section].alternate-five picture:last-of-type source.notebook {
+  max-width: 433px;
+  max-height: 306px;
+}
+section[is=call-to-action-section].alternate-five picture:first-of-type source.tablet {
+  max-width: 861px;
+  max-height: 502px;
+}
+section[is=call-to-action-section].alternate-five picture:last-of-type source.tablet {
+  max-width: 861px;
+  max-height: 502px;
+}
+section[is=call-to-action-section].alternate-five picture:first-of-type source.phone {
+  max-width: 707px;
+  max-height: 412px;
+}
+section[is=call-to-action-section].alternate-five picture:last-of-type source.phone {
+  max-width: 707px;
+  max-height: 412px;
+}
+section[is=call-to-action-section].alternate-five picture:first-of-type source.x-small {
+  max-width: 515px;
+  max-height: 300px;
+}
+section[is=call-to-action-section].alternate-five picture:last-of-type source.x-small {
+  max-width: 515px;
+  max-height: 300px;
+}
 
 section[is=call-to-action-section].alternate-six {
   gap: 30px;
@@ -2351,6 +2941,54 @@ section[is=call-to-action-section].alternate-six button {
     grid-column: 1;
     grid-row: 2/span 4;
   }
+}
+section[is=call-to-action-section].alternate-six picture:first-of-type source.desktop {
+  max-width: 622px;
+  max-height: 362px;
+}
+section[is=call-to-action-section].alternate-six picture:last-of-type source.desktop {
+  max-width: 622px;
+  max-height: 791px;
+}
+section[is=call-to-action-section].alternate-six picture:first-of-type source.laptop {
+  max-width: 602px;
+  max-height: 351px;
+}
+section[is=call-to-action-section].alternate-six picture:last-of-type source.laptop {
+  max-width: 602px;
+  max-height: 767px;
+}
+section[is=call-to-action-section].alternate-six picture:first-of-type source.notebook {
+  max-width: 507px;
+  max-height: 296px;
+}
+section[is=call-to-action-section].alternate-six picture:last-of-type source.notebook {
+  max-width: 507px;
+  max-height: 646px;
+}
+section[is=call-to-action-section].alternate-six picture:first-of-type source.tablet {
+  max-width: 861px;
+  max-height: 502px;
+}
+section[is=call-to-action-section].alternate-six picture:last-of-type source.tablet {
+  max-width: 861px;
+  max-height: 1095px;
+}
+section[is=call-to-action-section].alternate-six picture:first-of-type source.phone {
+  max-width: 707px;
+  max-height: 412px;
+}
+section[is=call-to-action-section].alternate-six picture:last-of-type source.phone {
+  max-width: 707px;
+  max-height: 899px;
+}
+section[is=call-to-action-section].alternate-six picture:first-of-type source.x-small {
+  max-width: 515px;
+  max-height: 300px;
+}
+section[is=call-to-action-section].alternate-six picture:last-of-type source.x-small {
+  max-width: 515px;
+  max-height: 655px;
 }
 
 section[is=call-to-action-section].alternate-seven {
@@ -2417,6 +3055,54 @@ section[is=call-to-action-section].alternate-seven button {
     align-items: end;
   }
 }
+section[is=call-to-action-section].alternate-seven picture:first-of-type source.desktop {
+  max-width: 622px;
+  max-height: 362px;
+}
+section[is=call-to-action-section].alternate-seven picture:last-of-type source.desktop {
+  max-width: 622px;
+  max-height: 362px;
+}
+section[is=call-to-action-section].alternate-seven picture:first-of-type source.laptop {
+  max-width: 602px;
+  max-height: 351px;
+}
+section[is=call-to-action-section].alternate-seven picture:last-of-type source.laptop {
+  max-width: 602px;
+  max-height: 351px;
+}
+section[is=call-to-action-section].alternate-seven picture:first-of-type source.notebook {
+  max-width: 507px;
+  max-height: 296px;
+}
+section[is=call-to-action-section].alternate-seven picture:last-of-type source.notebook {
+  max-width: 507px;
+  max-height: 296px;
+}
+section[is=call-to-action-section].alternate-seven picture:first-of-type source.tablet {
+  max-width: 861px;
+  max-height: 502px;
+}
+section[is=call-to-action-section].alternate-seven picture:last-of-type source.tablet {
+  max-width: 861px;
+  max-height: 502px;
+}
+section[is=call-to-action-section].alternate-seven picture:first-of-type source.phone {
+  max-width: 707px;
+  max-height: 412px;
+}
+section[is=call-to-action-section].alternate-seven picture:last-of-type source.phone {
+  max-width: 707px;
+  max-height: 412px;
+}
+section[is=call-to-action-section].alternate-seven picture:first-of-type source.x-small {
+  max-width: 515px;
+  max-height: 300px;
+}
+section[is=call-to-action-section].alternate-seven picture:last-of-type source.x-small {
+  max-width: 515px;
+  max-height: 300px;
+}
 
 section[is=testimonials-section] {
   display: grid;
@@ -2455,6 +3141,11 @@ section[is=testimonials-section] button {
   padding: unset;
   background: none;
 }
+section[is=testimonials-section] source {
+  max-width: 1px;
+  max-height: 1px;
+}
+
 section[is=testimonials-section].default li.testimonials-content {
   list-style-type: none;
   background-color: var(--color-two);
@@ -2630,9 +3321,13 @@ section[is=testimonials-section].alternate-one .testimonials-attribution-picture
   margin: auto;
   width: 100px;
   aspect-ratio: 1/1;
+  padding: 0;
+}
+section[is=testimonials-section].alternate-one .testimonials-attribution-picture img {
   border: solid 4px var(--color-one);
   border-radius: 50%;
-  padding: 0;
+  width: 100%;
+  aspect-ratio: 1/1;
 }
 @media (prefers-color-scheme: dark) {
   section[is=testimonials-section].alternate-one li.testimonials-content {
@@ -2700,6 +3395,30 @@ section[is=testimonials-section].alternate-one .testimonials-attribution-picture
   section[is=testimonials-section].alternate-one .testimonials-attribution-picture {
     width: 146px;
   }
+}
+section[is=testimonials-section].alternate-one source.desktop {
+  max-width: 154px;
+  max-height: 154px;
+}
+section[is=testimonials-section].alternate-one source.laptop {
+  max-width: 154px;
+  max-height: 154px;
+}
+section[is=testimonials-section].alternate-one source.notebook {
+  max-width: 154px;
+  max-height: 154px;
+}
+section[is=testimonials-section].alternate-one source.tablet {
+  max-width: 108px;
+  max-height: 108px;
+}
+section[is=testimonials-section].alternate-one source.phone {
+  max-width: 108px;
+  max-height: 108px;
+}
+section[is=testimonials-section].alternate-one source.x-small {
+  max-width: 108px;
+  max-height: 108px;
 }
 
 section[is=testimonials-section].alternate-two {
@@ -2777,9 +3496,11 @@ section[is=testimonials-section].alternate-two .testimonials-attribution-picture
   display: block;
   width: 100px;
   aspect-ratio: 1/1;
+  padding: 0;
+}
+section[is=testimonials-section].alternate-two .testimonials-attribution-picture img {
   border: solid 4px var(--color-one);
   border-radius: 50%;
-  padding: 0;
 }
 @media (prefers-color-scheme: dark) {
   section[is=testimonials-section].alternate-two li.testimonials-content {
@@ -2866,6 +3587,30 @@ section[is=testimonials-section].alternate-two .testimonials-attribution-picture
   section[is=testimonials-section].alternate-two .testimonials-attribution-picture {
     width: 146px;
   }
+}
+section[is=testimonials-section].alternate-two source.desktop {
+  max-width: 154px;
+  max-height: 154px;
+}
+section[is=testimonials-section].alternate-two source.laptop {
+  max-width: 154px;
+  max-height: 154px;
+}
+section[is=testimonials-section].alternate-two source.notebook {
+  max-width: 154px;
+  max-height: 154px;
+}
+section[is=testimonials-section].alternate-two source.tablet {
+  max-width: 108px;
+  max-height: 108px;
+}
+section[is=testimonials-section].alternate-two source.phone {
+  max-width: 108px;
+  max-height: 108px;
+}
+section[is=testimonials-section].alternate-two source.x-small {
+  max-width: 108px;
+  max-height: 108px;
 }
 
 section[is=testimonials-section].alternate-four li.testimonials-content {
@@ -3030,7 +3775,7 @@ section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container summary.
 section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container summary.question {
   padding: 8px 10px;
   list-style: none;
-  border: solid var(--color-three) 1px;
+  border: solid var(--brand-color) 1px;
   border-radius: var(--small-border-radius);
 }
 section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container summary.question h3.question-text {
@@ -3055,22 +3800,13 @@ section[is=faqs-section].default h3.question-text {
 }
 
 section[is=faqs-section].alternate summary.question {
-  background-color: var(--color-three);
+  background-color: var(--brand-color);
 }
 
 section[is=faqs-section].alternate h3.question-text {
-  color: var(--color-one);
+  color: var(--brand-contrast-color);
 }
 
-@media (prefers-color-scheme: dark) {
-  section[is=faqs-section].alternate ul.faqs li.faq-list-item details.faq-container summary.question {
-    border-color: var(--color-two);
-    background-color: var(--color-two);
-  }
-  section[is=faqs-section].alternate h3.question-text {
-    color: var(--color-four);
-  }
-}
 /*
 
 - default: how should the image scale around "tablet" size.
@@ -3098,6 +3834,30 @@ section[is=more-information-section] picture img {
     aspect-ratio: 19/10;
   }
 }
+section[is=more-information-section] source.desktop {
+  max-width: 1300px;
+  max-height: 689px;
+}
+section[is=more-information-section] source.laptop {
+  max-width: 1269px;
+  max-height: 667px;
+}
+section[is=more-information-section] source.notebook {
+  max-width: 1069px;
+  max-height: 562px;
+}
+section[is=more-information-section] source.tablet {
+  max-width: 861px;
+  max-height: 574px;
+}
+section[is=more-information-section] source.phone {
+  max-width: 707px;
+  max-height: 471px;
+}
+section[is=more-information-section] source.x-small {
+  max-width: 515px;
+  max-height: 343px;
+}
 
 section[is=more-information-section].default {
   grid-template-columns: 1fr;
@@ -3122,7 +3882,32 @@ section[is=more-information-section].default picture img {
   }
   section[is=more-information-section].default picture img {
     aspect-ratio: 6/5;
+    width: 100%;
   }
+}
+section[is=more-information-section].default source.desktop {
+  max-width: 589px;
+  max-height: 491px;
+}
+section[is=more-information-section].default source.laptop {
+  max-width: 571px;
+  max-height: 475px;
+}
+section[is=more-information-section].default source.notebook {
+  max-width: 481px;
+  max-height: 400px;
+}
+section[is=more-information-section].default source.tablet {
+  max-width: 861px;
+  max-height: 574px;
+}
+section[is=more-information-section].default source.phone {
+  max-width: 707px;
+  max-height: 471px;
+}
+section[is=more-information-section].default source.x-small {
+  max-width: 515px;
+  max-height: 343px;
 }
 
 section[is=more-information-section].alternate-two h2 {
@@ -3143,12 +3928,18 @@ section[is=footer-section] {
   display: grid;
   grid-template-columns: auto auto auto 1fr auto;
   gap: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 section[is=footer-section] > picture {
   grid-column: 1;
   width: 100%;
 }
+section[is=footer-section] > picture source {
+  max-width: 150px;
+}
 section[is=footer-section] > picture img {
+  width: 150px;
   object-fit: contain;
   aspect-ratio: unset;
 }
@@ -3183,6 +3974,18 @@ section[is=footer-section] dialog button {
   top: 0px;
   right: 0px;
   background: none;
+}
+@media (prefers-color-scheme: dark) {
+  section[is=footer-section] dialog {
+    background-color: var(--color-one);
+    color: var(--color-four);
+  }
+  section[is=footer-section] dialog h2 {
+    color: var(--color-four);
+  }
+  section[is=footer-section] button {
+    color: var(--color-four);
+  }
 }
 @media screen and (min-width: 768px) {
   section[is=footer-section] {

@@ -48,6 +48,10 @@ section[is="testimonials-section"] { // startfold
 
   @media screen and (min-width: base.$notebook) {
   }
+  source {
+    max-width: 1px;
+    max-height: 1px;
+  }
 } // endfold
 section[is="testimonials-section"].default { // startfold
   // default mobile startfold
@@ -231,9 +235,13 @@ section[is="testimonials-section"].alternate-one { // startfold
     margin: auto;
     width: 100px;
     aspect-ratio: 1/1;
-    border: solid 4px var(--color-one);
-    border-radius: 50%;;
     padding: 0;
+    img {
+      border: solid 4px var(--color-one);
+      border-radius: 50%;
+      width: 100%;
+      aspect-ratio: 1/1;
+    }
   }
   // endfold
   @media (prefers-color-scheme: dark) { // startfold
@@ -305,6 +313,30 @@ section[is="testimonials-section"].alternate-one { // startfold
       width: 146px;
     }
   } // endfold
+  source.desktop {
+    max-width: 154px;
+    max-height: 154px;
+  }
+  source.laptop {
+    max-width: 154px;
+    max-height: 154px;
+  }
+  source.notebook {
+    max-width: 154px;
+    max-height: 154px;
+  }
+  source.tablet {
+    max-width: 108px;
+    max-height: 108px;
+  }
+  source.phone {
+    max-width: 108px;
+    max-height: 108px;
+  }
+  source.x-small {
+    max-width: 108px;
+    max-height: 108px;
+  }
 } // endfold
 section[is="testimonials-section"].alternate-two { // startfold
   // default mobile startfold
@@ -387,9 +419,11 @@ section[is="testimonials-section"].alternate-two { // startfold
     display: block;
     width: 100px;
     aspect-ratio: 1/1;
-    border: solid 4px var(--color-one);
-    border-radius: 50%;;
     padding: 0;
+    img {
+      border: solid 4px var(--color-one);
+      border-radius: 50%;;
+    }
   }
   // endfold
   @media (prefers-color-scheme: dark) { // startfold
@@ -490,6 +524,30 @@ section[is="testimonials-section"].alternate-two { // startfold
       width: 146px;
     }
   } // endfold
+  source.desktop {
+    max-width: 154px;
+    max-height: 154px;
+  }
+  source.laptop {
+    max-width: 154px;
+    max-height: 154px;
+  }
+  source.notebook {
+    max-width: 154px;
+    max-height: 154px;
+  }
+  source.tablet {
+    max-width: 108px;
+    max-height: 108px;
+  }
+  source.phone {
+    max-width: 108px;
+    max-height: 108px;
+  }
+  source.x-small {
+    max-width: 108px;
+    max-height: 108px;
+  }
 } // endfold
 section[is="testimonials-section"].alternate-four { // startfold
   // default mobile startfold

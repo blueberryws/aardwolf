@@ -19,7 +19,7 @@ export class ImageAttributionSet extends HTMLUListElement { // startfold
     const pictures = document.querySelectorAll("picture");
     this.innerHTML = "";
     const li = document.createElement("li");
-    li.innerText = "Photos via Pexels.com and";
+    li.innerHTML = "<p>Photos via Pexels.com and</p>";
     this.appendChild(li);
     for (const pic of pictures) {
       const li = document.createElement("li");

@@ -1,6 +1,7 @@
 import { PictureEditor } from "../editors/picture_editor.js";
 import { fromHTML } from "../utils/html.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
+import { breakpoints } from "../interfaces/breakpoints.js";
 
 import { dispatch, ImageSetChanged } from "../interfaces/events.js";
 
@@ -33,6 +34,20 @@ export class EditablePicture extends HTMLPictureElement { // startfold
   } // endfold
   setSrc(src) { // startfold
     this.innerHTML = "";
+
+    for (const [key, val] of Object.entries(breakpoints)) {
+      const src = document.createElement("source");
+      src.classList.add(key);
+      this.appendChild(src);
+      src.setAttribute("media", `(min-width: ${val})`);
+    
+      const computedStyle = window.getComputedStyle(src);
+      const calculatedWidth = parseInt(computedStyle.getPropertyValue("max-width")) || 0;;
+      const calculatedHeight = parseInt(computedStyle.getPropertyValue("max-height")) || 0;
+    
+      src.setAttribute("data-max-width", calculatedWidth);
+      src.setAttribute("data-max-height", calculatedHeight);
+    }
     this.img.src = src;
     this.appendChild(this.img);
   } // endfold

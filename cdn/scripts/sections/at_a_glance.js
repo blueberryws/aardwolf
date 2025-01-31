@@ -8,6 +8,7 @@ export class AtAGlanceSection extends EditableSection { // startfold
   classes = [
       "default",
       "alternate-one",
+      "alternate-two",
   ];
 
   defaultContent = [
