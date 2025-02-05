@@ -30,6 +30,7 @@ export const ELEMENT_NAMES = {
     "editableIframe": "editable-iframe",
 
     "imageAttributionSet": "image-attribution-set",
+    "socialMediaLinks": "social-media-links",
 }
 
 export const SECTIONS = {};

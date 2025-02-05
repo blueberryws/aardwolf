@@ -25,7 +25,7 @@ export class ContactFormSection extends EditableSection { // startfold
     },
     {
       "element": "raw",
-      "content": `<form>
+      "content": `<form method="POST" action="/contact">
     <label for="name">Name</label>
     <input type="text" name="name" placeholder="Who am I speaking with?"></input>
     <label for="email">Email</label>
@@ -39,6 +39,16 @@ export class ContactFormSection extends EditableSection { // startfold
   constructor() {
     super();
     this.editor.ensureDefaults();
+    this.addSiteId();
+  }
+  addSiteId() {
+    const siteId = document.documentElement.dataset.siteId;
+    const form = this.querySelector("form");
+    const siteIdField = document.createElement("input");
+    siteIdField.type = "hidden";
+    siteIdField.name = "site-id";
+    siteIdField.value = siteId;
+    form.appendChild(siteIdField);
   }
 }
 register(ContactFormSection);

@@ -151,6 +151,13 @@ h2 {
   display: none !important;
 }
 
+.contact-success {
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
 /* Questions:
 - border-radius on buttons doesn't match. I'm assuming go with 12px?
 - pardon me, one more time. I'm writing it down this time: Which of these are grayscale? None, and all are just "low opacity with background color"?
@@ -3925,15 +3932,18 @@ section[is=more-information-section].alternate-three picture {
 
 section[is=footer-section] {
   background-color: var(--color-two);
-  display: grid;
-  grid-template-columns: auto auto auto 1fr auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
+  justify-content: center;
 }
 section[is=footer-section] > picture {
-  grid-column: 1;
-  width: 100%;
+  flex: 0 0 100%;
+  display: grid;
+  justify-items: center;
 }
 section[is=footer-section] > picture source {
   max-width: 150px;
@@ -3943,13 +3953,19 @@ section[is=footer-section] > picture img {
   object-fit: contain;
   aspect-ratio: unset;
 }
-section[is=footer-section] > a {
-  grid-row: 3;
-  cursor: pointer;
+section[is=footer-section] > p {
+  flex: 0 0 100%;
+  text-align: center;
 }
 section[is=footer-section] > ul {
-  grid-row: 2;
-  grid-column: 1/span 3;
+  flex: 0 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+section[is=footer-section] > div {
+  flex: 0 0 150px;
+  text-align: center;
+  cursor: pointer;
 }
 section[is=footer-section] dialog {
   position: fixed;
@@ -3968,27 +3984,42 @@ section[is=footer-section] dialog h2 {
 section[is=footer-section] dialog p {
   margin: auto;
   width: 90%;
+  color: var(--color-one);
+  text-align: start;
+}
+section[is=footer-section] dialog a {
+  color: var(--color-one);
 }
 section[is=footer-section] dialog button {
   position: absolute;
   top: 0px;
   right: 0px;
   background: none;
+  color: var(--color-one);
+}
+section[is=footer-section] div[is=image-attribution-set] dialog li {
+  display: flex;
+  flex-direction: column;
+}
+section[is=footer-section] ul {
+  min-height: 100px;
+  min-width: 100px;
 }
 @media (prefers-color-scheme: dark) {
   section[is=footer-section] dialog {
     background-color: var(--color-one);
     color: var(--color-four);
   }
-  section[is=footer-section] dialog h2 {
+  section[is=footer-section] dialog h2, section[is=footer-section] dialog a, section[is=footer-section] dialog p {
     color: var(--color-four);
   }
   section[is=footer-section] button {
     color: var(--color-four);
   }
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   section[is=footer-section] {
+    display: grid;
     gap: 20px;
   }
   section[is=footer-section] dialog {
@@ -3999,15 +4030,39 @@ section[is=footer-section] dialog button {
     right: 25px;
   }
   section[is=footer-section] > picture {
+    grid-row: 1/span 2;
     grid-column: 1/span 2;
+    justify-items: start;
   }
-  section[is=footer-section] > a {
-    grid-row: 2;
+  section[is=footer-section] > picture source {
+    max-width: 150px;
+  }
+  section[is=footer-section] > picture img {
+    grid-row: 1;
+    width: 150px;
+    object-fit: contain;
+    aspect-ratio: unset;
+  }
+  section[is=footer-section] > p {
+    grid-row: 1;
+    grid-column: 3/span 4;
   }
   section[is=footer-section] > ul {
-    grid-row: 1;
-    grid-column: 5;
-    justify-self: end;
+    grid-row: 2;
+    grid-column: 3/span 4;
+  }
+  section[is=footer-section] > div {
+    grid-row: 3;
+  }
+  section[is=footer-section] div[is=image-attribution-set] dialog li {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+  }
+  section[is=footer-section] div[is=image-attribution-set] dialog li a {
+    color: var(--color-one);
+  }
+  section[is=footer-section] div[is=image-attribution-set] dialog li p {
+    text-align: start;
   }
 }
 

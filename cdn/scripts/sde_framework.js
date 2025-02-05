@@ -10,12 +10,12 @@ import { ResetButton } from "./save/reset_button.js";
 import { UnorderedList, ListItem, DialogElement, ButtonElement, ObjectElement, FigureElement, BlockquoteElement, FigcaptionElement } from "./elements/generics.js";
 import { EditableH1, EditableH2, EditableH3, EditableH4, EditableH5, EditableH6 } from "./elements/editable_heading.js";
 import { EditableLinkButton } from "./elements/editable_link_button.js";
-import { EditableLinkModal } from "./elements/editable_link_modal.js";
+import { EditableLinkModal, ImageAttributionSet } from "./elements/editable_link_modal.js";
 import { EditableListItem } from "./elements/editable_list_item.js";
 import { EditablePicture } from "./elements/editable_picture.js";
 import { EditableParagraph, EditableBlockquote, EditableFigcaption } from "./elements/editable_paragraph.js";
 import { EditableIframe } from "./elements/editable_iframe.js"; 
-import { ImageAttributionSet } from "./elements/image_attribution_set.js"; 
+import { SocialMediaLinks } from "./elements/social_media_links.js"; 
 
 import { HeroSection } from "./sections/hero.js";
 import { AboutSection } from "./sections/about.js";

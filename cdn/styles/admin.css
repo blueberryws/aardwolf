@@ -151,6 +151,13 @@ h2 {
   display: none !important;
 }
 
+.contact-success {
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
 @font-face {
   font-family: "Bangers";
   src: url("/cdn/fonts/Bangers/Bangers-Regular.ttf");
@@ -549,6 +556,11 @@ button[is=reset-button] {
   bottom: 25px;
   right: 150px;
   z-index: 9999;
+}
+
+ul[is=social-media-links]:hover {
+  border: 1px solid var(--color-three);
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=admin.css.map */

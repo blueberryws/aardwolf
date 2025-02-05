@@ -24,14 +24,12 @@ export function htmlFromJSON(json, registry) {
     const element = fromHTML(json.content);
     return element;
   }
-  console.log(json.element);
   const elClass = registry[json.element];
   const element = new elClass();
   if (json.text != null) {
     element.innerText = json.text;
   }
   if (json.classes != null) {
-    console.log(json.classes)
     json.classes.forEach(e => {element.classList.add(e)});
   }
   if (json.children != null) {

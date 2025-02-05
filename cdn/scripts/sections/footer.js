@@ -10,16 +10,17 @@ export class FooterSection extends EditableSection { // startfold
   ];
 
   defaultContent = [
-    // Logo
     {
         "element": ELEMENT_NAMES.editablePicture,
     },
-    // Privacy Policy
-    // - a
-    //  - dialog
-    //   - p
-    //   - button <- can this get default added?
     {
+        "element": ELEMENT_NAMES.editableParagraph,
+        "text": "Follow Us On Social Media",
+    },
+    {
+        "element": ELEMENT_NAMES.socialMediaLinks,
+    },
+    { // startfold Privacy Policy
       "element": ELEMENT_NAMES.editableLinkModal,
       "text": "Privacy Policy",
       "children": [
@@ -37,9 +38,8 @@ export class FooterSection extends EditableSection { // startfold
           ],
         },
       ],
-    },
-    // Terms of Service
-    {
+    }, // endfold
+    {  // startfold Terms of Service
       "element": ELEMENT_NAMES.editableLinkModal,
       "text": "Terms of Service",
       "children": [
@@ -57,9 +57,8 @@ export class FooterSection extends EditableSection { // startfold
           ],
         },
       ],
-    },
-    // Accessibility Statement
-    {
+    }, // endfold
+    { // startfold Accessibility Statement
       "element": ELEMENT_NAMES.editableLinkModal,
       "text": "Accessibility Statement",
       "children": [
@@ -77,8 +76,7 @@ export class FooterSection extends EditableSection { // startfold
           ],
         },
       ],
-    },
-    // Pexels Attribution
+    }, // endfold
     {
       "element": ELEMENT_NAMES.imageAttributionSet,
     },

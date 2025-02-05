@@ -37,7 +37,6 @@ export class SaveButton extends HTMLButtonElement {
         this.store.saveSrc("head", content.head);
     }
     saveToCloud() {
-        console.log("saving to cloud");
         const main = document.querySelector("main").outerHTML;
         const head = document.querySelector("head").outerHTML;
         const content = {

@@ -2,15 +2,18 @@
 
 section[is="footer-section"] {
   background-color: var(--color-two);
-  display: grid;
-  grid-template-columns: auto auto auto 1fr auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
+  justify-content: center;
 
   > picture {
-    grid-column: 1;
-    width: 100%;
+    flex: 0 0 100%;
+    display: grid;
+    justify-items: center;
     source {
         max-width: 150px;
     }
@@ -20,13 +23,19 @@ section[is="footer-section"] {
       aspect-ratio: unset;
     }
   }
-  > a {
-    grid-row: 3;
-    cursor: pointer;
+  > p {
+    flex: 0 0 100%;
+    text-align: center;
   }
   > ul {
-    grid-row: 2;
-    grid-column: 1 / span 3;
+    flex: 0 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  > div {
+    flex: 0 0 150px;
+    text-align: center;
+    cursor: pointer;
   }
 
   dialog {
@@ -46,17 +55,34 @@ section[is="footer-section"] {
     p {
       margin: auto;
       width: 90%;
+      color: var(--color-one);
+      text-align: start;
+    }
+    a {
+      color: var(--color-one);
     }
     button {
       position: absolute;
       top: 0px;
       right: 0px;
       background: none;
+      color: var(--color-one);
     }
   }
+  div[is="image-attribution-set"] dialog {
+    li {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  ul {
+    min-height: 100px;
+    min-width: 100px;
+  }
+
   @media (prefers-color-scheme: dark) {
     dialog {
-        h2 {
+        h2, a, p {
             color: var(--color-four);
         }
         background-color: var(--color-one);
@@ -66,7 +92,9 @@ section[is="footer-section"] {
         color: var(--color-four);
     }
   }
-  @media screen and (min-width: base.$tablet) {
+  @media screen and (min-width: base.$notebook) {
+    display: grid;
+
     gap: 20px;
     dialog {
         padding: 60px 90px;
@@ -76,15 +104,42 @@ section[is="footer-section"] {
         }
     }
     > picture {
+      grid-row: 1 / span 2;
       grid-column: 1 / span 2;
+      justify-items: start;
+
+      source {
+          max-width: 150px;
+      }
+      img {
+        grid-row: 1;
+        width: 150px;
+        object-fit: contain;
+        aspect-ratio: unset;
+      }
     }
-    > a {
-      grid-row: 2;
+    > p {
+      grid-row: 1;
+      grid-column: 3 / span 4;
     }
     > ul {
-      grid-row: 1;
-      grid-column: 5;
-      justify-self: end;
+      grid-row: 2;
+      grid-column: 3 / span 4;
+    }
+    > div {
+      grid-row: 3;
+    }
+    div[is="image-attribution-set"] dialog {
+      li {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        a {
+          color: var(--color-one);
+        }
+        p {
+          text-align: start;
+        }
+      }
     }
   }
 }

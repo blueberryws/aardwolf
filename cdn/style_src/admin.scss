@@ -367,3 +367,8 @@ button[is="reset-button"] {
     right: 150px;
     z-index: 9999;
 }
+
+ul[is="social-media-links"]:hover {
+  border: 1px solid var(--color-three);
+  cursor: pointer;
+}
