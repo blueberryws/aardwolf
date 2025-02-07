@@ -1,4 +1,5 @@
 import { IS_LOCAL, GET_STORE } from "../globals.js";
+import { dispatch, SetDocumentEditable, UnsetDocumentEditable } from "../interfaces/events.js";
 
 
 export const SaveButtonName = "save-button";
@@ -32,16 +33,22 @@ export class SaveButton extends HTMLButtonElement {
         return content
     }
     saveToLocal() {
+        dispatch(UnsetDocumentEditable);
         const content = this.getContent();
         this.store.saveSrc("main", content.main);
         this.store.saveSrc("head", content.head);
+        dispatch(SetDocumentEditable);
+        console.log("save complete");
     }
     saveToCloud() {
+        dispatch(UnsetDocumentEditable);
         const main = document.querySelector("main").outerHTML;
         const head = document.querySelector("head").outerHTML;
+        const lang = document.documentElement.lang || "en";
         const content = {
             "head": head,
             "main": main,
+            "lang": lang,
             "site_json": "{}",
         }
 
@@ -51,8 +58,14 @@ export class SaveButton extends HTMLButtonElement {
             body: JSON.stringify(content),
         })
         .then(resp => resp.json())
-        .then(r => console.log(r))
-        .catch(e => console.error(e));
+        .then(r => {
+            console.log(r);
+            window.location.reload(true);
+        })
+        .catch(e => {
+            console.error(e);
+            dispatch(SetDocumentEditable);
+        });
     }
 }
 

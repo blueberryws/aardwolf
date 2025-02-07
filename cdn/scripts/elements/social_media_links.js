@@ -9,6 +9,14 @@ export class SocialMediaLinks extends HTMLUListElement { // startfold
     "facebook",
     "twitter",
     "youtube",
+    "x",
+    "discord",
+    "linkedin",
+    "pinterest",
+    "tiktok",
+    "instagram",
+    "github",
+    "threads",
   ];
 
   constructor() { // startfold
@@ -28,6 +36,8 @@ export class SocialMediaLinks extends HTMLUListElement { // startfold
        const linkA = document.createElement('a');
        linkA.dataset.linkType = link.linkType;
        linkA.href = link.href;
+       linkA.setAttribute("aria-label", `Link to ${link.linkType}`);
+       linkA.setAttribute("target", "_blank");
        newLink.appendChild(linkA);
        this.appendChild(newLink);
     }

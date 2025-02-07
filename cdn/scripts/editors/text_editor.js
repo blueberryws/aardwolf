@@ -22,6 +22,7 @@ export class TextEditor extends ElementEditor {
     this.element.contentEditable = true 
   } // endfold
   unsetEditable() { // startfold
+    console.log("unset editable called");
     this.element.removeAttribute("contentEditable");
   } // endfold
     clean() { // startfold

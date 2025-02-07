@@ -1,4 +1,6 @@
 import { AdminModal } from "../modals/base.js";
+import { fromHTML } from "../utils/html.js";
+
 // Data Element
 export const EditableHeadName = "editable-head";
 export function getEditableHead() {
@@ -64,9 +66,11 @@ export class HeadEditorModal extends AdminModal { // startfold
   contentClass = "modal-content";
   connectedCallback() { // startfold
     this.head = getEditableHead();
+    this.document = document.documentElement;
     this.beforeAction = () => {
         this.head.siteTitle.innerText = this.titleText.value; 
         this.head.description.content = this.descriptionText.value;
+        this.document.lang = this.languageSelector.value;
         this.head.getEditableChildren().forEach(child => child.remove());
         for (let child of this.metaChildren.children) {
             const selector = child.querySelector("select");
@@ -130,6 +134,16 @@ export class HeadEditorModal extends AdminModal { // startfold
     this.descriptionText.type = "text";
     this.descriptionText.value = this.head.description.content || "";
     content.appendChild(this.descriptionText);
+
+    const languageLabel = document.createElement("label");
+    languageLabel.innerText = "Language:";
+    content.appendChild(languageLabel);
+
+    this.languageSelector = document.createElement("select");
+    this.languageSelector.appendChild(fromHTML("<option value='en'>English</option>"));
+    this.languageSelector.appendChild(fromHTML("<option value='es'>Spanish</option>"));
+    this.languageSelector.value = this.document.lang || 'en';
+    content.appendChild(this.languageSelector);
 
     this.metaChildren = document.createElement("div");
     for (let meta of this.head.getEditableChildren()) {

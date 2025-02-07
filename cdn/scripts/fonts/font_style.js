@@ -249,10 +249,12 @@ export class FontStyle extends HTMLStyleElement { // startfold
   @font-face {
     font-family: '${fontPair.header.name}';
     src: url('${fontPair.header.url}');
+    font-display: swap;
   }
   @font-face {
     font-family: '${fontPair.body.name}';
     src: url('${fontPair.body.url}');
+    font-display: swap;
   }
   :root {
     --header-font-family: '${fontPair.header.name}';

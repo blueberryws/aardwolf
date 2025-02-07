@@ -5,7 +5,6 @@ export class DocumentStore { // startfold
     keyPath = "id";
 
     constructor() { // startfold
-        const queue = [];
         const request = indexedDB.open(this.dbName, this.dbVersion);
         request.onerror = (event) => {
             console.error(event);
@@ -15,7 +14,10 @@ export class DocumentStore { // startfold
         };
         request.onupgradeneeded = (event) => {
           this.db = event.target.result;
-          this.createStore();
+          this.db.createObjectStore(
+            this.storeName,
+            { keyPath: this.keyPath }
+          );
         };
     } // endfold
     saveSrc(key, src) { // startfold
@@ -34,12 +36,6 @@ export class DocumentStore { // startfold
             }
         }
     }  // endfold
-    createStore() { // startfold
-      this.db.createObjectStore(
-        this.storeName,
-        { keyPath: this.keyPath }
-      );
-    } // endfold
     loadSrc(key, callback) { // startfold
         if (this.db == null) {
             setTimeout(() => this.loadSrc(key, callback), 1000);
@@ -56,4 +52,13 @@ export class DocumentStore { // startfold
          .objectStore(this.storeName)
          .delete(key);
     } // endfold
+    loadToDocument(selector, callback) {
+      this.loadSrc(selector, (res) => {
+        if (res != null) {
+            const docSection = document.querySelector(selector);
+            docSection.outerHTML = res.src;
+        }
+        callback();
+      });
+    }
 } // endfold
