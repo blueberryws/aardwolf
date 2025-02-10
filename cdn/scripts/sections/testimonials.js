@@ -1,5 +1,3 @@
-import { LOG } from '../utils/logger.js';
-
 import { EditableSection } from "./base.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -85,16 +83,8 @@ export class TestimonialsSection extends EditableSection { // startfold
   ]
   constructor() {
     super();
-    try {
-      this.editor.ensureDefaults();
-    } catch (error) {
-      LOG.error(`Failed to ensure defaults in TestimonialsSection: ${error.message}`);
-    }
+    this.editor.ensureDefaults();
   }
 }
-try {
-  register(TestimonialsSection);
-} catch (error) {
-  LOG.error(`Failed to register TestimonialsSection: ${error.message}`);
-}
+register(TestimonialsSection);
 // endfold

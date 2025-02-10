@@ -1,5 +1,3 @@
-import { LOG } from '../utils/logger.js';
-
 import { EditableSection } from "./base.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -38,35 +36,20 @@ export class ContactFormSection extends EditableSection { // startfold
   </form>`
     },
   ]
-  
   constructor() {
     super();
-    try {
-      this.editor.ensureDefaults();
-      this.addSiteId();
-    } catch (error) {
-      LOG.error("Error in constructor of ContactFormSection: " + error.message);
-    }
+    this.editor.ensureDefaults();
+    this.addSiteId();
   }
-  
   addSiteId() {
-    try {
-      const siteId = document.documentElement.dataset.siteId;
-      const form = this.querySelector("form");
-      const siteIdField = document.createElement("input");
-      siteIdField.type = "hidden";
-      siteIdField.name = "site-id";
-      siteIdField.value = siteId;
-      form.appendChild(siteIdField);
-    } catch (error) {
-      LOG.error("Error in addSiteId method of ContactFormSection: " + error.message);
-    }
+    const siteId = document.documentElement.dataset.siteId;
+    const form = this.querySelector("form");
+    const siteIdField = document.createElement("input");
+    siteIdField.type = "hidden";
+    siteIdField.name = "site-id";
+    siteIdField.value = siteId;
+    form.appendChild(siteIdField);
   }
 }
-
-try {
-  register(ContactFormSection);
-} catch (error) {
-  LOG.error("Error registering ContactFormSection: " + error.message);
-}
+register(ContactFormSection);
 // endfold

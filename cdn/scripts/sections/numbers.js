@@ -1,5 +1,3 @@
-import { LOG } from '../utils/logger.js';
-
 import { EditableSection } from "./base.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -62,22 +60,10 @@ export class NumbersSection extends EditableSection { // startfold
       ],
     }
   ]
-
   constructor() {
     super();
-    try {
-      this.editor.ensureDefaults();
-      LOG.info("Defaults ensured successfully in NumbersSection constructor.");
-    } catch (error) {
-      LOG.error("Failed to ensure defaults in NumbersSection constructor: " + error.message);
-    }
+    this.editor.ensureDefaults();
   }
 }
-
-try {
-  register(NumbersSection);
-  LOG.info("NumbersSection registered successfully.");
-} catch (error) {
-  LOG.error("Failed to register NumbersSection: " + error.message);
-}
+register(NumbersSection);
 // endfold

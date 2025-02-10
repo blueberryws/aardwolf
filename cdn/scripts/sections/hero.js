@@ -1,5 +1,3 @@
-import { LOG } from '../utils/logger.js';
-
 import { EditableSection } from "./base.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -37,21 +35,10 @@ export class HeroSection extends EditableSection { // startfold
       "element": ELEMENT_NAMES.editableLinkButton,
     },
   ];
-  
   constructor() {
-    super();
-    try {
-      this.editor.ensureDefaults();
-      LOG.info("Defaults ensured for HeroSection");
-    } catch (error) {
-      LOG.error("Failed to ensure defaults in HeroSection: " + error.message);
-    }
+    super()
+    this.editor.ensureDefaults();
   };
 } // endfold
 
-try {
-  register(HeroSection);
-  LOG.info("HeroSection registered successfully");
-} catch (error) {
-  LOG.error("Failed to register HeroSection: " + error.message);
-}
+register(HeroSection);

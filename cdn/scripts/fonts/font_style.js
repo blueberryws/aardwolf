@@ -235,7 +235,6 @@ export class FontStyle extends HTMLStyleElement { // startfold
     let fontPair = this.fonts.find((fp) => fp.header.name == this.dataset.headerFont && fp.body.name == this.dataset.bodyFont);
     if (fontPair == null) {
         LOG.error("Unable to set fonts!");
-        alert(this.userErrorMessage);
         return;
     }
 
@@ -296,7 +295,6 @@ export class FontEditorModal extends AdminModal { // startfold
         this.render();
     } catch (error) {
         LOG.error("Error in FontEditorModal connectedCallback: " + error);
-        alert(this.fontStyle.userErrorMessage);
     }
   } // endfold
   getContent() { // startfold
@@ -318,7 +316,7 @@ export class FontEditorModal extends AdminModal { // startfold
   <p style="font-family: '${bodyFont}'; font-weight: ${fontPair.body.style.medium.weight};">${fontPair.description}</p>
 `
         if (this.fontStyle.dataset.headerFont == headerFont && this.fontStyle.dataset.bodyFont == bodyFont) {
-          card.classList.add("selected"); // Add selected class here.
+          card.classList.add("selected-font-pair"); // Add selected class here.
         }
         content.appendChild(card);
     }

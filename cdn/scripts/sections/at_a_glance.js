@@ -1,5 +1,3 @@
-import { LOG } from '../utils/logger.js';
-
 import { EditableSection } from "./base.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -59,21 +57,11 @@ export class AtAGlanceSection extends EditableSection { // startfold
         },
       ],
     }
-  ];
-
+  ]
   constructor() {
     super();
-    try {
-      this.editor.ensureDefaults();
-    } catch (error) {
-      LOG.error("Failed to ensure defaults in AtAGlanceSection constructor: " + error.message);
-    }
+    this.editor.ensureDefaults();
   }
 }
-
-try {
-  register(AtAGlanceSection);
-} catch (error) {
-  LOG.error("Failed to register AtAGlanceSection: " + error.message);
-}
+register(AtAGlanceSection);
 // endfold

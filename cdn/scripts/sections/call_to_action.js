@@ -1,5 +1,3 @@
-import { LOG } from '../utils/logger.js';
-
 import { EditableSection } from "./base.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -42,17 +40,9 @@ export class CallToActionSection extends EditableSection { // startfold
     },
   ];
   constructor() {
-    super();
-    try {
-      this.editor.ensureDefaults();
-    } catch (error) {
-      LOG.error("Failed to ensure defaults in CallToActionSection constructor: " + error.message);
-    }
+    super()
+    this.editor.ensureDefaults();
   };
 }
-try {
-  register(CallToActionSection);
-} catch (error) {
-  LOG.error("Failed to register CallToActionSection: " + error.message);
-}
+register(CallToActionSection);
 // endfold

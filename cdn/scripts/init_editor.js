@@ -24,11 +24,9 @@ export async function loadEditor() {
       const resetBtn = new ResetButton();
       document.body.appendChild(resetBtn);
     } else {
-      LOG.info("Running in remote mode.");
+      LOG.info("Running in cloud mode.");
       const sections = document.querySelectorAll("section");
       if (sections.length < 2) {
-        LOG.warn("Less than 2 sections found, loading from sandbox.");
-        
         store.loadSrc("main", (res) => {
           if (res != null) {
             const modal = modalBuilder()
@@ -51,7 +49,6 @@ export async function loadEditor() {
           }
         });
       } else {
-        LOG.info("Sufficient sections found, setting document as editable.");
         dispatch(SetDocumentEditable);
       }
     }
