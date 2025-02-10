@@ -1,8 +1,8 @@
 export function fromHTML(html) {
     const template = document.createElement('template');
     template.innerHTML = html.trim();
-    const nNodes = template.content.childNodes.length;
-    if (nNodes !== 1) {
+    const numberOfNodes = template.content.childNodes.length;
+    if (numberOfNodes !== 1) {
         throw new Error(
             `html parameter must represent a single node; got ${nNodes}. ` +
             'Note that leading or trailing spaces around an element in your ' +
@@ -19,36 +19,34 @@ function htmlToNodes(html) {
     return template.content.childNodes;
 }
 
-export function htmlFromJSON(json, registry) {
-  if (json.element == "raw") {
-    const element = fromHTML(json.content);
-    return element;
+export function htmlFromJSON(jsonData, registry) {
+  if (jsonData.element == "raw") {
+    return fromHTML(jsonData.content);
   }
-  const elClass = registry[json.element];
-  const element = new elClass();
-  if (json.text != null) {
-    element.innerText = json.text;
+  const ElementClass = registry[jsonData.element];
+  const element = new ElementClass();
+
+
+  if (jsonData.text != null) {
+    element.innerText = jsonData.text;
   }
-  if (json.classes != null) {
-    json.classes.forEach(e => {element.classList.add(e)});
+
+  if (jsonData.classes != null) {
+    jsonData.classes.forEach(className => {element.classList.add(className)});
   }
-  if (json.children != null) {
-    for (const child of json.children) {
+
+  const supportedAttributes = ['onclick', 'data', 'type', 'onload'];
+  supportedAttributes.forEach(attr => {
+    if (jsonData[attr] != null) {
+        element.setAttribute(attr, jsonData[attr]);
+    }
+  });
+
+  if (jsonData.children != null) {
+    for (const child of jsonData.children) {
         element.appendChild(htmlFromJSON(child, registry));
     }
   }
-  if (json.onclick != null) {
-    element.setAttribute("onclick", json.onclick);
-  }
-  if (json.data != null) {
-    element.setAttribute("data", json.data);
-  }
-  if (json.type != null) {
-    element.setAttribute("type", json.type);
-  }
-  if (json.onload != null) {
-    element.setAttribute("onload", json.onload);
-  }
+
   return element
-  // have to add "children" support
 }
