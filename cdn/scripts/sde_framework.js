@@ -1,3 +1,5 @@
+import { LOG } from './utils/logger.js';
+
 import { ColorStyle } from "./colors/color_style.js";
 import { FontStyle } from "./fonts/font_style.js";
 import { EditableHead } from "./metadata/metadata_editor.js";
@@ -37,4 +39,9 @@ import { EditableSectionEditor } from "./editors/section_editor.js";
 
 import { loadEditor } from "./init_editor.js";
 
-loadEditor();
+try {
+    loadEditor();
+    LOG.info("Editor loaded successfully.");
+} catch (error) {
+    LOG.error("Failed to load editor: " + error.message);
+}

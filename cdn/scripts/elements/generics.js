@@ -1,3 +1,5 @@
+import { LOG } from '../utils/logger.js';
+
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
 export class UnorderedList extends HTMLUListElement { // startfold
@@ -8,7 +10,11 @@ export class UnorderedList extends HTMLUListElement { // startfold
     super();
   } // endfold
 } // endfold
-register(UnorderedList);
+try {
+  register(UnorderedList);
+} catch (error) {
+  LOG.error(`Failed to register UnorderedList: ${error.message}`);
+}
 
 export class ListItem extends HTMLLIElement { // startfold
   static elementName = ELEMENT_NAMES.listItem
@@ -18,7 +24,11 @@ export class ListItem extends HTMLLIElement { // startfold
     super();
   } // endfold
 } // endfold
-register(ListItem);
+try {
+  register(ListItem);
+} catch (error) {
+  LOG.error(`Failed to register ListItem: ${error.message}`);
+}
 
 export class DetailsElement extends HTMLDetailsElement { // startfold
   static elementName = ELEMENT_NAMES.detailsElement
@@ -28,7 +38,11 @@ export class DetailsElement extends HTMLDetailsElement { // startfold
     super();
   } // endfold
 } // endfold
-register(DetailsElement);
+try {
+  register(DetailsElement);
+} catch (error) {
+  LOG.error(`Failed to register DetailsElement: ${error.message}`);
+}
 
 export class SummaryElement extends HTMLElement { // startfold
   static elementName = ELEMENT_NAMES.summaryElement
@@ -38,7 +52,11 @@ export class SummaryElement extends HTMLElement { // startfold
     super();
   } // endfold
 } // endfold
-register(SummaryElement);
+try {
+  register(SummaryElement);
+} catch (error) {
+  LOG.error(`Failed to register SummaryElement: ${error.message}`);
+}
 
 export class DialogElement extends HTMLDialogElement { // startfold
   static elementName = ELEMENT_NAMES.dialogElement
@@ -48,7 +66,11 @@ export class DialogElement extends HTMLDialogElement { // startfold
     super();
   } // endfold
 } // endfold
-register(DialogElement);
+try {
+  register(DialogElement);
+} catch (error) {
+  LOG.error(`Failed to register DialogElement: ${error.message}`);
+}
 
 export class ButtonElement extends HTMLButtonElement { // startfold
   static elementName = ELEMENT_NAMES.buttonElement
@@ -58,7 +80,11 @@ export class ButtonElement extends HTMLButtonElement { // startfold
     super();
   } // endfold
 } // endfold
-register(ButtonElement);
+try {
+  register(ButtonElement);
+} catch (error) {
+  LOG.error(`Failed to register ButtonElement: ${error.message}`);
+}
 
 export class ObjectElement extends HTMLObjectElement { // startfold
   static elementName = ELEMENT_NAMES.objectElement
@@ -68,7 +94,11 @@ export class ObjectElement extends HTMLObjectElement { // startfold
     super();
   } // endfold
 } // endfold
-register(ObjectElement);
+try {
+  register(ObjectElement);
+} catch (error) {
+  LOG.error(`Failed to register ObjectElement: ${error.message}`);
+}
 
 export class FigureElement extends HTMLElement { // startfold
   static elementName = ELEMENT_NAMES.figureElement
@@ -78,7 +108,11 @@ export class FigureElement extends HTMLElement { // startfold
     super();
   } // endfold
 } // endfold
-register(FigureElement);
+try {
+  register(FigureElement);
+} catch (error) {
+  LOG.error(`Failed to register FigureElement: ${error.message}`);
+}
 
 export class BlockquoteElement extends HTMLElement { // startfold
   static elementName = ELEMENT_NAMES.blockquoteElement
@@ -88,7 +122,11 @@ export class BlockquoteElement extends HTMLElement { // startfold
     super();
   } // endfold
 } // endfold
-register(BlockquoteElement);
+try {
+  register(BlockquoteElement);
+} catch (error) {
+  LOG.error(`Failed to register BlockquoteElement: ${error.message}`);
+}
 
 export class FigcaptionElement extends HTMLElement { // startfold
   static elementName = ELEMENT_NAMES.figcaptionElement
@@ -98,4 +136,8 @@ export class FigcaptionElement extends HTMLElement { // startfold
     super();
   } // endfold
 } // endfold
-register(FigcaptionElement);
+try {
+  register(FigcaptionElement);
+} catch (error) {
+  LOG.error(`Failed to register FigcaptionElement: ${error.message}`);
+}

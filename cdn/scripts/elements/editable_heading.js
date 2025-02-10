@@ -1,3 +1,5 @@
+import { LOG } from '../utils/logger.js';
+
 import { TextEditor } from "../editors/text_editor.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -7,8 +9,13 @@ export class EditableHeading extends HTMLHeadingElement { // startfold
 
   constructor() { // startfold
     super();
-    this.editor = new TextEditor(this);
-    this.setAttribute("is", this.constructor.elementName);
+    try {
+      this.editor = new TextEditor(this);
+      this.setAttribute("is", this.constructor.elementName);
+    } catch (error) {
+      LOG.error(`Failed to initialize EditableHeading: ${error.message}`);
+      throw error; // Rethrow the error after logging
+    }
   } // endfold
 
 } // endfold
@@ -43,9 +50,13 @@ export class EditableH6 extends EditableHeading {
     static elementType =  "h6";
 }
 
-register(EditableH1);
-register(EditableH2);
-register(EditableH3);
-register(EditableH4);
-register(EditableH5);
-register(EditableH6);
+try {
+  register(EditableH1);
+  register(EditableH2);
+  register(EditableH3);
+  register(EditableH4);
+  register(EditableH5);
+  register(EditableH6);
+} catch (error) {
+  LOG.error(`Failed to register editable headers: ${error.message}`);
+}

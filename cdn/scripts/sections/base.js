@@ -1,3 +1,5 @@
+import { LOG } from '../utils/logger.js';
+
 import { EditableSectionEditor } from "../editors/section_editor.js";
 
 export class EditableSection extends HTMLElement { // startfold
@@ -11,7 +13,12 @@ export class EditableSection extends HTMLElement { // startfold
 
   constructor() { // startfold
     super();
-    this.editor = new EditableSectionEditor(this);
-    this.setAttribute("is", this.constructor.elementName);
+    try {
+      this.editor = new EditableSectionEditor(this);
+      this.setAttribute("is", this.constructor.elementName);
+      LOG.info("EditableSection constructed successfully.");
+    } catch (error) {
+      LOG.error("Error during EditableSection construction: " + error.message);
+    }
   } // endfold
 }

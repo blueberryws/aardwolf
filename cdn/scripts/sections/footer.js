@@ -1,3 +1,5 @@
+import { LOG } from '../utils/logger.js';
+
 import { EditableSection } from "./base.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -83,8 +85,16 @@ export class FooterSection extends EditableSection { // startfold
   ]
   constructor() {
     super();
-    this.editor.ensureDefaults();
+    try {
+      this.editor.ensureDefaults();
+    } catch (error) {
+      LOG.error("Failed to ensure defaults in FooterSection constructor: " + error.message);
+    }
   }
 }
-register(FooterSection);
+try {
+  register(FooterSection);
+} catch (error) {
+  LOG.error("Failed to register FooterSection: " + error.message);
+}
 // endfold

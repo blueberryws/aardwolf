@@ -1,6 +1,12 @@
+import { LOG } from '../utils/logger.js';
+
 export function modalBuilder() { // startfold
-  const builder = new AdminModal();
-  return builder;
+  try {
+    const builder = new AdminModal();
+    return builder;
+  } catch (error) {
+    LOG.error("Error in modalBuilder: " + error.message);
+  }
 } // endfold
 
 export class AdminModal extends HTMLDialogElement { // startfold
@@ -15,58 +21,90 @@ export class AdminModal extends HTMLDialogElement { // startfold
     this.content = document.createElement("div");
   } // endfold
   connectedCallback() { // startfold
-    this.render();
+    try {
+      this.render();
+    } catch (error) {
+      LOG.error("Error in connectedCallback: " + error.message);
+    }
   }
   render() {
-    this.innerHTML = "";
-    this.classes.forEach(cl => {
-        this.classList.add(cl);
-    });
+    try {
+      this.innerHTML = "";
+      this.classes.forEach(cl => {
+          this.classList.add(cl);
+      });
 
-    this.header = document.createElement("h2");
-    this.header.innerText = this.headerText;
-    this.appendChild(this.header);
+      this.header = document.createElement("h2");
+      this.header.innerText = this.headerText;
+      this.appendChild(this.header);
 
-    this.appendChild(this.getContent());
+      this.appendChild(this.getContent());
 
-    this.createCancelBtn();
-    this.createActionBtn();
+      this.createCancelBtn();
+      this.createActionBtn();
+    } catch (error) {
+      LOG.error("Error in render: " + error.message);
+    }
   } // endfold
   getContent() { // startfold
     return this.content;
   } // endfold
   createActionBtn() { // startfold
+    try {
       this.actionBtn = document.createElement("button");
       this.actionBtn.classList.add("admin-modal-action-btn");
       this.actionBtn.innerText = this.actionText;
-    
+
       this.actionBtn.addEventListener("click", (e) => {
-        this.beforeAction(e);
-        this.close();
-        this.remove();
+        try {
+          this.beforeAction(e);
+          this.close();
+          this.remove();
+        } catch (error) {
+          LOG.error("Error in actionBtn click handler: " + error.message);
+        }
       });
       this.appendChild(this.actionBtn);
+    } catch (error) {
+      LOG.error("Error in createActionBtn: " + error.message);
+    }
   } // endfold
   createCancelBtn() { // startfold
+    try {
       this.cancelBtn = document.createElement("button");
       this.cancelBtn.classList.add("admin-modal-cancel-btn");
       this.cancelBtn.innerText = this.cancelText;
-    
+
       this.cancelBtn.addEventListener("click", (e) => {
-        this.beforeCancel(e);
-        this.close();
-        this.remove();
+        try {
+          this.beforeCancel(e);
+          this.close();
+          this.remove();
+        } catch (error) {
+          LOG.error("Error in cancelBtn click handler: " + error.message);
+        }
       });
       this.appendChild(this.cancelBtn);
+    } catch (error) {
+      LOG.error("Error in createCancelBtn: " + error.message);
+    }
   } // endfold
   contentHTML(html) { // startfold
-    this.content.innerHTML = html
-    return this
+    try {
+      this.content.innerHTML = html;
+      return this;
+    } catch (error) {
+      LOG.error("Error in contentHTML: " + error.message);
+    }
   } // endfold
   contentNode(node) { // startfold
-    this.content.innerHTML = "";
-    this.content.appendChild(node);
-    return this
+    try {
+      this.content.innerHTML = "";
+      this.content.appendChild(node);
+      return this;
+    } catch (error) {
+      LOG.error("Error in contentNode: " + error.message);
+    }
   } // endfold
   setHeaderText(text) { // startfold
     this.headerText = text;
@@ -74,19 +112,23 @@ export class AdminModal extends HTMLDialogElement { // startfold
   } // endfold
   setActionText(text) { // startfold
     this.actionText = text;
-    return this
+    return this;
   } // endfold
   actionFunc(func) { // startfold
-    this.beforeAction = func
-    return this
+    this.beforeAction = func;
+    return this;
   } // endfold
   cancelFunc(func) { // startfold
-    this.beforeCancel = func
-    return this
+    this.beforeCancel = func;
+    return this;
   } // endfold
   showMe() { //startfold
-    document.body.appendChild(this);
-    this.showModal();
+    try {
+      document.body.appendChild(this);
+      this.showModal();
+    } catch (error) {
+      LOG.error("Error in showMe: " + error.message);
+    }
   } // endfold
 }
 customElements.define("admin-modal", AdminModal, {extends: "dialog"});

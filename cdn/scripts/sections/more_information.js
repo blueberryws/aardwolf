@@ -1,3 +1,5 @@
+import { LOG } from '../utils/logger.js';
+
 import { EditableSection } from "./base.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -27,9 +29,19 @@ export class MoreInformationSection extends EditableSection { // startfold
     },
   ];
   constructor() {
-    super()
-    this.editor.ensureDefaults();
+    super();
+    try {
+      this.editor.ensureDefaults();
+      LOG.info("Ensure defaults executed successfully in MoreInformationSection constructor.");
+    } catch (error) {
+      LOG.error("Failed to ensure defaults in MoreInformationSection constructor: " + error.message);
+    }
   };
 } // endfold
 
-register(MoreInformationSection);
+try {
+  register(MoreInformationSection);
+  LOG.info("MoreInformationSection registered successfully.");
+} catch (error) {
+  LOG.error("Failed to register MoreInformationSection: " + error.message);
+}

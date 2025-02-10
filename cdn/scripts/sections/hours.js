@@ -1,3 +1,5 @@
+import { LOG } from '../utils/logger.js';
+
 import { EditableSection } from "./base.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -37,10 +39,19 @@ export class HoursSection extends EditableSection { // startfold
       ],
     }
   ]
+  
   constructor() {
     super();
-    this.editor.ensureDefaults();
+    try {
+      this.editor.ensureDefaults();
+    } catch (error) {
+      LOG.error("Failed to ensure defaults in HoursSection constructor: " + error.message);
+    }
   }
 }
-register(HoursSection);
+try {
+  register(HoursSection);
+} catch (error) {
+  LOG.error("Failed to register HoursSection: " + error.message);
+}
 // endfold

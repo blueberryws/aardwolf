@@ -1,3 +1,5 @@
+import { LOG } from '../utils/logger.js';
+
 import { EditableSection } from "./base.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -53,8 +55,18 @@ export class FAQsSection extends EditableSection { // startfold
   ]
   constructor() {
     super();
-    this.editor.ensureDefaults();
+    try {
+      this.editor.ensureDefaults();
+      LOG.info("Default values ensured for FAQsSection.");
+    } catch (error) {
+      LOG.error("Error ensuring default values in FAQsSection constructor: " + error.message);
+    }
   }
 }
-register(FAQsSection);
+try {
+  register(FAQsSection);
+  LOG.info("FAQsSection registered successfully.");
+} catch (error) {
+  LOG.error("Error registering FAQsSection: " + error.message);
+}
 // endfold

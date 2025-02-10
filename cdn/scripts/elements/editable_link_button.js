@@ -1,3 +1,5 @@
+import { LOG } from '../utils/logger.js';
+
 import { LinkButtonEditor } from "../editors/link_button_editor.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
@@ -8,17 +10,34 @@ export class EditableLinkButton extends HTMLAnchorElement { // startfold
 
   constructor() { // startfold
     super();
-    this.ensureButton()
-    this.editor = new LinkButtonEditor(this, this.button);
-    this.setAttribute("is", EditableLinkButton.elementName);
+    try {
+      this.ensureButton();
+      this.editor = new LinkButtonEditor(this, this.button);
+      this.setAttribute("is", EditableLinkButton.elementName);
+    } catch (error) {
+      LOG.error("Error during EditableLinkButton construction: " + error.message);
+    }
   } // endfold
+
   ensureButton() {
-    this.button = this.querySelector("button");
-    if (this.button == null) {
+    try {
+      this.button = this.querySelector("button");
+      if (this.button == null) {
         this.button = document.createElement("button");
         this.appendChild(this.button);
         this.button.innerText = this.buttonDefault;
+        LOG.debug("Button created and added to EditableLinkButton.");
+      } else {
+        LOG.info("Button already exists in EditableLinkButton.");
+      }
+    } catch (error) {
+      LOG.error("Error in ensureButton: " + error.message);
     }
   }
 } // endfold
-register(EditableLinkButton);
+
+try {
+  register(EditableLinkButton);
+} catch (error) {
+  LOG.error("Error registering EditableLinkButton: " + error.message);
+}

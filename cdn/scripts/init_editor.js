@@ -1,3 +1,5 @@
+import { LOG } from './utils/logger.js';
+
 import { AdminAside } from "./admin/admin_aside.js";
 import { SaveButton } from "./save/save_button.js";
 import { ResetButton } from "./save/reset_button.js";
@@ -6,24 +8,30 @@ import { dispatch, SetDocumentEditable, UnsetDocumentEditable, SetLoading, Unset
 import { IS_LOCAL, GET_STORE } from "./globals.js";
 import { modalBuilder } from "./modals/base.js";
 
-
 export async function loadEditor() {
-  dispatch(SetLoading);
+  try {
+    dispatch(SetLoading);
+    LOG.info("Loading editor...");
 
-  const saveBtn = new SaveButton();
-  const store = GET_STORE();
-  if (IS_LOCAL()) {
-    store.loadToDocument("head", () => dispatch(SetDocumentEditable));
-    store.loadToDocument("main", () => dispatch(SetDocumentEditable));
+    const saveBtn = new SaveButton();
+    const store = GET_STORE();
+    
+    if (IS_LOCAL()) {
+      LOG.info("Running in local mode.");
+      store.loadToDocument("head", () => dispatch(SetDocumentEditable));
+      store.loadToDocument("main", () => dispatch(SetDocumentEditable));
 
-    const resetBtn = new ResetButton();
-    document.body.appendChild(resetBtn);
-  } else {
-    const sections = document.querySelectorAll("section");
-    if (sections.length < 2) {
-      store.loadSrc("main", (res) => {
-        if (res != null) {
-          const modal = modalBuilder()
+      const resetBtn = new ResetButton();
+      document.body.appendChild(resetBtn);
+    } else {
+      LOG.info("Running in remote mode.");
+      const sections = document.querySelectorAll("section");
+      if (sections.length < 2) {
+        LOG.warn("Less than 2 sections found, loading from sandbox.");
+        
+        store.loadSrc("main", (res) => {
+          if (res != null) {
+            const modal = modalBuilder()
               .setHeaderText("Load From Sandbox?")
               .contentHTML("<p>A sandbox site has been detected. Do you want to load the site from your sandbox?</p>")
               .setActionText("Load")
@@ -38,14 +46,23 @@ export async function loadEditor() {
                 });
               })
               .showMe();
-        }
-      });
-    } else {
-      dispatch(SetDocumentEditable);
+          } else {
+            LOG.error("Failed to load from sandbox: response is null.");
+          }
+        });
+      } else {
+        LOG.info("Sufficient sections found, setting document as editable.");
+        dispatch(SetDocumentEditable);
+      }
     }
-  }
-  document.body.appendChild(saveBtn);
+    document.body.appendChild(saveBtn);
 
-  const adminAside = new AdminAside();
-  document.body.appendChild(adminAside);
+    const adminAside = new AdminAside();
+    document.body.appendChild(adminAside);
+    LOG.info("Editor loaded successfully.");
+  } catch (error) {
+    LOG.fatal("An error occurred while loading the editor: " + error.message);
+  } finally {
+    dispatch(UnsetLoading);
+  }
 }

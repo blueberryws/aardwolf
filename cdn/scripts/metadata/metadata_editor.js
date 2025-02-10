@@ -1,49 +1,64 @@
+import { LOG } from '../utils/logger.js';
+
 import { AdminModal } from "../modals/base.js";
 import { fromHTML } from "../utils/html.js";
 
 // Data Element
 export const EditableHeadName = "editable-head";
 export function getEditableHead() {
-    return document.querySelector(`head[is='${EditableHeadName}']`)
+    const head = document.querySelector(`head[is='${EditableHeadName}']`);
+    if (!head) {
+        LOG.error("EditableHead not found in the document.");
+    }
+    return head;
 }
 
 export class EditableHead extends HTMLHeadElement { // startfold
-  // This is how the component communicates with itself between edits.
-  userErrorMessage = "Unable to save metadata.\nIf this persists, please contact support."
+  userErrorMessage = "Unable to save metadata.\nIf this persists, please contact support.";
   supportedNames = [
     "rating",
     "google-site-verification",
     "robots",
     "google",
     "googlebot",
-  ]
+  ];
 
   constructor() { // startfold
     super();
     [this.siteTitle, this.description] = this.ensureDefaults();
+
     const other = getEditableHead();
     if (other != null && other !== this) {
-        throw(`There can only be ONE ${EditableHeadName} element!`);
+        LOG.fatal(`There can only be ONE ${EditableHeadName} element!`);
+        throw new Error(`There can only be ONE ${EditableHeadName} element!`);
     }
   } // endfold
+  
   openHeaditor() { // startfold
     const modal = new HeadEditorModal();
     modal.showMe();
-  } //endfold
+  } // endfold
+  
   ensureDefaults() { // startfold
     let title = this.querySelector("title");
     let description = this.querySelector("meta[name='description']");
+    
     if (title == null) {
         title = document.createElement("title");
         this.appendChild(title);
+        LOG.debug("Created a new title element.");
     }
+    
     if (description == null) {
         description = document.createElement("meta");
         description.name = "description";
         this.appendChild(description);
+        LOG.debug("Created a new meta description element.");
     }
-    return [title, description]
+    
+    return [title, description];
   } // endfold
+  
   getEditableChildren() { // startfold
     let editableChildren = [];
     for (const child of this.children) {
@@ -51,12 +66,14 @@ export class EditableHead extends HTMLHeadElement { // startfold
             child.name != null
             && this.supportedNames.includes(child.name)
         ) {
-            editableChildren.push(child)
+            editableChildren.push(child);
         }
     }
-    return editableChildren
+    LOG.info(`Found ${editableChildren.length} editable children.`);
+    return editableChildren;
   } // endfold
 }
+
 customElements.define(EditableHeadName, EditableHead, {extends: "head"});
 // endfold
 
@@ -64,28 +81,39 @@ export class HeadEditorModal extends AdminModal { // startfold
   actionText = "Update";
   headerText = "SEO and Metadata";
   contentClass = "modal-content";
+
   connectedCallback() { // startfold
-    this.head = getEditableHead();
-    this.document = document.documentElement;
-    this.beforeAction = () => {
-        this.head.siteTitle.innerText = this.titleText.value; 
-        this.head.description.content = this.descriptionText.value;
-        this.document.lang = this.languageSelector.value;
-        this.head.getEditableChildren().forEach(child => child.remove());
-        for (let child of this.metaChildren.children) {
-            const selector = child.querySelector("select");
-            const content = child.querySelector("input");
-            if (content.value != "" && content.value != null) {
-              const newMeta = document.createElement("meta");
-              newMeta.name = selector.value;
-              newMeta.content = content.value;
-              this.head.appendChild(newMeta);
+    try {
+        this.head = getEditableHead();
+        this.document = document.documentElement;
+        this.beforeAction = () => {
+            try {
+                this.head.siteTitle.innerText = this.titleText.value; 
+                this.head.description.content = this.descriptionText.value;
+                this.document.lang = this.languageSelector.value;
+                this.head.getEditableChildren().forEach(child => child.remove());
+                for (let child of this.metaChildren.children) {
+                    const selector = child.querySelector("select");
+                    const content = child.querySelector("input");
+                    if (content.value != "" && content.value != null) {
+                        const newMeta = document.createElement("meta");
+                        newMeta.name = selector.value;
+                        newMeta.content = content.value;
+                        this.head.appendChild(newMeta);
+                    }
+                }
+                LOG.info("Metadata successfully updated.");
+            } catch (error) {
+                LOG.error("Error while updating metadata: " + error.message);
             }
-        }
-    };
-    this.metaChildren = null;
-    this.render();
+        };
+        this.metaChildren = null;
+        this.render();
+    } catch (error) {
+        LOG.error("Error in connectedCallback: " + error.message);
+    }
   } // endfold
+  
   makeMetaSelector(name, content) { // startfold
     const container = document.createElement("div");
     const selector = document.createElement("select");
@@ -108,10 +136,13 @@ export class HeadEditorModal extends AdminModal { // startfold
     removeButton.innerText = "x";
     removeButton.addEventListener("click", () => {
         container.remove();
-    })
+        LOG.info("Metadata input removed.");
+    });
     container.appendChild(removeButton);
+    
     return container;
   } // endfold
+  
   getContent() { // startfold
     const content = document.createElement("div");
     content.classList.add(this.contentClass);
@@ -157,10 +188,11 @@ export class HeadEditorModal extends AdminModal { // startfold
     addButton.addEventListener("click", () => {
         const newMeta = this.makeMetaSelector(null, "");
         this.metaChildren.appendChild(newMeta);
+        LOG.info("New metadata input added.");
     });
     content.appendChild(addButton);
 
-    return content
+    return content;
   } // endfold
 } // endfold
 customElements.define("head-editor-modal", HeadEditorModal, {extends: "dialog"});
@@ -173,7 +205,14 @@ export class EditHeadButton extends HTMLButtonElement {
         super();
         this.innerText = this.buttonText;
         const fonts = getEditableHead();
-        this.addEventListener("click", fonts.openHeaditor);
+        this.addEventListener("click", () => {
+            try {
+                fonts.openHeaditor();
+                LOG.info("Opened head editor.");
+            } catch (error) {
+                LOG.error("Error opening head editor: " + error.message);
+            }
+        });
     }
 }
 

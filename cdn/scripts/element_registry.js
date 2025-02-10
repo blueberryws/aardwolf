@@ -1,7 +1,7 @@
+import { LOG } from './utils/logger.js';
+
 export const REGISTRY = {};
 
-// These are the keys to the REGISTRY for base elements.
-// It acts as an interface for sections and their defaults to grab these.
 export const ELEMENT_NAMES = {
     "unorderedList": "unordered-list",
     "listItem": "list-item",
@@ -36,9 +36,18 @@ export const ELEMENT_NAMES = {
 export const SECTIONS = {};
 
 export function register(ElementType) {
-    REGISTRY[ElementType.elementName] = ElementType; 
-    customElements.define(ElementType.elementName, ElementType, {extends: ElementType.elementType});
-    if (ElementType.sectionName != null) {
-      SECTIONS[ElementType.sectionName] = ElementType;
+    try {
+        if (!ElementType || !ElementType.elementName || !ElementType.elementType) {
+            LOG.warn("Invalid ElementType provided to register function");
+            return;
+        }
+        REGISTRY[ElementType.elementName] = ElementType; 
+        customElements.define(ElementType.elementName, ElementType, {extends: ElementType.elementType});
+        if (ElementType.sectionName != null) {
+            SECTIONS[ElementType.sectionName] = ElementType;
+        }
+        LOG.info(`Registered element: ${ElementType.elementName}`);
+    } catch (error) {
+        LOG.error(`Error registering element: ${ElementType.elementName}. Error: ${error.message}`);
     }
 }

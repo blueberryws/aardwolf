@@ -1,3 +1,5 @@
+import { LOG } from '../utils/logger.js';
+
 import { PictureEditor } from "../editors/picture_editor.js";
 import { fromHTML } from "../utils/html.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
@@ -15,45 +17,63 @@ export class EditablePicture extends HTMLPictureElement { // startfold
   defaultAttributionText = "Photo Credit: Flanoz, CC0, via Wikimedia Commons"
   defaultAttributionHref = "https://commons.wikimedia.org/wiki/File:Placeholder_view_vector.svg"
 
-
   constructor() { // startfold
     super();
     this.setAttribute("is", EditablePicture.elementName);
 
     // Set some defaults
-    if (this.dataset.attributionText == null) {this.dataset.attributionText = this.defaultAttributionText }
-    if (this.dataset.attributionHref== null) {this.dataset.attributionHref = this.defaultAttributionHref}
-    this.handleSrcChange = () => this.clearSources();
-    this.img = this.querySelector("img");
-    if (this.img == null) {
+    try {
+      if (this.dataset.attributionText == null) {
+        this.dataset.attributionText = this.defaultAttributionText 
+      }
+      if (this.dataset.attributionHref == null) {
+        this.dataset.attributionHref = this.defaultAttributionHref
+      }
+      this.handleSrcChange = () => this.clearSources();
+      this.img = this.querySelector("img");
+      if (this.img == null) {
         this.img = fromHTML(`<img src="${this.defaultImgSrc}" alt="${this.defaultAltText}">`);
         this.appendChild(this.img);
+      }
+      if (this.id == null) {
+        this.id = crypto.randomUUID()
+      }
+      this.editor = new PictureEditor(this);
+    } catch (error) {
+      LOG.error(`Error in constructor: ${error.message}`);
     }
-    if (this.id == null) {this.id = crypto.randomUUID()}
-    this.editor = new PictureEditor(this);
   } // endfold
+  
   setSrc(src) { // startfold
-    this.innerHTML = "";
+    try {
+      this.innerHTML = "";
 
-    for (const [key, val] of Object.entries(breakpoints)) {
-      const src = document.createElement("source");
-      src.classList.add(key);
-      this.appendChild(src);
-      src.setAttribute("media", `(min-width: ${val})`);
-    
-      const computedStyle = window.getComputedStyle(src);
-      const calculatedWidth = parseInt(computedStyle.getPropertyValue("max-width")) || 0;;
-      const calculatedHeight = parseInt(computedStyle.getPropertyValue("max-height")) || 0;
-    
-      src.setAttribute("data-max-width", calculatedWidth);
-      src.setAttribute("data-max-height", calculatedHeight);
+      for (const [key, val] of Object.entries(breakpoints)) {
+        const sourceElement = document.createElement("source");
+        sourceElement.classList.add(key);
+        this.appendChild(sourceElement);
+        sourceElement.setAttribute("media", `(min-width: ${val})`);
+      
+        const computedStyle = window.getComputedStyle(sourceElement);
+        const calculatedWidth = parseInt(computedStyle.getPropertyValue("max-width")) || 0;
+        const calculatedHeight = parseInt(computedStyle.getPropertyValue("max-height")) || 0;
+      
+        sourceElement.setAttribute("data-max-width", calculatedWidth);
+        sourceElement.setAttribute("data-max-height", calculatedHeight);
+      }
+      this.img.src = src;
+      this.appendChild(this.img);
+    } catch (error) {
+      LOG.error(`Error in setSrc method: ${error.message}`);
     }
-    this.img.src = src;
-    this.appendChild(this.img);
   } // endfold
    
   attributeChangedCallback(name, oldValue, newValue) {
-    dispatch(ImageSetChanged);
+    try {
+      dispatch(ImageSetChanged);
+    } catch (error) {
+      LOG.error(`Error in attributeChangedCallback: ${error.message}`);
+    }
   }
 
 } // endfold

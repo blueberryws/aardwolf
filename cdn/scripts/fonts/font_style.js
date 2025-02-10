@@ -1,8 +1,14 @@
+import { LOG } from '../utils/logger.js';
+
 import { AdminModal } from "../modals/base.js";
 // Data Element
 export const FontStyleElementName = "font-style";
 export function getFontStyle() {
-    return document.querySelector(`style[is='${FontStyleElementName}']`)
+    const element = document.querySelector(`style[is='${FontStyleElementName}']`);
+    if (!element) {
+        LOG.warn("FontStyle element not found.");
+    }
+    return element;
 }
 const STANDARD_HEADER_STYLE = {
   "x-large": {
@@ -39,7 +45,6 @@ const STANDARD_BODY_STYLE = {
 
 
 export class FontStyle extends HTMLStyleElement { // startfold
-  // This is how the component communicates with itself between edits.
   static observedAttributes = ["data-header-font", "data-body-font"];
   defaultHeaderFont = "Open Sans Condensed";
   defaultBodyFont = "Lora"
@@ -209,7 +214,8 @@ export class FontStyle extends HTMLStyleElement { // startfold
     this.render();
     const other = getFontStyle();
     if (other != null && other !== this) {
-        throw(`There can only be ONE ${FontStyleElementName} element!`);
+        LOG.error(`There can only be ONE ${FontStyleElementName} element!`);
+        throw new Error(`There can only be ONE ${FontStyleElementName} element!`);
     }
   } // endfold
   openFontEditor() { // startfold
@@ -228,8 +234,9 @@ export class FontStyle extends HTMLStyleElement { // startfold
   render() { // startfold
     let fontPair = this.fonts.find((fp) => fp.header.name == this.dataset.headerFont && fp.body.name == this.dataset.bodyFont);
     if (fontPair == null) {
-        console.error("Unable to set fonts!");
-        return
+        LOG.error("Unable to set fonts!");
+        alert(this.userErrorMessage);
+        return;
     }
 
     let headerFontVars = "";
@@ -265,7 +272,6 @@ export class FontStyle extends HTMLStyleElement { // startfold
 `
   } // endfold
   attributeChangedCallback(name, oldValue, newValue) { // startfold
-    // Body font change comes second.
     if (name == "data-body-font") {
       this.render();
     }
@@ -279,14 +285,19 @@ export class FontEditorModal extends AdminModal { // startfold
   headerText = "Edit Fonts";
   contentClass = "modal-content";
   connectedCallback() { // startfold
-    this.fontStyle = getFontStyle();
-    this.curHeaderFont = this.fontStyle.dataset.headerFont;
-    this.curBodyFont = this.fontStyle.dataset.bodyFont;
-    this.beforeCancel = () => {
-        this.fontStyle.dataset.headerFont = this.curHeaderFont;
-        this.fontStyle.dataset.bodyFont = this.curBodyFont;
-    };
-    this.render();
+    try {
+        this.fontStyle = getFontStyle();
+        this.curHeaderFont = this.fontStyle.dataset.headerFont;
+        this.curBodyFont = this.fontStyle.dataset.bodyFont;
+        this.beforeCancel = () => {
+            this.fontStyle.dataset.headerFont = this.curHeaderFont;
+            this.fontStyle.dataset.bodyFont = this.curBodyFont;
+        };
+        this.render();
+    } catch (error) {
+        LOG.error("Error in FontEditorModal connectedCallback: " + error);
+        alert(this.fontStyle.userErrorMessage);
+    }
   } // endfold
   getContent() { // startfold
     const content = document.createElement("div");
@@ -307,7 +318,7 @@ export class FontEditorModal extends AdminModal { // startfold
   <p style="font-family: '${bodyFont}'; font-weight: ${fontPair.body.style.medium.weight};">${fontPair.description}</p>
 `
         if (this.fontStyle.dataset.headerFont == headerFont && this.fontStyle.dataset.bodyFont == bodyFont) {
-          // Add selected class here.
+          card.classList.add("selected"); // Add selected class here.
         }
         content.appendChild(card);
     }
@@ -325,7 +336,11 @@ export class EditFontButton extends HTMLButtonElement {
         super();
         this.innerText = this.buttonText;
         const fonts = getFontStyle();
-        this.addEventListener("click", fonts.openFontEditor);
+        if (fonts) {
+            this.addEventListener("click", fonts.openFontEditor);
+        } else {
+            LOG.warn("FontStyle element not found when creating EditFontButton.");
+        }
     }
 }
 

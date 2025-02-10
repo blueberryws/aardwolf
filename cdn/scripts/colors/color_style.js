@@ -1,3 +1,5 @@
+import { LOG } from '../utils/logger.js';
+
 import { MakeToast } from "../utils/make_toast.js";
 import { EditColorsEvent } from "../interfaces/events.js";
 import { ColorEditorModal } from "./color_editor_modal.js";
@@ -9,7 +11,6 @@ export function getColorStyle() {
 }
 
 export class ColorStyle extends HTMLStyleElement { // startfold
-  // This is how the component communicates with itself between edits.
   static observedAttributes = ["data-palette", "data-primary-color", "data-secondary-color"];
   paletteSize = 4;
   colorValidationRegex = /^#[0-9A-Fa-f]{6}/g;
@@ -24,17 +25,18 @@ export class ColorStyle extends HTMLStyleElement { // startfold
     this.render();
     const other = getColorStyle();
     if (other != null && other !== this) {
+        LOG.error(`There can only be ONE ${ColorStyleElementName} element!`);
         throw(`There can only be ONE ${ColorStyleElementName} element!`);
     }
     document.addEventListener(EditColorsEvent, (e) => this.openColorEditor(e));
-
   } // endfold
+  
   openColorEditor() { // startfold
     const modal = new ColorEditorModal();
     modal.showMe();
   } //endfold
+  
   ensureDefaults() { // startfold
-    // Create a default color palette, if one doesn't exist.
     if (this.dataset.palette == null) {
       this.dataset.palette = JSON.stringify(this.defaultPalette);
     }
@@ -45,57 +47,66 @@ export class ColorStyle extends HTMLStyleElement { // startfold
         this.dataset.secondaryColor = this.defaultSecondaryColor;
     }
   } // endfold
+  
   validateColors(colors) { // startfold
-    let newColors
+    let newColors;
     try {
       newColors = JSON.parse(colors); 
     } catch(e) {
-      console.error(e);
+      LOG.error(e);
       MakeToast(this.userErrorMessage);
-      return
+      return;
     }
+    
     const errorString = `invalid color set: ${newColors}`;
     if (!Array.isArray(newColors)) {
-      console.error(errorString);
+      LOG.error(errorString);
       MakeToast(this.userErrorMessage);
-      return
+      return;
     }
+    
     for (let color of newColors) {
       if (typeof color != "string") {
-        console.error(errorString);
+        LOG.error(errorString);
         MakeToast(this.userErrorMessage);
-        return
+        return;
       }
       let passedRegex = this.colorValidationRegex.test(color);
       this.colorValidationRegex.lastIndex = 0;
       if (!passedRegex) {
-        console.error(errorString);
+        LOG.error(errorString);
         MakeToast(this.userErrorMessage);
-        return
+        return;
       }
     }
-    return newColors
+    return newColors;
   } // endfold
+  
   render() { // startfold
-    const palette = JSON.parse(this.dataset.palette);
-    const wContrast = contrast(parseHexColor(palette[0]), parseHexColor(this.dataset.primaryColor));
-    const bContrast = contrast(parseHexColor(palette[3]), parseHexColor(this.dataset.primaryColor));
-    const contrastColor = wContrast > bContrast ? palette[0] : palette[3];
-    this.innerHTML = `
-  :root {
-    --palette-color-one: ${palette[0]};
-    --palette-color-two: ${palette[1]};
-    --palette-color-three: ${palette[2]};
-    --palette-color-four: ${palette[3]};
-    --palette-brand-contrast-color: ${contrastColor};
-    --palette-brand-color: ${this.dataset.primaryColor};
-  }
-`
-  console.log("render complete");
+    try {
+      const palette = JSON.parse(this.dataset.palette);
+      const wContrast = contrast(parseHexColor(palette[0]), parseHexColor(this.dataset.primaryColor));
+      const bContrast = contrast(parseHexColor(palette[3]), parseHexColor(this.dataset.primaryColor));
+      const contrastColor = wContrast > bContrast ? palette[0] : palette[3];
+      this.innerHTML = `
+      :root {
+        --palette-color-one: ${palette[0]};
+        --palette-color-two: ${palette[1]};
+        --palette-color-three: ${palette[2]};
+        --palette-color-four: ${palette[3]};
+        --palette-brand-contrast-color: ${contrastColor};
+        --palette-brand-color: ${this.dataset.primaryColor};
+      }
+      `;
+      LOG.info("Render complete");
+    } catch (error) {
+      LOG.error("Error during render: " + error);
+    }
   } // endfold
+  
   attributeChangedCallback(name, oldValue, newValue) { // startfold
     if (name == "data-primary-color" || name == "data-secondary-color") {
-        return
+        return;
     }
     const newColors = this.validateColors(newValue);
     if (newColors != null) {
@@ -104,15 +115,9 @@ export class ColorStyle extends HTMLStyleElement { // startfold
         this.dataset["name"] = oldValue;
     }
   } // endfold
+  
   generatePaletteChoices() { // startfold
-    // primary: off-white mid-color dark-color off-black
-    // secondary: off-white mid-color dark-color off-black
-    // grayscale: white light-gray dark-gray black
-    // brownscale: ivory tan mid-brown dark-brown (#755E4A)
-    // 
-    // 0 1 2 3 4 5 6 7 8 9 a b c d e f
-    // 0         5         a         f
-    const grayscale = ["#ffffff", "#aaaaaa", "#555555", "#000000"]; // pure grayscale
+    const grayscale = ["#ffffff", "#aaaaaa", "#555555", "#000000"];
     const brownscale =["#F6E4D5", "#D3C0AD", "#39332C", "#201A15"]; 
     const monochrome = genStraight(this.dataset.secondaryColor);
     return [
@@ -121,15 +126,14 @@ export class ColorStyle extends HTMLStyleElement { // startfold
       brownscale,
       [brownscale[0], monochrome[1], monochrome[2], brownscale[3]],
       monochrome,
-    ]
+    ];
   } // endfold
 } // endfold
 customElements.define(ColorStyleElementName, ColorStyle, {extends: "style"});
 
-
 function genStraight(hex) {
   const base = parseHexColor(hex);
-  console.log(base);
+  LOG.debug(base);
   const largest = getLargest(base);
   const smallest = getSmallest(base);
   let white = genWhite(base); 
@@ -137,17 +141,18 @@ function genStraight(hex) {
     r: Math.floor((192 / largest) * base.r), 
     g: Math.floor((192 / largest) * base.g), 
     b: Math.floor((192 / largest) * base.b), 
-  }
+  };
   let colorThree = {
     r: Math.floor((96 / largest) * base.r), 
     g: Math.floor((96 / largest) * base.g), 
     b: Math.floor((96 / largest) * base.b), 
-  }
+  };
   let black = {
     r: Math.floor((28 / largest) * base.r),
     g: Math.floor((28 / largest) * base.g), 
     b: Math.floor((28 / largest) * base.b), 
-  }
+  };
+
   if (largest > 220 && smallest > 200) {
     white = base;
   } else if (largest > 136) {
@@ -157,12 +162,14 @@ function genStraight(hex) {
   } else {
     black = base;
   }
+
   const palette = [
     rgbToHex(white.r, white.g, white.b),
     rgbToHex(colorTwo.r, colorTwo.g, colorTwo.b),
     rgbToHex(colorThree.r, colorThree.g, colorThree.b),
     rgbToHex(black.r, black.g, black.b),
-  ]
+  ];
+  
   return palette;
 }
 
@@ -172,7 +179,7 @@ function genWhite(base) {
       r: base.r + genWhiteComponent(base.r, smallest),
       g: base.g + genWhiteComponent(base.g, smallest),
       b: base.b + genWhiteComponent(base.b, smallest),
-    }
+    };
 }
 
 function genWhiteComponent(component, smallest) {
@@ -203,15 +210,12 @@ function getSmallest(base) {
 }
 
 function parseHexColor(hex) {
-  // Remove the '#' if present
   hex = hex.replace("#", "");
 
-  // Check if it's a shorthand hex value (e.g., #f00)
   if (hex.length === 3) {
     hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
   }
 
-  // Convert to RGB values
   const r = parseInt(hex.slice(0, 2), 16);
   const g = parseInt(hex.slice(2, 4), 16);
   const b = parseInt(hex.slice(4, 6), 16);
