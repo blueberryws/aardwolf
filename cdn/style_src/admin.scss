@@ -328,7 +328,13 @@
 }
 
 .admin-modal img {
+    height: 100px;
     width: 150px;
+    margin: 0 3px;
+    box-sizing: border-box;
+}
+.admin-modal img.selected-preview-image {
+  border: 5px solid var(--brand-color);
 }
 
 aside[is="admin-aside"] {
@@ -340,7 +346,7 @@ aside[is="admin-aside"] {
     left: 0;
     width: 250px;
     height: 100vh;
-    transform: translateX(-95%);
+    transform: translateX(-100%);
     transition: transform 1s;
     background-color: lightgray;
     box-sizing: border-box;
@@ -354,6 +360,17 @@ aside[is="admin-aside"]:hover {
 }
 
 aside[is="admin-aside"] button {
+}
+
+aside[is="admin-aside"] #aside-arrow {
+    position: absolute;
+    top: 0;
+    right: -38px;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 2px;
+    background-color: lightgray;
 }
 
 button[is="save-button"] {

@@ -3,6 +3,7 @@ export const SetDocumentEditable = "setDocumentEditable";
 export const UnsetDocumentEditable = "unsetDocumentEditable";
 export const SetLoading = "setLoading";
 export const UnsetLoading = "unsetLoading";
+export const CleanDocument = "cleanDocument";
 
 export const ImageSetChanged = "imageSetChanged";
 

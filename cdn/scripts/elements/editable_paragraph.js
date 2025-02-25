@@ -1,5 +1,6 @@
 import { TextEditor } from "../editors/text_editor.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
+import { CLEANABLE_ATTR } from "../interfaces/selectors.js";
 
 export class EditableBlockquote extends HTMLQuoteElement { // startfold
   static elementName = ELEMENT_NAMES.editableBlockquote;
@@ -9,6 +10,7 @@ export class EditableBlockquote extends HTMLQuoteElement { // startfold
     super();
     this.editor = new TextEditor(this);
     this.setAttribute("is", EditableBlockquote.elementName);
+    this.setAttribute(`data-${CLEANABLE_ATTR}`, true);
   } // endfold
 } // endfold
 register(EditableBlockquote);
@@ -21,6 +23,7 @@ export class EditableFigcaption extends HTMLElement { // startfold
     super();
     this.editor = new TextEditor(this);
     this.setAttribute("is", EditableFigcaption.elementName);
+    this.setAttribute(`data-${CLEANABLE_ATTR}`, true);
   } // endfold
 } // endfold
 register(EditableFigcaption);
@@ -33,6 +36,7 @@ export class EditableParagraph extends HTMLParagraphElement { // startfold
     super();
     this.editor = new TextEditor(this);
     this.setAttribute("is", EditableParagraph.elementName);
+    this.setAttribute(`data-${CLEANABLE_ATTR}`, true);
   } // endfold
 } // endfold
 

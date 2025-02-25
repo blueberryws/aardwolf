@@ -4,33 +4,42 @@ export const LOG_LEVELS = {
     WARN: 20,
     INFO: 30,
     DEBUG: 40,
+    DEBUG: 50,
 }
 
-export const LOG = {
-    logLevel: LOG_LEVELS.ERROR, 
+export const LOGGER = {
     fatal: (msg) => {
-        if (this.logLevel >= LOG_LEVELS.FATAL) {
+        if (window.LOG_LEVEL >= LOG_LEVELS.FATAL) {
             console.error(msg);
         }
     },
     error: (msg) => {
-        if (this.logLevel >= LOG_LEVELS.ERROR) {
+        if (window.LOG_LEVEL >= LOG_LEVELS.ERROR) {
             console.error(msg);
         }
     },
     warn: (msg) => {
-        if (this.logLevel >= LOG_LEVELS.WARN) {
+        if (window.LOG_LEVEL >= LOG_LEVELS.WARN) {
             console.error(msg);
         }
     },
     info: (msg) => {
-        if (this.logLevel >= LOG_LEVELS.INFO) {
+        if (window.LOG_LEVEL >= LOG_LEVELS.INFO) {
             console.log(msg);
         }
     },
     debug: (msg) => {
-        if (this.logLevel >= LOG_LEVELS.DEBUG) {
+        if (window.LOG_LEVEL >= LOG_LEVELS.DEBUG) {
             console.log(msg);
         }
     },
+    trace: (msg) => {
+        if (window.LOG_LEVEL >= LOG_LEVELS.DEBUG) {
+            console.log(msg);
+        }
+    },
+}
+
+if (window.LOG_LEVEL == null) {
+    window.LOG_LEVEL = LOG_LEVELS.INFO;
 }

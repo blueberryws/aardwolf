@@ -1,5 +1,6 @@
 import { TextEditor } from "../editors/text_editor.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
+import { CLEANABLE_ATTR } from "../interfaces/selectors.js";
 
 export class EditableHeading extends HTMLHeadingElement { // startfold
   static elementName = "ABSTRACT_HEADING_NAME"
@@ -9,6 +10,7 @@ export class EditableHeading extends HTMLHeadingElement { // startfold
     super();
     this.editor = new TextEditor(this);
     this.setAttribute("is", this.constructor.elementName);
+    this.setAttribute(`data-${CLEANABLE_ATTR}`, true);
   } // endfold
 
 } // endfold

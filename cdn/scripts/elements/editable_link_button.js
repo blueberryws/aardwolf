@@ -1,5 +1,6 @@
 import { LinkButtonEditor } from "../editors/link_button_editor.js";
 import { register, ELEMENT_NAMES } from "../element_registry.js";
+import { CLEANABLE_ATTR } from "../interfaces/selectors.js";
 
 export class EditableLinkButton extends HTMLAnchorElement { // startfold
   static elementName = ELEMENT_NAMES.editableLinkButton;
@@ -11,6 +12,7 @@ export class EditableLinkButton extends HTMLAnchorElement { // startfold
     this.ensureButton()
     this.editor = new LinkButtonEditor(this, this.button);
     this.setAttribute("is", EditableLinkButton.elementName);
+    this.setAttribute(`data-${CLEANABLE_ATTR}`, true);
   } // endfold
   ensureButton() {
     this.button = this.querySelector("button");

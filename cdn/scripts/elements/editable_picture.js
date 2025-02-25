@@ -4,6 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 import { breakpoints } from "../interfaces/breakpoints.js";
 
 import { dispatch, ImageSetChanged } from "../interfaces/events.js";
+import { CLEANABLE_ATTR } from "../interfaces/selectors.js";
 
 export class EditablePicture extends HTMLPictureElement { // startfold
   static observedAttributes = ["data-attribution-text", "data-attribution-href"]
@@ -19,6 +20,7 @@ export class EditablePicture extends HTMLPictureElement { // startfold
   constructor() { // startfold
     super();
     this.setAttribute("is", EditablePicture.elementName);
+    this.setAttribute(`data-${CLEANABLE_ATTR}`, true);
 
     // Set some defaults
     if (this.dataset.attributionText == null) {this.dataset.attributionText = this.defaultAttributionText }
@@ -34,24 +36,33 @@ export class EditablePicture extends HTMLPictureElement { // startfold
   } // endfold
   setSrc(src) { // startfold
     this.innerHTML = "";
+    const originalSrc = this.img.src;
+
 
     for (const [key, val] of Object.entries(breakpoints)) {
-      const src = document.createElement("source");
-      src.classList.add(key);
-      this.appendChild(src);
-      src.setAttribute("media", `(min-width: ${val})`);
+      const sourceElement = document.createElement("source");
+      sourceElement.classList.add(key);
+      this.appendChild(sourceElement);
+      sourceElement.setAttribute("media", `(min-width: ${val})`);
     
-      const computedStyle = window.getComputedStyle(src);
+      const computedStyle = window.getComputedStyle(sourceElement);
       const calculatedWidth = parseInt(computedStyle.getPropertyValue("max-width")) || 0;;
       const calculatedHeight = parseInt(computedStyle.getPropertyValue("max-height")) || 0;
     
-      src.setAttribute("data-max-width", calculatedWidth);
-      src.setAttribute("data-max-height", calculatedHeight);
+      sourceElement.setAttribute("data-max-width", calculatedWidth);
+      sourceElement.setAttribute("data-max-height", calculatedHeight);
     }
     this.img.src = src;
     this.appendChild(this.img);
+    if (originalSrc != src) { 
+        this.editor.newId();
+        console.log(this.dataset.uuid);
+        this.editor.uploadSrc();
+    } else {
+        this.editor.uploadLayout();
+    }
   } // endfold
-   
+
   attributeChangedCallback(name, oldValue, newValue) {
     dispatch(ImageSetChanged);
   }

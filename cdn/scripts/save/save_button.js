@@ -1,5 +1,6 @@
 import { IS_LOCAL, GET_STORE } from "../globals.js";
-import { dispatch, SetDocumentEditable, UnsetDocumentEditable } from "../interfaces/events.js";
+import { dispatch, CleanDocument, SetDocumentEditable, UnsetDocumentEditable } from "../interfaces/events.js";
+import { CLEANABLE_SELECTOR } from "../interfaces/selectors.js";
 
 
 export const SaveButtonName = "save-button";
@@ -32,6 +33,12 @@ export class SaveButton extends HTMLButtonElement {
         }
         return content
     }
+    cleanDocument() {
+        const cleanable = document.querySelectorAll(CLEANABLE_SELECTOR);
+        for (const cleanableElement of cleanable) {
+            cleanableElement.editor.clean();
+        }
+    }
     saveToLocal() {
         dispatch(UnsetDocumentEditable);
         const content = this.getContent();
@@ -42,6 +49,7 @@ export class SaveButton extends HTMLButtonElement {
     }
     saveToCloud() {
         dispatch(UnsetDocumentEditable);
+        this.cleanDocument();
         const main = document.querySelector("main").outerHTML;
         const head = document.querySelector("head").outerHTML;
         const lang = document.documentElement.lang || "en";

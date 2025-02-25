@@ -1,3 +1,5 @@
+import { LOGGER } from "./utils/logger.js";
+
 export const REGISTRY = {};
 
 // These are the keys to the REGISTRY for base elements.
@@ -36,9 +38,13 @@ export const ELEMENT_NAMES = {
 export const SECTIONS = {};
 
 export function register(ElementType) {
+    LOGGER.debug(`Registering ${ElementType.elementName} as an extension of ElementType.elementType`); 
     REGISTRY[ElementType.elementName] = ElementType; 
     customElements.define(ElementType.elementName, ElementType, {extends: ElementType.elementType});
+    LOGGER.debug(`${ElementType.elementName} registered successfully!`); 
+
     if (ElementType.sectionName != null) {
+      LOGGER.debug(`Adding section ${ElementType.sectionName}`); 
       SECTIONS[ElementType.sectionName] = ElementType;
     }
 }
