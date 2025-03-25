@@ -1,7 +1,7 @@
 import { ColorStyle } from "./colors/color_style.js";
 import { FontStyle } from "./fonts/font_style.js";
 import { EditableHead } from "./metadata/metadata_editor.js";
-import { FaviconEditorModal } from "./favicon/favicon_editor.js";
+import { FaviconEditorModal, EditableFavicon } from "./favicon/favicon_editor.js";
 import { EditPaletteButton } from "./colors/edit_palette_button.js";
 
 import { SaveButton } from "./save/save_button.js";
@@ -35,6 +35,6 @@ import { AdminAside } from "./admin/admin_aside.js";
 
 import { EditableSectionEditor } from "./editors/section_editor.js";
 
-import { loadEditor } from "./init_editor.js";
+import { loadEditor } from "./startup/init_editor.js";
 
 loadEditor();

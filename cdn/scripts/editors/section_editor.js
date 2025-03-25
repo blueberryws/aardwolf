@@ -4,7 +4,7 @@ import { dispatch, SetDocumentEditable } from "../interfaces/events.js";
 import { htmlFromJSON } from "../utils/html.js";
 import { SECTIONS, REGISTRY } from "../element_registry.js";
 
-function makeSection(section) {
+export function makeSection(section) {
     const newSection = new section();
     newSection.editor.setEditable();
     newSection.classList.add(newSection.classes[0]);
@@ -70,6 +70,10 @@ export class EditableSectionEditor extends ElementEditor {
         btn.innerText = "x";
         btn.classList.add("section-delete-btn");
         btn.addEventListener("click", () => {
+            const sectionCount = document.querySelectorAll("main section").length;
+            if (sectionCount <= 1) {
+                return
+            }
             const modal = modalBuilder()
                 .contentHTML(`<p>Are you sure you want to delete this section?</p>`)
                 .setActionText('Delete')
@@ -161,13 +165,31 @@ export class EditableSectionEditor extends ElementEditor {
       return btn
   } // endfold
   showAddSection() { // startfold
+    const addSectionSelector = document.createElement("div");
+    addSectionSelector.classList.add("add-section-content");
+    const promptEl = document.createElement("h3");
+    promptEl.innerText = "Section Type:";
     const selector = document.createElement("select");
-    for (const sectionName in SECTIONS) {
+    const descriptionLabel = document.createElement("h3");
+    descriptionLabel.innerText = "Section Description:";
+    const description = document.createElement("p");
+    selector.addEventListener("change", () => {
+        const selectedDescription = selector.querySelector("option:checked").dataset.description;
+        description.innerText = selectedDescription;
+    })
+    for (const [sectionName, section] of Object.entries(SECTIONS)) {
         const opt = document.createElement("option");
         opt.value = sectionName;
         opt.innerText = sectionName;
+        opt.setAttribute("data-description", section.description);
         selector.appendChild(opt);
     }
+    const selectedDescription = selector.querySelector("option:checked").dataset.description;
+    description.innerText = selectedDescription;
+    addSectionSelector.appendChild(promptEl);
+    addSectionSelector.appendChild(selector);
+    addSectionSelector.appendChild(descriptionLabel);
+    addSectionSelector.appendChild(description);
     const modal = modalBuilder()
         .actionFunc(() => {
             const newSectionType = SECTIONS[selector.value];
@@ -177,7 +199,7 @@ export class EditableSectionEditor extends ElementEditor {
         })
         .setHeaderText("Add Section")
         .setActionText("Add")
-        .contentNode(selector)
+        .contentNode(addSectionSelector)
         .showMe()
   } // endfold
   resetPictures() { // startfold

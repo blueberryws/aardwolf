@@ -1,5 +1,5 @@
 import { IS_LOCAL, GET_STORE } from "../globals.js";
-import { dispatch, CleanDocument, SetDocumentEditable, UnsetDocumentEditable } from "../interfaces/events.js";
+import { dispatch, CleanDocument, SetDocumentEditable, UnsetDocumentEditable, SetLoading, UnsetLoading } from "../interfaces/events.js";
 import { CLEANABLE_SELECTOR } from "../interfaces/selectors.js";
 
 
@@ -45,10 +45,12 @@ export class SaveButton extends HTMLButtonElement {
         this.store.saveSrc("main", content.main);
         this.store.saveSrc("head", content.head);
         dispatch(SetDocumentEditable);
+        dispatch(UnsetLoading);
         console.log("save complete");
     }
     saveToCloud() {
         dispatch(UnsetDocumentEditable);
+        dispatch(SetLoading);
         this.cleanDocument();
         const main = document.querySelector("main").outerHTML;
         const head = document.querySelector("head").outerHTML;
@@ -73,6 +75,7 @@ export class SaveButton extends HTMLButtonElement {
         .catch(e => {
             console.error(e);
             dispatch(SetDocumentEditable);
+            dispatch(UnsetLoading);
         });
     }
 }

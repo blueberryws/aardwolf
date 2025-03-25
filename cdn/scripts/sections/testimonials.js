@@ -4,6 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class TestimonialsSection extends EditableSection { // startfold
   static elementName = "testimonials-section";
   static sectionName = "testimonials";
+  static description = "This section showcases feedback from satisfied customers or clients, highlighting their positive experiences. It includes quotes, names, and optionally photos, aiming to build trust and credibility with potential customers."
 
   classes = [
       "default",
@@ -57,6 +58,7 @@ export class TestimonialsSection extends EditableSection { // startfold
     {
       "element": ELEMENT_NAMES.buttonElement,
       "classes": ["previous-button"],
+      "aria-label": "Show previous testimonial",
       "onclick": "prevItem(this)",
       "children": [
         {
@@ -70,6 +72,7 @@ export class TestimonialsSection extends EditableSection { // startfold
     {
       "element": ELEMENT_NAMES.buttonElement,
       "classes": ["next-button"],
+      "aria-label": "Show next testimonial",
       "onclick": "nextItem(this)",
       "children": [
         {

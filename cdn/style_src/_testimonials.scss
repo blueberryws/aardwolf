@@ -177,6 +177,9 @@ section[is="testimonials-section"].default { // startfold
 } // endfold
 section[is="testimonials-section"].alternate-one { // startfold
   // default mobile startfold
+  ul {
+    margin-top: 30px;
+  }
   li.testimonials-content {
     list-style-type: none;
     background-color: var(--color-two);
@@ -259,9 +262,6 @@ section[is="testimonials-section"].alternate-one { // startfold
     button > svg path {
       fill: var(--color-four);
       stroke: var(--color-four);
-    }
-    .testimonials-attribution-picture {
-      border: solid 4px var(--color-four);
     }
   } // endfold
   @media screen and (min-width: base.$notebook) { // startfold
@@ -423,6 +423,8 @@ section[is="testimonials-section"].alternate-two { // startfold
     img {
       border: solid 4px var(--color-one);
       border-radius: 50%;;
+      aspect-ratio: 1/1;
+      width: 100%;
     }
   }
   // endfold
@@ -441,9 +443,6 @@ section[is="testimonials-section"].alternate-two { // startfold
     button > svg path {
       fill: var(--color-four);
       stroke: var(--color-four);
-    }
-    .testimonials-attribution-picture {
-      border: solid 4px var(--color-four);
     }
   } // endfold
   @media screen and (min-width: base.$tablet) { // startfold

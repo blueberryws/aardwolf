@@ -1,7 +1,7 @@
 @use "base";
 section[is='hours-section'] {
   ul {
-    width: min(650px, 90%);
+    width: min(500px, 90%);
     margin: auto;
   }
 
@@ -13,9 +13,6 @@ section[is='hours-section'] {
 }
 section[is='hours-section'].default {
   padding-bottom: 150px;
-  h2 {
-    color: var(--color-three);
-  }
   ul {
     display: grid;
     width: min(650px, 90%);
@@ -68,7 +65,6 @@ section[is='hours-section'].default {
 
 section[is='hours-section'].alternate {
   background-color: var(--brand-color);
-  border-radius: var(--normal-border-radius);
   margin: 15px;
   h2 {
     color: var(--brand-contrast-color);

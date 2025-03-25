@@ -62,7 +62,7 @@ section[is="about-section"].default { // startfold
 
   ul {
     @include base.flex-row-center;
-    align-items: start;
+    align-items: start; 
     flex-wrap: wrap;
     column-gap: 10%;
     row-gap: 50px;
@@ -100,7 +100,6 @@ section[is="about-section"].default { // startfold
       max-width: 231px;
       max-height: 231px;
     }
-
     img {
         width: 100%;
         aspect-ratio: 1/1;

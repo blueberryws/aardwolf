@@ -3,6 +3,7 @@ import { ElementEditor } from "./element_editor.js";
 import { EditablePicture } from "../elements/editable_picture.js";
 import { getColorStyle } from "../colors/color_style.js";
 import { IMAGE_SEARCH, IMAGE_SAVE } from "../urls.js";
+import { generateRandomString } from "../utils/random.js";
 
 // startfold
 const respMock = '[{"alt": "White Capsule on Red Surface", "avg_color": "#E30802", "height": 3372, "id": 3683083, "liked": false, "photographer": "Anna Shvets", "photographer_id": 1984515, "photographer_url": "https://www.pexels.com/@shvetsa", "src": {"landscape": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200", "large": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "large2x": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "medium": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&h=350", "original": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg", "portrait": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800", "small": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&h=130", "tiny": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"}, "url": "https://www.pexels.com/photo/white-capsule-on-red-surface-3683083/", "width": 5058}, {"alt": "Syringes on Red Background", "avg_color": "#FB3007", "height": 6000, "id": 3786132, "liked": false, "photographer": "Anna Shvets", "photographer_id": 1984515, "photographer_url": "https://www.pexels.com/@shvetsa", "src": {"landscape": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200", "large": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "large2x": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "medium": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&h=350", "original": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg", "portrait": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800", "small": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&h=130", "tiny": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"}, "url": "https://www.pexels.com/photo/syringes-on-red-background-3786132/", "width": 4000}, {"alt": "Close-Up View of Logo With Horse", "avg_color": "#E10706", "height": 3194, "id": 9843280, "liked": false, "photographer": "Leif Bergerson", "photographer_id": 99376750, "photographer_url": "https://www.pexels.com/@leif-bergerson-99376750", "src": {"landscape": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200", "large": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "large2x": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "medium": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&h=350", "original": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg", "portrait": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800", "small": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&h=130", "tiny": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"}, "url": "https://www.pexels.com/photo/close-up-view-of-logo-with-horse-9843280/", "width": 4791}, {"alt": "Leaves Cut Out in Red Paper", "avg_color": "#F82110", "height": 6720, "id": 5412288, "liked": false, "photographer": "Photo By: Kaboompics.com", "photographer_id": 2332540, "photographer_url": "https://www.pexels.com/@karolina-grabowska", "src": {"landscape": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200", "large": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "large2x": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "medium": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&h=350", "original": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg", "portrait": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800", "small": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&h=130", "tiny": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"}, "url": "https://www.pexels.com/photo/leaves-cut-out-in-red-paper-5412288/", "width": 4480}, {"alt": "A Gift Box on a Red Background", "avg_color": "#F72429", "height": 6720, "id": 5725868, "liked": false, "photographer": "Photo By: Kaboompics.com", "photographer_id": 2332540, "photographer_url": "https://www.pexels.com/@karolina-grabowska", "src": {"landscape": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200", "large": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "large2x": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "medium": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&h=350", "original": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg", "portrait": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800", "small": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&h=130", "tiny": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"}, "url": "https://www.pexels.com/photo/a-gift-box-on-a-red-background-5725868/", "width": 4480}]'
@@ -30,7 +31,12 @@ export class PictureEditor extends ElementEditor {
     } // endfold
     newId() { // startfold
         this.element.prevId = this.element.dataset.uuid;
-        this.element.dataset.uuid = crypto.randomUUID();
+        try {
+            this.element.dataset.uuid = crypto.randomUUID();
+        } catch (e) {
+            console.error(e);
+            this.element.dataset.uuid = generateRandomString(30);
+        }
     } // endfold
     loadFromElement() { // startfold
         //   We need to make a modal copy of the attributes, so we can modify
@@ -66,15 +72,15 @@ export class PictureEditor extends ElementEditor {
         // startfold photo metadata form
         let form = document.createElement("form");
 
-        form.insertAdjacentHTML("beforeend", "<label>Alt Text: </label>");
+        form.insertAdjacentHTML("beforeend", "<label>Picture Description: </label>");
         this.altTextInput.remove();
         form.appendChild(this.altTextInput);
 
-        form.insertAdjacentHTML("beforeend", "<label>Attribution Text: </label>");
+        form.insertAdjacentHTML("beforeend", "<label>Photo Credit (Optional): </label>");
         this.attributionTextInput.remove();
         form.appendChild(this.attributionTextInput);
 
-        form.insertAdjacentHTML("beforeend", "<label>Attribution Link: </label>");
+        form.insertAdjacentHTML("beforeend", "<label>Photographer Link (Optional): </label>");
         this.attributionHrefInput.remove();
         form.appendChild(this.attributionHrefInput);
         return form
@@ -126,12 +132,14 @@ export class PictureEditor extends ElementEditor {
 
     this.imgPreview.remove();
     content.appendChild(this.imgPreview);
-    content.appendChild(this.makeForm());
 
     const uploadInput = document.createElement("input");
     uploadInput.innerText = "Upload Photo";
     uploadInput.type="file";
     uploadInput.addEventListener("change", (e) => {
+        this.altTextInput.value = "";
+        this.attributionTextInput.value = "";
+        this.attributionHrefInput.value = "";
         this.previewFile(e.target, this.imgPreview);
     });
     content.appendChild(uploadInput);
@@ -148,6 +156,7 @@ export class PictureEditor extends ElementEditor {
     content.appendChild(pexelsSearchForm);
 
     content.appendChild(this.pexelsPreviews);
+    content.appendChild(this.makeForm());
     m.content = content;
     m.beforeAction = () => this.saveChanges();
     m.showMe();

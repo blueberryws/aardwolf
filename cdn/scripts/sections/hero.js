@@ -5,6 +5,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class HeroSection extends EditableSection { // startfold
   static elementName = "hero-section";
   static sectionName = "hero";
+  static description = "The prominent area at the top of the page that features a large image, or graphic along with a headline and call-to-action. It's designed to grab attention, communicate the core message of the site, and encourage visitors to engage further with the content.";
 
   classes = [
       "default",

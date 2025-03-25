@@ -6,34 +6,34 @@ export function getFontStyle() {
 }
 const STANDARD_HEADER_STYLE = {
   "x-large": {
-    size: "36px",
-    weight: 500,
+    size: "100px",
+    weight: 400,
   },
   large: {
-    size: "32px",
-    weight: 500,
+    size: "48px",
+    weight: 400,
   },
   medium: {
     size: "32px",
-    weight: 500,
+    weight: 400,
   },
   small: {
     size: "20px",
-    weight: 500,
+    weight: 400,
   },
 }
 const STANDARD_BODY_STYLE = {
   large: {
     size: "24px",
-    weight: 500,
+    weight: 400,
   },
   medium: {
     size: "16px",
-    weight: 500,
+    weight: 400,
   },
   small: {
     size: "14px",
-    weight: 500,
+    weight: 400,
   },
 }
 
@@ -276,7 +276,7 @@ customElements.define(FontStyleElementName, FontStyle, {extends: "style"});
 
 export class FontEditorModal extends AdminModal { // startfold
   actionText = "Update";
-  headerText = "Edit Fonts";
+  headerText = "Pick Font Pairing";
   contentClass = "modal-content";
   connectedCallback() { // startfold
     this.fontStyle = getFontStyle();
@@ -297,10 +297,18 @@ export class FontEditorModal extends AdminModal { // startfold
         const card = document.createElement("div");
         const headerFont = fontPair.header.name;
         const bodyFont = fontPair.body.name;
+        const selectedClass = "selected-font-pair";
+        if (headerFont == this.fontStyle.dataset.headerFont && bodyFont == this.fontStyle.dataset.bodyFont) {
+            card.classList.add(selectedClass);
+        }
         card.classList.add("font-card");
         card.addEventListener("click", (e) => {
             this.fontStyle.dataset.headerFont = headerFont;
             this.fontStyle.dataset.bodyFont = bodyFont;
+            for (const el of document.getElementsByClassName(selectedClass)) {
+                el.classList.remove(selectedClass);
+            };
+            card.classList.add(selectedClass);
         });
         card.innerHTML = `<h3 style="font-family: '${headerFont}';font-weight: ${fontPair.header.style.medium.weight};">${headerFont}</h3>
   <p style="font-family: '${bodyFont}'; font-weight: ${fontPair.body.style.medium.weight};">${bodyFont}</p>
@@ -320,7 +328,7 @@ customElements.define("font-editor-modal", FontEditorModal, {extends: "dialog"})
 // Edit Button startfold
 export const EditFontButtonName = "edit-fonts-button";
 export class EditFontButton extends HTMLButtonElement {
-    buttonText = "Edit Fonts";
+    buttonText = "Fonts";
     constructor() {
         super();
         this.innerText = this.buttonText;

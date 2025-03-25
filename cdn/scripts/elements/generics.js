@@ -1,5 +1,16 @@
 import { register, ELEMENT_NAMES } from "../element_registry.js";
 
+export class Image extends HTMLImageElement { // startfold
+  static elementName = ELEMENT_NAMES.image
+  static elementType = "img"
+
+  constructor() { // startfold
+    super();
+  } // endfold
+} // endfold
+register(Image);
+
+
 export class UnorderedList extends HTMLUListElement { // startfold
   static elementName = ELEMENT_NAMES.unorderedList
   static elementType = "ul"

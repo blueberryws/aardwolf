@@ -6,7 +6,7 @@ section[is="at-a-glance-section"] { // startfold
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    gap: 40px;
+    gap: 30px;
   }
   li {
     display: flex;
@@ -26,14 +26,18 @@ section[is="at-a-glance-section"] { // startfold
     text-align: center;
     color: var(--color-three);
     font-size: var(--header-font-size-small);
+    font-family: var(--body-font-family);
   }
 
   @media screen and (min-width: base.$tablet) {
     ul {
       flex-direction: row;
+      flex-wrap: wrap;
+      max-width: 100%;
+      align-items: start;
     }
     li {
-      flex: 0 0 33%;
+      flex: 0 0 calc(33% - 60px);
     }
     picture {
       width: 75%;
@@ -94,7 +98,7 @@ section[is="at-a-glance-section"].alternate-two { // startfold
     border-radius: 50%;
   }
   h3 {
-    color: var(--color-four);
+    color: var(--brand-contrast-color);
   }
   @media screen and (min-width: base.$tablet) {
     li {

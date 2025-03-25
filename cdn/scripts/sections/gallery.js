@@ -4,10 +4,12 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class GallerySection extends EditableSection { // startfold
   static elementName = "gallery-section";
   static sectionName = "gallery";
+  static description = "This section displays a collection of images to showcasing products, services, past work, or events. It allows visitors to visually explore your offerings or portfolio."
 
   classes = [
       "default",
       "alternate-one",
+      "alternate-two",
   ];
 
   defaultContent = [
@@ -18,6 +20,7 @@ export class GallerySection extends EditableSection { // startfold
     {
       "element": ELEMENT_NAMES.buttonElement,
       "classes": ["previous-button"],
+      "aria-label": "Show previous image",
       "onclick": "prevItem(this)",
       "children": [
         {
@@ -31,6 +34,7 @@ export class GallerySection extends EditableSection { // startfold
     {
       "element": ELEMENT_NAMES.buttonElement,
       "classes": ["next-button"],
+      "aria-label": "Show next image",
       "onclick": "nextItem(this)",
       "children": [
         {

@@ -4,6 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class AboutSection extends EditableSection { // startfold
   static elementName = "about-section";
   static sectionName = "about";
+  static description = "The about section provides an overview of the company, organization, or individual behind the site. It typically includes information about the mission, values, history, and goals, helping visitors understand who they are engaging with."
 
   classes = [
       "default",

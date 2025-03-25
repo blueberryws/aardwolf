@@ -41,9 +41,10 @@ import { getColorStyle } from "./color_style.js";
 
 export class ColorEditorModal extends AdminModal { // startfold
   actionText = "Update";
-  headerText = "Edit Colors";
+  headerText = "Set Colors";
   contentClass = "modal-content";
   connectedCallback() { // startfold
+    this.classList.add("colors-modal");
     this.colorStyle = getColorStyle();
     this.currentPalette = JSON.parse(this.colorStyle.dataset.palette);
     this.curPrimaryColor = this.colorStyle.dataset.primaryColor;
@@ -85,6 +86,19 @@ export class ColorEditorModal extends AdminModal { // startfold
     selectors.appendChild(secondaryInput);
 
     return selectors
+  } // endfold
+  getInstructions() { // startfold
+    const instructions = document.createElement("details");
+    instructions.innerHTML = `
+    <summary>How To Set Colors</summary>
+    <ol>
+        <li>Click the Color Selector for "Primary Color" To Pick Your Primary Color</li>
+        <li>Click the Color Selector for "Secondary Color" To Pick Your Secondary Color</li>
+        <li>Pick from one of the generated color palettes.</li>
+    </ol>
+    <p>Note: The color palettes are generated using the secondary color. The primary color is used directly across the site.
+`
+    return instructions;
   } // endfold
   getContent() { // startfold
     const content = document.createElement("div");

@@ -11,10 +11,10 @@ export class EditablePicture extends HTMLPictureElement { // startfold
   static elementName = ELEMENT_NAMES.editablePicture;
   static elementType = "picture"
 
-  defaultImgSrc = "/cdn/images/default.png"
-  defaultAltText = "A mountain silhouette placeholder image"
-  defaultAttributionText = "Photo Credit: Flanoz, CC0, via Wikimedia Commons"
-  defaultAttributionHref = "https://commons.wikimedia.org/wiki/File:Placeholder_view_vector.svg"
+  defaultImgSrc = "/cdn/images/click_to_add_image.png"
+  defaultAltText = "Description For Blind People"
+  defaultAttributionText = "Photo Credit: Photographer's Name Here"
+  defaultAttributionHref = "https://example.com/optional/photographer/link"
 
 
   constructor() { // startfold
@@ -31,7 +31,7 @@ export class EditablePicture extends HTMLPictureElement { // startfold
         this.img = fromHTML(`<img src="${this.defaultImgSrc}" alt="${this.defaultAltText}">`);
         this.appendChild(this.img);
     }
-    if (this.id == null) {this.id = crypto.randomUUID()}
+    if (this.id == null) {this.editor.newID()}
     this.editor = new PictureEditor(this);
   } // endfold
   setSrc(src) { // startfold

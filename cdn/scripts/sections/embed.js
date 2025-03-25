@@ -4,6 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class EmbedSection extends EditableSection { // startfold
   static elementName = "embed-section";
   static sectionName = "embed";
+  static description = "This section allows you to embed custom code. This can be used to embed YouTube videos, calendly links, mailing list signup forms, google-maps directions, Instagram feeds, google reviews, etc.";
 
   classes = [
       "default",

@@ -4,6 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class ContactFormSection extends EditableSection { // startfold
   static elementName = "contact-form-section";
   static sectionName = "contact-form";
+  static description = "This section allows visitors to easily get in touch with you by submitting their name, email, and message."
 
   classes = [
       "default",

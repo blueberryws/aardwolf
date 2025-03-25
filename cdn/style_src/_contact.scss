@@ -13,6 +13,11 @@ section[is="contact-form-section"] { // startfold
     margin-top: 50px;
     margin-bottom: unset;
   }
+
+  p {
+    margin: auto;
+    max-width: 800px;
+  }
   
   form {
     display: grid;

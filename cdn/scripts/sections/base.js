@@ -1,5 +1,6 @@
 import { EditableSectionEditor } from "../editors/section_editor.js";
 
+
 export class EditableSection extends HTMLElement { // startfold
   static elementType = "section";
 

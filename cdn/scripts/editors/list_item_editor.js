@@ -2,6 +2,7 @@ import { modalBuilder } from "../modals/base.js";
 import { ElementEditor } from "./element_editor.js";
 import { EditableListItem } from "../elements/editable_list_item.js";
 import { SetDocumentEditable, UnsetDocumentEditable, dispatch } from "../interfaces/events.js";
+import { toggleNextPrev } from "../utils/interactions.js";
 
 export class ListItemEditor extends ElementEditor {
     constructor(element) {
@@ -92,6 +93,7 @@ export class ListItemEditor extends ElementEditor {
               pic.editor.newId();   
             }
             dispatch(SetDocumentEditable);
+            toggleNextPrev();
         });
         return btn
     }  // endfold
@@ -99,12 +101,18 @@ export class ListItemEditor extends ElementEditor {
         const btn = document.createElement("button");
         btn.innerText = "x";
         btn.classList.add("list-delete-btn");
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", (e) => {
+            const itemsList = e.target.closest("ul");
+            const itemCount = itemsList.querySelectorAll("li").length;
+            if (itemCount <= 1) {
+                return
+            }
             const modal = modalBuilder()
                 .contentHTML(`<p>Are you sure you want to delete this item?</p>`)
                 .setActionText('Delete')
                 .actionFunc(() => {
                     this.element.remove();
+                    toggleNextPrev();
                 })
             modal.headerText = "Delete Item";
             modal.showMe();

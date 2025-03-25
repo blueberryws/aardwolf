@@ -11,15 +11,15 @@ section[is="gallery-section"].default { // startfold
   padding: var(--narrow-padding);
 
   h2 {
-    color: var(--color-three);
     text-align: start;
   }
   ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     aspect-ratio: 3 / 2;
-    overflow: hidden;
     gap: 10px;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .previous-button, .next-button {
@@ -40,6 +40,9 @@ section[is="gallery-section"].default { // startfold
   }
   ul.show-all {
     aspect-ratio: unset;
+  }
+  li {
+    height: fit-content;
   }
 
   @media screen and (min-width: base.$tablet) {
@@ -68,6 +71,9 @@ section[is="gallery-section"].default { // startfold
   }
   source.x-small {
     max-width: 175px;
+  }
+  img {
+    max-width: min(345px, 100%);
   }
 }
 section[is="gallery-section"].default:has(li:nth-child(n+7)) button.show-all {
@@ -137,7 +143,6 @@ section[is="gallery-section"].alternate-one { // startfold
     ul {
       display: grid;
       grid-template-columns: repeat(3, auto);
-      overflow: hidden;
       align-items: center;
       column-gap: 20px;
 
@@ -186,4 +191,82 @@ section[is="gallery-section"].alternate-one { // startfold
   source.x-small {
     max-width: 463px;
   }
+  img {
+    max-width: 365px;
+  }
+} // endfold
+section[is="gallery-section"].alternate-two { // startfold
+  display: grid;
+  padding: var(--narrow-padding);
+  background-color: var(--brand-color);
+ 
+  h2 {
+    text-align: start;
+    color: var(--brand-contrast-color);
+  }
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    aspect-ratio: 3 / 2;
+    gap: 10px;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .previous-button, .next-button {
+    display: none; 
+  }
+  button.show-all {
+    grid-row: 3;
+    justify-self: end;
+    background: none;
+    outline: none;
+    text-decoration: underline;
+    width: fit-content;
+    padding: 10px 0;
+    font-size: var(--body-font-small);
+    font-weight: 400;
+    color: var(--color-four);
+    display: none;
+  }
+  ul.show-all {
+    aspect-ratio: unset;
+  }
+  li {
+    height: fit-content;
+  }
+
+  @media screen and (min-width: base.$tablet) {
+    h2 {
+      text-align: center;
+    }
+    ul {
+      grid-template-columns: repeat(4, 1fr);
+      aspect-ratio: 4 / 2;
+    }
+  }
+  source.desktop {
+    max-width: 345px;
+  }
+  source.laptop {
+    max-width: 334px;
+  }
+  source.notebook {
+    max-width: 284px;
+  }
+  source.tablet {
+    max-width: 232px;
+  }
+  source.phone {
+    max-width: 239px;
+  }
+  source.x-small {
+    max-width: 175px;
+  }
+  img {
+    max-width: 345px;
+  }
+}
+section[is="gallery-section"].default:has(li:nth-child(n+7)) button.show-all {
+  display: block;
 } // endfold

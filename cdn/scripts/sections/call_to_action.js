@@ -4,7 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class CallToActionSection extends EditableSection { // startfold
   classes = [
     "default",
-    "alternate-one",
+//    "alternate-one",
     "alternate-two",
     "alternate-three",
     "alternate-four",
@@ -15,6 +15,7 @@ export class CallToActionSection extends EditableSection { // startfold
 
   static elementName = "call-to-action-section";
   static sectionName = "call-to-action";
+  static description = "A call-to-action (CTA) section on a website prompts visitors to take a specific action, such as signing up, purchasing, or contacting the business. It features a clear, compelling message paired with a button or link that directs users toward the desired next step."
 
   defaultContent = [
     {

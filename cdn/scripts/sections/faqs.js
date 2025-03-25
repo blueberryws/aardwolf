@@ -4,6 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class FAQsSection extends EditableSection { // startfold
   static elementName = "faqs-section";
   static sectionName = "faqs";
+  static description = "This section provides answers to common queries that visitors may have about the business, products, or services. It helps to address potential concerns, clarify information, and improve the user experience by offering quick, accessible solutions."
 
   classes = [
       "default",

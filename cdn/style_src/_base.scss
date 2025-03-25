@@ -71,23 +71,25 @@ $cdn-base-url: "http://my.localhost/cdn";
 }
 html, body {
   background-color: var(--color-one);
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--header-font-family);
 }
 
-p, blockquote, label, figcaption, a {
+p, blockquote, label, figcaption, a, li {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-medium);
-  font-weight: 300;
+  font-weight: var(--body-font-weight-medium);
   color: var(--color-four);
 }
 
 button {
   font-family: var(--body-font-family);
-  font-size: 20px;
-  font-weight: 900;
+  font-size: var(--body-font-size-small);
+  font-weight: var(--body-font-weight-small);
   text-align: center;
   padding: 12px 25px;
   border: 20px;
@@ -153,7 +155,7 @@ section {
 
 /* typography settings startfold */
 h1, .page-title {
-    font-weight: 800;
+    font-weight: var(--header-font-weight-x-large);
     font-size: var(--header-font-size-x-large);
 }
 @mixin section-heading {
@@ -172,26 +174,26 @@ h2 {
 }
 
 .callout-text {
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: var(--body-font-weight-medium);
+    font-size: var(--body-font-size-medium);
 }
 .testimonial-text {
   font-size: var(--body-font-size-small);
-  font-weight: 400;
+  font-weight: var(--body-font-weight-medium);
   text-align: center;
 }
 @mixin alternate-paragraph {
   font-size: var(--body-font-size-small);
-  font-weight: 400;
+  font-weight: var(--body-font-weight-small);
   color: var(--color-four);
 }
 @mixin enlarged-text {
   font-size: var(--body-font-size-x-large);
-  font-weight: 400;
+  font-weight: var(--body-font-weight-x-large);
 }
 @mixin form-label {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--body-font-size-small);
+  font-weight: var(--body-font-weight-medium);
   text-align: left;
 }
 @mixin flex-row-center {
@@ -208,16 +210,16 @@ h2 {
 }
 @media (width >= 992px) {
   h1, .page-title {
-    font-weight: 600;
-    font-size: 128px;
+    font-weight: var(--header-font-weight-x-large);
+    font-size: var(--header-font-size-x-large);
   }
   h2, .page-subtitle {
-    font-weight: 600;
-    font-size: 64px;
+    font-weight: var(--header-font-weight-large);
+    font-size: var(--header-font-size-large);
   }
   .callout-text {
-    font-weight: 300;
-    font-size: 24px;
+    font-weight: var(--body-font-weight-large);
+    font-size: var(--body-font-size-medium);
   }
 }
 /* endfold */

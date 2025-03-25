@@ -4,6 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class NumbersSection extends EditableSection { // startfold
   static elementName = "numbers-section";
   static sectionName = "numbers";
+  static description = "The numbers section on a website highlights key statistics that demonstrate the success, impact, or credibility of a business or service.";
 
   classes = [
       "default",

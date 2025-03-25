@@ -4,6 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class AtAGlanceSection extends EditableSection { // startfold
   static elementName = "at-a-glance-section";
   static sectionName = "at-a-glance";
+  static description = "An at-a-glance section on a website provides a quick, easy-to-scan summary of key information, such as features, benefits, or services. It's designed to give visitors an overview without overwhelming them."
 
   classes = [
       "default",

@@ -1,18 +1,24 @@
 @use "base";
 
+:root {
+    --admin-default-color: #E0E0E0;
+    --admin-accent-color: #293B5F;
+    --admin-selection-color: #33cc33;
+}
+
 @mixin admin-button($btn-color) {
-  background-color: unset !important;
-  color: $btn-color !important;
+  color: white !important;
   border: 1px solid $btn-color !important;
   text-align: center !important;
   padding: 3px 20px 5px 20px !important;
   width: fit-content !important;
   font-family: arial !important;
   font-size: 30px !important;
+  background-color: $btn-color !important;
+  opacity: .5;
 
   &:hover {
-    background-color: $btn-color !important;
-    color: white !important;
+    opacity: 1;
   }
 }
 
@@ -139,23 +145,131 @@
     margin: auto;
     padding: 50px;
     border-radius: 12px;
+    width: 800px;
+}
+.admin-modal details summary {
+    cursor: pointer;
+}
+.admin-modal:has(.font-modal) {
+    width: 1100px;
 }
 .admin-modal h2 {
   text-align: center;
   width: 100%;
   grid-row: 1;
   grid-column: 1 / span 2;
+  color: var(--admin-accent-color);
+}
+.admin-modal h3 {
+  color: var(--admin-accent-color);
+}
+.admin-modal p, .admin-modal li, .admin-modal blockquote, .admin-modal label, .admin-modal figcaption, .admin-modal a {
+  color: black;
 }
 .admin-modal button {
-  @include admin-button(gray);
+  @include admin-button(var(--admin-accent-color));
   align-self: center;
 }
+
 .admin-modal > div, modal-content {
-  grid-row: 2;
+  grid-row: auto;
   grid-column: 1 / span 2;
   display: grid;
   gap: 25px;
   margin-bottom: 30px;
+}
+
+
+.admin-modal .add-section-content {
+    display: grid;
+}
+.admin-modal .add-section-content h3 {
+    margin-top: 10px;
+}
+
+.admin-modal.welcome-modal {
+    width: 800px;
+}
+
+.admin-modal.welcome-modal > div {
+    gap: unset;
+}
+
+.admin-modal.welcome-modal hr {
+  margin: 20px 20px 30px 20px;
+}
+
+.admin-modal.welcome-modal details {
+  margin: 20px;
+}
+
+.admin-modal.welcome-modal details img {
+  width: 640px;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+}
+
+.admin-modal.welcome-modal details summary::-webkit-details-marker {
+  display: none;
+}
+.admin-modal.welcome-modal .tdw-help-menu summary {
+  background-color: var(--admin-default-color);
+  padding: 10px;
+  border-radius: 5px;
+}
+.admin-modal.welcome-modal details summary {
+  cursor: pointer;
+}
+.admin-modal.welcome-modal details summary h3 {
+  display: inline;
+}
+.admin-modal.welcome-modal details ul {
+  margin-left: 20px;
+}
+.admin-modal.welcome-modal details li {
+  list-style: disc;
+}
+
+.admin-modal.welcome-modal ul.ai-prompt-list {
+  margin-left: 20px;
+}
+.admin-modal.welcome-modal ul.ai-prompt-list li {
+  list-style: disc;
+}
+
+.loading-modal {
+    background: transparent;
+    border: none;
+}
+
+.admin-modal.loading-modal img {
+    width: 100px;
+    margin: auto;
+}
+
+.loading-modal h2, .loading-modal button {
+    display: none;
+}
+
+.admin-modal.colors-modal ol {
+  padding: 20px; 
+}
+.admin-modal.colors-modal ol li {
+  list-style: inherit;
+}
+.colors-modal details, .metadata-modal details, .favicon-modal details {
+    margin-bottom: 20px; 
+    grid-column: 1 / span 2;
+}
+.colors-modal summary, .metadata-modal summary, .favicon-modal summary {
+  background-color: var(--admin-default-color);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.favicon-modal details img, .metadata-modal details img {
+    height: unset;
 }
 
 .modal-content form {
@@ -216,29 +330,29 @@
     height: 200px;
     box-sizing: border-box;
     padding: 45px 65px 45px 30px;
-    background-color: var(--color-four);;
-    color: var(--color-one);
+    background-color: black;
 }
 
 .font-modal h3 {
     font-size: var(--header-font-size-medium);
+    color: white;
 }
 .font-modal p {
     font-size: var(--body-font-size-medium);
-    color: var(--color-one);
+    color: white;
 }
 
 .link-button-modal {
     display: grid;
 }
 
-.edit-image-modal-content {
-    display: grid;
-}
 /* endfold
 /* metadata modal startfold */
 .metadata-modal {
   grid-template-columns: repeat(auto, 3);
+}
+.metadata-modal details img {
+  width: 300px;
 }
 .metadata-modal label {
   grid-column: 1;
@@ -263,11 +377,13 @@
 }
 /* endfold */
 .section-add-btn, .section-delete-btn, .section-up-btn, .section-down-btn, .section-next-btn, .section-prev-btn { /* startfold */
-  @include admin-button(gray);
+  @include admin-button(black);
   display: block !important;
   position: absolute !important;
   z-index: 9000;
   margin: 0 !important;
+  grid-column: auto !important; /* Removes it from the grid */
+  grid-row: auto !important;
 }
 .section-add-btn:hover, .section-delete-btn:hover, .section-up-btn:hover, .section-down-btn:hover, .section-next-btn:hover, .section-prev-btn:hover { /* startfold */
     z-index: 9999;
@@ -283,11 +399,13 @@
 }
 
 .section-next-btn {
-    top: calc(min(50%, 50vh) - 20px);
+    /* top: calc(min(50%, 50vh) - 20px); */
+    top: 200px;
     right: calc(var(--standard-padding-right) / 2);
 }
 .section-prev-btn {
     top: calc(min(50%, 50vh) - 20px);
+    top: 200px;
     left: calc(var(--standard-padding-left) / 2);
 }
 
@@ -303,7 +421,7 @@
 
 .list-up-btn, .list-down-btn, .list-clone-btn, .list-delete-btn {
     
-    @include admin-button(blue);
+    @include admin-button(var(--admin-accent-color));
     position: absolute !important;
     z-index: 9000;
 }
@@ -311,20 +429,20 @@
     z-index: 9999;
 }
 .list-up-btn {
-  top: 0 !important;
-  left: 0 !important;
+  top: -20px !important;
+  left: -20px !important;
 }
 .list-down-btn {
-  bottom: 0 !important;
-  left: 0 !important;
+  bottom: -20px !important;
+  left: -20px !important;
 }
 .list-clone-btn {
-  bottom: 0 !important;
-  right: 0 !important;
+  bottom: -20px !important;
+  right: -20px !important;
 }
 .list-delete-btn {
-  top: 0 !important;
-  right: 0 !important;
+  top: -20px !important;
+  right: -20px !important;
 }
 
 .admin-modal img {
@@ -333,8 +451,17 @@
     margin: 0 3px;
     box-sizing: border-box;
 }
-.admin-modal img.selected-preview-image {
+.admin-modal img.selected-preview-image, .admin-modal .selected-font-pair {
   border: 5px solid var(--brand-color);
+}
+#edit-image-modal-content {
+    min-width: 800px;
+    max-width: 100%;
+}
+
+#edit-image-modal-content form {
+  grid-template-columns: auto 1fr;
+  gap: 5px;
 }
 
 aside[is="admin-aside"] {
@@ -363,14 +490,14 @@ aside[is="admin-aside"] button {
 }
 
 aside[is="admin-aside"] #aside-arrow {
-    position: absolute;
-    top: 0;
-    right: -38px;
-    width: 30px;
-    height: 30px;
-    padding: 5px;
-    border-radius: 2px;
-    background-color: lightgray;
+  position: absolute;
+  top: 0;
+  right: -85px;
+  font-size: 20px;
+  height: 28px;
+  padding: 5px;
+  border-radius: 2px;
+  background-color: #d3d3d3;
 }
 
 button[is="save-button"] {
@@ -390,4 +517,31 @@ button[is="reset-button"] {
 ul[is="social-media-links"]:hover {
   border: 1px solid var(--color-three);
   cursor: pointer;
+}
+// endfold
+
+main:has(section:hover) section {
+    opacity: .5;
+}
+
+main section:hover {
+    border: 3px solid var(--admin-accent-color);
+    opacity: 1 !important;
+}
+
+section:has(li[is="editable-list-item"]:hover) li[is="editable-list-item"] {
+  opacity: .5;
+}
+
+section li[is="editable-list-item"]:hover {
+    border: 3px solid var(--admin-default-color);
+    opacity: 1 !important;
+}
+
+picture[is="editable-picture"] {
+  cursor: pointer;
+}
+
+strong {
+    font-weight: 900;
 }

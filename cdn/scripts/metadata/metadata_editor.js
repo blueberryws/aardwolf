@@ -65,6 +65,7 @@ export class HeadEditorModal extends AdminModal { // startfold
   headerText = "SEO and Metadata";
   contentClass = "modal-content";
   connectedCallback() { // startfold
+    this.classList.add("metadata-modal");
     this.head = getEditableHead();
     this.document = document.documentElement;
     this.beforeAction = () => {
@@ -85,6 +86,20 @@ export class HeadEditorModal extends AdminModal { // startfold
     };
     this.metaChildren = null;
     this.render();
+  } // endfold
+  getInstructions() { // startfold
+    const instructions = document.createElement("details");
+    instructions.innerHTML = `
+    <summary>About Setting Metadata</summary>
+    <p>Your site title and description are used to tell search engines what your site is about. They are the bit of text that show up when your site is searched for on google. (Title in blue, description is the gray text.)</p>
+    <img src="/cdn/images/site_title_and_description.png" />
+    <p>Additionally, the title is what your users will see in their browser tab.</p>
+    <img src="/cdn/images/site_title_example.png" />
+    <p>Setting a good title and description is an important part of SEO. You can try different keywords here to try reach different audiences. This might be names of specific cities that you serve, or specific services that you offer. There isn't one-right-way to write a description. It's something that you have to try different things to find out what works.</p>
+    <p>If needed, you can add additional metadata. For most sites, this is not necessary unless you have a specific metadata to add (such as a google-site-verification tag).</p>
+
+`
+    return instructions;
   } // endfold
   makeMetaSelector(name, content) { // startfold
     const container = document.createElement("div");
@@ -130,8 +145,8 @@ export class HeadEditorModal extends AdminModal { // startfold
     descriptionLabel.innerText = "Site Description:";
     content.appendChild(descriptionLabel);
 
-    this.descriptionText = document.createElement("input");
-    this.descriptionText.type = "text";
+    this.descriptionText = document.createElement("textarea");
+    this.descriptionText.setAttribute("onchange", "this.style.height = this.scrollHeight +'px'");
     this.descriptionText.value = this.head.description.content || "";
     content.appendChild(this.descriptionText);
 

@@ -127,7 +127,7 @@ export class ColorStyle extends HTMLStyleElement { // startfold
 customElements.define(ColorStyleElementName, ColorStyle, {extends: "style"});
 
 
-function genStraight(hex) {
+export function genStraight(hex) {
   const base = parseHexColor(hex);
   console.log(base);
   const largest = getLargest(base);
@@ -178,7 +178,7 @@ function genWhite(base) {
 function genWhiteComponent(component, smallest) {
     const maxSize = 255;
     const stepSize = (maxSize - component) / (maxSize - smallest);
-    const stepCount = 220 - smallest;
+    const stepCount = 235 - smallest;
     return Math.floor(stepSize * stepCount);
 }
 

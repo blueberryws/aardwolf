@@ -29,11 +29,13 @@ section[is="numbers-section"] {
   h4 {
     text-align: center;
     color: var(--color-four);
+    font-family: var(--body-font-family);
     font-size: calc(var(--header-font-size-small) * .8);
     font-weight: 400;
   }
 
   @media screen and (min-width: base.$tablet) {
+    padding-bottom: 60px;
     ul {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -43,7 +45,7 @@ section[is="numbers-section"] {
       height: fit-content;
     }
     h3 {
-      font-size: calc(var(--header-font-size-x-large) * .75);
+      font-size: var(--header-font-size-large);
     }
     h4 {
       font-size: var(--header-font-size-medium);
@@ -59,8 +61,8 @@ section[is="numbers-section"].alternate-one {
   li {
     background-color: var(--brand-color);
     border-radius: 200px;
-    width: 80%;
-    padding: 20px 10px;
+    width: calc(80% - 40px);
+    padding: 20px;
     
     * {
         color: var(--brand-contrast-color);
@@ -72,7 +74,6 @@ section[is="numbers-section"].alternate-one {
     li {
       border-radius: 50%;
       aspect-ratio: 1/1;
-      padding: 0;
     }
   }
 }

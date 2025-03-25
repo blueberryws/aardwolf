@@ -4,6 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class HoursSection extends EditableSection { // startfold
   static elementName = "hours-section";
   static sectionName = "hours";
+  static description = "The hours section displays the hours of operation when you are open and available to customers. It typically includes the days of the week and specific opening and closing times, making it easy for visitors to know when they can reach you."
 
   classes = [
       "default",

@@ -4,6 +4,7 @@ import { register, ELEMENT_NAMES } from "../element_registry.js";
 export class FooterSection extends EditableSection { // startfold
   static elementName = "footer-section";
   static sectionName = "footer";
+  static description = "This section is the section at the bottom of the page with your logo, social media icons, an accessibility statement, privacy policy, and terms of service."
 
   classes = [
       "default",

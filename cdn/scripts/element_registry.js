@@ -15,6 +15,7 @@ export const ELEMENT_NAMES = {
     "figureElement": "figure-element",
     "blockquoteElement": "blockquote-element",
     "figcaptionElement": "figcaption-element",
+    "image": "image-element",
 
     "editableH1": "editable-h1",
     "editableH2": "editable-h2",

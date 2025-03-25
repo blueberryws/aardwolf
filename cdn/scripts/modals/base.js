@@ -12,6 +12,7 @@ export class AdminModal extends HTMLDialogElement { // startfold
     super();
     this.beforeCancel = () => {};
     this.beforeAction = () => {};
+    this.instructions = document.createElement("div");
     this.content = document.createElement("div");
   } // endfold
   connectedCallback() { // startfold
@@ -27,6 +28,7 @@ export class AdminModal extends HTMLDialogElement { // startfold
     this.header.innerText = this.headerText;
     this.appendChild(this.header);
 
+    this.appendChild(this.getInstructions());
     this.appendChild(this.getContent());
 
     this.createCancelBtn();
@@ -34,6 +36,20 @@ export class AdminModal extends HTMLDialogElement { // startfold
   } // endfold
   getContent() { // startfold
     return this.content;
+  } // endfold
+  getInstructionSummary() { // startfold
+    const summary = document.createElement("summary");
+    summary.innerText = "Instructions";
+    return summary;
+  } // endfold
+  getInstructions() { // startfold
+    if (this.instructions.innerHTML == "" ) {
+        return this.instructions;
+    }
+    const instructions = document.createElement("details"); 
+    instructions.appendChild(this.getInstructionSummary());
+    instructions.appendChild(this.instructions);
+    return instructions;
   } // endfold
   createActionBtn() { // startfold
       this.actionBtn = document.createElement("button");
@@ -68,12 +84,29 @@ export class AdminModal extends HTMLDialogElement { // startfold
     this.content.appendChild(node);
     return this
   } // endfold
+  instructionsHTML(html) { // startfold
+    this.instructions.innerHTML = html
+    return this
+  } // endfold
+  instructionsNode(node) { // startfold
+    this.instructions.innerHTML = "";
+    this.instructions.appendChild(node);
+    return this
+  } // endfold
+  addClass(className) { // startfold
+    this.classList.add(className);
+    return this;
+  } // endfold
   setHeaderText(text) { // startfold
     this.headerText = text;
     return this;
   } // endfold
   setActionText(text) { // startfold
     this.actionText = text;
+    return this
+  } // endfold
+  setCancelText(text) { // startfold
+    this.cancelText = text;
     return this
   } // endfold
   actionFunc(func) { // startfold

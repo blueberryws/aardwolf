@@ -35,7 +35,7 @@ export function htmlFromJSON(jsonData, registry) {
     jsonData.classes.forEach(className => {element.classList.add(className)});
   }
 
-  const supportedAttributes = ['onclick', 'data', 'type', 'onload'];
+  const supportedAttributes = ['onclick', 'data', 'type', 'onload', 'aria-label', 'src'];
   supportedAttributes.forEach(attr => {
     if (jsonData[attr] != null) {
         element.setAttribute(attr, jsonData[attr]);

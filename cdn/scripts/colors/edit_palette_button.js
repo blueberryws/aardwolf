@@ -2,7 +2,7 @@ import { getColorStyle } from "./color_style.js";
 
 export const EditPaletteButtonName = "edit-palette-button";
 export class EditPaletteButton extends HTMLButtonElement {
-    buttonText = "Edit Palette";
+    buttonText = "Colors";
     constructor() {
         super();
         this.innerText = this.buttonText;
