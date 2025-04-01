@@ -120,7 +120,8 @@ section[is='hero-section'].alternate-one { /* startfold */
     z-index: 10;
     grid-column: 1;
     text-align: start;
-    padding-left: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
   }
   h1 {
     align-self: end;
@@ -149,6 +150,12 @@ section[is='hero-section'].alternate-one { /* startfold */
     }
   }
 
+  @media screen and (min-width: base.$phone) {
+    > * {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+  }
   @media screen and (min-width: base.$notebook) {
     grid-template-rows: 1fr auto auto 2fr;
 
@@ -251,6 +258,7 @@ section[is='hero-section'].alternate-three { /* startfold */
     justify-items: center;
     align-items: center;
     background-color: var(--color-four);
+    height: fit-content;
     @media (prefers-color-scheme: dark) {
       background-color: var(--color-one);
     }
@@ -258,29 +266,34 @@ section[is='hero-section'].alternate-three { /* startfold */
   > * {
     z-index: 10;
     grid-column: 1;
-    text-align: start;
+    text-align: center;
+    padding: 10px 25px
   }
   h1 {
     align-self: end;
     grid-row: 1;
+    margin-top: 25px;
   }
   h2 {
     grid-row: 2;
+    margin-bottom: 0;
   }
   p {
-    grid-row: 4;
+    grid-row: 3;
   }
   a {
-    grid-row: 5;
+    grid-row: 4;
     align-self: end;
     padding-bottom: 50px;
+    margin-top: 25px;
   }
   picture {
-    grid-row: 3;
+    grid-row: 5;
     z-index: 1;
     padding-left: 0;
     height: unset;
     aspect-ratio: 1 / 1;
+    padding: unset;
 
     img {
       z-index: 1;
@@ -295,6 +308,7 @@ section[is='hero-section'].alternate-three { /* startfold */
     > * {
         grid-column: 1;
         padding-left: 50px;
+        text-align: start;
     }
     h2 {
         margin-bottom: 0;
@@ -305,6 +319,8 @@ section[is='hero-section'].alternate-three { /* startfold */
     a {
       grid-row: 4;
       align-self: center;
+      margin: unset;
+      padding-top: 0;
     }
     picture {
       grid-row: 1 / span 4;

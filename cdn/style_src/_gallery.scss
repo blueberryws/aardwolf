@@ -226,7 +226,7 @@ section[is="gallery-section"].alternate-two { // startfold
     padding: 10px 0;
     font-size: var(--body-font-small);
     font-weight: 400;
-    color: var(--color-four);
+    color: var(--brand-contrast-color);
     display: none;
   }
   ul.show-all {
@@ -267,6 +267,6 @@ section[is="gallery-section"].alternate-two { // startfold
     max-width: 345px;
   }
 }
-section[is="gallery-section"].default:has(li:nth-child(n+7)) button.show-all {
+section[is="gallery-section"].alternate-two:has(li:nth-child(n+7)) button.show-all {
   display: block;
 } // endfold

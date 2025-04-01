@@ -630,12 +630,12 @@ section[is="testimonials-section"].alternate-four { // startfold
     background: linear-gradient(
       to bottom,
       /* First third: transparent */
-      transparent calc(300px),
+      transparent calc(230px),
       /* Middle third: solid color */
-      var(--color-two) calc(300px),
-      var(--color-two) calc(100% - 175px),
+      var(--color-two) calc(230px),
+      var(--color-two) calc(100% - 170px),
       /* Final third: back to transparent */
-      transparent calc(100% - 175px)
+      transparent calc(100% - 170px)
   );
   } // endfold
   @media screen and (min-width: base.$notebook) { // startfold

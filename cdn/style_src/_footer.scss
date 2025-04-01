@@ -34,9 +34,10 @@ section[is="footer-section"] {
     gap: 10px;
   }
   > div {
-    flex: 0 0 150px;
+    flex: 0 0 20px;
     text-align: center;
     cursor: pointer;
+    color: var(--color-four);
   }
 
   dialog {

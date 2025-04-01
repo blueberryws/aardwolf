@@ -155,7 +155,7 @@ section {
 
 /* typography settings startfold */
 h1, .page-title {
-    font-weight: var(--header-font-weight-x-large);
+    font-weight: calc(var(--header-font-weight-x-large) * .65);
     font-size: var(--header-font-size-x-large);
 }
 @mixin section-heading {
@@ -211,7 +211,6 @@ h2 {
 @media (width >= 992px) {
   h1, .page-title {
     font-weight: var(--header-font-weight-x-large);
-    font-size: var(--header-font-size-x-large);
   }
   h2, .page-subtitle {
     font-weight: var(--header-font-weight-large);
