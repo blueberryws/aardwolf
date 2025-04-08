@@ -84,6 +84,8 @@ export function loadSectionsFromJSON(content) {
         sectionInstance.classList.replace("default", newClass);
         main.appendChild(sectionInstance);
     }
+    const next_buttons = document.querySelectorAll(".next-button");
+    next_buttons.forEach(btn => btn.click());
 }
 
 export function loadMetadataFromJSON(metadata) {

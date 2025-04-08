@@ -6,7 +6,7 @@ export function getFontStyle() {
 }
 const STANDARD_HEADER_STYLE = {
   "x-large": {
-    size: "100px",
+    size: "64px",
     weight: 400,
   },
   large: {

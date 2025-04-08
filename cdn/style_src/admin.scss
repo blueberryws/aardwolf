@@ -545,3 +545,9 @@ picture[is="editable-picture"] {
 strong {
     font-weight: 900;
 }
+
+h2:empty, h3:empty, h4:empty, h5:empty, h6:empty, p:empty, label:empty {
+    min-height: 20px;
+    min-width: 50px;
+    border: 1px solid var(--color-three);
+}

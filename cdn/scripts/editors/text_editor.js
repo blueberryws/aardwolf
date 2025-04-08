@@ -26,7 +26,10 @@ export class TextEditor extends ElementEditor {
     this.element.removeAttribute("contentEditable");
   } // endfold
     clean() { // startfold
-        const text = this.element.innerText.replaceAll("\n", "<br>");
-        this.element.innerHTML = text;
+        if (this.element.innerHTML.replace(/\s+/g, '') == "") {
+            this.element.innerHTML = "";
+        } else {
+            this.element.innerHTML = this.element.innerHTML.replaceAll("\n", "<br>");
+        }
     } // endfold
 }
