@@ -49,10 +49,12 @@ export class ColorEditorModal extends AdminModal { // startfold
     this.currentPalette = JSON.parse(this.colorStyle.dataset.palette);
     this.curPrimaryColor = this.colorStyle.dataset.primaryColor;
     this.curSecondaryColor = this.colorStyle.dataset.secondaryColor;
+    this.curDarkModeDefault = this.colorStyle.dataset.darkModeDefault
     this.beforeCancel = () => {
         this.colorStyle.dataset.palette = JSON.stringify(this.currentPalette);
         this.colorStyle.dataset.primaryColor= this.curPrimaryColor;
         this.colorStyle.dataset.secondaryColor = this.curSecondaryColor;
+        this.colorStyle.dataset.darkModeDefault = this.curDarkModeDefault;
     };
     this.render();
   } // endfold
@@ -84,6 +86,23 @@ export class ColorEditorModal extends AdminModal { // startfold
         this.render();
     });
     selectors.appendChild(secondaryInput);
+
+    const invertLabel = document.createElement("label");
+    invertLabel.innerText = "Invert Colors:";
+    selectors.appendChild(invertLabel);
+    const invertInput = document.createElement("input");
+    invertInput.type = "checkbox";
+    if (this.curDarkModeDefault == "true") {
+      invertInput.setAttribute("checked", true);
+    }
+    invertInput.addEventListener("change", (event) => {
+        if (invertInput.checked) {
+            this.colorStyle.dataset.darkModeDefault = "true";
+        } else {
+            this.colorStyle.dataset.darkModeDefault = "false";
+        }
+    });
+    selectors.appendChild(invertInput);
 
     return selectors
   } // endfold

@@ -12,10 +12,10 @@ $cdn-base-url: "http://my.localhost/cdn";
   --small-border-radius: 7px;
 
   --section-margin-bottom: 45px;
-  --color-one: var(--palette-color-one);
-  --color-two: var(--palette-color-two);
-  --color-three: var(--palette-color-three);
-  --color-four: var(--palette-color-four);
+  --color-one: var(--light-color-one);
+  --color-two: var(--light-color-two);
+  --color-three: var(--light-color-three);
+  --color-four: var(--light-color-four);
   --brand-color: var(--palette-brand-color);
   --brand-contrast-color: var(--palette-brand-contrast-color);
 
@@ -57,10 +57,10 @@ $cdn-base-url: "http://my.localhost/cdn";
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-one: var(--palette-color-four);
-    --color-two: var(--palette-color-three);
-    --color-three: var(--palette-color-two);
-    --color-four: var(--palette-color-one);
+    --color-one: var(--dark-color-one);
+    --color-two: var(--dark-color-two);
+    --color-three: var(--dark-color-three);
+    --color-four: var(--dark-color-four);
   }
 }
 

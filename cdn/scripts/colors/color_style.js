@@ -10,7 +10,7 @@ export function getColorStyle() {
 
 export class ColorStyle extends HTMLStyleElement { // startfold
   // This is how the component communicates with itself between edits.
-  static observedAttributes = ["data-palette", "data-primary-color", "data-secondary-color"];
+  static observedAttributes = ["data-palette", "data-primary-color", "data-secondary-color", "data-dark-mode-default"];
   paletteSize = 4;
   colorValidationRegex = /^#[0-9A-Fa-f]{6}/g;
   defaultPrimaryColor = "#ffffff"
@@ -81,27 +81,49 @@ export class ColorStyle extends HTMLStyleElement { // startfold
     const wContrast = contrast(parseHexColor(palette[0]), parseHexColor(this.dataset.primaryColor));
     const bContrast = contrast(parseHexColor(palette[3]), parseHexColor(this.dataset.primaryColor));
     const contrastColor = wContrast > bContrast ? palette[0] : palette[3];
-    this.innerHTML = `
-  :root {
-    --palette-color-one: ${palette[0]};
-    --palette-color-two: ${palette[1]};
-    --palette-color-three: ${palette[2]};
-    --palette-color-four: ${palette[3]};
-    --palette-brand-contrast-color: ${contrastColor};
-    --palette-brand-color: ${this.dataset.primaryColor};
+    if (this.dataset.darkModeDefault == "true") {
+        this.innerHTML = `
+      :root {
+        --light-color-one: ${palette[3]};
+        --light-color-two: ${palette[2]};
+        --light-color-three: ${palette[1]};
+        --light-color-four: ${palette[0]};
+        --dark-color-one: ${palette[3]};
+        --dark-color-two: ${palette[2]};
+        --dark-color-three: ${palette[1]};
+        --dark-color-four: ${palette[0]};
+        --palette-brand-contrast-color: ${contrastColor};
+        --palette-brand-color: ${this.dataset.primaryColor};
+      }
+    `
+    } else {
+        this.innerHTML = `
+      :root {
+        --light-color-one: ${palette[0]};
+        --light-color-two: ${palette[1]};
+        --light-color-three: ${palette[2]};
+        --light-color-four: ${palette[3]};
+        --dark-color-one: ${palette[3]};
+        --dark-color-two: ${palette[2]};
+        --dark-color-three: ${palette[1]};
+        --dark-color-four: ${palette[0]};
+        --palette-brand-contrast-color: ${contrastColor};
+        --palette-brand-color: ${this.dataset.primaryColor};
+      }
+    `
   }
-`
   console.log("render complete");
   } // endfold
   attributeChangedCallback(name, oldValue, newValue) { // startfold
-    if (name == "data-primary-color" || name == "data-secondary-color") {
-        return
-    }
-    const newColors = this.validateColors(newValue);
-    if (newColors != null) {
-        this.render();
+    if (name == "data-palette") {
+        const newColors = this.validateColors(newValue);
+        if (newColors != null) {
+            this.render();
+        } else {
+            this.dataset["name"] = oldValue;
+        }
     } else {
-        this.dataset["name"] = oldValue;
+        this.render();
     }
   } // endfold
   generatePaletteChoices() { // startfold

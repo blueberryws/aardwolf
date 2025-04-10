@@ -28,11 +28,13 @@ export class ContactFormSection extends EditableSection { // startfold
       "element": "raw",
       "content": `<form method="POST" action="/contact">
     <label for="name">Name</label>
-    <input type="text" name="name" placeholder="Who am I speaking with?"></input>
+    <input type="text" name="name" placeholder="Who am I speaking with?" required></input>
     <label for="email">Email</label>
-    <input type="email" name="email" placeholder="What's a good email to reach you at?"></input>
+    <input type="email" name="email" placeholder="What's a good email to reach you at?" required></input>
     <label for="message">Message</label>
-    <textarea name="message" placeholder="What do you wanna talk about?"></textarea>
+    <textarea name="message" placeholder="Your message here." required></textarea>
+    <input name="duration" class="hidden"></input>
+    <input name="honey" class="hidden"></input>
     <button type="submit">Send</button>
   </form>`
     },
@@ -45,11 +47,14 @@ export class ContactFormSection extends EditableSection { // startfold
   addSiteId() {
     const siteId = document.documentElement.dataset.siteId;
     const form = this.querySelector("form");
-    const siteIdField = document.createElement("input");
-    siteIdField.type = "hidden";
-    siteIdField.name = "site-id";
-    siteIdField.value = siteId;
-    form.appendChild(siteIdField);
+    const curSiteId = document.querySelector("[name='site-id']");
+    if (curSiteId == null) {
+        const siteIdField = document.createElement("input");
+        siteIdField.type = "hidden";
+        siteIdField.name = "site-id";
+        siteIdField.value = siteId;
+        form.appendChild(siteIdField);
+    }
   }
 }
 register(ContactFormSection);
