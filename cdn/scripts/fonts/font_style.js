@@ -28,11 +28,11 @@ const STANDARD_BODY_STYLE = {
     weight: 400,
   },
   medium: {
-    size: "16px",
+    size: "20px",
     weight: 400,
   },
   small: {
-    size: "14px",
+    size: "16px",
     weight: 400,
   },
 }
