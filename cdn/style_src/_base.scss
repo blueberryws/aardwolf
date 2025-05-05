@@ -96,13 +96,13 @@ h1.sized-text[data-font-size="small"], h2.sized-text[data-font-size="small"], h3
     font-size: var(--header-font-size-small);
 }
 
-p.sized-text[data-font-size="large"], blockquote.sized-text[data-font-size="large"], label.sized-text[data-font-size="large"], a.sized-text[data-font-size="large"], li.sized-text[data-font-size="large"] {
+p.sized-text[data-font-size="large"] text-fragment, blockquote.sized-text[data-font-size="large"] text-fragment, label.sized-text[data-font-size="large"] text-fragment, a.sized-text[data-font-size="large"] text-fragment, li.sized-text[data-font-size="large"] text-fragment {
     font-size: var(--body-font-size-large);
 }
-p.sized-text[data-font-size="medium"], blockquote.sized-text[data-font-size="medium"], label.sized-text[data-font-size="medium"], a.sized-text[data-font-size="medium"], li.sized-text[data-font-size="medium"] {
+p.sized-text[data-font-size="medium"] text-fragment, blockquote.sized-text[data-font-size="medium"] text-fragment, label.sized-text[data-font-size="medium"] text-fragment, a.sized-text[data-font-size="medium"] text-fragment, li.sized-text[data-font-size="medium"] text-fragment {
     font-size: var(--body-font-size-medium);
 }
-p.sized-text[data-font-size="small"], blockquote.sized-text[data-font-size="small"], label.sized-text[data-font-size="small"], a.sized-text[data-font-size="small"], li.sized-text[data-font-size="small"] {
+p.sized-text[data-font-size="small"] text-fragment, blockquote.sized-text[data-font-size="small"] text-fragment, label.sized-text[data-font-size="small"] text-fragment, a.sized-text[data-font-size="small"] text-fragment, li.sized-text[data-font-size="small"] text-fragment {
     font-size: var(--body-font-size-small);
 }
 
