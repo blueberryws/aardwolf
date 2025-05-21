@@ -463,6 +463,6 @@ export class TextEditor extends ElementEditor {
   unsetEditable() { // startfold
     console.log("unset editable called");
     this.element.removeAttribute("contentEditable");
-    this.element.removeRichTextOptions();
+    this.removeRichTextOptions();
   } // endfold
 }

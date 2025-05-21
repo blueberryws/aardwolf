@@ -1,6 +1,7 @@
 import { IS_LOCAL, GET_STORE } from "../globals.js";
 import { dispatch, CleanDocument, SetDocumentEditable, UnsetDocumentEditable, SetLoading, UnsetLoading } from "../interfaces/events.js";
 import { CLEANABLE_SELECTOR } from "../interfaces/selectors.js";
+import { register, ELEMENT_NAMES } from "../element_registry.js";
 
 
 export const SaveButtonName = "save-button";

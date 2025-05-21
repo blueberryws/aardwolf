@@ -57,7 +57,25 @@ function getRandomElement(array) {
 
 function replText(el, content) {
   for (const [key, val] of Object.entries(content)) {
-    if (Array.isArray(val)) {
+    if (key == "picture") {
+        if (Array.isArray(val)) {
+            const pics = el.querySelectorAll(key);
+            if (pics == null) {
+                console.error(`${key} not found on ${el.is}`);
+            } else {
+                val.forEach((src, idx) => {
+                  pics[idx].setSrc(src);
+                });
+            }
+        } else {
+            const pic = el.querySelector(key);
+            if (pic == null) {
+                console.error(`${key} not found on ${el.is}`);
+            } else {
+                pic.setSrc(val);
+            }
+        }
+    } else if (Array.isArray(val)) {
       let children = Array.from(el.querySelectorAll(key));
       while (children.length < val.length) {
         let clone = children[0].cloneNode(true); 
@@ -68,7 +86,12 @@ function replText(el, content) {
         replText(child, val[idx]);
       });
     } else {
-      el.querySelector(key).innerText = val;
+      const child = el.querySelector(key);
+      if (child == null) {
+        console.error(`${key} not found on ${el.is}`);
+      } else {
+        el.querySelector(key).innerText = val;
+      }
     }
   }
 }
