@@ -500,7 +500,7 @@ aside[is="admin-aside"] {
     z-index: 1000;
 }
  
-aside[is="admin-aside"]:hover {
+aside[is="admin-aside"]:hover, aside[is="admin-aside"].mobile-selected {
     transform: translateX(0px);
 }
 
@@ -539,10 +539,10 @@ save-menu label {
   border-radius: 8px;
   padding: 10px 25px;
 }
-save-menu:hover * {
+save-menu:hover *, save-menu.mobile-selected * {
   display: block;
 }
-save-menu:hover label {
+save-menu:hover label, save-menu.mobile-selected label {
   display: none;
 }
 
@@ -556,7 +556,7 @@ main:has(section:hover) section {
     opacity: .5;
 }
 
-main section:hover {
+main section:hover, main section.mobile-selected {
     outline: 3px solid var(--admin-accent-color);
     opacity: 1 !important;
 }

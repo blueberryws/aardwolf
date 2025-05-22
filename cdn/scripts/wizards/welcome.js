@@ -1,7 +1,7 @@
 import { CustomElement } from "../base.js";
 import { MakeToast } from "../utils/make_toast.js";
 import { IS_LOCAL } from "../globals.js";
-import { DOMAIN_SEARCH, DOMAIN_REGISTRATION } from "../urls.js";
+import { DOMAIN_SEARCH, DOMAIN_REGISTRATION, DOMAIN_CONNECT } from "../urls.js";
 
 import { modalBuilder } from "../modals/base.js";
 import { SetDocumentEditable, UnsetDocumentEditable, SetLoading, UnsetLoading, dispatch } from "../interfaces/events.js";
@@ -119,7 +119,7 @@ export function showWelcomeModal() {
         actionText = "GENERATE!";
     }
     modalBuilder()
-      .setHeaderText("Welcome To Two Dollar Website")
+      .setHeaderText("Welcome To One Hour Website")
       .addClass("welcome-modal")
       .contentHTML(CONTENT)
       .setActionText(actionText)
@@ -133,7 +133,7 @@ export function showWelcomeModal() {
 }
 // endfold
 
-class GenerationManager {
+class GenerationManager { // startfold
     constructor() {}
     generate(userPrompt) {
         console.log(userPrompt);
@@ -163,8 +163,7 @@ class GenerationManager {
         dispatch(SetDocumentEditable);
         dispatch(UnsetLoading);
     }
-}
-
+} // endfold
 export class StartBuilding extends CustomElement { // startfold
     h2 = "... and you're in!";
     h1 = "Let's start building";
@@ -282,16 +281,16 @@ export class StartupRegistrarInstructions extends CustomElement { // startfold
               <li>Log in to your DNS provider</li>
               <li>Add the following TXT record:<br>
                  <div class="adm-indented">Host: @</div>
-                 <div class="adm-indented">Value: yourkeyhere</div>
+                 <div class="adm-indented">Value: ${REFERRAL_CODE}</div>
               </li>
               <li>Set your A record to:<br>
                  <div class="adm-indented">Host: @</div>
-                 <div class="adm-indented">Value: iphere</div>
+                 <div class="adm-indented">Value: ${SERVER_IP}</div>
               </li>
               <li>Enter your domain below and click "connect"</li>
             </ol>
             <form>
-              <input type="text" class="adm-inline-input"></input><button class="admin-btn function-btn" data-on-click="connect">CONNECT!</button>
+              <input type="text" class="adm-inline-input" data-tag="domainName"></input><button class="admin-btn function-btn" data-on-click="connect">CONNECT!</button>
             </form>
             <small class="adm-small">
                 I'll add a domain later. Skip to
@@ -300,11 +299,31 @@ export class StartupRegistrarInstructions extends CustomElement { // startfold
             <button class="admin-btn adm-deemph-btn" data-on-click="back">🡐 Back</button>
         `);
     }
-    connect(e) {
+    async connect(e) {
+        e.preventDefault();
+        const request = { domainName: this.domainName.value };
+        const resp = await fetch(
+            DOMAIN_CONNECT,
+            {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(request),
+            },
+        )
+        if (!resp.ok) {
+            MakeToast("Domain Connection Failed!");
+            const respText = await resp.text();
+            console.error(respText);
+        } else {
+            MakeToast("Domain Connected!");
+            this.nav("generator");
+        }
     }
     cancel(e) {
         e.preventDefault();
-        this.nav("close");
+        this.nav("generator");
     }
     back(e) {
         e.preventDefault();
@@ -566,7 +585,7 @@ customElements.define("startup-tutorial", StartupTutorial);
 // endfold
 export class TutorialComplete extends CustomElement { // startfold
     title = "... and that's it!";
-    caption = "For more advanced tutorials on how to do things like adding <span class='italic'> scheduling calendars or embeding videos</span>, check out our Youtube channel, TwoDollarWebsiteTuts!";
+    caption = "For more advanced tutorials on how to do things like adding <span class='italic'> scheduling calendars or embeding videos</span>, check out our Youtube channel!";
 
     constructor(nav, genMgr) {
         super();

@@ -35,6 +35,7 @@ export class EditablePicture extends HTMLPictureElement { // startfold
     this.editor = new PictureEditor(this);
   } // endfold
   setSrc(src) { // startfold
+    console.log("called!");
     this.innerHTML = "";
     const originalSrc = this.img.src;
 

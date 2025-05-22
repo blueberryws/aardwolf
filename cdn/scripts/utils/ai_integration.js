@@ -57,14 +57,21 @@ function getRandomElement(array) {
 
 function replText(el, content) {
   for (const [key, val] of Object.entries(content)) {
+    console.log(val);
     if (key == "picture") {
         if (Array.isArray(val)) {
             const pics = el.querySelectorAll(key);
             if (pics == null) {
                 console.error(`${key} not found on ${el.is}`);
             } else {
-                val.forEach((src, idx) => {
-                  pics[idx].setSrc(src);
+                val.forEach((d, idx) => {
+                  const src = d.src;
+                  const pic = pics[idx];
+                  console.log(d);
+                  pic.img.alt = d.alt;
+                  pic.dataset.attributionText = d.attributionText;
+                  pic.dataset.attributionHref = d.attributionHref;
+                  pic.setSrc(src);
                 });
             }
         } else {
@@ -72,7 +79,10 @@ function replText(el, content) {
             if (pic == null) {
                 console.error(`${key} not found on ${el.is}`);
             } else {
-                pic.setSrc(val);
+                pic.img.alt = val.alt;
+                pic.dataset.attributionText = val.attributionText;
+                pic.dataset.attributionHref = val.attributionHref;
+                pic.setSrc(val.src);
             }
         }
     } else if (Array.isArray(val)) {
@@ -83,6 +93,7 @@ function replText(el, content) {
         children = Array.from(el.querySelectorAll(key));
       }
       children.forEach((child, idx) => {
+        console.log("calling on child");
         replText(child, val[idx]);
       });
     } else {

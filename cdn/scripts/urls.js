@@ -4,3 +4,4 @@ export const IMAGE_SAVE = `${BASE_URL}/image`;
 export const LOGO_SAVE = `${BASE_URL}/image/logo`;
 export const DOMAIN_SEARCH = `${BASE_URL}/domain/search`;
 export const DOMAIN_REGISTRATION = `${BASE_URL}/domain/register`;
+export const DOMAIN_CONNECT = `${BASE_URL}/domain/connect`;

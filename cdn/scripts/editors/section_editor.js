@@ -26,6 +26,9 @@ export class EditableSectionEditor extends ElementEditor {
         this.prevButton = this.buildPrevClass();
     }
   setEditable() { // startfold
+    this.element.addEventListener("touchstart", () => {
+        const otherSelected = document.querySelectorAll(".mobile-selected");
+    })
     this.element.addEventListener("mouseenter", () => {
         this.addButton.remove();
         this.element.appendChild(this.addButton);

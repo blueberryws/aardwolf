@@ -173,7 +173,7 @@ export class TextEditor extends ElementEditor {
         this.element.addEventListener("input", (event) => this.clean(event));
         this.element.addEventListener("focusout", (event) => this.removeFocus(event));
         this.element.addEventListener("focusin", (event) => this.getFocus(event));
-
+        this.element.setAttribute(`data-${CLEANABLE_ATTR}`, true);
 
         const linkButton = document.createElement("button");
         linkButton.classList.add("linked-button");

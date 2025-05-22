@@ -10,7 +10,6 @@ export class EditableHeading extends HTMLHeadingElement { // startfold
     super();
     this.editor = new TextEditor(this);
     this.setAttribute("is", this.constructor.elementName);
-    this.setAttribute(`data-${CLEANABLE_ATTR}`, true);
   } // endfold
 
 } // endfold
