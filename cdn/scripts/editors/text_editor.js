@@ -1,5 +1,6 @@
 import { ElementEditor } from "./element_editor.js";
 import { modalBuilder } from "../modals/base.js";
+import { CLEANABLE_ATTR } from "../interfaces/selectors.js";
 
 
 class TextFragment extends HTMLElement { // startfold
