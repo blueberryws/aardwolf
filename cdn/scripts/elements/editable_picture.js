@@ -12,7 +12,7 @@ export class EditablePicture extends HTMLPictureElement { // startfold
   static elementType = "picture"
 
   defaultImgSrc = "/cdn/images/click_to_add_image.png"
-  defaultAltText = "Description For Blind People"
+  defaultAltText = "Description for screen readers and the visually impaired."
   defaultAttributionText = "Photo Credit: Photographer's Name Here"
   defaultAttributionHref = "https://example.com/optional/photographer/link"
 

@@ -1,5 +1,6 @@
 import { AdminModal } from "../modals/base.js";
 import { fromHTML } from "../utils/html.js";
+import { AutoResizeTextarea } from "../utils/interactions.js";
 
 // Data Element
 export const EditableHeadName = "editable-head";
@@ -86,6 +87,8 @@ export class HeadEditorModal extends AdminModal { // startfold
     };
     this.metaChildren = null;
     this.render();
+    AutoResizeTextarea(this.titleText);
+    AutoResizeTextarea(this.descriptionText);
   } // endfold
   getInstructions() { // startfold
     const instructions = document.createElement("details");
@@ -115,8 +118,12 @@ export class HeadEditorModal extends AdminModal { // startfold
     }
     container.appendChild(selector);
 
-    const input = document.createElement("input");
+    const input = document.createElement("textarea");
     input.value = content;
+    input.addEventListener("input", (e) => {
+      AutoResizeTextarea(input);
+    });
+    AutoResizeTextarea(input);
     container.appendChild(input);
 
     const removeButton = document.createElement("button");
@@ -136,9 +143,12 @@ export class HeadEditorModal extends AdminModal { // startfold
     titleLabel.innerText = "Title:";
     content.appendChild(titleLabel);
 
-    this.titleText = document.createElement("input");
-    this.titleText.type = "text";
+    this.titleText = document.createElement("textarea");
+    this.titleText.setAttribute("type", "text");
     this.titleText.value = this.head.siteTitle.innerText || "";
+    this.titleText.addEventListener("input", (e) => {
+      AutoResizeTextarea(this.titleText);
+    });
     content.appendChild(this.titleText);
 
     const descriptionLabel = document.createElement("label");
@@ -148,7 +158,11 @@ export class HeadEditorModal extends AdminModal { // startfold
     this.descriptionText = document.createElement("textarea");
     this.descriptionText.setAttribute("onchange", "this.style.height = this.scrollHeight +'px'");
     this.descriptionText.value = this.head.description.content || "";
+    this.descriptionText.addEventListener("input", (e) => {
+      AutoResizeTextarea(this.descriptionText);
+    });
     content.appendChild(this.descriptionText);
+    AutoResizeTextarea(this.descriptionText);
 
     const languageLabel = document.createElement("label");
     languageLabel.innerText = "Language:";
