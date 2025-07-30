@@ -61,18 +61,18 @@ class TextFragment extends HTMLElement { // startfold
     }
   } // endfold
   splitAt(idx) { // startfold
-      const newNode = this.cloneNode(true);
-      const textContent = this.textContent;
-      if (this.classList.contains("linked-text")) {
-        const thisLink = this.querySelector("a");
-        thisLink.textContent = textContent.substring(0, idx);
-        const newLink = newNode.querySelector("a");
-        newLink.textContent = textContent.substring(idx);
-      } else {
-        this.textContent = this.textContent.substring(0, idx);
-        newNode.textContent = newNode.textContent.substring(idx);
-      }
-      return newNode;
+    const newNode = this.cloneNode(true);
+    const textContent = this.textContent;
+    if (this.classList.contains("linked-text")) {
+      const thisLink = this.querySelector("a");
+      thisLink.textContent = textContent.substring(0, idx);
+      const newLink = newNode.querySelector("a");
+      newLink.textContent = textContent.substring(idx);
+    } else {
+      this.textContent = this.textContent.substring(0, idx);
+      newNode.textContent = newNode.textContent.substring(idx);
+    }
+    return newNode;
   } // endfold
   addHref(href) { // startfold
     const newA = document.createElement("a");
@@ -83,9 +83,9 @@ class TextFragment extends HTMLElement { // startfold
     this.appendChild(newA);
   } // endfold
   removeHref() { // startfold
-      const textContent = this.textContent;
-      this.innerHTML = "";
-      this.textContent = textContent;
+    const textContent = this.textContent;
+    this.innerHTML = "";
+    this.textContent = textContent;
   } // endfold
 }
 customElements.define("text-fragment", TextFragment);
@@ -101,233 +101,378 @@ customElements.define("text-fragment", TextFragment);
 //   - need classes for the various sizes
 
 export class SizeSelector extends HTMLElement { // startfold
-    constructor(textEditor) {
-        super();
-        this.dataset.currentlyOn = "false";
+  constructor(textEditor) {
+    super();
+    this.dataset.currentlyOn = "false";
 
-        this.editor = textEditor;
+    this.editor = textEditor;
 
-        this.classList.add("rich-text-option");
-        this.dataset.selected="false";
+    this.classList.add("rich-text-option");
+    this.dataset.selected = "false";
 
-        this.label = document.createElement("label");
-        const curSize = this.editor.element.dataset.fontSize || "default";
-        this.label.innerText = curSize;
-        this.appendChild(this.label);
+    this.label = document.createElement("label");
+    const curSize = this.editor.element.dataset.fontSize || "default";
+    this.label.innerText = curSize;
+    this.appendChild(this.label);
 
-        this.large = this.makeSizeButton("large");
-        this.medium = this.makeSizeButton("medium");
-        this.small = this.makeSizeButton("small");
+    this.large = this.makeSizeButton("large");
+    this.medium = this.makeSizeButton("medium");
+    this.small = this.makeSizeButton("small");
 
-        this.defaultSize = document.createElement("button");
-        this.defaultSize.innerText = "default";
-        this.defaultSize.addEventListener("mousedown", (e) => {
-            e.preventDefault();
-        });
-        this.defaultSize.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this.editor.element.classList.remove("sized-text");
-            delete this.editor.element.dataset.fontSize;
-            this.label.innerText = "default";
-            this.dataset.selected = "false";
-        });
-        this.appendChild(this.defaultSize);
-        this.appendChild(this.large);
-        this.appendChild(this.medium);
-        this.appendChild(this.small);
+    this.defaultSize = document.createElement("button");
+    this.defaultSize.innerText = "default";
+    this.defaultSize.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+    });
+    this.defaultSize.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.editor.element.classList.remove("sized-text");
+      delete this.editor.element.dataset.fontSize;
+      this.label.innerText = "default";
+      this.dataset.selected = "false";
+    });
+    this.appendChild(this.defaultSize);
+    this.appendChild(this.large);
+    this.appendChild(this.medium);
+    this.appendChild(this.small);
 
-        this.addEventListener("mousedown", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-        });
-        this.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this.dataset.selected = this.dataset.selected == "true" ? "false" : "true";
-        });
-    }
-    makeSizeButton(size) {
-        const button = document.createElement("button");
-        button.innerText = size;
-        button.addEventListener("mousedown", (e) => {
-            e.preventDefault();
-        });
-        button.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this.dataset.selected = "false";
-            this.editor.element.classList.add("sized-text");
-            this.editor.element.dataset.fontSize = size;
-            this.label.innerText = size;
-        });
-        return button;
-    }
+    this.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    this.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.dataset.selected = this.dataset.selected == "true" ? "false" : "true";
+    });
+  }
+  makeSizeButton(size) {
+    const button = document.createElement("button");
+    button.innerText = size;
+    button.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+    });
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.dataset.selected = "false";
+      this.editor.element.classList.add("sized-text");
+      this.editor.element.dataset.fontSize = size;
+      this.label.innerText = size;
+    });
+    return button;
+  }
 }
 customElements.define("size-selector", SizeSelector);
 // endfold
 
 export class TextEditor extends ElementEditor {
-    constructor(element) {
-        super();
-        this.element = element;
-        this.element.addEventListener("input", (event) => this.clean(event));
-        this.element.addEventListener("focusout", (event) => this.removeFocus(event));
-        this.element.addEventListener("focusin", (event) => this.getFocus(event));
-        this.element.setAttribute(`data-${CLEANABLE_ATTR}`, true);
+  constructor(element) {
+    super();
+    this.element = element;
+    this.element.addEventListener("input", (event) => this.clean(event));
+    this.element.addEventListener("focusout", (event) => this.removeFocus(event));
+    this.element.addEventListener("focusin", (event) => this.getFocus(event));
+    this.element.setAttribute(`data-${CLEANABLE_ATTR}`, true);
 
-        const linkButton = document.createElement("button");
-        linkButton.classList.add("linked-button");
-        linkButton.classList.add("rich-text-option");
-        linkButton.textContent = "🔗";
-        linkButton.addEventListener("mousedown", (e) => e.preventDefault());
-        linkButton.addEventListener("click", (e) => {
-          e.preventDefault();
-          const selection = this.getSelection();
-          const [finalAnchorOffset, finalFocusOffset] = this.extractSelection(selection);
-          if (linkButton.dataset.currentlyOn == "true") {
-              this.applyStyle(selection, (element) => {
-                  console.log(element);
-                  element.removeHref();
-                  element.classList.remove("linked-text");
-              });
-          } else {
-              modalBuilder()
-                .setHeaderText("Set Link Destination")
-                .contentHTML(`
+
+    const linkButton = document.createElement("button");
+    linkButton.classList.add("linked-button");
+    linkButton.classList.add("rich-text-option");
+    linkButton.textContent = "🔗";
+    linkButton.addEventListener("mousedown", (e) => e.preventDefault());
+    linkButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      const selection = this.getSelection();
+      const [finalAnchorOffset, finalFocusOffset] = this.extractSelection(selection);
+      if (linkButton.dataset.currentlyOn == "true") {
+        this.applyStyle(selection, (element) => {
+          console.log(element);
+          element.removeHref();
+          element.classList.remove("linked-text");
+        });
+      } else {
+        modalBuilder()
+          .setHeaderText("Set Link Destination")
+          .contentHTML(`
                 <label>Link Destination</link>
                 <input id="set-link-destination-input"></input>
                 `)
-                .actionFunc(() => {
-                  this.setSelection(selection, finalAnchorOffset, finalFocusOffset);
-                  this.applyStyle(selection, (element) => {
-                      const destination = document.getElementById("set-link-destination-input").value;
-                      element.addHref(destination);
-                      element.classList.add("linked-text");
-                  });
-                })
-                .showMe()
-          }
-        });
-        const clearButton = document.createElement("button");
-        clearButton.classList.add("clear-button");
-        clearButton.classList.add("rich-text-option");
-        clearButton.textContent = "⌫";
-        clearButton.addEventListener("mousedown", (e) => e.preventDefault());
-        clearButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            const selection = this.getSelection();
+          .actionFunc(() => {
+            this.setSelection(selection, finalAnchorOffset, finalFocusOffset);
             this.applyStyle(selection, (element) => {
-                  element.removeHref();
-                  element.classList = [];
+              const destination = document.getElementById("set-link-destination-input").value;
+              element.addHref(destination);
+              element.classList.add("linked-text");
             });
-        });
-        this.stateRegistry = {};
-        this.stateRegistry["linked-text"] = linkButton;
-        this.sizeSelector = new SizeSelector(this);
-    
-        this.richTextOptions = [
-          this.makeRichTextButton("bold", "𝐁"),
-          this.makeRichTextButton("italic", "𝐼"),
-          this.makeRichTextButton("underline", "U"),
-          linkButton,
-          clearButton,
-          this.sizeSelector,
-        ]
+          })
+          .showMe()
+      }
+    });
+    const clearButton = document.createElement("button");
+    clearButton.classList.add("clear-button");
+    clearButton.classList.add("rich-text-option");
+    clearButton.textContent = "⌫";
+    clearButton.addEventListener("mousedown", (e) => e.preventDefault());
+    clearButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      const selection = this.getSelection();
+      this.applyStyle(selection, (element) => {
+        element.removeHref();
+        element.classList = [];
+      });
+    });
+    this.stateRegistry = {};
+    this.stateRegistry["linked-text"] = linkButton;
+    this.sizeSelector = new SizeSelector(this);
 
-        this._stateCalculator = (event) => {this.calculateSelectionState(event)};
+    this.richTextOptions = [
+      this.makeRichTextButton("bold", "𝐁"),
+      this.makeRichTextButton("italic", "𝐼"),
+      this.makeRichTextButton("underline", "U"),
+      linkButton,
+      clearButton,
+      this.sizeSelector,
+    ]
+
+    this._stateCalculator = (event) => { this.calculateSelectionState(event) };
+  }
+
+  calculateSelectionState(event) { // startfold
+    const selectionObj = this.getSelection();
+    const selection = selectionObj.selectionEvent;
+
+    if (selection.rangeCount != 1) {
+      return
+    }
+    let anchorNode = selection.direction == "forward" ? selection.anchorNode : selection.focusNode;
+    const anchorParent = anchorNode.parentElement.closest("text-fragment");
+    for (const className in this.stateRegistry) {
+      let inRange = false;
+      let hasClass = [];
+      for (const child of this.element.childNodes) {
+        if (child.isSameNode(anchorParent)) {
+          inRange = true;
+        }
+        if (inRange) {
+          hasClass.push(child.classList.contains(className));
+        }
+        if (child.isSameNode(anchorParent)) {
+          inRange = false
+        };
+      }
+      this.stateRegistry[className].dataset.currentlyOn = hasClass.every(Boolean) && hasClass.length > 0;
+    }
+  } // endfold
+  setSelection(selection, anchorOffset, focusOffset) { // startfold
+    let range = document.createRange();
+    let setAnchor = false;
+    let setFocus = false;
+    let currentLength = 0;
+    for (const child of this.element.children) {
+      const nodeLength = child.textContent.length;
+      const nodeEnd = currentLength + nodeLength;
+      const textNode = (child.querySelector("a") || child).childNodes[0];
+      if (!setAnchor && nodeEnd > anchorOffset) {
+        const localAnchorOffset = anchorOffset - currentLength;
+        range.setStart(textNode, localAnchorOffset);
+        setAnchor = true;
+      }
+      if (!setFocus && nodeEnd >= focusOffset) {
+        const localFocusOffset = focusOffset - currentLength;
+        range.setEnd(textNode, localFocusOffset);
+        setFocus = true;
+      }
+      currentLength = nodeEnd;
+    }
+    selection.removeAllRanges();
+    selection.addRange(range);
+  } // endfold
+
+
+  getSelection() {
+    let selection = window.getSelection();
+    let selectionText = selection.toString();
+    let textFgmts = this.element.querySelectorAll('text-fragment');
+    if (textFgmts.length === 0) {
+      textFgmts = [new TextFragment(this.element.childNodes[0].nodeValue)];
     }
 
-    getSelection() { // startfold
-        let selection = window.getSelection();
-        if (selection.type == "Caret") {
-            return selection;
-        }
-        let anchorParent = selection.anchorNode.nodeName == "TEXT-FRAGMENT" ? selection.anchorNode : selection.anchorNode.parentElement.closest("text-fragment");
-        let focusParent = selection.focusNode.nodeName == "TEXT-FRAGMENT" ? selection.focusNode : selection.focusNode.parentElement.closest("text-fragment");
+    let selectionObj = { 'selection-text': selectionText, 'current-setup': {} };
+    for (let textFgmt of textFgmts) {
+      let txt = textFgmt.innerText;
+      selectionObj['current-setup'][txt] = textFgmt.classList;
+    }
+    selectionObj.selectionEvent = selection;
+    return selectionObj;
+  }
 
-        if (anchorParent == null || focusParent == null) {
-            const allFragments = this.element.querySelectorAll("text-fragment");
-            const start = this.element.querySelector("text-fragment");
-            const endNode = allFragments[allFragments.length-1];
-            const end = (endNode.querySelector("a") || endNode).childNodes[0];
-            let range = document.createRange();
-            range.setStart(start, 0);
-            if (end != null) {
-                range.setEnd(end, end.textContent.length);
-            } else {
-                range.setEnd(endNode, 0);
-            }
-            selection.removeAllRanges();
-            selection.addRange(range);
+  makeRichTextButton(name, text) { // startfold
+    const styleClass = `${name}-text`;
+    const buttonClass = `${name}-button`;
+    const button = document.createElement("button");
+    button.classList.add(buttonClass);
+    button.classList.add("rich-text-option");
+    button.textContent = text;
+    button.addEventListener("mousedown", (e) => e.preventDefault());
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      const selection = this.getSelection();
+      // If has bold, remove
+      let newSelection = selection['selection-text'];
+      let currentSetup = selection['current-setup'];
+      let searchStrings = Object.keys(currentSetup);
+      let fullString = Object.keys(currentSetup).join('');
+      let newSetup = {}
+      for (let searchString of searchStrings) {
+        if (searchString !== "") {
+          let idx = fullString.indexOf(searchString);
+          newSetup[idx] = currentSetup[searchString];
         }
-        return selection;
-    } // endfold
-    makeRichTextButton(name, text) { // startfold
-        const styleClass = `${name}-text`;
-        const buttonClass = `${name}-button`;
-        const button = document.createElement("button");
-        button.classList.add(buttonClass);
-        button.classList.add("rich-text-option");
-        button.textContent = text;
-        button.addEventListener("mousedown", (e) => e.preventDefault());
-        button.addEventListener("click", (e) => {
-          e.preventDefault();
-          const selection = this.getSelection();
-          // If has bold, remove
-          if (button.dataset.currentlyOn == "true") {
-              this.applyStyle(selection, (element) => element.classList.remove(styleClass));
-          } else {
-              this.applyStyle(selection, (element) => element.classList.add(styleClass));
+      }
+      newSetup[fullString.length] = new Set();
+
+      let newIdx = fullString.indexOf(newSelection);
+      let end = newIdx + newSelection.length;
+      let found = false;
+      let prev = -1;
+      let affected = [];
+      for (let index in newSetup) {
+        if (!found) {
+          if (index < newIdx) {
+            prev = index;
+            continue;
           }
-        });
-        this.stateRegistry[styleClass] = button;
-        return button;
-    } // endfold
-    addRichTextOptions() { // startfold
-        this.richTextOptions.forEach(el => {
-            this.element.appendChild(el);
-        });
-    } // endfold
-    removeRichTextOptions() { // startfold
-        this.richTextOptions.forEach(el => {
-            el.remove();
-        });
-    } // endfold
-    getFocus(event) { // startfold
-        this.addRichTextOptions();
-        this.clean();
-        document.addEventListener("selectionchange", this._stateCalculator);
-    } // endfold
-    removeFocus(event) { // startfold
-        this.removeRichTextOptions();
-        this.clean();
-        document.removeEventListener("selectionchange", this._stateCalculator);
-    } // endfold
-    calculateSelectionState(event) { // startfold
-        const selection = this.getSelection();
-        if (selection.rangeCount != 1) {
-            return
-        }
-        let anchorNode = selection.direction == "forward" ? selection.anchorNode : selection.focusNode;
-        const anchorParent = anchorNode.parentElement.closest("text-fragment");
-        for (const className in this.stateRegistry) {
-            let inRange = false;
-            let hasClass = [];
-            for (const child of this.element.childNodes) {
-                if (child.isSameNode(anchorParent)) {
-                    inRange = true;
-                }
-                if (inRange) {
-                    hasClass.push(child.classList.contains(className));
-                }
-                if (child.isSameNode(anchorParent)) {
-                    inRange = false
-                };
+          found = true;
+          if (index != newIdx) {
+            newSetup[newIdx] = new Set();
+            if (prev != -1) {
+              newSetup[newIdx] = new Set([...newSetup[prev]]);
             }
-            this.stateRegistry[className].dataset.currentlyOn = hasClass.every(Boolean) && hasClass.length > 0;
+          }
         }
-    } // endfold
+
+        if (index == end) {
+          break
+        }
+        else if (index > end) {
+          newSetup[end] = new Set();
+          if (prev != -1) {
+            newSetup[end] = new Set([...newSetup[prev]]);
+          }
+          break;
+        }
+        affected.push(index);
+        prev = index;
+      }
+      if (!(newIdx in affected)) {
+        affected.push(newIdx);
+      }
+
+      if (!Object.keys(newSetup).includes(end.toString())) {
+        newSetup[end] = new Set();
+      }
+
+      let turnOff = true;
+      for (let idx of affected) {
+        if (!Object.keys(newSetup).includes(idx.toString())) {
+          newSetup[idx] = new Set();
+        }
+        if (!(newSetup[idx].has?.(styleClass) || newSetup[idx].contains?.(styleClass))) {
+          turnOff = false;
+        }
+      }
+
+      for (let idx of affected) {
+        if (turnOff) {
+          try {
+            newSetup[idx].remove(styleClass);
+          }
+          catch {
+            newSetup[idx].delete(styleClass);
+          }
+        } else {
+          newSetup[idx].add(styleClass);
+        }
+      }
+      this.applyStyle(newSetup, fullString, newSelection, selection.selectionEvent);
+    });
+    this.stateRegistry[styleClass] = button;
+    return button;
+  } // endfold
+  addRichTextOptions() { // startfold
+    this.richTextOptions.forEach(el => {
+      this.element.appendChild(el);
+    });
+  } // endfold
+  removeRichTextOptions() { // startfold
+    this.richTextOptions.forEach(el => {
+      el.remove();
+    });
+  } // endfold
+  getFocus(event) { // startfold
+    this.addRichTextOptions();
+    this.clean();
+    document.addEventListener("selectionchange", this._stateCalculator);
+  } // endfold
+  removeFocus(event) { // startfold
+    this.removeRichTextOptions();
+    this.clean();
+    document.removeEventListener("selectionchange", this._stateCalculator);
+  } // endfold
+
+  applyStyle(setup, fullString, selection, selectionEvent) { // startfold
+    let prevItems = this.element.querySelectorAll('text-fragment');
+    if (prevItems.length === 0) {
+      this.element.childNodes[0].remove();
+    }
+    else {
+      for (let i of prevItems) {
+        i.remove();
+      }
+    }
+    const endpoint = this.element.querySelector('*:first-child');
+
+    let indices = Object.keys(setup);
+    for (let i = 0; i < indices.length; i++) {
+      let start = indices[i];
+      let stop = i < indices.length + 1 ? indices[i + 1] : fullString.length;
+      let textContent = fullString.substring(start, stop);
+      let fgmt = document.createElement("text-fragment");
+      fgmt.innerText = textContent;
+      fgmt.classList.add(...Array.from(setup[start]));
+      this.element.insertBefore(fgmt, endpoint);
+    }
+    this.clean();
+    this.setSelection(selectionEvent);
+    this.calculateSelectionState();
+    // this.setSelection(selection, finalAnchorOffset, finalFocusOffset);
+  } // endfold
+  extractSelection(selection) { // startfold
+    let anchorParent = selection.anchorNode.nodeName == "TEXT-FRAGMENT" ? selection.anchorNode : selection.anchorNode.parentElement.closest("text-fragment");
+    let focusParent = selection.focusNode.nodeName == "TEXT-FRAGMENT" ? selection.focusNode : selection.focusNode.parentElement.closest("text-fragment");
+    let anchorOffset = selection.anchorOffset;
+    let focusOffset = selection.focusOffset;
+    if (selection.direction == "backward") {
+      [anchorParent, focusParent] = [focusParent, anchorParent];
+      [anchorOffset, focusOffset] = [focusOffset, anchorOffset];
+    }
+    let finalAnchorOffset = 0;
+    let finalFocusOffset = 0;
+    let currentOffset = 0;
+    for (const child of this.element.childNodes) {
+      const nodeLength = child.textContent.length;
+      if (child.isSameNode(anchorParent)) {
+        finalAnchorOffset = currentOffset + anchorOffset;
+      }
+      if (child.isSameNode(focusParent)) {
+        finalFocusOffset = currentOffset + focusOffset;
+      }
+      currentOffset += nodeLength;
+    }
+    return [finalAnchorOffset, finalFocusOffset];
+  } // endfold
   clean(e) { // startfold
     if (this.element.childNodes == null) {
       return
@@ -336,115 +481,53 @@ export class TextEditor extends ElementEditor {
     while (needsCleaning) {
       needsCleaning = false;
       for (const curNode of this.element.childNodes) {
-          let nextNode = curNode.nextSibling;
-          if (curNode.nodeType != Node.TEXT_NODE && curNode.classList.contains("rich-text-option")) {
-            continue
-          }
-          if (curNode.nodeType == Node.TEXT_NODE || curNode.nodeName != "TEXT-FRAGMENT") {
-            const newFragment = new TextFragment(curNode.textContent);
-            curNode.replaceWith(newFragment);
-            needsCleaning = true;
-            break;
-          }
-          if (curNode.compareStyle(nextNode)) {
-            let mergeNode = nextNode;
-            nextNode = nextNode.nextSibling;
-            curNode.mergeWith(mergeNode);
-            mergeNode.remove();
-            needsCleaning = true;
-            break;
-          }
-          curNode.clean();
+        let nextNode = curNode.nextSibling;
+        if (curNode.nodeType != Node.TEXT_NODE && curNode.classList.contains("rich-text-option")) {
+          continue
+        }
+        if (curNode.nodeType == Node.TEXT_NODE || curNode.nodeName != "TEXT-FRAGMENT") {
+          const newFragment = new TextFragment(curNode.textContent);
+          curNode.replaceWith(newFragment);
+          needsCleaning = true;
+          break;
+        }
+        if (curNode.compareStyle(nextNode)) {
+          let mergeNode = nextNode;
+          nextNode = nextNode.nextSibling;
+          curNode.mergeWith(mergeNode);
+          mergeNode.remove();
+          needsCleaning = true;
+          break;
+        }
+        curNode.clean();
       }
     }
-  } // endfold
-  applyStyle(selection, callback) { // startfold
-    let {anchorNode, anchorOffset, focusNode, focusOffset} = selection;
-    if (selection.direction == "caret") {
-        return
-    }
-    if (selection.direction == "backward") {
-        [anchorNode, focusNode] = [focusNode, anchorNode];
-        [anchorOffset, focusOffset] = [focusOffset, anchorOffset];
-    }
-    let anchorParent = selection.anchorNode.nodeName == "TEXT-FRAGMENT" ? selection.anchorNode : selection.anchorNode.parentElement.closest("text-fragment");
-    let focusParent = selection.focusNode.nodeName == "TEXT-FRAGMENT" ? selection.focusNode : selection.focusNode.parentElement.closest("text-fragment");
-    const [finalAnchorOffset, finalFocusOffset] = this.extractSelection(selection);
+  }
 
-    let inMiddle = false;
-    if (anchorNode === focusNode) {
-      const second = anchorParent.splitAt(anchorOffset);
-      const third = second.splitAt(focusOffset-anchorOffset);
-      anchorParent.after(second);
-      second.after(third);
-      callback(second);
-    } else {
-        for (const child of this.element.children) {
-            if (child === anchorParent) {
-              inMiddle = true;
-              const newNode = child.splitAt(anchorOffset);
-              child.after(newNode);
-            } else if (child === focusParent) {
-              inMiddle = false;
-              const newNode = child.splitAt(focusOffset);
-              child.after(newNode);
-              callback(child);
-            } else if (inMiddle) {
-              callback(child);
-            }
-        }
+  setSelection(selection) { // startfold
+    let [anchorOffset, focusOffset] = this.extractSelection(selection);
+    let range = document.createRange();
+    let setAnchor = false;
+    let setFocus = false;
+    let currentLength = 0;
+    for (const child of this.element.children) {
+      const nodeLength = child.textContent.length;
+      const nodeEnd = currentLength + nodeLength;
+      const textNode = (child.querySelector("a") || child).childNodes[0];
+      if (!setAnchor && nodeEnd > anchorOffset) {
+        const localAnchorOffset = anchorOffset - currentLength;
+        range.setStart(textNode, localAnchorOffset);
+        setAnchor = true;
+      }
+      if (!setFocus && nodeEnd >= focusOffset) {
+        const localFocusOffset = focusOffset - currentLength;
+        range.setEnd(textNode, localFocusOffset);
+        setFocus = true;
+      }
+      currentLength = nodeEnd;
     }
-    this.clean();
-    this.setSelection(selection, finalAnchorOffset, finalFocusOffset);
-    this.calculateSelectionState();
-  } // endfold
-  extractSelection(selection) { // startfold
-      let anchorParent = selection.anchorNode.nodeName == "TEXT-FRAGMENT" ? selection.anchorNode : selection.anchorNode.parentElement.closest("text-fragment");
-      let focusParent = selection.focusNode.nodeName == "TEXT-FRAGMENT" ? selection.focusNode : selection.focusNode.parentElement.closest("text-fragment");
-      let anchorOffset = selection.anchorOffset;
-      let focusOffset = selection.focusOffset;
-      if (selection.direction == "backward") {
-          [anchorParent, focusParent] = [focusParent, anchorParent];
-          [anchorOffset, focusOffset] = [focusOffset, anchorOffset];
-      }
-      let finalAnchorOffset = 0;
-      let finalFocusOffset = 0;
-      let currentOffset = 0;
-      for (const child of this.element.childNodes) {
-        const nodeLength = child.textContent.length;
-        if (child.isSameNode(anchorParent)) {
-            finalAnchorOffset = currentOffset + anchorOffset;
-        }
-        if (child.isSameNode(focusParent)) {
-            finalFocusOffset = currentOffset + focusOffset;
-        }
-        currentOffset += nodeLength;
-      }
-      return [finalAnchorOffset, finalFocusOffset];
-  } // endfold
-  setSelection(selection, anchorOffset, focusOffset) { // startfold
-      let range = document.createRange();
-      let setAnchor = false;
-      let setFocus = false;
-      let currentLength = 0;
-      for (const child of this.element.children) {
-        const nodeLength = child.textContent.length;
-        const nodeEnd = currentLength + nodeLength;
-        const textNode = (child.querySelector("a") || child).childNodes[0];
-        if (!setAnchor && nodeEnd > anchorOffset) {
-            const localAnchorOffset = anchorOffset - currentLength;
-            range.setStart(textNode, localAnchorOffset);
-            setAnchor = true;
-        }
-        if (!setFocus && nodeEnd >= focusOffset) {
-            const localFocusOffset = focusOffset - currentLength;
-            range.setEnd(textNode, localFocusOffset);
-            setFocus = true;
-        }
-        currentLength = nodeEnd;
-      }
-      selection.removeAllRanges();
-      selection.addRange(range);
+    selection.removeAllRanges();
+    selection.addRange(range);
   } // endfold
   getHTMLContent() { // startfold
     this.clean();
@@ -453,13 +536,13 @@ export class TextEditor extends ElementEditor {
   getJSONContent() { // startfold
     this.clean();
     return {
-        elementType: this.element.ElementType,
-        attributes: {is: this.element.elementName},
-        content: this.element.innerText
+      elementType: this.element.ElementType,
+      attributes: { is: this.element.elementName },
+      content: this.element.innerText
     }
   } // endfold
   setEditable() { // startfold
-    this.element.contentEditable = true 
+    this.element.contentEditable = true
   } // endfold
   unsetEditable() { // startfold
     console.log("unset editable called");
