@@ -5,6 +5,7 @@ import { getColorStyle } from "../colors/color_style.js";
 import { IMAGE_SEARCH, IMAGE_SAVE } from "../urls.js";
 import { generateRandomString } from "../utils/random.js";
 import { CLEANABLE_ATTR } from "../interfaces/selectors.js";
+import { AutoResizeTextarea } from "../utils/interactions.js";
 
 // startfold
 const respMock = '[{"alt": "White Capsule on Red Surface", "avg_color": "#E30802", "height": 3372, "id": 3683083, "liked": false, "photographer": "Anna Shvets", "photographer_id": 1984515, "photographer_url": "https://www.pexels.com/@shvetsa", "src": {"landscape": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200", "large": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "large2x": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "medium": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&h=350", "original": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg", "portrait": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800", "small": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&h=130", "tiny": "https://images.pexels.com/photos/3683083/pexels-photo-3683083.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"}, "url": "https://www.pexels.com/photo/white-capsule-on-red-surface-3683083/", "width": 5058}, {"alt": "Syringes on Red Background", "avg_color": "#FB3007", "height": 6000, "id": 3786132, "liked": false, "photographer": "Anna Shvets", "photographer_id": 1984515, "photographer_url": "https://www.pexels.com/@shvetsa", "src": {"landscape": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200", "large": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "large2x": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "medium": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&h=350", "original": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg", "portrait": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800", "small": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&h=130", "tiny": "https://images.pexels.com/photos/3786132/pexels-photo-3786132.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"}, "url": "https://www.pexels.com/photo/syringes-on-red-background-3786132/", "width": 4000}, {"alt": "Close-Up View of Logo With Horse", "avg_color": "#E10706", "height": 3194, "id": 9843280, "liked": false, "photographer": "Leif Bergerson", "photographer_id": 99376750, "photographer_url": "https://www.pexels.com/@leif-bergerson-99376750", "src": {"landscape": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200", "large": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "large2x": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "medium": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&h=350", "original": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg", "portrait": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800", "small": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&h=130", "tiny": "https://images.pexels.com/photos/9843280/pexels-photo-9843280.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"}, "url": "https://www.pexels.com/photo/close-up-view-of-logo-with-horse-9843280/", "width": 4791}, {"alt": "Leaves Cut Out in Red Paper", "avg_color": "#F82110", "height": 6720, "id": 5412288, "liked": false, "photographer": "Photo By: Kaboompics.com", "photographer_id": 2332540, "photographer_url": "https://www.pexels.com/@karolina-grabowska", "src": {"landscape": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200", "large": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "large2x": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "medium": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&h=350", "original": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg", "portrait": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800", "small": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&h=130", "tiny": "https://images.pexels.com/photos/5412288/pexels-photo-5412288.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"}, "url": "https://www.pexels.com/photo/leaves-cut-out-in-red-paper-5412288/", "width": 4480}, {"alt": "A Gift Box on a Red Background", "avg_color": "#F72429", "height": 6720, "id": 5725868, "liked": false, "photographer": "Photo By: Kaboompics.com", "photographer_id": 2332540, "photographer_url": "https://www.pexels.com/@karolina-grabowska", "src": {"landscape": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200", "large": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&h=650&w=940", "large2x": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", "medium": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&h=350", "original": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg", "portrait": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800", "small": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&h=130", "tiny": "https://images.pexels.com/photos/5725868/pexels-photo-5725868.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"}, "url": "https://www.pexels.com/photo/a-gift-box-on-a-red-background-5725868/", "width": 4480}]'
@@ -46,28 +47,45 @@ export class PictureEditor extends ElementEditor {
         //   Make a two-way-data-binding sorta thing here.
         // Read from altText, Write to altTextInput.
         this.altText = this.element.img.alt;
-        this.altTextInput = document.createElement("input");
+        this.altTextInput = document.createElement("textarea");
         this.altTextInput.value = this.altText;
+        this.altTextInput.placeholder = "Description for screen readers and the visually impaired.";
         this.altTextInput.addEventListener("change", (e) => {
             this.altText = e.target.value;
+            AutoResizeTextarea(this.altTextInput);
+        })
+        this.altTextInput.addEventListener("input", (e) => {
+            AutoResizeTextarea(this.altTextInput);
         })
 
         this.attributionText = this.element.dataset.attributionText;
-        this.attributionTextInput = document.createElement("input");
+        this.attributionTextInput = document.createElement("textarea");
         this.attributionTextInput.value = this.attributionText;
+        this.attributionTextInput.placeholder = "Photo Credit: Photographer's Name Here";
         this.attributionTextInput.addEventListener("change", (e) => {
             this.attributionText = e.target.value;
-        });
+            AutoResizeTextarea(this.attributionTextInput);
+        })
+        this.attributionTextInput.addEventListener("input", (e) => {
+            AutoResizeTextarea(this.attributionTextInput);
+        })
 
         this.attributionHref = this.element.dataset.attributionHref;
-        this.attributionHrefInput = document.createElement("input");
+        this.attributionHrefInput = document.createElement("textarea");
         this.attributionHrefInput.value = this.attributionHref;
+        this.attributionHrefInput.placeholder = "https://example.com/optional/photographer/link";
         this.attributionHrefInput.addEventListener("change", (e) => {
             this.attributionHref= e.target.value;
+            AutoResizeTextarea(this.attributionHrefInput);
         });
+        this.attributionHrefInput.addEventListener("input", (e) => {
+            AutoResizeTextarea(this.attributionHrefInput);
+        })
+
 
         this.imgPreviewSrc = this.element.img.src;
         this.imgPreview = document.createElement("img");
+        this.imgPreview.classList.add("image-preview");
         this.imgPreview.src = this.imgPreviewSrc;
     } // endfold
     makeForm() { // startfold
@@ -120,6 +138,9 @@ export class PictureEditor extends ElementEditor {
       this.altTextInput.value = selected.dataset.altText;
       this.attributionTextInput.value = selected.dataset.attributionText;
       this.attributionHrefInput.value = selected.dataset.attributionHref;
+      AutoResizeTextarea(this.altTextInput);
+      AutoResizeTextarea(this.attributionTextInput);
+      AutoResizeTextarea(this.attributionHrefInput);
       this.imgPreview.originalSrc = selected.originalSrc;
       this.imgPreview.src = selected.src;
   } // endfold
@@ -143,6 +164,9 @@ export class PictureEditor extends ElementEditor {
         this.altTextInput.value = "";
         this.attributionTextInput.value = "";
         this.attributionHrefInput.value = "";
+        AutoResizeTextarea(this.altTextInput);
+        AutoResizeTextarea(this.attributionTextInput);
+        AutoResizeTextarea(this.attributionHrefInput);
         this.previewFile(e.target, this.imgPreview);
     });
     content.appendChild(uploadInput);
