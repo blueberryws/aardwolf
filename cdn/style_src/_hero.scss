@@ -15,6 +15,9 @@ section[is='hero-section'] { /* startfold */
     > * {
       color: var(--color-one);
     }
+    > div > * {
+      color: var(--color-one);
+    }
     h1, h2, p {
         max-width: min(1200px, 100vw);
         overflow-wrap: anywhere;
