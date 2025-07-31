@@ -639,21 +639,27 @@ export class StartupWizard extends CustomElement { // startfold
     const nav = (d) => this.nav(d);
     const genMgr = new GenerationManager();
 
-    this.pages = {
-      startBuilding: new StartBuilding(nav),
-      registerDomain: new StartupRegisterDomain(nav, this.domainRegistration),
-      registrarInstructions: new StartupRegistrarInstructions(nav),
-      startupDomainCheckout: new StartupDomainCheckout(nav, this.domainRegistration),
-      paymentConfirmation: new DomainPaymentConfirmation(nav, this.domainRegistration),
-      generator: new GenerateSite(nav, genMgr),
-      generateStarted: new GenerationStarted(nav),
-      tutorial: new StartupTutorial(nav),
-      tutorialComplete: new TutorialComplete(nav, genMgr),
-    }
-
+    this.pages = {};
     if (IS_LOCAL()) {
+        this.pages = {
+          generator: new GenerateSite(nav, genMgr),
+          generateStarted: new GenerationStarted(nav),
+          tutorial: new StartupTutorial(nav),
+          tutorialComplete: new TutorialComplete(nav, genMgr),
+        }
         this.nav("generator");
     } else {
+        this.pages = {
+          startBuilding: new StartBuilding(nav),
+          registerDomain: new StartupRegisterDomain(nav, this.domainRegistration),
+          registrarInstructions: new StartupRegistrarInstructions(nav),
+          startupDomainCheckout: new StartupDomainCheckout(nav, this.domainRegistration),
+          paymentConfirmation: new DomainPaymentConfirmation(nav, this.domainRegistration),
+          generator: new GenerateSite(nav, genMgr),
+          generateStarted: new GenerationStarted(nav),
+          tutorial: new StartupTutorial(nav),
+          tutorialComplete: new TutorialComplete(nav, genMgr),
+        }
         this.nav("startBuilding");
     }
 
