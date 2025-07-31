@@ -614,10 +614,10 @@ save-menu label {
   border-radius: 8px;
   padding: 10px 25px;
 }
-save-menu:hover *, save-menu.mobile-selected * {
+save-menu:hover *, save-menu.focus * {
   display: block;
 }
-save-menu:hover label, save-menu.mobile-selected label {
+save-menu:hover label, save-menu.focus label {
   display: none;
 }
 /* endfold */
