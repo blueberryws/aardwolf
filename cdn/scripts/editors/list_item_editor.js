@@ -14,28 +14,43 @@ export class ListItemEditor extends ElementEditor {
         this.copyButton = this.buildCopyButton();
         this.deleteButton = this.buildDeleteButton();
 
-
-        this.enterListener = () => {
-          this.upButton.remove();
-          this.element.appendChild(this.upButton);
-
-          this.downButton.remove();
-          this.element.appendChild(this.downButton);
-
-          this.copyButton.remove();
-          this.element.appendChild(this.copyButton);
-
-          this.deleteButton.remove();
-          this.element.appendChild(this.deleteButton);
-        }
-
-        this.leaveListener = () => {
-          this.removeButtons();
-        }
+        this.enterListener = (e) => this.takeFocus(e);
+        this.leaveListener = () => this.removeButtons();
     }
+    takeFocus(e) { // startfold
+        console.log(this.scrolled);
+        if (this.scrolled == true) {
+            this.scrolled = false;
+            return
+        }
+        if (e != null) {
+            e.stopPropagation();
+        }
+        const otherSelected = document.querySelectorAll(".focus");
+        otherSelected.forEach(el => {
+            el.editor.removeFocus();
+        });
+        this.element.classList.add("focus");
+        this.upButton.remove();
+        this.element.appendChild(this.upButton);
+
+        this.downButton.remove();
+        this.element.appendChild(this.downButton);
+
+        this.copyButton.remove();
+        this.element.appendChild(this.copyButton);
+
+        this.deleteButton.remove();
+        this.element.appendChild(this.deleteButton);
+    } // endfold
+    removeFocus() { // startfold
+        this.removeButtons();
+        this.element.classList.remove("focus");
+    } // endfold
   setEditable() { // startfold
     this.element.addEventListener("mouseenter", this.enterListener);
     this.element.addEventListener("mouseleave", this.leaveListener); 
+    this.element.addEventListener("touchend", this.enterListener);
   } // endfold
   removeButtons() { // startfold
     console.log("called remove buttons");
@@ -47,6 +62,7 @@ export class ListItemEditor extends ElementEditor {
   unsetEditable() { // startfold
     this.element.removeEventListener("mouseenter", this.enterListener);
     this.element.removeEventListener("mouseleave", this.leaveListener); 
+    this.element.removeEventListener("touchend", this.enterListener);
     this.removeButtons();
   } // endfold
     buildUpButton() {  // startfold

@@ -19,7 +19,20 @@ export class PictureEditor extends ElementEditor {
         if (this.element.dataset.uuid == null || this.element.dataset.uuid == "") {
             this.newId();
         }
-        this.clickHandler = () => this.launchEditorModal();
+        this.clickHandler = (e) => this.launchEditorModal(e);
+        this.touchHandler = (e) => {
+          e.preventDefault();
+          if (this.scrolled) {
+            this.scrolled = false;
+            return
+          }
+          const parent = this.element.closest("section, li[is='editable-list-item']");
+          if (parent.classList.contains("focus")) {
+            this.launchEditorModal(e);
+          } else {
+              parent.editor.takeFocus();
+          }
+        }
 
         // TODO: Refactor candidate.
         // Not sure what the right pattern is here.
@@ -31,6 +44,9 @@ export class PictureEditor extends ElementEditor {
             }
         });
         this.pexelsQuery.placeholder = "Search for stock photos...";
+
+        this.scrolled = false;
+        this.scrollListener = (e) => {this.scrolled = true};
     } // endfold
     newId() { // startfold
         this.element.prevId = this.element.dataset.uuid;
@@ -107,10 +123,14 @@ export class PictureEditor extends ElementEditor {
         // endfold
     } // endfold
   setEditable() { // startfold
-    this.element.addEventListener("click", this.clickHandler);
+    this.element.addEventListener("mouseup", this.clickHandler);
+    this.element.addEventListener("touchend", this.touchHandler);
+    this.element.addEventListener("touchmove", this.scrollListener);
   } // endfold
   unsetEditable() { // startfold
-    this.element.removeEventListener("click", this.clickHandler);
+    this.element.removeEventListener("mouseup", this.clickHandler);
+    this.element.removeEventListener("touchend", this.touchHandler);
+    this.element.removeEventListener("touchmove", this.scrollListener);
   } // endfold
   clean() { // startfold
       if (this.element.tempMarkup) {
@@ -144,7 +164,7 @@ export class PictureEditor extends ElementEditor {
       this.imgPreview.originalSrc = selected.originalSrc;
       this.imgPreview.src = selected.src;
   } // endfold
-  launchEditorModal() { // startfold
+  launchEditorModal(e) { // startfold
     this.loadFromElement();
     let m = new AdminModal();
     m.headerText = "Edit Image";
