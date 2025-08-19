@@ -15,14 +15,14 @@ class TextFragment extends HTMLElement { // startfold
     let needsCleaning = true;
     while (needsCleaning) {
       needsCleaning = false;
-      for (const curNode of this.childNodes) {
+      let curNode = this.firstChild;
+      while (curNode) {
         const nextNode = curNode.nextSibling;
         if (
           curNode.nodeType != Node.TEXT_NODE &&
           !["BR", "A"].includes(curNode.nodeName)
         ) {
           const textNode = document.createTextNode(curNode.textContent);
-          textNode.appendData(" ");
           curNode.replaceWith(textNode);
           curNode = textNode;
           needsCleaning = true;
@@ -34,6 +34,7 @@ class TextFragment extends HTMLElement { // startfold
           needsCleaning = true;
           break;
         }
+        curNode = curNode.nextSibling;
       }
     }
   } // endfold
@@ -41,6 +42,7 @@ class TextFragment extends HTMLElement { // startfold
     if (other == null || other.nodeName != "TEXT-FRAGMENT") {
       return false;
     }
+    if (this.dataset.break === "true" || other.dataset.break === "true") return false;
     const otherClassList = Array.from(other.classList).sort();
     const thisClassList = Array.from(this.classList).sort();
     const classMatch = thisClassList.toString() == otherClassList.toString()
@@ -175,7 +177,20 @@ export class TextEditor extends ElementEditor {
     this.element.addEventListener("focusout", (event) => this.removeFocus(event));
     this.element.addEventListener("focusin", (event) => this.getFocus(event));
     this.element.setAttribute(`data-${CLEANABLE_ATTR}`, true);
-
+    this.element.addEventListener("beforeinput", (e) => {
+      if (e.inputType === "insertParagraph" || e.inputType === "insertLineBreak") {
+        e.preventDefault();
+        this._insertNewlineAtCaret();
+      }
+    });
+    // Fallback for environments that don't reliably fire beforeinput.
+    this.element.addEventListener("keydown", (e) => {
+      if ((e.key === "Enter" || e.keyCode === 13) && !e.isComposing) {
+        e.preventDefault();
+        this._insertNewlineAtCaret();
+      }
+    });
+    this.element.style.whiteSpace = "pre-wrap";
 
 
     const linkButton = document.createElement("button");
@@ -296,16 +311,16 @@ export class TextEditor extends ElementEditor {
       textFgmts = [new TextFragment(this.element.childNodes[0].nodeValue)];
     }
 
-    let selectionObj = { 'selection-text': selectionText, 'current-setup': {}, 'data-ref': {}, };
+    let selectionObj = { 'selection-text': selectionText, 'current-setup': [], 'data-ref': {}, };
     for (let textFgmt of textFgmts) {
-      let txt = textFgmt.innerText;
+      let txt = textFgmt.textContent ?? "";
       const classes = new Set(textFgmt.classList);
       let href = null;
       const a = textFgmt.querySelector('a');
       if (a) {
         href = a.getAttribute('href');
       }
-      selectionObj["current-setup"][txt] = { classes, href };
+      selectionObj["current-setup"].push({ text: txt, classes, href });
     }
     selectionObj.selectionEvent = selection;
     return selectionObj;
@@ -340,28 +355,49 @@ export class TextEditor extends ElementEditor {
       return;
     }
     const { selectionEvent } = selection;
-    const currentSetup = selection['current-setup'];
+    const currentSetup = selection['current-setup']; // ordered array [{text, classes(Set), href}]
 
-    // 2. Reconstruct the full text
-    const searchStrings = Object.keys(currentSetup);
-    const fullString = searchStrings.join('');
+    // 2. Reconstruct the full text (preserve order; keep "\n")
+    const fullString = currentSetup.map(p => p.text).join('');
 
-    let newSetup = {}
+    // Map absolute offsets → {classes, href}
+    const newSetup = {};
     let offset = 0;
-    for (let searchString of searchStrings) {
-      if (searchString !== "") {
-        newSetup[offset] = currentSetup[searchString];
-        offset += searchString.length;
+    for (const part of currentSetup) {
+      const txt = part.text;
+      if (txt !== "") {
+        newSetup[offset] = {
+          classes: new Set(Array.from(part.classes)),
+          href: part.href ?? null
+        };
+        offset += txt.length;
       }
     }
     newSetup[fullString.length] = { classes: new Set(), href: null };
 
     const [newIdx, end] = this.extractSelection(selectionEvent);
 
+    // Force cut points at every newline
+    for (let i = 0; i < fullString.length; i++) {
+      if (fullString[i] === "\n") {
+        if (!(i in newSetup)) {
+          const prevKey = Object.keys(newSetup).map(Number).filter(k => k <= i).sort((a, b) => b - a)[0];
+          const prev = newSetup[prevKey] || { classes: new Set(), href: null };
+          newSetup[i] = { classes: new Set(prev.classes), href: prev.href, isBreak: true };
+        } else {
+          newSetup[i].isBreak = true;
+        }
+        if (!((i + 1) in newSetup)) {
+          const prev = newSetup[i];
+          newSetup[i + 1] = { classes: new Set(prev.classes), href: prev.href };
+        }
+      }
+    }
+    const sorted = Object.keys(newSetup).map(Number).sort((a, b) => a - b);
     let found = false;
     let prev = -1;
     let affected = [];
-    for (let index in newSetup) {
+    for (const index of sorted) {
       if (!found) {
         if (index < newIdx) {
           prev = index;
@@ -371,7 +407,7 @@ export class TextEditor extends ElementEditor {
         if (index != newIdx) {
           newSetup[newIdx] = { classes: new Set(), href: null };
           if (prev != -1) {
-            newSetup[newIdx].classes.add(...newSetup[prev].classes);
+            for (const c of newSetup[prev].classes) newSetup[newIdx].classes.add(c);
             newSetup[newIdx].href = newSetup[prev].href;
           }
         }
@@ -383,28 +419,29 @@ export class TextEditor extends ElementEditor {
       else if (index > end) {
         newSetup[end] = { classes: new Set(), href: null };
         if (prev != -1) {
-          newSetup[end].classes.add(...newSetup[prev].classes);
+          for (const c of newSetup[prev].classes) newSetup[end].classes.add(c);
           newSetup[end].href = newSetup[prev].href;
         }
         break;
       }
-      affected.push(index.toString());
+      affected.push(index);
       prev = index;
     }
     if (!affected.includes(newIdx)) {
-      affected.push(newIdx.toString());
+      affected.push(newIdx);
     }
+    affected = affected.filter(idx => !newSetup[idx].isBreak);
 
-    if (!Object.keys(newSetup).includes(end.toString())) {
+    if (!Object.prototype.hasOwnProperty.call(newSetup, end)) {
       newSetup[end] = { classes: new Set(), href: null };
     }
 
     let turnOff = true;
     for (let idx of affected) {
-      if (!Object.keys(newSetup).includes(idx.toString())) {
+      if (!Object.prototype.hasOwnProperty.call(newSetup, end)) {
         newSetup[idx] = { classes: new Set(), href: null };
       }
-      if (!(newSetup[idx].has?.(styleClass) || newSetup[idx].contains?.(styleClass))) {
+      if (!newSetup[idx].classes.has(styleClass)) {
         turnOff = false;
       }
     }
@@ -493,17 +530,22 @@ export class TextEditor extends ElementEditor {
     }
     const endpoint = this.element.querySelector('*:first-child');
 
-    let indices = Object.keys(setup);
+    let indices = Object.keys(setup).map(n => Number(n)).sort((a, b) => a - b);
     for (let i = 0; i < indices.length; i++) {
-      let start = indices[i];
-      let stop = i < indices.length + 1 ? indices[i + 1] : fullString.length;
-      let textContent = fullString.substring(start, stop);
+      const start = indices[i];
+      const stop = (i < indices.length - 1) ? indices[i + 1] : fullString.length;
+      const textContent = fullString.substring(start, stop);
       let fgmt = document.createElement("text-fragment");
-      if (setup[start].href) {
-        fgmt.innerHTML = `<a href=${setup[start].href}>${textContent}</a>`
-      }
-      else {
-        fgmt.innerText = textContent;
+      if (textContent === "\n") {
+        fgmt.appendChild(document.createTextNode("\n"));
+        fgmt.dataset.break = "true";
+      } else if (setup[start].href) {
+        const a = document.createElement("a");
+        a.setAttribute("href", setup[start].href);
+        a.appendChild(document.createTextNode(textContent));
+        fgmt.appendChild(a);
+      } else {
+        fgmt.appendChild(document.createTextNode(textContent));
       }
       fgmt.classList.add(...Array.from(setup[start].classes));
 
@@ -550,6 +592,37 @@ export class TextEditor extends ElementEditor {
     return [finalAnchorOffset, finalFocusOffset];
   } // endfold
 
+  _insertNewlineAtCaret() { // startfold
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0) return;
+    let range = sel.getRangeAt(0);
+
+    // Capture absolute start BEFORE we mutate DOM so we can restore caret by index.
+    const [absStart] = this.extractSelection(sel);
+
+    // If selection is a range, delete it first so we're collapsed.
+    if (!sel.isCollapsed) {
+      range.deleteContents();
+      range = sel.getRangeAt(0);
+    }
+
+    // Insert a plain text node containing "\n" at the caret.
+    const nlText = document.createTextNode("\n");
+    range.insertNode(nlText);
+
+    // Move caret immediately after the inserted newline in the live DOM.
+    range.setStartAfter(nlText);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    // Normalize DOM to your canonical model; selection will be rebuilt by absolute index.
+    this.clean();
+    const newCaret = absStart + 1; // count the inserted "\n"
+    this.setSelection(window.getSelection(), newCaret, newCaret);
+    this.calculateSelectionState();
+  } // endfold
+
   clean(e) { // startfold
     if (this.element.childNodes == null) {
       return
@@ -563,7 +636,14 @@ export class TextEditor extends ElementEditor {
           continue
         }
         if (curNode.nodeType == Node.TEXT_NODE || curNode.nodeName != "TEXT-FRAGMENT") {
-          const newFragment = new TextFragment(curNode.textContent);
+          let newFragment;
+          if (curNode.nodeName === "DIV" || curNode.nodeName === "BR") {
+            newFragment = new TextFragment("\n");
+            newFragment.dataset.break = "true";
+          }
+          else {
+            newFragment = new TextFragment(curNode.textContent);
+          }
           curNode.replaceWith(newFragment);
           needsCleaning = true;
           break;

@@ -22,14 +22,29 @@ export class EditableSectionEditor extends ElementEditor {
         this.downButton = this.buildDownButton();
         this.deleteButton = this.buildDeleteButton();
 
+        this.scrolled = false;
+
         this.nextButton = this.buildNextClass();
         this.prevButton = this.buildPrevClass();
+        this.mouseEnter = () => this.takeFocus();
+        this.mouseLeave = () => this.removeFocus();
+        this.touchEnd = () => this.takeFocus();
     }
-  setEditable() { // startfold
-    this.element.addEventListener("touchstart", () => {
-        const otherSelected = document.querySelectorAll(".mobile-selected");
-    })
-    this.element.addEventListener("mouseenter", () => {
+    removeFocus() { // startfold
+        this.element.classList.remove("focus");
+        this.addButton.remove();
+        this.deleteButton.remove();
+        this.upButton.remove();
+        this.downButton.remove();
+        this.nextButton.remove();
+        this.prevButton.remove();
+    } // endfold
+    takeFocus() { // startfold
+        const otherSelected = document.querySelectorAll(".focus");
+        otherSelected.forEach(el => {
+            el.editor.removeFocus();
+        });
+        this.element.classList.add("focus");
         this.addButton.remove();
         this.element.appendChild(this.addButton);
         this.deleteButton.remove();
@@ -43,15 +58,11 @@ export class EditableSectionEditor extends ElementEditor {
         this.element.appendChild(this.nextButton);
         this.prevButton.remove();
         this.element.appendChild(this.prevButton);
-    });
-    this.element.addEventListener("mouseleave", () => {
-        this.addButton.remove();
-        this.deleteButton.remove();
-        this.upButton.remove();
-        this.downButton.remove();
-        this.nextButton.remove();
-        this.prevButton.remove();
-    });
+    } // endfold
+  setEditable() { // startfold
+    this.element.addEventListener("mouseenter", this.mouseEnter);
+    this.element.addEventListener("mouseleave", this.mouseLeave);
+    this.element.addEventListener("touchend", this.touchEnd);
   } // endfold
   unsetEditable() { // startfold
         this.addButton.remove();

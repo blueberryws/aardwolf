@@ -21,6 +21,13 @@ function loadLocal() {
     LOGGER.info("Loading from local...");
     store.loadToDocument("head", () => dispatch(SetDocumentEditable));
     store.loadToDocument("main", () => dispatch(SetDocumentEditable));
+    const sections = document.querySelectorAll("section");
+    if (sections.length < 2) {
+      new StartupWizard();
+    } else {
+      dispatch(SetDocumentEditable);
+      dispatch(UnsetLoading);
+    }
 }
 
 
