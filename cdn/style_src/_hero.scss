@@ -12,10 +12,7 @@ section[is='hero-section'] { /* startfold */
     min-height: 100vh;
     height: fit-content;
     padding: 0;
-    > * {
-      color: var(--color-one);
-    }
-    > div > * {
+    > *, > div > * {
       color: var(--color-one);
     }
     h1, h2, p {
@@ -36,7 +33,7 @@ section[is='hero-section'] { /* startfold */
         color: var(--brand-contrast-color);
     }
     @media (prefers-color-scheme: dark) {
-        * {
+        *, div > * {
           color: var(--color-four);
         }
     }
@@ -82,7 +79,7 @@ section[is='hero-section'].default { /* startfold */
     height: fit-content;
 }
 
-section[is='hero-section'].default > * {
+section[is='hero-section'].default > *, section[is='hero-section'].default > div > * {
     z-index: 10;
     grid-column: 1;
     text-align: center;
@@ -129,7 +126,7 @@ section[is='hero-section'].alternate-one { /* startfold */
     justify-items: start;
     align-items: center;
 
-  > * {
+   > *, > div > * {
     z-index: 10;
     grid-column: 1;
     text-align: start;
@@ -188,7 +185,7 @@ section[is='hero-section'].alternate-two { /* startfold */
     align-items: start;
     overflow: hidden;
 
-  > * {
+   > *, > div > * {
     z-index: 10;
     grid-column: 2;
     text-align: end;
@@ -270,7 +267,7 @@ section[is='hero-section'].alternate-three { /* startfold */
     background-color: var(--dark-color-one);
     height: fit-content;
 
-  > * {
+   > *, > div > * {
     z-index: 10;
     grid-column: 1;
     text-align: center;
@@ -397,7 +394,7 @@ section[is='hero-section'].alternate-six { /* startfold */
     justify-items: center;
     padding-bottom: 40px;
 
-    > * {
+     > *, > div > * {
         padding: 0 var(--narrow-padding-left);
         color: var(--color-four);
         text-align: center;
@@ -451,7 +448,7 @@ section[is='hero-section'].alternate-seven { /* startfold */
     justify-items: center;
     padding-bottom: 40px;
 
-    > * {
+    > *, > div > * {
         padding: 0 var(--narrow-padding-left);
         color: var(--color-four);
         text-align: center;
@@ -491,7 +488,7 @@ section[is='hero-section'].alternate-eight { /* startfold */
     justify-items: center;
     padding-bottom: 60px;
 
-    > * {
+     > *, > div > * {
         padding: 0 var(--narrow-padding-left);
         color: var(--color-four);
         text-align: center;
@@ -541,7 +538,7 @@ section[is='hero-section'].alternate-nine { /* startfold */
       var(--color-one) 100%,
     );
 
-    > * {
+    > *, > div > * {
         color: var(--color-four);
         text-align: center;
     }

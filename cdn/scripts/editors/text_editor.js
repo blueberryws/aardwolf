@@ -344,8 +344,6 @@ export class TextEditor extends ElementEditor {
 
   toggleStyle(styleClass, selectionObj = null, callback = null) {
 
-    // FIXME: urls still don't quite work...
-    // FIXME: multiline editing isn't there yet.
     // FIXME: you can't select a fontstyle without selecting text first
     // FIXME: does this work with ctrl u/b/i?
 
