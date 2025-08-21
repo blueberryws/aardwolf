@@ -147,7 +147,7 @@ export class EditableSectionEditor extends ElementEditor {
         btn.innerText = ">";
         btn.classList.add("section-next-btn");
         btn.addEventListener("click", () => {
-            const curClass = this.element.classList[0];
+            const curClass = this.element.classes.find(el => this.element.classList.contains(el));
             const curIdx = this.element.classes.indexOf(curClass);
             let nextIdx = curIdx + 1;
             if (nextIdx >= this.element.classes.length) {
@@ -165,7 +165,7 @@ export class EditableSectionEditor extends ElementEditor {
       btn.innerText = "<";
       btn.classList.add("section-prev-btn");
       btn.addEventListener("click", () => {
-          const curClass = this.element.classList[0];
+          const curClass = this.element.classes.find(el => this.element.classList.contains(el));
           const curIdx = this.element.classes.indexOf(curClass);
           let nextIdx = curIdx - 1;
           if (nextIdx < 0) {
