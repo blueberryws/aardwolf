@@ -1,0 +1,13 @@
+<section data-id="{{section.id}}" data-layout="{{section.layout}}" data-editor="section">
+  {% render 'h2', text: section.content.title %}
+  {% render 'p', text: section.content.description %}
+  <div>
+  {% for item in section.content.items %}
+    <div data-id="{{item.id}}" data-editor="item">
+      {% render 'picture' picture: item.picture %}
+      {% render 'h3', text: item.caption %}
+      {% render 'p', text: item.description %}
+    </div>
+  {% endfor %}
+  </div>
+</section>

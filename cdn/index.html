@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<header></header>
+<main></main>
+<footer></footer>
+<div id="scratch">
+  <link rel="stylesheet" href="src/editor.css" type="text/css">
+  <script src="/src/section_editor.js"></script>
+  <script src="/src/item_editor.js"></script>
+  <script src="/src/link_editor.js"></script>
+  <script src="/src/embed_editor.js"></script>
+  <script src="/src/liquid.browser.umd.js"></script>
+  <script>
+    // TODO:
+    //   "focus" and "selection" manager <-- this will preserve state between renders.
+    //   command controller <-- editors should be fire and forget, not managing DOM lifecycle
+    //   more intelligent stylesheets <-- We shouldn't have to rerender everything each time, just the parts that changed. Should this be auto-called as part of render/renderDiff?
+    //   how do we handle section layout changes? They impact pictures?
+
+    const pageDataPath = "/page_data.json?a=1";
+    const themeDataPath = "/theme_data.json";
+    const parser = new DOMParser();
+    const tmplBase = "http://localhost:8000/layouts/templates";
+    var Liquid = window.liquidjs.Liquid;
+    var pageData = {};
+    var themeData = {};
+
+    var engine = new Liquid({ // startfold
+        fs: {
+            readFileSync (file) {
+                const tmplPath = tmplBase + "/" + file + ".liquid?a=1";
+                let tmpl;
+                const request = new XMLHttpRequest();
+                request.open("GET", tmplPath, false);
+                request.send(null);
+                
+                if (request.status === 200) {
+                  return request.responseText;
+                }
+                return null;
+            },
+            async readFile (file) {
+                const tmplPath = tmplBase + "/" + file + ".liquid";
+                const resp = await fetch(tmplPath, {cache: "no-store"});
+                const template = await resp.text();
+                return template
+            },
+            existsSync () {
+                return true
+            },
+            async exists () {
+                return true
+            },
+            contains () {
+                return true
+            },
+            resolve(root, file, ext) {
+                return file
+            }
+        }
+    }); // endfold
+
+    function attachHTML(el, markup) { // startfold
+        el.innerHTML = markup;
+        const namedChildren = el.querySelectorAll("[data-name]");
+        namedChildren.forEach(chd => {
+          el[chd.dataset.name] = chd;
+        });
+    } // endfold
+    function getAddress(node) { // startfold
+        let addr = node.dataset.id;
+        let pNode = node.parentElement;
+        while (pNode != null) {
+          if (pNode.dataset.id != null && pNode.dataset.id != "") {
+            addr = pNode.dataset.id + "-" + addr;
+          }
+          pNode = pNode.parentElement;
+        }
+        // "1-2-3-4"
+        return addr
+    } // endfold
+    function _getNext(data) { // startfold
+        if (data.pages != null) {
+            return "pages"
+        }
+        if (data.sections != null) {
+            return "sections";
+        }
+        if (data.content != null) {
+            return "content";
+        }
+        if (data.items != null) {
+            return "items";
+        }
+        if (data.fragments != null) {
+            return "fragments";
+        }
+    } // endfold
+    function _nextIndex(idx, arr) { // startfold
+          if (idx == -1) {
+            return 0
+          } else if (idx >= arr.length -1) {
+            return 0;
+          } else {
+            return idx + 1;
+          }
+    } // endfold
+    function _prevIndex(idx, arr) { // startfold
+          if (idx == -1) {
+            return 0
+          } else if (idx == 0) {
+            return arr.length - 1;
+          } else {
+            return idx - 1;
+          }
+    } // endfold
+    function getDataByAddress(address, data) { // startfold
+        const addressParts = address.split("-");
+        let current = data;
+        for (var i = 0; i < addressParts.length; i++) {
+            const nextPart = addressParts[i];
+            const searchKey = _getNext(current);
+            const searchPart = searchKey != null ? current[searchKey] : current;
+            if (Array.isArray(searchPart)) {
+              current = searchPart.find(el => el.id == nextPart);
+            } else {
+              for (const key in searchPart) {
+                  const value = searchPart[key];
+                  if (key == "items") {
+                      const found = value.find(el => el.id == nextPart);
+                      if (found) {
+                          current = found;
+                          break;
+                      }
+                  }
+                  if (searchPart[key].id == nextPart) {
+                    current = searchPart[key];
+                    break;
+                  }
+              }
+            }
+        }
+        return current;
+    } // endfold
+    function textEditor(el) { // startfold
+      // TODO: Handle Newlines. Right now, they just munged into a single line.
+      el.addEventListener("mousedown", (e) => {
+          const section = el.closest("section");
+          if (section.dataset.focus != "true") {
+            e.preventDefault();
+          }
+      });
+      el.addEventListener("touchstart", (e) => {
+          const section = el.closest("section");
+          if (section.dataset.focus != "true") {
+            e.preventDefault();
+          }
+      });
+
+      el.setAttribute("contenteditable", true);
+      el.addEventListener("blur", (e) => {
+          const fragNodes = Array.from(e.target.children);
+          const fragments = fragNodes.map(f => {return {
+              id: f.dataset.id,
+              text: f.textContent,
+          }});
+          const address = getAddress(e.target);
+          // TODO: move this to an event, and have the handler elsewhere.
+          const node = getDataByAddress(address, pageData);
+          node.fragments = fragments;
+          renderDiff(e.target.dataset.id, pageData);
+          attach();
+      });
+    } // endfold
+
+    const sectionController = new SectionController();
+    const linkController = new LinkController();
+    const itemController = new ItemController();
+    const embedController = new EmbedController();
+    const EDITORS = {
+      // "done"
+      "link": (link) => {linkController.register(link)},
+      "embed": (embed) => {embedController.register(embed)},
+
+      // "partial" - "add/duplicate functionality"
+      // Figuring out how to generate new ids
+      // - Need to decide on id scheme.
+      "section": (section) => {sectionController.register(section)},
+      "item": (item) => {itemController.register(item)},
+
+      // "todo"
+      "text": textEditor,
+      // Porting picture editor over.
+      "picture": () => {},
+      // colors
+      // fonts
+    }
+
+    function attach() {
+      const editable = document.querySelectorAll("[data-editor]");
+      editable.forEach(el => {
+        if (!el.editorAttached) {
+          try {
+          EDITORS[el.dataset.editor](el);
+          el.editorAttached = true;
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      });
+    }
+
+    function render(data) { // startfold
+      const markup = engine.renderFileSync('page', data);
+      const doc = parser.parseFromString(markup, 'text/html');
+      document.querySelector("header").outerHTML = doc.querySelector("header").outerHTML;
+      document.querySelector("main").outerHTML = doc.querySelector("main").outerHTML;
+      document.querySelector("footer").outerHTML = doc.querySelector("footer").outerHTML;
+    } // endfold
+    function renderDiff(address, data) { // startfold
+      const markup = engine.renderFileSync('page', data);
+      const doc = parser.parseFromString(markup, 'text/html');
+      const oldNode = document.querySelector(`[data-id="${address}"]`)
+      const newNode = doc.querySelector(`[data-id="${address}"]`);
+      oldNode.outerHTML = newNode.outerHTML;
+    } // endfold
+
+    async function loadPage() {
+      const resp = await fetch(pageDataPath, {cache: "no-store"});
+      pageData = await resp.json();
+      const themeResp = await fetch(themeDataPath, {cache: "no-store"});
+      themeData = await themeResp.json();
+      render(pageData);
+      attach();
+    }
+
+    async function loadStyles() {
+        const stylesContainer = document.querySelector("#styles");
+        stylesContainer.innerHTML = '';
+        const currentTheme = pageData.theme;
+        const stylesBaseUrl = "/layouts/themes";
+        pageData.pages[0].sections.forEach(section => {
+          const stylesUrl = `${stylesBaseUrl}/${currentTheme}/${section.layout}.css`;
+          const styleLink = document.createElement("link");
+          styleLink.setAttribute("rel", "stylesheet");
+          styleLink.setAttribute("href", stylesUrl);
+          styleLink.setAttribute("type", "text/css");
+          stylesContainer.appendChild(styleLink);
+        });
+    }
+
+    window.addEventListener("load", async () => {await loadPage(); await loadStyles()});
+  </script>
+</div>
+<div id="styles">
+</div>
+</body>
+</html>

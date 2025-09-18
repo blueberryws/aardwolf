@@ -1,0 +1,146 @@
+{
+  "id": "1",
+  "theme": "default",
+  "pages": [
+    {
+      "id": "2",
+      "route": "/",
+      "sections": [
+        {
+          "id": "3",
+          "type": "hero",
+          "template": "hero",
+          "layout": "default",
+          "content": {
+            "title": {
+              "id": "5",
+              "fragments": [{"id": "6", "text": "Hello"}, {"id": "7", "text": "world"}]
+            },
+            "subtitle": {
+              "id": "8",
+              "fragments": [{"id": "9", "text": "Subtext"}]
+            },
+            "description": {
+              "id": "10",
+              "fragments": [{"id": "11", "text": "Description"}]
+            },
+            "link": {
+              "id": "12",
+              "destination": "https://youtube.com",
+              "text": "Check out my Vids"
+            },
+            "picture": {
+              "id": "13",
+              "uuid": "123-123-123-123",
+              "alt_text": "fun fact",
+              "attribution_text": "yay",
+              "attribution_href": "yay",
+              "temp": {}
+            }
+          }
+        },
+        {
+          "id": "14",
+          "type": "hero",
+          "template": "hero",
+          "layout": "default",
+          "content": {
+            "title": {
+              "id": "15",
+              "fragments": [{"id": "16", "text": "Hello"}, {"id": "17", "text": "world"}]
+            },
+            "subtitle": {
+              "id": "18",
+              "fragments": [{"id": "19", "text": "Subtext"}]
+            },
+            "description": {
+              "id": "20",
+              "fragments": [{"id": "21", "text": "Description"}]
+            },
+            "link": {
+              "id": "22", "destination": "https://youtube.com", "text": "Check out my Vids"
+            },
+            "picture": {
+              "id": "23",
+              "uuid": "123-123-123-123",
+              "alt_text": "fun fact",
+              "attribution_text": "yay"
+            }
+          }
+        },
+        {
+          "id": "24",
+          "type": "about",
+          "template": "about_with_description",
+          "layout": "about_default",
+          "content": {
+            "title": {
+              "id": "25",
+              "fragments": [{"id": "26", "text": "Hello"}, {"id": "27", "text": "world"}]
+            },
+            "description": {
+              "id": "28",
+              "fragments": [{"id": "29", "text": "Description"}]
+            },
+            "items": [
+              {
+                "id": "29",
+                "picture": {
+                  "id": "33",
+                  "uuid": "123-123-123-123",
+                  "alt_text": "fun fact",
+                  "attribution_text": "yay"
+                },
+                "caption": {
+                  "id": "34",
+                  "fragments": [{"id": "35", "text": "caption"}]
+                },
+                "description": {
+                  "id": "36",
+                  "fragments": [{"id": "37", "text": "description"}]
+                }
+              },
+              {
+                "id": "37",
+                "picture": {
+                  "id": "38",
+                  "uuid": "123-123-123-123",
+                  "alt_text": "fun fact",
+                  "attribution_text": "yay"
+                },
+                "caption": {
+                  "id": "39",
+                  "fragments": [{"id": "40", "text": "caption 2"}]
+                },
+                "description": {
+                  "id": "41",
+                  "fragments": [{"id": "42", "text": "description 2"}]
+                }
+              }
+            ]
+          }
+        },
+        { 
+          "id": "43",
+          "type": "embed",
+          "template": "embed_with_description",
+          "layout": "embed_default",
+          "content": {
+            "title": {
+              "id": "45",
+              "fragments": [{"id": "46", "text": "Hello"}, {"id": "47", "text": "world"}]
+            },
+            "description": {
+              "id": "48",
+              "fragments": [{"id": "49", "text": "Description"}]
+            },
+            "embed": {
+              "id": "50",
+              "content": "<iframe width='560' height='315' src='https://www.youtube.com/embed/iWuFBZw9Olk?si=Pcx4FkXekN2dBUPU' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{% assign page=pages[0] %}
+{% assign site_id=id %}
+<!DOCTYPE html>
+<html>
+<header>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</header>
+<main data-route="{{page.route}}" data-id="{{page.id}}">
+{% for section in page.sections %}
+    {% include section.template section: section %}
+{% endfor %}
+</main>
+<footer></footer>
+<body>
+</html>

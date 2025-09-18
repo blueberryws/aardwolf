@@ -1,0 +1,90 @@
+{
+  "default": {
+    "hero": {
+      "content": {
+        "title": {
+          "id": null,
+          "fragments": [{"id": null, "text": "Hello The Internet"}]
+        },
+        "subtitle": {
+          "fragments": [{"id": "9", "text": "Welcome to your new Website"}]
+        },
+        "description": {
+          "id": null,
+          "fragments": [{"id": null, "text": "Click anything to start editing!"}]
+        },
+        "link": {
+          "id": null,
+          "destination": "",
+          "text": "Get Started"
+        },
+        "picture": {
+          "id": null,
+          "uuid": "",
+          "alt_text": "Description for screen readers and visually impaired users.",
+          "attribution_text": "Image Credit (Photographer's Name)",
+          "attribution_href": "Link to the photographer's work (if applicable)"
+        }
+      },
+      "layouts": [
+        {"template": "hero", "layout": "default"},
+        {"template": "hero", "layout": "secondary"}
+      ]
+    },
+    "about": {
+      "content": {
+        "title": {
+          "id": null,
+          "fragments": [{"id": null, "text": "About Us"}]
+        },
+        "description": {
+          "id": null,
+          "fragments": [{"id": null, "text": "A description of your business or services, or whatever feels relevant."}]
+        },
+        "items": [
+          {
+            "id": null,
+            "picture": {
+              "id": null,
+              "uuid": "",
+              "alt_text": "Description for screen readers and visually impaired users.",
+              "attribution_text": "Image Credit (Photographer's Name)",
+              "attribution_href": "Link to the photographer's work (if applicable)"
+            },
+            "caption": {
+              "id": null,
+              "fragments": [{"id": null, "text": "A caption or subtitle for the image or bullet point"}]
+            },
+            "description": {
+              "id": null,
+              "fragments": [{"id": null, "text": "Description of image or bullet point about your or your services"}]
+            }
+          }
+        ]
+      },
+      "layouts": [
+        {"template": "about_with_description", "layout": "about_default"},
+        {"template": "about_without_description", "layout": "about_secondary"}
+      ]
+    },
+    "embed": {
+      "content": {
+        "title": {
+          "id": null,
+          "fragments": [{"id": null, "text": "Embed Section"}]
+        },
+        "description": {
+          "id": null,
+          "fragments": [{"id": null, "text": "You can embed anything you want here. YouTube videos, email-capture form from mailchimp, instagram feed, google-reviews, CRM booking form, etc"}]
+        },
+        "embed": {
+          "id": null,
+          "content": ""
+        }
+      },
+      "layouts": [
+        {"template": "embed_with_description", "layout": "embed_default"}
+      ]
+    }
+  }
+}
