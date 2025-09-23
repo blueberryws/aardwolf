@@ -55,23 +55,19 @@ class DuplicateItem extends HTMLElement { // startfold
   focus(item) {
     // DOMRect { x: 8, y: 19.916671752929688, width: 1900, height: 151.8333282470703, top: 19.916671752929688, right: 1908, bottom: 171.75, left: 8 }
     const bounds = item.getBoundingClientRect();
-    this.style = `top: ${bounds.bottom + window.scrollY - 10}px; left: ${((bounds.right - bounds.left) / 2) + window.scrollX - 50}px;`;
+    this.style = `top: ${bounds.bottom + window.scrollY - 10}px; left: ${((bounds.right - bounds.left) / 2) + window.scrollX + 50}px;`;
   }
 }
 customElements.define("duplicate-item", DuplicateItem);
 //endfold
 
 class ItemController {
-  // TODO:
-  // - duplicate item 
-  //   - get all ids
-  //   - make new ids
   constructor() {
       this.buttons = [
         new MoveItemUp((e) => {this.moveItemUp(e)}),
         new MoveItemDown((e) => {this.moveItemDown(e)}),
         new RemoveItem((e) => {this.removeItem(e)}),
-//        new DuplicateItem((e) => {this.duplicateItem(e)}),
+        new DuplicateItem((e) => {this.duplicateItem(e)}),
       ];
       this.resizeObserver = new ResizeObserver((entries) => {
           entries.forEach(entry => {
@@ -184,4 +180,16 @@ class ItemController {
           loadStyles();
       }
   } // endfold
+  duplicateItem(e) { // startfold
+        const node = dataController.byId(this.item.dataset.id);
+        const parent = node.parent;
+        const nodeIdx = parent.indexOf(node.data);
+        let newNode = JSON.parse(JSON.stringify(node.data));
+        dataController.makeNewIds(newNode);
+        parent.splice(nodeIdx + 1, 0, newNode);
+        render(pageData);
+        attach();
+        loadStyles();
+        dataController._buildTree(pageData);
+  } //
 }

@@ -7,7 +7,7 @@
           "fragments": [{"id": null, "text": "Hello The Internet"}]
         },
         "subtitle": {
-          "fragments": [{"id": "9", "text": "Welcome to your new Website"}]
+          "fragments": [{"id": null, "text": "Welcome to your new Website"}]
         },
         "description": {
           "id": null,
@@ -26,6 +26,7 @@
           "attribution_href": "Link to the photographer's work (if applicable)"
         }
       },
+      "description": "Top of the page section with large banner image",
       "layouts": [
         {"template": "hero", "layout": "default"},
         {"template": "hero", "layout": "secondary"}
@@ -62,6 +63,7 @@
           }
         ]
       },
+      "description": "About Section",
       "layouts": [
         {"template": "about_with_description", "layout": "about_default"},
         {"template": "about_without_description", "layout": "about_secondary"}
@@ -82,6 +84,7 @@
           "content": ""
         }
       },
+      "description": "Embed Section",
       "layouts": [
         {"template": "embed_with_description", "layout": "embed_default"}
       ]

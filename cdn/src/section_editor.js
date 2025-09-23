@@ -75,10 +75,91 @@ class RemoveSection extends HTMLElement { // startfold
 }
 customElements.define("remove-section", RemoveSection);
 //endfold
+class AddSectionButton extends HTMLElement { // startfold
+  constructor(clickHandler) {
+    super();
+    this.textContent = "";
+    this.classList.add(SECTION_CONTROLLER_BUTTON_CLASS);
+    this.addEventListener("click", clickHandler);
+  }
+  focus(section) {
+    // DOMRect { x: 8, y: 19.916671752929688, width: 1900, height: 151.8333282470703, top: 19.916671752929688, right: 1908, bottom: 171.75, left: 8 }
+    const bounds = section.getBoundingClientRect();
+    this.style = `top: ${bounds.bottom + window.scrollY - 10}px; left: ${((bounds.right - bounds.left) / 2) + window.scrollX + 50}px;`;
+  }
+}
+customElements.define("add-section-button", AddSectionButton);
+//endfold
+class AddSectionModal extends HTMLElement { // startfold
+    constructor(themeData, saveFunc) {
+        super();
+        this.saveFunc = saveFunc;
+        attachHTML(this, `
+            <dialog data-name="modal">
+              <h2>Edit Link</h2>
+              <label>Section Type:</label>
+              <select data-name="choice">
+              ${Object.keys(themeData).map(name => `
+                <option value="${name}">${name}</option>
+              `)}
+              </select>
+              <label>Section Description:</label>
+              <p data-name="description">${themeData.hero.description}</p>
+              <button data-name="cancel">Cancel</button>
+              <button data-name="add">Add</button>
+            </dialog>
+        `);
+        document.body.appendChild(this);
+        this.addEventListener("click", (e) => {this.handleClick(e)});
+        this.modal.showModal();
+        this.choice.addEventListener("change", (e) => {
+          this.description.textContent = themeData[this.choice.value].description;
+        });
+    }
+    handleClick(e) {
+      if (e.target == this.cancel) {
+        this.remove();
+      }
+      if (e.target == this.add) {
+        this.saveFunc(this.choice.value);
+        this.remove();
+      }
+    }
+}
+customElements.define("add-section-modal", AddSectionModal);
+// endfold
+class RemoveSectionModal extends HTMLElement { // startfold
+    constructor(removeFunc) {
+        super();
+        this.removeFunc = removeFunc;
+        attachHTML(this, `
+            <dialog data-name="modal">
+              <h2>Remove Section</h2>
+              <label>Are you sure you want to remove this section?</label>
+              <button data-name="cancel">Cancel</button>
+              <button data-name="delete">Remove</button>
+            </dialog>
+        `);
+        document.body.appendChild(this);
+        this.addEventListener("click", (e) => {this.handleClick(e)});
+        this.modal.showModal();
+    }
+    handleClick(e) {
+      if (e.target == this.cancel) {
+        this.remove();
+      }
+      if (e.target == this.delete) {
+        this.removeFunc();
+        this.remove();
+      }
+    }
+}
+customElements.define("remove-section-modal", RemoveSectionModal);
+// endfold
+
 
 class SectionController {
   // TODO:
-  // - add section
   // - All the sub-todos
   // - trigger image optimization job
   constructor() {
@@ -88,6 +169,7 @@ class SectionController {
         new MoveSectionUp((e) => {this.moveUp(e)}),
         new MoveSectionDown((e) => {this.moveDown(e)}),
         new RemoveSection((e) => {this.removeSection(e)}),
+        new AddSectionButton((e) => {this.addSection(e)}),
       ];
       this.resizeObserver = new ResizeObserver((entries) => {
           entries.forEach(entry => {
@@ -139,18 +221,18 @@ class SectionController {
       }
       // This leverages the global namespace extensively... which is uncomfy.
       // Need to figure out dependency injection.
-      const address = getAddress(this.section);
-      const node = getDataByAddress(address, pageData);
-      const layoutOptions = themeData[pageData.theme][node.type].layouts;
+      const node = dataController.byId(this.section.dataset.id);
+      const nodeData = node.data;
+      const layoutOptions = themeData[pageData.theme][nodeData.type].layouts;
       const curLayout = layoutOptions.find(n => {
-        if (n.layout == node.layout && n.template == node.template) return n
+        if (n.layout == nodeData.layout && n.template == nodeData.template) return n
       });
       const curLayoutIdx = layoutOptions.indexOf(curLayout);
       const nextLayoutIdx = _prevIndex(curLayoutIdx, layoutOptions);
       const newLayout = layoutOptions[nextLayoutIdx];
       // TODO: move this to an event, and have the handler elsewhere.
-      node.layout = newLayout.layout;
-      node.template = newLayout.template;
+      nodeData.layout = newLayout.layout;
+      nodeData.template = newLayout.template;
       renderDiff(this.section.dataset.id, pageData);
       attach();
       loadStyles();
@@ -163,18 +245,18 @@ class SectionController {
       }
       // This leverages the global namespace extensively... which is uncomfy.
       // Need to figure out dependency injection.
-      const address = getAddress(this.section);
-      const node = getDataByAddress(address, pageData);
-      const layoutOptions = themeData[pageData.theme][node.type].layouts;
+      const node = dataController.byId(this.section.dataset.id);
+      const nodeData = node.data;
+      const layoutOptions = themeData[pageData.theme][nodeData.type].layouts;
       const curLayout = layoutOptions.find(n => {
-        if (n.layout == node.layout && n.template == node.template) return n
+        if (n.layout == nodeData.layout && n.template == nodeData.template) return n
       });
       const curLayoutIdx = layoutOptions.indexOf(curLayout);
       const nextLayoutIdx = _nextIndex(curLayoutIdx, layoutOptions);
       const newLayout = layoutOptions[nextLayoutIdx];
       // TODO: move this to an event, and have the handler elsewhere.
-      node.layout = newLayout.layout;
-      node.template = newLayout.template;
+      nodeData.layout = newLayout.layout;
+      nodeData.template = newLayout.template;
       renderDiff(this.section.dataset.id, pageData);
       attach();
       loadStyles();
@@ -187,14 +269,11 @@ class SectionController {
       }
       // This leverages the global namespace extensively... which is uncomfy.
       // Need to figure out dependency injection.
-      const address = getAddress(this.section);
-      const node = getDataByAddress(address, pageData);
-      // TODO: This part has too much knowledge of the DOM.
-      const mainAddress = getAddress(document.querySelector("main"));
-      const main = getDataByAddress(mainAddress, pageData);
-      const nodeIdx = main.sections.indexOf(node);
+      const node = dataController.byId(this.section.dataset.id);
+      const parent = node.parent;
+      const nodeIdx = parent.indexOf(node.data);
       if (nodeIdx > 0) {
-          [main.sections[nodeIdx -1], main.sections[nodeIdx]] = [main.sections[nodeIdx], main.sections[nodeIdx -1]];
+          [parent[nodeIdx -1], parent[nodeIdx]] = [parent[nodeIdx], parent[nodeIdx -1]];
           render(pageData);
           attach();
           loadStyles();
@@ -208,14 +287,11 @@ class SectionController {
       }
       // This leverages the global namespace extensively... which is uncomfy.
       // Need to figure out dependency injection.
-      const address = getAddress(this.section);
-      const node = getDataByAddress(address, pageData);
-      // TODO: This part has too much knowledge of the DOM.
-      const mainAddress = getAddress(document.querySelector("main"));
-      const main = getDataByAddress(mainAddress, pageData);
-      const nodeIdx = main.sections.indexOf(node);
-      if (nodeIdx < main.sections.length) {
-          [main.sections[nodeIdx], main.sections[nodeIdx+1]] = [main.sections[nodeIdx+1], main.sections[nodeIdx]];
+      const node = dataController.byId(this.section.dataset.id);
+      const parent = node.parent;
+      const nodeIdx = parent.indexOf(node.data);
+      if (nodeIdx < parent.length) {
+          [parent[nodeIdx], parent[nodeIdx+1]] = [parent[nodeIdx+1], parent[nodeIdx]];
           render(pageData);
           attach();
           loadStyles();
@@ -226,17 +302,42 @@ class SectionController {
       if (this.section == null) {
           console.error("Remove Section called on fake section?");
       }
-      const address = getAddress(this.section);
-      const node = getDataByAddress(address, pageData);
-      // TODO: This part has too much knowledge of the DOM.
-      const mainAddress = getAddress(document.querySelector("main"));
-      const main = getDataByAddress(mainAddress, pageData);
-      const nodeIdx = main.sections.indexOf(node);
-      if (nodeIdx != -1 && main.sections.length > 1) {
-          main.sections.splice(nodeIdx, 1);
-          render(pageData);
-          attach();
-          loadStyles();
+      new RemoveSectionModal(() => {
+        const node = dataController.byId(this.section.dataset.id);
+        const parent = node.parent;
+        const nodeIdx = parent.indexOf(node.data);
+
+        if (nodeIdx != -1 && parent.length > 1) {
+            parent.splice(nodeIdx, 1);
+            render(pageData);
+            attach();
+            loadStyles();
+        }
+      });
+  } // endfold
+  addSection(event) { // startfold
+      if (this.section == null) {
+          console.error("Add Section called on fake section?");
       }
+      new AddSectionModal(themeData[pageData.theme], (sectionName) => {
+        const node = dataController.byId(this.section.dataset.id);
+        const parent = node.parent;
+        const nodeIdx = parent.indexOf(node.data);
+        const sectionData = themeData[pageData.theme][sectionName];
+        let content = JSON.parse(JSON.stringify(sectionData.content));
+        let newNode = {
+          id: null,
+          content: content,
+          template: sectionData.layouts[0].template,
+          layout: sectionData.layouts[0].layout,
+          type: sectionName,
+        };
+        dataController.makeNewIds(newNode);
+        parent.splice(nodeIdx + 1, 0, newNode);
+        render(pageData);
+        attach();
+        loadStyles();
+        dataController._buildTree(pageData);
+      });
   } // endfold
 }

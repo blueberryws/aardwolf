@@ -1,12 +1,25 @@
+/* These need to go in a different css file */
 section {
   position: relative;
 }
 div[data-editor='embed'] {
   position: relative;
 }
+h1, h2, h3, h4, h5, h6, p {
+  white-space: pre-wrap;
+}
+/* end "move" section */
 .section-controller-button {
   position: absolute;
   background-color: blue;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  z-index: 9999;
+}
+.text-style-button {
+  position: absolute;
+  background-color: red;
   height: 20px;
   width: 20px;
   cursor: pointer;

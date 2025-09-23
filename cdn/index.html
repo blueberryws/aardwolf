@@ -12,6 +12,8 @@
   <script src="/src/item_editor.js"></script>
   <script src="/src/link_editor.js"></script>
   <script src="/src/embed_editor.js"></script>
+  <script src="/src/data_editor.js"></script>
+  <script src="/src/text_editor.js"></script>
   <script src="/src/liquid.browser.umd.js"></script>
   <script>
     // TODO:
@@ -20,10 +22,10 @@
     //   more intelligent stylesheets <-- We shouldn't have to rerender everything each time, just the parts that changed. Should this be auto-called as part of render/renderDiff?
     //   how do we handle section layout changes? They impact pictures?
 
-    const pageDataPath = "/page_data.json?a=1";
+    const pageDataPath = "/page_data.json";
     const themeDataPath = "/theme_data.json";
     const parser = new DOMParser();
-    const tmplBase = "http://localhost:8000/layouts/templates";
+    const tmplBase = "/layouts/templates";
     var Liquid = window.liquidjs.Liquid;
     var pageData = {};
     var themeData = {};
@@ -145,54 +147,22 @@
         }
         return current;
     } // endfold
-    function textEditor(el) { // startfold
-      // TODO: Handle Newlines. Right now, they just munged into a single line.
-      el.addEventListener("mousedown", (e) => {
-          const section = el.closest("section");
-          if (section.dataset.focus != "true") {
-            e.preventDefault();
-          }
-      });
-      el.addEventListener("touchstart", (e) => {
-          const section = el.closest("section");
-          if (section.dataset.focus != "true") {
-            e.preventDefault();
-          }
-      });
-
-      el.setAttribute("contenteditable", true);
-      el.addEventListener("blur", (e) => {
-          const fragNodes = Array.from(e.target.children);
-          const fragments = fragNodes.map(f => {return {
-              id: f.dataset.id,
-              text: f.textContent,
-          }});
-          const address = getAddress(e.target);
-          // TODO: move this to an event, and have the handler elsewhere.
-          const node = getDataByAddress(address, pageData);
-          node.fragments = fragments;
-          renderDiff(e.target.dataset.id, pageData);
-          attach();
-      });
-    } // endfold
 
     const sectionController = new SectionController();
     const linkController = new LinkController();
     const itemController = new ItemController();
     const embedController = new EmbedController();
+    const textController = new TextController();
+    let dataController = null; 
     const EDITORS = {
       // "done"
       "link": (link) => {linkController.register(link)},
       "embed": (embed) => {embedController.register(embed)},
-
-      // "partial" - "add/duplicate functionality"
-      // Figuring out how to generate new ids
-      // - Need to decide on id scheme.
       "section": (section) => {sectionController.register(section)},
       "item": (item) => {itemController.register(item)},
 
       // "todo"
-      "text": textEditor,
+      "text": (text) => {textController.register(text)},
       // Porting picture editor over.
       "picture": () => {},
       // colors
@@ -231,6 +201,7 @@
     async function loadPage() {
       const resp = await fetch(pageDataPath, {cache: "no-store"});
       pageData = await resp.json();
+      dataController = new PageData(pageData);
       const themeResp = await fetch(themeDataPath, {cache: "no-store"});
       themeData = await themeResp.json();
       render(pageData);
