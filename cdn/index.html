@@ -1,78 +1,82 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 </head>
+
 <body>
-<header></header>
-<main></main>
-<footer></footer>
-<div id="scratch">
-  <link rel="stylesheet" href="src/editor.css" type="text/css">
-  <script src="/src/section_editor.js"></script>
-  <script src="/src/item_editor.js"></script>
-  <script src="/src/link_editor.js"></script>
-  <script src="/src/embed_editor.js"></script>
-  <script src="/src/data_editor.js"></script>
-  <script src="/src/text_editor.js"></script>
-  <script src="/src/liquid.browser.umd.js"></script>
-  <script>
-    // TODO:
-    //   "focus" and "selection" manager <-- this will preserve state between renders.
-    //   command controller <-- editors should be fire and forget, not managing DOM lifecycle
-    //   more intelligent stylesheets <-- We shouldn't have to rerender everything each time, just the parts that changed. Should this be auto-called as part of render/renderDiff?
-    //   how do we handle section layout changes? They impact pictures?
+  <header></header>
+  <main></main>
+  <footer></footer>
+  <div id="scratch">
+    <link rel="stylesheet" href="src/editor.css" type="text/css">
+    <script src="/src/admin_modal.js"></script>
+    <script src="/src/section_editor.js"></script>
+    <script src="/src/item_editor.js"></script>
+    <script src="/src/link_editor.js"></script>
+    <script src="/src/embed_editor.js"></script>
+    <script src="/src/data_editor.js"></script>
+    <script src="/src/text_editor.js"></script>
+    <script src="/src/picture_editor.js"></script>
+    <script src="/src/liquid.browser.umd.js"></script>
+    <script>
+      // TODO:
+      //   "focus" and "selection" manager <-- this will preserve state between renders.
+      //   command controller <-- editors should be fire and forget, not managing DOM lifecycle
+      //   more intelligent stylesheets <-- We shouldn't have to rerender everything each time, just the parts that changed. Should this be auto-called as part of render/renderDiff?
+      //   how do we handle section layout changes? They impact pictures?
 
-    const pageDataPath = "/page_data.json";
-    const themeDataPath = "/theme_data.json";
-    const parser = new DOMParser();
-    const tmplBase = "/layouts/templates";
-    var Liquid = window.liquidjs.Liquid;
-    var pageData = {};
-    var themeData = {};
+      const pageDataPath = "/page_data.json";
+      const themeDataPath = "/theme_data.json";
+      const parser = new DOMParser();
+      const tmplBase = "/layouts/templates";
+      var Liquid = window.liquidjs.Liquid;
+      var pageData = {};
+      var themeData = {};
 
-    var engine = new Liquid({ // startfold
+      var engine = new Liquid({ // startfold
         fs: {
-            readFileSync (file) {
-                const tmplPath = tmplBase + "/" + file + ".liquid?a=1";
-                let tmpl;
-                const request = new XMLHttpRequest();
-                request.open("GET", tmplPath, false);
-                request.send(null);
-                
-                if (request.status === 200) {
-                  return request.responseText;
-                }
-                return null;
-            },
-            async readFile (file) {
-                const tmplPath = tmplBase + "/" + file + ".liquid";
-                const resp = await fetch(tmplPath, {cache: "no-store"});
-                const template = await resp.text();
-                return template
-            },
-            existsSync () {
-                return true
-            },
-            async exists () {
-                return true
-            },
-            contains () {
-                return true
-            },
-            resolve(root, file, ext) {
-                return file
-            }
-        }
-    }); // endfold
+          readFileSync(file) {
+            const tmplPath = tmplBase + "/" + file + ".liquid?a=1";
+            let tmpl;
+            const request = new XMLHttpRequest();
+            request.open("GET", tmplPath, false);
+            request.send(null);
 
-    function attachHTML(el, markup) { // startfold
+            if (request.status === 200) {
+              return request.responseText;
+            }
+            return null;
+          },
+          async readFile(file) {
+            const tmplPath = tmplBase + "/" + file + ".liquid";
+            const resp = await fetch(tmplPath, { cache: "no-store" });
+            const template = await resp.text();
+            return template
+          },
+          existsSync() {
+            return true
+          },
+          async exists() {
+            return true
+          },
+          contains() {
+            return true
+          },
+          resolve(root, file, ext) {
+            return file
+          }
+        }
+      }); // endfold
+
+      function attachHTML(el, markup) { // startfold
         el.innerHTML = markup;
         const namedChildren = el.querySelectorAll("[data-name]");
         namedChildren.forEach(chd => {
           el[chd.dataset.name] = chd;
         });
-    } // endfold
-    function getAddress(node) { // startfold
+      } // endfold
+      function getAddress(node) { // startfold
         let addr = node.dataset.id;
         let pNode = node.parentElement;
         while (pNode != null) {
@@ -83,132 +87,133 @@
         }
         // "1-2-3-4"
         return addr
-    } // endfold
-    function _getNext(data) { // startfold
+      } // endfold
+      function _getNext(data) { // startfold
         if (data.pages != null) {
-            return "pages"
+          return "pages"
         }
         if (data.sections != null) {
-            return "sections";
+          return "sections";
         }
         if (data.content != null) {
-            return "content";
+          return "content";
         }
         if (data.items != null) {
-            return "items";
+          return "items";
         }
         if (data.fragments != null) {
-            return "fragments";
+          return "fragments";
         }
-    } // endfold
-    function _nextIndex(idx, arr) { // startfold
-          if (idx == -1) {
-            return 0
-          } else if (idx >= arr.length -1) {
-            return 0;
-          } else {
-            return idx + 1;
-          }
-    } // endfold
-    function _prevIndex(idx, arr) { // startfold
-          if (idx == -1) {
-            return 0
-          } else if (idx == 0) {
-            return arr.length - 1;
-          } else {
-            return idx - 1;
-          }
-    } // endfold
-    function getDataByAddress(address, data) { // startfold
+      } // endfold
+      function _nextIndex(idx, arr) { // startfold
+        if (idx == -1) {
+          return 0
+        } else if (idx >= arr.length - 1) {
+          return 0;
+        } else {
+          return idx + 1;
+        }
+      } // endfold
+      function _prevIndex(idx, arr) { // startfold
+        if (idx == -1) {
+          return 0
+        } else if (idx == 0) {
+          return arr.length - 1;
+        } else {
+          return idx - 1;
+        }
+      } // endfold
+      function getDataByAddress(address, data) { // startfold
         const addressParts = address.split("-");
         let current = data;
         for (var i = 0; i < addressParts.length; i++) {
-            const nextPart = addressParts[i];
-            const searchKey = _getNext(current);
-            const searchPart = searchKey != null ? current[searchKey] : current;
-            if (Array.isArray(searchPart)) {
-              current = searchPart.find(el => el.id == nextPart);
-            } else {
-              for (const key in searchPart) {
-                  const value = searchPart[key];
-                  if (key == "items") {
-                      const found = value.find(el => el.id == nextPart);
-                      if (found) {
-                          current = found;
-                          break;
-                      }
-                  }
-                  if (searchPart[key].id == nextPart) {
-                    current = searchPart[key];
-                    break;
-                  }
+          const nextPart = addressParts[i];
+          const searchKey = _getNext(current);
+          const searchPart = searchKey != null ? current[searchKey] : current;
+          if (Array.isArray(searchPart)) {
+            current = searchPart.find(el => el.id == nextPart);
+          } else {
+            for (const key in searchPart) {
+              const value = searchPart[key];
+              if (key == "items") {
+                const found = value.find(el => el.id == nextPart);
+                if (found) {
+                  current = found;
+                  break;
+                }
+              }
+              if (searchPart[key].id == nextPart) {
+                current = searchPart[key];
+                break;
               }
             }
-        }
-        return current;
-    } // endfold
-
-    const sectionController = new SectionController();
-    const linkController = new LinkController();
-    const itemController = new ItemController();
-    const embedController = new EmbedController();
-    const textController = new TextController();
-    let dataController = null; 
-    const EDITORS = {
-      // "done"
-      "link": (link) => {linkController.register(link)},
-      "embed": (embed) => {embedController.register(embed)},
-      "section": (section) => {sectionController.register(section)},
-      "item": (item) => {itemController.register(item)},
-
-      // "todo"
-      "text": (text) => {textController.register(text)},
-      // Porting picture editor over.
-      "picture": () => {},
-      // colors
-      // fonts
-    }
-
-    function attach() {
-      const editable = document.querySelectorAll("[data-editor]");
-      editable.forEach(el => {
-        if (!el.editorAttached) {
-          try {
-          EDITORS[el.dataset.editor](el);
-          el.editorAttached = true;
-          } catch (error) {
-            console.error(error);
           }
         }
-      });
-    }
+        return current;
+      } // endfold
 
-    function render(data) { // startfold
-      const markup = engine.renderFileSync('page', data);
-      const doc = parser.parseFromString(markup, 'text/html');
-      document.querySelector("header").outerHTML = doc.querySelector("header").outerHTML;
-      document.querySelector("main").outerHTML = doc.querySelector("main").outerHTML;
-      document.querySelector("footer").outerHTML = doc.querySelector("footer").outerHTML;
-    } // endfold
-    function renderDiff(address, data) { // startfold
-      const markup = engine.renderFileSync('page', data);
-      const doc = parser.parseFromString(markup, 'text/html');
-      const oldNode = document.querySelector(`[data-id="${address}"]`)
-      const newNode = doc.querySelector(`[data-id="${address}"]`);
-      oldNode.outerHTML = newNode.outerHTML;
-    } // endfold
+      const sectionController = new SectionController();
+      const linkController = new LinkController();
+      const itemController = new ItemController();
+      const embedController = new EmbedController();
+      const textController = new TextController();
+      const pictureController = new PictureController();
+      let dataController = null;
+      const EDITORS = {
+        // "done"
+        "link": (link) => { linkController.register(link) },
+        "embed": (embed) => { embedController.register(embed) },
+        "section": (section) => { sectionController.register(section) },
+        "item": (item) => { itemController.register(item) },
 
-    async function loadPage() {
-      const resp = await fetch(pageDataPath, {cache: "no-store"});
-      pageData = await resp.json();
-      dataController = new PageData(pageData);
-      const themeResp = await fetch(themeDataPath, {cache: "no-store"});
-      themeData = await themeResp.json();
-      render(pageData);
-      attach();
-    }
+        // "todo"
+        "text": (text) => { textController.register(text) },
+        // Porting picture editor over.
+        "picture": (picture) => { pictureController.register(picture) },
+        // colors
+        // fonts
+      }
 
-    async function loadStyles() {
+      function attach() {
+        const editable = document.querySelectorAll("[data-editor]");
+        editable.forEach(el => {
+          if (!el.editorAttached) {
+            try {
+              EDITORS[el.dataset.editor](el);
+              el.editorAttached = true;
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        });
+      }
+
+      function render(data) { // startfold
+        const markup = engine.renderFileSync('page', data);
+        const doc = parser.parseFromString(markup, 'text/html');
+        document.querySelector("header").outerHTML = doc.querySelector("header").outerHTML;
+        document.querySelector("main").outerHTML = doc.querySelector("main").outerHTML;
+        document.querySelector("footer").outerHTML = doc.querySelector("footer").outerHTML;
+      } // endfold
+      function renderDiff(address, data) { // startfold
+        const markup = engine.renderFileSync('page', data);
+        const doc = parser.parseFromString(markup, 'text/html');
+        const oldNode = document.querySelector(`[data-id="${address}"]`)
+        const newNode = doc.querySelector(`[data-id="${address}"]`);
+        oldNode.outerHTML = newNode.outerHTML;
+      } // endfold
+
+      async function loadPage() {
+        const resp = await fetch(pageDataPath, { cache: "no-store" });
+        pageData = await resp.json();
+        dataController = new PageData(pageData);
+        const themeResp = await fetch(themeDataPath, { cache: "no-store" });
+        themeData = await themeResp.json();
+        render(pageData);
+        attach();
+      }
+
+      async function loadStyles() {
         const stylesContainer = document.querySelector("#styles");
         stylesContainer.innerHTML = '';
         const currentTheme = pageData.theme;
@@ -221,12 +226,13 @@
           styleLink.setAttribute("type", "text/css");
           stylesContainer.appendChild(styleLink);
         });
-    }
+      }
 
-    window.addEventListener("load", async () => {await loadPage(); await loadStyles()});
-  </script>
-</div>
-<div id="styles">
-</div>
+      window.addEventListener("load", async () => { await loadPage(); await loadStyles() });
+    </script>
+  </div>
+  <div id="styles">
+  </div>
 </body>
+
 </html>
