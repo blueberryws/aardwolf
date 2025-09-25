@@ -1,0 +1,17 @@
+<section data-id="{{section.id}}" data-layout="{{section.layout}}" data-editor="section">
+{%- render 'h2', text: section.content.title -%}
+<ul>
+  <li>
+    {%- render 'picture' picture: section.content.picture_one -%}
+    {%- render 'h3', text: section.content.point_one -%}
+  </li>
+  <li>
+    {%- render 'picture' picture: section.content.picture_two -%}
+    {%- render 'h3', text: section.content.point_two -%}
+  </li>
+  <li>
+    {%- render 'picture' picture: section.content.picture_three -%}
+    {%- render 'h3', text: section.content.point_three -%}
+  </li>
+</ul>
+</section>

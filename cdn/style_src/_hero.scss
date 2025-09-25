@@ -70,6 +70,7 @@ section[is='hero-section'] picture img {
     height: 100%;
     width: 100%;
 } /* endfold */
+
 section[is='hero-section'].default { /* startfold */
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;
@@ -216,6 +217,7 @@ section[is='hero-section'].alternate-two { /* startfold */
       z-index: 1;
     }
   }
+  
   picture::after {
     content: "";
     display: block;

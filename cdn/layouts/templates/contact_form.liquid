@@ -1,0 +1,17 @@
+<section data-id="{{section.id}}" data-layout="{{section.layout}}" data-editor="section">
+{%- render 'h2', text: section.content.title -%}
+{%- render 'p', text: section.content.description -%}
+{%- render 'picture' picture: section.content.picture -%}
+<form method="POST" action="/contact">
+    <label for="name">Name</label>
+    <input type="text" name="name" placeholder="Who am I speaking with?" required="">
+    <label for="email">Email</label>
+    <input type="email" name="email" placeholder="What's a good email to reach you at?" required="">
+    <label for="message">Message</label>
+    <textarea name="message" placeholder="Your message here." required=""></textarea>
+    <input name="duration" class="hidden">
+    <input name="honey" class="hidden">
+    <button type="submit">Send</button>
+    <input type="hidden" name="site-id" value="undefined">
+</form>
+</section>

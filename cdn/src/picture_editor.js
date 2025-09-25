@@ -79,6 +79,12 @@ class EditPictureModal extends HTMLElement {
         searchButton.innerText = "search";
         searchButton.addEventListener("click", () => this.searchPexels());
         pexelsSearchForm.appendChild(searchButton);
+        const pexelsLink = document.createElement("a");
+        pexelsLink.innerText = "Photos provided by Pexels";
+        pexelsLink.href = "https://www.pexels.com";
+        pexelsSearchForm.appendChild(document.createElement("br"));
+        pexelsSearchForm.appendChild(pexelsLink);
+
         content.appendChild(pexelsSearchForm);
         content.appendChild(this.pexelsPreviews);
 

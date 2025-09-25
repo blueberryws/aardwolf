@@ -1,0 +1,53 @@
+<section data-id="{{section.id}}" data-layout="{{section.layout}}" data-editor="section">
+  {%- render 'picture', picture: section.content.picture -%}
+  {%- render 'p', text: section.content.description -%}
+  <ul is="social-media-links">
+    {% for link in section.content.social_media_links %}
+      <li>
+        <a data-link-type="{{link.type}}" href="{{ link.href }}" aria-label="{{ link.aria_text }}" target="_blank"></a>
+      </li>
+    {% endfor %}
+  </ul>
+  <div is="editable-link-modal" onclick="this.querySelector('dialog').showModal();">
+    {{ section.content.privacy_policy_link }}
+    <dialog is="dialog-element">
+      {%- render 'p', text: section.content.privacy_policy_header -%}
+      {%- render 'p', text: section.content.privacy_policy_text -%}
+      <button onclick="this.parentElement.close(); event.stopPropagation();">X</button>
+    </dialog>
+  </div>
+  <div is="editable-link-modal" onclick="this.querySelector('dialog').showModal();">
+    {{ section.content.tos_link }}
+    <dialog is="dialog-element">
+      {%- render 'p', text: section.content.tos_header -%}
+      {%- render 'p', text: section.content.tos_text -%}
+      <button onclick="this.parentElement.close(); event.stopPropagation();">X</button>
+    </dialog>
+  </div>
+  <div is="editable-link-modal" onclick="this.querySelector('dialog').showModal();">
+    {{ section.content.acessibility_link }}
+    <dialog is="dialog-element">
+      {%- render 'p', text: section.content.acessibility_header -%}
+      {%- render 'p', text: section.content.acessibility_text -%}
+      <button onclick="this.parentElement.close(); event.stopPropagation();">X</button>
+    </dialog>
+  </div>
+  <div is="image-attribution-set" onclick="this.querySelector('dialog').showModal();">
+    Photo Credits
+    <dialog>
+      <h2>Photos Via Pexels.com</h2>
+      <button onclick="this.parentElement.close(); event.stopPropagation();">X</button>
+      <ul>
+        <li>
+          <a
+            href="https://example.com/optional/photographer/link"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Photo Credit: Photographer's Name Here</a
+          >
+          <p>Description for screen readers and the visually impaired.</p>
+        </li>
+      </ul>
+    </dialog>
+  </div>
+</section>

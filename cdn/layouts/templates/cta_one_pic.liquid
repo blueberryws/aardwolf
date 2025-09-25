@@ -1,0 +1,7 @@
+<section data-id="{{section.id}}" data-layout="{{section.layout}}" data-editor="section">
+{%- render 'h2', text: section.content.title -%}
+{%- render 'picture' picture: section.content.primary_picture -%}
+{%- render 'h3', text: section.content.subtitle -%}
+{%- render 'p', text: section.content.description -%}
+{%- render 'link', link: section.content.link -%}
+</section>
