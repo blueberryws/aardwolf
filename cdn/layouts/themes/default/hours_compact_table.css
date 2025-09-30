@@ -1,0 +1,35 @@
+@import "hours_base.css";
+
+section[is=hours-section].alternate {
+    background-color: var(--brand-color);
+    margin: 15px
+}
+
+section[is=hours-section].alternate h2 {
+    color: var(--brand-contrast-color)
+}
+
+section[is=hours-section].alternate ul {
+    display: flex;
+    justify-content: center
+}
+
+section[is=hours-section].alternate li {
+    display: none
+}
+
+section[is=hours-section].alternate li:first-of-type {
+    display: flex;
+    flex-direction: column
+}
+
+section[is=hours-section].alternate li p {
+    text-align: center;
+    color: var(--brand-contrast-color)
+}
+
+@media screen and (min-width: 768px) {
+    section[is=hours-section].alternate {
+        margin: 0 auto
+    }
+}

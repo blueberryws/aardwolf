@@ -1,0 +1,89 @@
+@import "call_to_action_base.css";
+
+section[is=call-to-action-section].alternate-two {
+    align-content: center
+}
+
+section[is=call-to-action-section].alternate-two picture {
+    width: 100%
+}
+
+section[is=call-to-action-section].alternate-two picture img {
+    width: 100%;
+    aspect-ratio: 12/7
+}
+
+section[is=call-to-action-section].alternate-two picture:nth-of-type(even) {
+    display: none
+}
+
+section[is=call-to-action-section].alternate-two h3 {
+    margin: 15px 0;
+    text-align: center
+}
+
+section[is=call-to-action-section].alternate-two p {
+    margin-bottom: 60px;
+    font-weight: 300;
+    text-align: center
+}
+
+section[is=call-to-action-section].alternate-two button {
+    width: 100%
+}
+
+@media screen and (min-width: 768px) {
+    section[is=call-to-action-section].alternate-two h2 {
+        margin-bottom: 90px
+    }
+
+    section[is=call-to-action-section].alternate-two h3 {
+        margin-top: 35px;
+        margin-bottom: 60px
+    }
+
+    section[is=call-to-action-section].alternate-two p {
+        width: 85%;
+        justify-self: center
+    }
+
+    section[is=call-to-action-section].alternate-two a {
+        justify-self: center;
+        width: unset
+    }
+}
+
+section[is=call-to-action-section].alternate-two picture:first-of-type source.desktop {
+    max-width: 1310px;
+    max-height: 764px
+}
+
+section[is=call-to-action-section].alternate-two picture:first-of-type source.laptop {
+    max-width: 1269px;
+    max-height: 740px
+}
+
+section[is=call-to-action-section].alternate-two picture:first-of-type source.notebook {
+    max-width: 1069px;
+    max-height: 623px
+}
+
+section[is=call-to-action-section].alternate-two picture:first-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px
+}
+
+section[is=call-to-action-section].alternate-two picture:first-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px
+}
+
+section[is=call-to-action-section].alternate-two picture:first-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px
+}
+
+section[is=call-to-action-section].alternate-two picture:last-of-type source {
+    max-width: 1px;
+    max-height: 1px
+}

@@ -1,0 +1,171 @@
+@import "call_to_action_base.css";
+
+section[is=call-to-action-section].alternate-five {
+    display: grid;
+    row-gap: 10px;
+    grid-template-columns: calc(var(--header-font-size-large) * 2) 1fr;
+    background-color: var(--color-two)
+}
+
+section[is=call-to-action-section].alternate-five * {
+    grid-column: 1/span 2
+}
+
+section[is=call-to-action-section].alternate-five h2 {
+    grid-column: 1;
+    grid-row: 3;
+    transform: rotate(-90deg);
+    text-wrap: nowrap;
+    aspect-ratio: 1/1;
+    min-height: 100%;
+    text-align: center;
+    width: fit-content
+}
+
+section[is=call-to-action-section].alternate-five h3 {
+    grid-column: 2;
+    color: var(--color-three)
+}
+
+section[is=call-to-action-section].alternate-five p {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: center
+}
+
+section[is=call-to-action-section].alternate-five picture:first-of-type img {
+    aspect-ratio: 12/7
+}
+
+section[is=call-to-action-section].alternate-five picture:nth-of-type(even) img {
+    aspect-ratio: 12/7
+}
+
+section[is=call-to-action-section].alternate-five a {
+    grid-column: 2;
+    width: fit-content
+}
+
+section[is=call-to-action-section].alternate-five button {
+    width: 100%;
+    margin: 25px 0
+}
+
+@media screen and (min-width: 992px) {
+    section[is=call-to-action-section].alternate-five {
+        grid-template-columns: calc(var(--header-font-size-large) * 3) 1fr 1fr;
+        column-gap: 5%
+    }
+
+    section[is=call-to-action-section].alternate-five * {
+        grid-column: 2
+    }
+
+    section[is=call-to-action-section].alternate-five h2 {
+        grid-column: 1;
+        grid-row: 1/span 4;
+        margin-left: calc(var(--header-font-size-large) * 0.75)
+    }
+
+    section[is=call-to-action-section].alternate-five h3 {
+        grid-column: 2;
+        grid-row: 1
+    }
+
+    section[is=call-to-action-section].alternate-five p {
+        grid-column: 2;
+        grid-row: 2/span 2
+    }
+
+    section[is=call-to-action-section].alternate-five a {
+        grid-column: 2;
+        grid-row: 4
+    }
+
+    section[is=call-to-action-section].alternate-five button {
+        width: unset;
+        align-self: end;
+        margin: 0
+    }
+
+    section[is=call-to-action-section].alternate-five img {
+        width: 100%;
+        height: 100%
+    }
+
+    section[is=call-to-action-section].alternate-five picture:first-of-type {
+        grid-column: 3;
+        grid-row: 3/span 2;
+        aspect-ratio: unset;
+        width: 100%;
+        height: 100%
+    }
+
+    section[is=call-to-action-section].alternate-five picture:nth-of-type(even) {
+        grid-column: 3;
+        grid-row: 1/span 2;
+        aspect-ratio: unset;
+        width: 100%;
+        height: 100%
+    }
+}
+
+section[is=call-to-action-section].alternate-five picture:first-of-type source.desktop {
+    max-width: 541px;
+    max-height: 319px
+}
+
+section[is=call-to-action-section].alternate-five picture:last-of-type source.desktop {
+    max-width: 541px;
+    max-height: 319px
+}
+
+section[is=call-to-action-section].alternate-five picture:first-of-type source.laptop {
+    max-width: 523px;
+    max-height: 309px
+}
+
+section[is=call-to-action-section].alternate-five picture:last-of-type source.laptop {
+    max-width: 523px;
+    max-height: 309px
+}
+
+section[is=call-to-action-section].alternate-five picture:first-of-type source.notebook {
+    max-width: 433px;
+    max-height: 306px
+}
+
+section[is=call-to-action-section].alternate-five picture:last-of-type source.notebook {
+    max-width: 433px;
+    max-height: 306px
+}
+
+section[is=call-to-action-section].alternate-five picture:first-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px
+}
+
+section[is=call-to-action-section].alternate-five picture:last-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px
+}
+
+section[is=call-to-action-section].alternate-five picture:first-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px
+}
+
+section[is=call-to-action-section].alternate-five picture:last-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px
+}
+
+section[is=call-to-action-section].alternate-five picture:first-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px
+}
+
+section[is=call-to-action-section].alternate-five picture:last-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px
+}

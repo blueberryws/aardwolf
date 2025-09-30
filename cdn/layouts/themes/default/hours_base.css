@@ -1,0 +1,11 @@
+section[is=hours-section] ul {
+    width: min(500px, 90%);
+    margin: auto
+}
+
+section[is=hours-section] p {
+    font-size: var(--body-font-size-x-large);
+    font-weight: var(--body-font-weight-x-large);
+    height: calc(var(--body-font-size-x-large) * 1.2);
+    line-height: calc(var(--body-font-size-x-large) * 1.2)
+}

@@ -1,0 +1,95 @@
+@import "hero_base.css";
+
+section[is=hero-section].alternate-two {
+    background-color: var(--color-four);
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 2fr;
+    justify-items: end;
+    align-items: start;
+    overflow: hidden
+}
+
+section[is=hero-section].alternate-two>*,
+section[is=hero-section].alternate-two>div>* {
+    z-index: 10;
+    grid-column: 2;
+    text-align: end;
+    box-sizing: border-box;
+    color: var(--dark-color-four)
+}
+
+section[is=hero-section].alternate-two h1 {
+    grid-row: 1;
+    padding-top: 50px
+}
+
+section[is=hero-section].alternate-two h2 {
+    grid-row: 2
+}
+
+section[is=hero-section].alternate-two p {
+    display: none
+}
+
+section[is=hero-section].alternate-two a {
+    grid-row: 3
+}
+
+section[is=hero-section].alternate-two picture {
+    justify-self: start;
+    z-index: 1;
+    padding-left: 0;
+    padding-right: 0;
+    position: absolute
+}
+
+section[is=hero-section].alternate-two picture img {
+    z-index: 1
+}
+
+section[is=hero-section].alternate-two picture::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(60deg, transparent 50%, var(--dark-color-one) 50%);
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+section[is=hero-section].alternate-two a {
+    justify-self: center
+}
+
+@media screen and (min-width: 992px) {
+    section[is=hero-section].alternate-two {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto 1fr;
+        align-items: center
+    }
+
+    section[is=hero-section].alternate-two>* {
+        padding-left: 100px
+    }
+
+    section[is=hero-section].alternate-two h1 {
+        align-self: end
+    }
+
+    section[is=hero-section].alternate-two picture {
+        grid-column: 1/span 2;
+        grid-row: 1/span 4;
+        width: 100%
+    }
+
+    section[is=hero-section].alternate-two picture::after {
+        background: linear-gradient(37.5deg, transparent 50%, var(--dark-color-one) 50%)
+    }
+
+    section[is=hero-section].alternate-two a {
+        align-self: start;
+        justify-self: unset
+    }
+}

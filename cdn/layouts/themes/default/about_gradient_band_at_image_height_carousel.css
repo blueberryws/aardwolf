@@ -1,0 +1,111 @@
+@import "about_base.css";
+
+section[is=about-section].alternate-six {
+    --picture-height: min(45vw, 225px);
+    background: linear-gradient(to bottom, var(--color-two) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
+    padding-left: 0;
+    padding-right: 0
+}
+
+section[is=about-section].alternate-six>* {
+    box-sizing: border-box;
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+    width: 100%
+}
+
+section[is=about-section].alternate-six>p {
+    display: none
+}
+
+section[is=about-section].alternate-six>h2 {
+    text-align: start;
+    margin-bottom: 30px
+}
+
+section[is=about-section].alternate-six ul {
+    background: linear-gradient(to bottom, transparent var(--picture-height), var(--color-one) var(--picture-height), var(--color-one) 100%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    row-gap: 75px
+}
+
+section[is=about-section].alternate-six li {
+    flex: 0 0 calc(var(--picture-height) * 2);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 15px
+}
+
+section[is=about-section].alternate-six li picture {
+    width: 90%;
+    min-width: 250px;
+    align-self: center
+}
+
+section[is=about-section].alternate-six li picture img {
+    aspect-ratio: 1/1;
+    width: 100%
+}
+
+section[is=about-section].alternate-six li h3,
+section[is=about-section].alternate-six li p {
+    width: 90%
+}
+
+@media screen and (min-width: 768px) {
+    section[is=about-section].alternate-six h2 {
+        text-align: center
+    }
+
+    section[is=about-section].alternate-six ul {
+        gap: 5%;
+        row-gap: 40px
+    }
+
+    section[is=about-section].alternate-six li {
+        justify-content: center
+    }
+
+    section[is=about-section].alternate-six li picture {
+        width: 100%
+    }
+
+    section[is=about-section].alternate-six li picture img {
+        width: 100%
+    }
+}
+
+section[is=about-section].alternate-six source.desktop {
+    max-width: 450px;
+    max-height: 450px
+}
+
+section[is=about-section].alternate-six source.laptop {
+    max-width: 450px;
+    max-height: 450px
+}
+
+section[is=about-section].alternate-six source.notebook {
+    max-width: 450px;
+    max-height: 450px
+}
+
+section[is=about-section].alternate-six source.tablet {
+    max-width: 450px;
+    max-height: 450px
+}
+
+section[is=about-section].alternate-six source.phone {
+    max-width: 405px;
+    max-height: 405px
+}
+
+section[is=about-section].alternate-six source.x-small {
+    max-width: 405px;
+    max-height: 405px
+}

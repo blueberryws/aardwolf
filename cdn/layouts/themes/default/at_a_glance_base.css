@@ -1,0 +1,53 @@
+section[is=at-a-glance-section] ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 30px
+}
+
+section[is=at-a-glance-section] li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center
+}
+
+section[is=at-a-glance-section] picture {
+    margin: auto;
+    width: 33%
+}
+
+section[is=at-a-glance-section] picture img {
+    width: 100%;
+    aspect-ratio: 1/1
+}
+
+section[is=at-a-glance-section] h3 {
+    text-align: center;
+    color: var(--color-three);
+    font-size: var(--header-font-size-small);
+    font-family: var(--body-font-family)
+}
+
+@media screen and (min-width: 768px) {
+    section[is=at-a-glance-section] ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 100%;
+        align-items: start
+    }
+
+    section[is=at-a-glance-section] li {
+        flex: 0 0 calc(33% - 60px)
+    }
+
+    section[is=at-a-glance-section] picture {
+        width: 75%;
+        margin-bottom: 20px
+    }
+
+    section[is=at-a-glance-section] h3 {
+        font-size: var(--header-font-size-medium)
+    }
+}

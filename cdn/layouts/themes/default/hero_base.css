@@ -1,0 +1,80 @@
+section[is=hero-section] {
+    display: grid;
+    min-height: 100vh;
+    height: fit-content;
+    padding: 0
+}
+
+section[is=hero-section]>*,
+section[is=hero-section]>div>* {
+    color: var(--color-one)
+}
+
+section[is=hero-section] h1,
+section[is=hero-section] h2,
+section[is=hero-section] p {
+    max-width: min(1200px, 100vw);
+    overflow-wrap: anywhere
+}
+
+section[is=hero-section] h2 {
+    font-family: var(--body-font-family)
+}
+
+section[is=hero-section] picture {
+    height: 100%
+}
+
+section[is=hero-section] picture img {
+    max-height: 100%
+}
+
+section[is=hero-section] a button {
+    color: var(--brand-contrast-color)
+}
+
+@media (prefers-color-scheme: dark) {
+
+    section[is=hero-section] *,
+    section[is=hero-section] div>* {
+        color: var(--color-four)
+    }
+}
+
+section[is=hero-section] source.desktop {
+    max-width: 1920px
+}
+
+section[is=hero-section] source.laptop {
+    max-width: 1200px
+}
+
+section[is=hero-section] source.notebook {
+    max-width: 992px
+}
+
+section[is=hero-section] source.tablet {
+    max-width: 768px
+}
+
+section[is=hero-section] source.phone {
+    max-width: 576px
+}
+
+section[is=hero-section] source.x-small {
+    max-width: 576px
+}
+
+section[is=hero-section] picture {
+    grid-row: 1/-1;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background-color: var(--dark-color-one)
+}
+
+section[is=hero-section] picture img {
+    z-index: 1;
+    height: 100%;
+    width: 100%
+}

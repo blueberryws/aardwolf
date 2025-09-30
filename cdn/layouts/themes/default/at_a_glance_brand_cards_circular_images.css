@@ -1,0 +1,58 @@
+@import "at_a_glance_base.css";
+
+section[is=at-a-glance-section].alternate-two li {
+    background-color: var(--brand-color);
+    border-radius: var(--normal-border-radius);
+    padding: 30px;
+    width: 65%;
+    justify-content: space-around
+}
+
+section[is=at-a-glance-section].alternate-two picture {
+    width: 65%;
+    margin-bottom: 15px
+}
+
+section[is=at-a-glance-section].alternate-two img {
+    border-radius: 50%
+}
+
+section[is=at-a-glance-section].alternate-two h3 {
+    color: var(--brand-contrast-color)
+}
+
+@media screen and (min-width: 768px) {
+    section[is=at-a-glance-section].alternate-two li {
+        padding: 30px 15px
+    }
+}
+
+section[is=at-a-glance-section].alternate-two source.desktop {
+    max-width: 280px;
+    max-height: 280px
+}
+
+section[is=at-a-glance-section].alternate-two source.laptop {
+    max-width: 272px;
+    max-height: 272px
+}
+
+section[is=at-a-glance-section].alternate-two source.notebook {
+    max-width: 229px;
+    max-height: 229px
+}
+
+section[is=at-a-glance-section].alternate-two source.tablet {
+    max-width: 184px;
+    max-height: 184px
+}
+
+section[is=at-a-glance-section].alternate-two source.phone {
+    max-width: 300px;
+    max-height: 300px
+}
+
+section[is=at-a-glance-section].alternate-two source.x-small {
+    max-width: 217px;
+    max-height: 217px
+}

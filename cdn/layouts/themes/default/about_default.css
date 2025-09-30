@@ -1,3 +1,92 @@
-section[data-layout="about_default"] h2 {
-  color: red;
+@import "about_base.css";
+
+section[is=about-section].default {
+    padding-left: 0;
+    padding-right: 0
+}
+
+section[is=about-section].default>p {
+    display: none
+}
+
+section[is=about-section].default>* {
+    box-sizing: border-box;
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+    width: 100%
+}
+
+section[is=about-section].default ul {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-wrap: wrap;
+    column-gap: 10%;
+    row-gap: 50px
+}
+
+section[is=about-section].default li {
+    flex: 0 0 45%;
+    display: grid;
+    justify-items: center;
+    column-gap: 50px;
+    text-align: center
+}
+
+section[is=about-section].default li source.desktop {
+    max-width: 210px;
+    max-height: 210px
+}
+
+section[is=about-section].default li source.laptop {
+    max-width: 156px;
+    max-height: 156px
+}
+
+section[is=about-section].default li source.notebook {
+    max-width: 110px;
+    max-height: 110px
+}
+
+section[is=about-section].default li source.tablet {
+    max-width: 318px;
+    max-height: 318px
+}
+
+section[is=about-section].default li source.phone {
+    max-width: 231px;
+    max-height: 231px
+}
+
+section[is=about-section].default li source.x-small {
+    max-width: 231px;
+    max-height: 231px
+}
+
+section[is=about-section].default li img {
+    width: 100%;
+    aspect-ratio: 1/1
+}
+
+@media screen and (min-width: 992px) {
+    section[is=about-section].default li {
+        display: grid;
+        justify-items: start;
+        align-items: start;
+        text-align: start;
+        row-gap: 20px
+    }
+
+    section[is=about-section].default li picture {
+        grid-column: 1;
+        grid-row: 1/span 2
+    }
+
+    section[is=about-section].default li h3 {
+        grid-column: 2
+    }
+
+    section[is=about-section].default li p {
+        grid-column: 2
+    }
 }

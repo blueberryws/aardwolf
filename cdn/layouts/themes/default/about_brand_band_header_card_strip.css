@@ -1,0 +1,153 @@
+@import "about_base.css";
+
+section[is=about-section].alternate-four {
+    text-align: center;
+    background: linear-gradient(to bottom, var(--brand-color) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
+    padding-left: 0;
+    padding-right: 0
+}
+
+section[is=about-section].alternate-four>* {
+    box-sizing: border-box;
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+    width: 100%
+}
+
+section[is=about-section].alternate-four>h2,
+section[is=about-section].alternate-four>p {
+    padding-right: var(--narrow-padding-right);
+    padding-left: var(--narrow-padding-left);
+    color: var(--brand-contrast-color);
+    margin: auto
+}
+
+section[is=about-section].alternate-four>h2 {
+    margin-bottom: 25px
+}
+
+section[is=about-section].alternate-four>p {
+    margin-bottom: 60px;
+    font-size: var(--body-font-size-large)
+}
+
+section[is=about-section].alternate-four ul {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    max-width: 100%;
+    scrollbar-width: none;
+    background: linear-gradient(to bottom, transparent 125px, var(--color-one) 125px, var(--color-one) 100%)
+}
+
+section[is=about-section].alternate-four ul ::-webkit-scrollbar {
+    display: none
+}
+
+section[is=about-section].alternate-four li {
+    flex: 0 0 90%;
+    scroll-snap-align: center;
+    row-gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 60px
+}
+
+section[is=about-section].alternate-four li:first-of-type {
+    flex: 0 0 100%
+}
+
+section[is=about-section].alternate-four li:last-of-type {
+    flex: 0 0 100%
+}
+
+section[is=about-section].alternate-four li h3,
+section[is=about-section].alternate-four li p {
+    max-width: 300px
+}
+
+section[is=about-section].alternate-four li picture {
+    width: 250px
+}
+
+section[is=about-section].alternate-four li picture img {
+    aspect-ratio: 1/1;
+    width: 90%;
+    border-radius: 50%
+}
+
+@media screen and (min-width: 768px) {
+
+    section[is=about-section].alternate-four>h2,
+    section[is=about-section].alternate-four>p {
+        width: 85%
+    }
+
+    section[is=about-section].alternate-four ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow: unset;
+        padding-left: var(--narrow-padding-left);
+        padding-right: var(--narrow-padding-right)
+    }
+
+    section[is=about-section].alternate-four li,
+    section[is=about-section].alternate-four li:first-of-type,
+    section[is=about-section].alternate-four li:last-of-type {
+        flex: 0 1 375px
+    }
+}
+
+@media screen and (min-width: 1400px) {
+
+    section[is=about-section].alternate-four>h2,
+    section[is=about-section].alternate-four>p {
+        padding-left: var(--standard-padding-left);
+        padding-right: var(--standard-padding-right)
+    }
+
+    section[is=about-section].alternate-four ul {
+        padding-left: var(--standard-padding-left);
+        padding-right: var(--standard-padding-right)
+    }
+
+    section[is=about-section].alternate-four li,
+    section[is=about-section].alternate-four li:first-of-type,
+    section[is=about-section].alternate-four li:last-of-type {
+        flex-basis: 400px
+    }
+}
+
+section[is=about-section].alternate-four source.desktop {
+    max-width: 225px;
+    max-height: 225px
+}
+
+section[is=about-section].alternate-four source.laptop {
+    max-width: 225px;
+    max-height: 225px
+}
+
+section[is=about-section].alternate-four source.notebook {
+    max-width: 225px;
+    max-height: 225px
+}
+
+section[is=about-section].alternate-four source.tablet {
+    max-width: 225px;
+    max-height: 225px
+}
+
+section[is=about-section].alternate-four source.phone {
+    max-width: 225px;
+    max-height: 225px
+}
+
+section[is=about-section].alternate-four source.x-small {
+    max-width: 225px;
+    max-height: 225px
+}

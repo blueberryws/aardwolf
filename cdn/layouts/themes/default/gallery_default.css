@@ -1,0 +1,85 @@
+@import "gallery_base.css";
+
+section[is=gallery-section].default {
+    display: grid;
+    padding: var(--narrow-padding)
+}
+
+section[is=gallery-section].default h2 {
+    text-align: start
+}
+
+section[is=gallery-section].default ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    aspect-ratio: 3/2;
+    gap: 10px;
+    max-width: 100%;
+    overflow: hidden
+}
+
+section[is=gallery-section].default .previous-button,
+section[is=gallery-section].default .next-button {
+    display: none
+}
+
+section[is=gallery-section].default button.show-all {
+    grid-row: 3;
+    justify-self: end;
+    background: none;
+    outline: none;
+    text-decoration: underline;
+    width: fit-content;
+    padding: 10px 0;
+    font-size: var(--body-font-small);
+    font-weight: 400;
+    color: var(--color-four);
+    display: none
+}
+
+section[is=gallery-section].default ul.show-all {
+    aspect-ratio: unset
+}
+
+section[is=gallery-section].default li {
+    height: fit-content
+}
+
+@media screen and (min-width: 768px) {
+    section[is=gallery-section].default h2 {
+        text-align: center
+    }
+
+    section[is=gallery-section].default ul {
+        grid-template-columns: repeat(4, 1fr);
+        aspect-ratio: 4/2
+    }
+}
+
+section[is=gallery-section].default source.desktop {
+    max-width: 345px
+}
+
+section[is=gallery-section].default source.laptop {
+    max-width: 334px
+}
+
+section[is=gallery-section].default source.notebook {
+    max-width: 284px
+}
+
+section[is=gallery-section].default source.tablet {
+    max-width: 232px
+}
+
+section[is=gallery-section].default source.phone {
+    max-width: 239px
+}
+
+section[is=gallery-section].default source.x-small {
+    max-width: 175px
+}
+
+section[is=gallery-section].default img {
+    max-width: min(345px, 100%)
+}

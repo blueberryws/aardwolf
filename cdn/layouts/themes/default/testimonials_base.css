@@ -1,0 +1,50 @@
+section[is=testimonials-section] {
+    display: grid;
+    justify-items: center;
+    padding: var(--narrow-padding)
+}
+
+section[is=testimonials-section]>* {
+    grid-column: 1
+}
+
+section[is=testimonials-section] h2 {
+    padding-left: 15px;
+    justify-self: start
+}
+
+section[is=testimonials-section] ul {
+    grid-row: 2;
+    align-self: start;
+    height: 80%;
+    position: relative
+}
+
+section[is=testimonials-section] ul li.testimonials-content {
+    display: none
+}
+
+section[is=testimonials-section] ul li.testimonials-content.focus {
+    display: grid
+}
+
+section[is=testimonials-section] blockquote::before {
+    content: "\""
+}
+
+section[is=testimonials-section] blockquote::after {
+    content: "\""
+}
+
+section[is=testimonials-section] button {
+    min-width: unset;
+    width: 15px;
+    height: 35px;
+    padding: unset;
+    background: none
+}
+
+section[is=testimonials-section] source {
+    max-width: 1px;
+    max-height: 1px
+}

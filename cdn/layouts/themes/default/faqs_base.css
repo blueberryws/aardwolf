@@ -1,0 +1,50 @@
+section[is=faqs-section] {
+    background-color: var(--color-one)
+}
+
+section[is=faqs-section] ul.faqs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center
+}
+
+section[is=faqs-section] ul.faqs li.faq-list-item {
+    width: 100%
+}
+
+section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container summary.question::-webkit-details-marker {
+    display: none
+}
+
+section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container summary.question {
+    padding: 8px 10px;
+    list-style: none;
+    border: solid var(--brand-color) 1px;
+    border-radius: var(--small-border-radius)
+}
+
+section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container summary.question h3.question-text {
+    font-size: calc(var(--header-font-size-small) * 0.8);
+    font-weight: 600;
+    font-family: var(--body-font-family)
+}
+
+section[is=faqs-section] ul.faqs li.faq-list-item details.faq-container p.answer {
+    padding: 10px 8px;
+    font-size: var(--body-font-size-small);
+    font-weight: var(--body-font-weight-small);
+    color: var(--color-four)
+}
+
+section[is=faqs-section] ul.faqs li:hover {
+    cursor: pointer
+}
+
+@media screen and (min-width: 1200px) {
+    section[is=faqs-section] ul.faqs {
+        width: 65%;
+        margin: auto
+    }
+}

@@ -1,0 +1,108 @@
+@import "about_base.css";
+
+section[is=about-section].alternate-nine {
+    --picture-height: min(max(30vw, 250px), 350px);
+    background: linear-gradient(to bottom, var(--color-two) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
+    padding-left: 0;
+    padding-right: 0
+}
+
+section[is=about-section].alternate-nine>* {
+    box-sizing: border-box;
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+    width: 100%
+}
+
+section[is=about-section].alternate-nine>p {
+    display: none
+}
+
+section[is=about-section].alternate-nine>h2 {
+    text-align: start;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 30px
+}
+
+section[is=about-section].alternate-nine ul {
+    background: linear-gradient(to bottom, transparent calc(var(--picture-height) * 0.5), var(--color-one) calc(var(--picture-height) * 0.5), var(--color-one) 100%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+    gap: 5%;
+    row-gap: 75px
+}
+
+section[is=about-section].alternate-nine li {
+    flex: 0 0 var(--picture-height);
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    justify-content: start;
+    row-gap: 15px
+}
+
+section[is=about-section].alternate-nine li picture {
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 250px;
+    align-self: center
+}
+
+section[is=about-section].alternate-nine li picture img {
+    aspect-ratio: 1/1;
+    width: 100%;
+    border-radius: 50%
+}
+
+section[is=about-section].alternate-nine li h3,
+section[is=about-section].alternate-nine li p {
+    width: 90%
+}
+
+section[is=about-section].alternate-nine li p {
+    font-size: var(--body-font-size-medium)
+}
+
+@media screen and (min-width: 768px) {
+    section[is=about-section].alternate-nine h2 {
+        text-align: center
+    }
+
+    section[is=about-section].alternate-nine li p {
+        font-size: var(--body-font-size-small)
+    }
+}
+
+section[is=about-section].alternate-nine source.desktop {
+    max-width: 350px;
+    max-height: 350px
+}
+
+section[is=about-section].alternate-nine source.laptop {
+    max-width: 350px;
+    max-height: 350px
+}
+
+section[is=about-section].alternate-nine source.notebook {
+    max-width: 350px;
+    max-height: 350px
+}
+
+section[is=about-section].alternate-nine source.tablet {
+    max-width: 297px;
+    max-height: 297px
+}
+
+section[is=about-section].alternate-nine source.phone {
+    max-width: 250px;
+    max-height: 250px
+}
+
+section[is=about-section].alternate-nine source.x-small {
+    max-width: 250px;
+    max-height: 250px
+}

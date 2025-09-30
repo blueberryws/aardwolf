@@ -1,0 +1,28 @@
+section[is=about-section] {
+    color: var(--color-four);
+    padding-bottom: var(--standard-padding-bottom)
+}
+
+section[is=about-section] img {
+    border-radius: var(--normal-border-radius)
+}
+
+section[is=about-section] h3 {
+    color: var(--color-three);
+    font-size: var(--header-font-size-small);
+    font-weight: 500
+}
+
+section[is=about-section] p {
+    font-size: var(--body-font-size-medium)
+}
+
+@media screen and (min-width: 992px) {
+    section[is=about-section] h3 {
+        font-size: var(--header-font-size-medium)
+    }
+
+    section[is=about-section] p {
+        font-size: var(--body-font-size-small)
+    }
+}

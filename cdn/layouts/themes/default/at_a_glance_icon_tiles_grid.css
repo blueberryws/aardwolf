@@ -1,0 +1,5 @@
+@import "at_a_glance_base.css";
+
+section[is=at-a-glance-section].alternate-one img {
+    border-radius: var(--normal-border-radius)
+}

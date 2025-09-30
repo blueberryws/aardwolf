@@ -1,0 +1,155 @@
+@import "about_base.css";
+
+section[is=about-section].alternate-ten {
+    --picture-height: min(45vw, 180px);
+    background-color: var(--color-one);
+    padding-left: 0;
+    padding-right: 0
+}
+
+section[is=about-section].alternate-ten>* {
+    box-sizing: border-box;
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+    width: 100%
+}
+
+section[is=about-section].alternate-ten>p {
+    display: none
+}
+
+section[is=about-section].alternate-ten>h2 {
+    text-align: start;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 30px
+}
+
+section[is=about-section].alternate-ten ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    row-gap: 75px;
+    gap: 25px
+}
+
+section[is=about-section].alternate-ten li {
+    flex: 0 0 calc(var(--picture-height) * 2);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: start;
+    row-gap: 15px
+}
+
+section[is=about-section].alternate-ten li picture {
+    width: 100%;
+    min-width: 250px;
+    align-self: center
+}
+
+section[is=about-section].alternate-ten li picture img {
+    width: 100%;
+    aspect-ratio: 6/5
+}
+
+section[is=about-section].alternate-ten li h3,
+section[is=about-section].alternate-ten li p {
+    width: 90%
+}
+
+section[is=about-section].alternate-ten li p {
+    font-size: var(--body-font-size-medium)
+}
+
+@media screen and (min-width: 768px) {
+    section[is=about-section].alternate-ten h2 {
+        text-align: center
+    }
+
+    section[is=about-section].alternate-ten h3 {
+        text-align: start;
+        margin-top: 50px
+    }
+
+    section[is=about-section].alternate-ten ul {
+        row-gap: 50px
+    }
+
+    section[is=about-section].alternate-ten li,
+    section[is=about-section].alternate-ten li:first-of-type,
+    section[is=about-section].alternate-ten li:last-of-type {
+        flex: 0 0 100%;
+        display: grid;
+        grid-template-columns: 47.5% 47.5%;
+        grid-template-rows: auto 1fr;
+        justify-items: start;
+        align-items: start;
+        gap: 5%
+    }
+
+    section[is=about-section].alternate-ten li h3,
+    section[is=about-section].alternate-ten li:first-of-type h3,
+    section[is=about-section].alternate-ten li:last-of-type h3 {
+        grid-row: 1
+    }
+
+    section[is=about-section].alternate-ten li picture,
+    section[is=about-section].alternate-ten li:first-of-type picture,
+    section[is=about-section].alternate-ten li:last-of-type picture {
+        grid-row: 1/span 2
+    }
+
+    section[is=about-section].alternate-ten li p,
+    section[is=about-section].alternate-ten li:first-of-type p,
+    section[is=about-section].alternate-ten li:last-of-type p {
+        font-size: var(--body-font-size-small)
+    }
+
+    section[is=about-section].alternate-ten li:nth-child(odd)>* {
+        grid-column: 2
+    }
+
+    section[is=about-section].alternate-ten li:nth-child(odd) picture {
+        grid-column: 1
+    }
+
+    section[is=about-section].alternate-ten li:nth-child(even)>* {
+        grid-column: 1
+    }
+
+    section[is=about-section].alternate-ten li:nth-child(even) picture {
+        grid-column: 2
+    }
+}
+
+section[is=about-section].alternate-ten source.desktop {
+    max-width: 622px;
+    max-height: 518px
+}
+
+section[is=about-section].alternate-ten source.laptop {
+    max-width: 602px;
+    max-height: 502px
+}
+
+section[is=about-section].alternate-ten source.notebook {
+    max-width: 507px;
+    max-height: 423px
+}
+
+section[is=about-section].alternate-ten source.tablet {
+    max-width: 408px;
+    max-height: 340px
+}
+
+section[is=about-section].alternate-ten source.phone {
+    max-width: 360px;
+    max-height: 300px
+}
+
+section[is=about-section].alternate-ten source.x-small {
+    max-width: 360px;
+    max-height: 300px
+}

@@ -1,0 +1,158 @@
+@import "call_to_action_base.css";
+
+section[is=call-to-action-section].alternate-four {
+    display: grid;
+    row-gap: 10px;
+    grid-template-columns: calc(var(--header-font-size-large) * 2) 1fr;
+    background-color: var(--color-two)
+}
+
+section[is=call-to-action-section].alternate-four * {
+    grid-column: 1/span 2
+}
+
+section[is=call-to-action-section].alternate-four h2 {
+    grid-column: 1;
+    grid-row: 3;
+    transform: rotate(-90deg);
+    text-wrap: nowrap;
+    aspect-ratio: 1/1;
+    min-height: 100%;
+    text-align: center;
+    width: fit-content
+}
+
+section[is=call-to-action-section].alternate-four h3 {
+    grid-column: 2;
+    color: var(--color-three)
+}
+
+section[is=call-to-action-section].alternate-four p {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: center
+}
+
+section[is=call-to-action-section].alternate-four a {
+    grid-column: 2;
+    width: fit-content
+}
+
+section[is=call-to-action-section].alternate-four picture:first-of-type img {
+    aspect-ratio: 12/7
+}
+
+section[is=call-to-action-section].alternate-four picture:nth-of-type(even) img {
+    aspect-ratio: 11/14
+}
+
+section[is=call-to-action-section].alternate-four button {
+    width: 100%;
+    margin: 25px 0
+}
+
+@media screen and (min-width: 992px) {
+    section[is=call-to-action-section].alternate-four {
+        grid-template-columns: 1fr calc(var(--header-font-size-large) * 3) 1fr
+    }
+
+    section[is=call-to-action-section].alternate-four * {
+        grid-column: 3
+    }
+
+    section[is=call-to-action-section].alternate-four h2 {
+        grid-column: 2;
+        grid-row: 1/span 4;
+        margin-left: var(--header-font-size-large)
+    }
+
+    section[is=call-to-action-section].alternate-four h3 {
+        grid-column: 3;
+        grid-row: 1
+    }
+
+    section[is=call-to-action-section].alternate-four p {
+        grid-column: 3;
+        grid-row: 2;
+        font-weight: 300
+    }
+
+    section[is=call-to-action-section].alternate-four a {
+        grid-column: 3;
+        grid-row: 3
+    }
+
+    section[is=call-to-action-section].alternate-four button {
+        width: unset
+    }
+
+    section[is=call-to-action-section].alternate-four picture:first-of-type {
+        aspect-ratio: unset;
+        align-self: end
+    }
+
+    section[is=call-to-action-section].alternate-four picture:nth-of-type(even) {
+        grid-column: 1;
+        grid-row: 1/span 4
+    }
+}
+
+section[is=call-to-action-section].alternate-four picture:first-of-type source.desktop {
+    max-width: 607px;
+    max-height: 354px
+}
+
+section[is=call-to-action-section].alternate-four picture:last-of-type source.desktop {
+    max-width: 607px;
+    max-height: 772px
+}
+
+section[is=call-to-action-section].alternate-four picture:first-of-type source.laptop {
+    max-width: 586px;
+    max-height: 342px
+}
+
+section[is=call-to-action-section].alternate-four picture:last-of-type source.laptop {
+    max-width: 586px;
+    max-height: 746px
+}
+
+section[is=call-to-action-section].alternate-four picture:first-of-type source.notebook {
+    max-width: 486px;
+    max-height: 283px
+}
+
+section[is=call-to-action-section].alternate-four picture:last-of-type source.notebook {
+    max-width: 486px;
+    max-height: 619px
+}
+
+section[is=call-to-action-section].alternate-four picture:first-of-type source.tablet {
+    max-width: 861px;
+    max-height: 502px
+}
+
+section[is=call-to-action-section].alternate-four picture:last-of-type source.tablet {
+    max-width: 861px;
+    max-height: 1095px
+}
+
+section[is=call-to-action-section].alternate-four picture:first-of-type source.phone {
+    max-width: 707px;
+    max-height: 412px
+}
+
+section[is=call-to-action-section].alternate-four picture:last-of-type source.phone {
+    max-width: 707px;
+    max-height: 899px
+}
+
+section[is=call-to-action-section].alternate-four picture:first-of-type source.x-small {
+    max-width: 515px;
+    max-height: 300px
+}
+
+section[is=call-to-action-section].alternate-four picture:last-of-type source.x-small {
+    max-width: 515px;
+    max-height: 655px
+}

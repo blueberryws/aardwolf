@@ -1,0 +1,90 @@
+@import "hero_base.css";
+
+section[is=hero-section].alternate-nine {
+    min-height: unset;
+    display: grid;
+    justify-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background: linear-gradient(to bottom, var(--color-two) calc(100% - 145px), var(--color-one) calc(100% - 145px), var(--color-one) 100%)
+}
+
+section[is=hero-section].alternate-nine>*,
+section[is=hero-section].alternate-nine>div>* {
+    color: var(--color-four);
+    text-align: center
+}
+
+section[is=hero-section].alternate-nine h1,
+section[is=hero-section].alternate-nine p {
+    padding-left: var(--narrow-padding-left);
+    padding-right: var(--narrow-padding-right)
+}
+
+section[is=hero-section].alternate-nine p {
+    grid-row: 1
+}
+
+section[is=hero-section].alternate-nine h1 {
+    grid-row: 2;
+    margin-top: 20px;
+    margin-bottom: 40px
+}
+
+section[is=hero-section].alternate-nine h2 {
+    display: none
+}
+
+section[is=hero-section].alternate-nine picture {
+    grid-row: 3;
+    width: min(80vw, 700px);
+    aspect-ratio: 3/2
+}
+
+section[is=hero-section].alternate-nine a {
+    display: none
+}
+
+@media screen and (min-width: 768px) {
+    section[is=hero-section].alternate-nine {
+        background: linear-gradient(to bottom, var(--color-two) calc(100% - 255px), var(--color-one) calc(100% - 255px), var(--color-one) 100%)
+    }
+}
+
+@media screen and (min-width: 992px) {
+    section[is=hero-section].alternate-nine {
+        padding-top: 10vh;
+        padding-bottom: 10vh;
+        background: linear-gradient(to bottom, var(--color-two) calc(100% - 275px), var(--color-one) calc(100% - 275px), var(--color-one) 100%)
+    }
+}
+
+section[is=hero-section].alternate-nine source.desktop {
+    max-width: 700px;
+    max-height: 470px
+}
+
+section[is=hero-section].alternate-nine source.laptop {
+    max-width: 700px;
+    max-height: 470px
+}
+
+section[is=hero-section].alternate-nine source.notebook {
+    max-width: 700px;
+    max-height: 470px
+}
+
+section[is=hero-section].alternate-nine source.tablet {
+    max-width: 614px;
+    max-height: 413px
+}
+
+section[is=hero-section].alternate-nine source.phone {
+    max-width: 454px;
+    max-height: 306px
+}
+
+section[is=hero-section].alternate-nine source.x-small {
+    max-width: 454px;
+    max-height: 306px
+}

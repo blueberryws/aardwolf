@@ -1,0 +1,10 @@
+@import "contact_base.css";
+
+section[is=contact-form-section].default picture {
+    display: none
+}
+
+section[is=contact-form-section].default source {
+    max-width: 1px;
+    max-height: 1px
+}

@@ -1,0 +1,64 @@
+@import "hero_base.css";
+
+section[is=hero-section].alternate-six {
+    display: grid;
+    justify-items: center;
+    padding-bottom: 40px
+}
+
+section[is=hero-section].alternate-six>*,
+section[is=hero-section].alternate-six>div>* {
+    padding: 0 var(--narrow-padding-left);
+    color: var(--color-four);
+    text-align: center
+}
+
+section[is=hero-section].alternate-six h1 {
+    padding-top: 10vh;
+    grid-row: 1;
+    grid-column: 1;
+    z-index: 2;
+    color: var(--dark-color-four)
+}
+
+section[is=hero-section].alternate-six picture {
+    grid-row: 1;
+    grid-column: 1;
+    width: 100%;
+    height: 60vh;
+    padding-left: 0;
+    padding-right: 0
+}
+
+section[is=hero-section].alternate-six img {
+    opacity: 65%;
+    filter: brightness(75%)
+}
+
+section[is=hero-section].alternate-six h2 {
+    margin: 40px 0 0 0;
+    grid-row: 2
+}
+
+section[is=hero-section].alternate-six p {
+    margin: 20px 0;
+    grid-row: 3
+}
+
+section[is=hero-section].alternate-six a {
+    grid-row: 4
+}
+
+@media screen and (min-width: 992px) {
+    section[is=hero-section].alternate-six {
+        justify-items: start
+    }
+
+    section[is=hero-section].alternate-six>* {
+        text-align: unset
+    }
+
+    section[is=hero-section].alternate-six h1 {
+        padding-top: 20vh
+    }
+}

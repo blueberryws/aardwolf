@@ -1,0 +1,23 @@
+@import "numbers_base.css";
+
+section[is=numbers-section].alternate-one {
+    background-color: var(--color-two)
+}
+
+section[is=numbers-section].alternate-one li {
+    background-color: var(--brand-color);
+    border-radius: 200px;
+    width: calc(80% - 40px);
+    padding: 20px
+}
+
+section[is=numbers-section].alternate-one li * {
+    color: var(--brand-contrast-color)
+}
+
+@media screen and (min-width: 768px) {
+    section[is=numbers-section].alternate-one li {
+        border-radius: 50%;
+        aspect-ratio: 1/1
+    }
+}

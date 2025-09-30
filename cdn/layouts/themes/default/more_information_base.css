@@ -1,0 +1,56 @@
+section[is=more-information-section] {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center
+}
+
+section[is=more-information-section] picture {
+    margin-bottom: 25px;
+    width: 100%
+}
+
+section[is=more-information-section] picture img {
+    width: 100%;
+    aspect-ratio: 3/2;
+    border-radius: var(--normal-border-radius)
+}
+
+@media screen and (min-width: 992px) {
+    section[is=more-information-section] picture {
+        margin-bottom: 40px
+    }
+
+    section[is=more-information-section] picture img {
+        aspect-ratio: 19/10
+    }
+}
+
+section[is=more-information-section] source.desktop {
+    max-width: 1300px;
+    max-height: 689px
+}
+
+section[is=more-information-section] source.laptop {
+    max-width: 1269px;
+    max-height: 667px
+}
+
+section[is=more-information-section] source.notebook {
+    max-width: 1069px;
+    max-height: 562px
+}
+
+section[is=more-information-section] source.tablet {
+    max-width: 861px;
+    max-height: 574px
+}
+
+section[is=more-information-section] source.phone {
+    max-width: 707px;
+    max-height: 471px
+}
+
+section[is=more-information-section] source.x-small {
+    max-width: 515px;
+    max-height: 343px
+}

@@ -1,0 +1,5 @@
+@import "faqs_base.css";
+
+section[is=faqs-section].default h3.question-text {
+    color: var(--color-three)
+}

@@ -1,0 +1,118 @@
+@import "about_base.css";
+
+section[is=about-section].alternate-one {
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0
+}
+
+section[is=about-section].alternate-one>p {
+    display: none
+}
+
+section[is=about-section].alternate-one>* {
+    box-sizing: border-box;
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+    width: 100%
+}
+
+section[is=about-section].alternate-one ul {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    max-width: 100%;
+    scrollbar-width: none
+}
+
+section[is=about-section].alternate-one ul ::-webkit-scrollbar {
+    display: none
+}
+
+section[is=about-section].alternate-one li {
+    flex: 0 0 90%;
+    scroll-snap-align: center;
+    row-gap: 20px;
+    display: grid;
+    justify-items: center
+}
+
+section[is=about-section].alternate-one li:first-of-type {
+    flex: 0 0 100%
+}
+
+section[is=about-section].alternate-one li:last-of-type {
+    flex: 0 0 100%
+}
+
+section[is=about-section].alternate-one li * {
+    grid-column: 1;
+    width: 90%
+}
+
+section[is=about-section].alternate-one li source.desktop {
+    max-width: 195px;
+    max-height: 195px
+}
+
+section[is=about-section].alternate-one li source.laptop {
+    max-width: 160px;
+    max-height: 160px
+}
+
+section[is=about-section].alternate-one li source.notebook {
+    max-width: 128px;
+    max-height: 128px
+}
+
+section[is=about-section].alternate-one li source.tablet {
+    max-width: 572px;
+    max-height: 572px
+}
+
+section[is=about-section].alternate-one li source.phone {
+    max-width: 417px;
+    max-height: 417px
+}
+
+section[is=about-section].alternate-one li source.x-small {
+    max-width: 417px;
+    max-height: 417px
+}
+
+section[is=about-section].alternate-one li img {
+    aspect-ratio: 1/1
+}
+
+@media screen and (min-width: 768px) {
+    section[is=about-section].alternate-one ul {
+        justify-content: center;
+        row-gap: 50px;
+        overflow-x: unset;
+        flex-wrap: wrap
+    }
+
+    section[is=about-section].alternate-one h3 {
+        margin-top: 15px
+    }
+
+    section[is=about-section].alternate-one li,
+    section[is=about-section].alternate-one li:first-of-type,
+    section[is=about-section].alternate-one li:last-of-type {
+        flex: 0 0 33%;
+        display: grid
+    }
+
+    section[is=about-section].alternate-one li *,
+    section[is=about-section].alternate-one li:first-of-type *,
+    section[is=about-section].alternate-one li:last-of-type * {
+        width: 90%
+    }
+
+    section[is=about-section].alternate-one li img,
+    section[is=about-section].alternate-one li:first-of-type img,
+    section[is=about-section].alternate-one li:last-of-type img {
+        width: 50%
+    }
+}

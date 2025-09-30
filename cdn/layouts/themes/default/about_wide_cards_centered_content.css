@@ -1,0 +1,117 @@
+@import "about_base.css";
+
+section[is=about-section].alternate-seven {
+    --picture-height: min(45vw, 180px);
+    background: linear-gradient(to bottom, var(--color-two) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
+    padding-left: 0;
+    padding-right: 0
+}
+
+section[is=about-section].alternate-seven>* {
+    box-sizing: border-box;
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+    width: 100%
+}
+
+section[is=about-section].alternate-seven>p {
+    display: none
+}
+
+section[is=about-section].alternate-seven>h2 {
+    text-align: start;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 30px
+}
+
+section[is=about-section].alternate-seven ul {
+    background: linear-gradient(to bottom, transparent calc(var(--picture-height) * 0.65), var(--color-one) calc(var(--picture-height) * 0.65), var(--color-one) 100%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+    row-gap: 75px;
+    gap: 25px
+}
+
+section[is=about-section].alternate-seven li {
+    flex: 0 0 calc(var(--picture-height) * 2);
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    justify-content: start;
+    row-gap: 15px
+}
+
+section[is=about-section].alternate-seven li picture {
+    width: 100%;
+    min-width: 250px;
+    align-self: center
+}
+
+section[is=about-section].alternate-seven li picture img {
+    width: 100%;
+    aspect-ratio: 11/7
+}
+
+section[is=about-section].alternate-seven li h3,
+section[is=about-section].alternate-seven li p {
+    width: 90%
+}
+
+section[is=about-section].alternate-seven li p {
+    font-size: var(--body-font-size-medium)
+}
+
+@media screen and (min-width: 768px) {
+    section[is=about-section].alternate-seven h2 {
+        text-align: center
+    }
+
+    section[is=about-section].alternate-seven h3 {
+        text-align: center
+    }
+
+    section[is=about-section].alternate-seven ul {
+        display: grid;
+        grid-template-columns: repeat(2, calc(var(--picture-height) * 2));
+        justify-items: center;
+        gap: 5%
+    }
+
+    section[is=about-section].alternate-seven li p {
+        font-size: var(--body-font-size-small)
+    }
+}
+
+section[is=about-section].alternate-seven source.desktop {
+    max-width: 360px;
+    max-height: 229px
+}
+
+section[is=about-section].alternate-seven source.laptop {
+    max-width: 360px;
+    max-height: 229px
+}
+
+section[is=about-section].alternate-seven source.notebook {
+    max-width: 360px;
+    max-height: 229px
+}
+
+section[is=about-section].alternate-seven source.tablet {
+    max-width: 360px;
+    max-height: 229px
+}
+
+section[is=about-section].alternate-seven source.phone {
+    max-width: 360px;
+    max-height: 229px
+}
+
+section[is=about-section].alternate-seven source.x-small {
+    max-width: 360px;
+    max-height: 229px
+}

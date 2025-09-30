@@ -1,0 +1,6 @@
+@import "more_information_base.css";
+
+section[is=more-information-section].alternate-two h2 {
+    grid-row: 2;
+    margin-bottom: 25px
+}

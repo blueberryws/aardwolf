@@ -1,0 +1,87 @@
+@import "gallery_base.css";
+
+section[is=gallery-section].alternate-two {
+    display: grid;
+    padding: var(--narrow-padding);
+    background-color: var(--brand-color)
+}
+
+section[is=gallery-section].alternate-two h2 {
+    text-align: start;
+    color: var(--brand-contrast-color)
+}
+
+section[is=gallery-section].alternate-two ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    aspect-ratio: 3/2;
+    gap: 10px;
+    max-width: 100%;
+    overflow: hidden
+}
+
+section[is=gallery-section].alternate-two .previous-button,
+section[is=gallery-section].alternate-two .next-button {
+    display: none
+}
+
+section[is=gallery-section].alternate-two button.show-all {
+    grid-row: 3;
+    justify-self: end;
+    background: none;
+    outline: none;
+    text-decoration: underline;
+    width: fit-content;
+    padding: 10px 0;
+    font-size: var(--body-font-small);
+    font-weight: 400;
+    color: var(--brand-contrast-color);
+    display: none
+}
+
+section[is=gallery-section].alternate-two ul.show-all {
+    aspect-ratio: unset
+}
+
+section[is=gallery-section].alternate-two li {
+    height: fit-content
+}
+
+@media screen and (min-width: 768px) {
+    section[is=gallery-section].alternate-two h2 {
+        text-align: center
+    }
+
+    section[is=gallery-section].alternate-two ul {
+        grid-template-columns: repeat(4, 1fr);
+        aspect-ratio: 4/2
+    }
+}
+
+section[is=gallery-section].alternate-two source.desktop {
+    max-width: 345px
+}
+
+section[is=gallery-section].alternate-two source.laptop {
+    max-width: 334px
+}
+
+section[is=gallery-section].alternate-two source.notebook {
+    max-width: 284px
+}
+
+section[is=gallery-section].alternate-two source.tablet {
+    max-width: 232px
+}
+
+section[is=gallery-section].alternate-two source.phone {
+    max-width: 239px
+}
+
+section[is=gallery-section].alternate-two source.x-small {
+    max-width: 175px
+}
+
+section[is=gallery-section].alternate-two img {
+    max-width: 345px
+}

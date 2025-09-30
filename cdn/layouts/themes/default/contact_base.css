@@ -1,0 +1,129 @@
+section[is=contact-form-section] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: unset
+}
+
+section[is=contact-form-section] h2 {
+    margin-top: 50px;
+    margin-bottom: unset
+}
+
+section[is=contact-form-section] p {
+    margin: auto;
+    max-width: 800px
+}
+
+section[is=contact-form-section] form {
+    display: grid;
+    row-gap: 5px;
+    margin-top: 50px;
+    align-self: center;
+    box-sizing: border-box;
+    margin-bottom: 150px;
+    width: 80%
+}
+
+section[is=contact-form-section] form * {
+    grid-column: 1
+}
+
+section[is=contact-form-section] form label {
+    z-index: 12;
+    justify-self: start;
+    align-self: start;
+    padding-top: 5px;
+    padding-left: 20px;
+    font-size: var(--body-font-size-small);
+    font-weight: var(--body-font-weight-medium);
+    text-align: left
+}
+
+section[is=contact-form-section] form input {
+    height: 50px
+}
+
+section[is=contact-form-section] form textarea {
+    height: 150px;
+    resize: none
+}
+
+section[is=contact-form-section] form input,
+section[is=contact-form-section] form textarea {
+    border-radius: var(--small-border-radius);
+    background-color: var(--color-one);
+    outline: none;
+    border: 1px solid var(--color-four);
+    font-size: var(--body-font-size-small);
+    font-weight: var(--body-font-weight-small);
+    color: var(--color-four);
+    box-sizing: border-box;
+    padding: 15px 0 0 20px;
+    display: flex;
+    align-content: end
+}
+
+section[is=contact-form-section] form label[for=name],
+section[is=contact-form-section] form input[name=name] {
+    grid-row: 1
+}
+
+section[is=contact-form-section] form label[for=email],
+section[is=contact-form-section] form input[name=email] {
+    grid-row: 2
+}
+
+section[is=contact-form-section] form label[for=message],
+section[is=contact-form-section] form textarea[name=message] {
+    grid-row: 3
+}
+
+section[is=contact-form-section] form textarea[name=message] {
+    padding-top: 20px
+}
+
+@media (prefers-color-scheme: dark) {
+    section[is=contact-form-section] p {
+        color: var(--color-four)
+    }
+
+    section[is=contact-form-section] form input,
+    section[is=contact-form-section] form textarea {
+        background-color: var(--color-four);
+        color: var(--color-one)
+    }
+}
+
+@media screen and (min-width: 768px) {
+    section[is=contact-form-section] form {
+        width: 650px;
+        gap: 15px
+    }
+
+    section[is=contact-form-section] form label[for=name],
+    section[is=contact-form-section] form input[name=name] {
+        grid-row: 1;
+        grid-column: 1
+    }
+
+    section[is=contact-form-section] form label[for=email],
+    section[is=contact-form-section] form input[name=email] {
+        grid-row: 1;
+        grid-column: 2
+    }
+
+    section[is=contact-form-section] form label[for=message],
+    section[is=contact-form-section] form textarea[name=message] {
+        grid-row: 2;
+        grid-column: 1/span 2
+    }
+
+    section[is=contact-form-section] form button {
+        width: 60%;
+        justify-self: end;
+        grid-column: 2;
+        border-radius: var(--small-border-radius)
+    }
+}

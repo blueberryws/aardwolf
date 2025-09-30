@@ -1,0 +1,9 @@
+@import "faqs_base.css";
+
+section[is=faqs-section].alternate summary.question {
+    background-color: var(--brand-color)
+}
+
+section[is=faqs-section].alternate h3.question-text {
+    color: var(--brand-contrast-color)
+}

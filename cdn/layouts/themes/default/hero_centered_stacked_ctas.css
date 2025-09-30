@@ -1,0 +1,103 @@
+@import "hero_base.css";
+
+section[is=hero-section].alternate-three {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--dark-color-one);
+    height: fit-content
+}
+
+section[is=hero-section].alternate-three>*,
+section[is=hero-section].alternate-three>div>* {
+    z-index: 10;
+    grid-column: 1;
+    text-align: center;
+    padding: 10px 25px;
+    color: var(--dark-color-four)
+}
+
+section[is=hero-section].alternate-three h1 {
+    align-self: end;
+    grid-row: 1;
+    margin-top: 25px
+}
+
+section[is=hero-section].alternate-three h2 {
+    grid-row: 2;
+    margin-bottom: 0
+}
+
+section[is=hero-section].alternate-three p {
+    grid-row: 3
+}
+
+section[is=hero-section].alternate-three a {
+    grid-row: 4;
+    align-self: end;
+    padding-bottom: 50px;
+    margin-top: 25px
+}
+
+section[is=hero-section].alternate-three picture {
+    grid-row: 5;
+    z-index: 1;
+    padding-left: 0;
+    height: unset;
+    aspect-ratio: 1/1;
+    padding: unset
+}
+
+section[is=hero-section].alternate-three picture img {
+    z-index: 1
+}
+
+@media screen and (min-width: 992px) {
+    section[is=hero-section].alternate-three {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr auto auto 1fr;
+        justify-items: start
+    }
+
+    section[is=hero-section].alternate-three>* {
+        grid-column: 1;
+        padding-left: 50px;
+        text-align: start
+    }
+
+    section[is=hero-section].alternate-three h2 {
+        margin-bottom: 0
+    }
+
+    section[is=hero-section].alternate-three p {
+        grid-row: 3
+    }
+
+    section[is=hero-section].alternate-three a {
+        grid-row: 4;
+        align-self: center;
+        margin: unset;
+        padding-top: 0
+    }
+
+    section[is=hero-section].alternate-three picture {
+        grid-row: 1/span 4;
+        grid-column: 2;
+        height: 100%;
+        width: 100%;
+        aspect-ratio: unset;
+        position: absolute
+    }
+}
+
+section[is=hero-section].alternate-three source.desktop {
+    max-width: 960px
+}
+
+section[is=hero-section].alternate-three source.laptop {
+    max-width: 600px
+}
+
+section[is=hero-section].alternate-three source.notebook {
+    max-width: 496px
+}

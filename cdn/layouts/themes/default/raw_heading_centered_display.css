@@ -1,0 +1,6 @@
+@import "raw_heading_base.css";
+@media screen and (min-width: 768px) {
+    section[is=raw-heading-section].alternate-one h2 {
+        text-align: start
+    }
+}

@@ -1,0 +1,142 @@
+@import "testimonials_base.css";
+
+section[is=testimonials-section].default li.testimonials-content {
+    list-style-type: none;
+    background-color: var(--color-two);
+    border-radius: var(--normal-border-radius);
+    padding: 30px 20px 25px 20px;
+    max-width: 486px
+}
+
+section[is=testimonials-section].default blockquote.testimonial-text {
+    font-size: var(--body-font-size-small);
+    font-weight: var(--body-font-weight-small);
+    color: var(--color-four)
+}
+
+section[is=testimonials-section].default figcaption.testimonial-attribution {
+    text-align: center;
+    font-size: var(--body-font-size-small);
+    font-weight: 700;
+    padding: 20px
+}
+
+section[is=testimonials-section].default ul object {
+    width: 100px;
+    justify-self: center
+}
+
+section[is=testimonials-section].default svg {
+    justify-self: center;
+    width: 100px
+}
+
+section[is=testimonials-section].default svg path {
+    fill: var(--color-three)
+}
+
+section[is=testimonials-section].default button {
+    grid-row: 3;
+    margin: 50px 15px 0 15px
+}
+
+section[is=testimonials-section].default button>object {
+    width: 100%;
+    height: 100%
+}
+
+section[is=testimonials-section].default button>svg {
+    width: 100%;
+    height: 100%
+}
+
+section[is=testimonials-section].default button>svg path {
+    fill: var(--color-three);
+    stroke: var(--color-three)
+}
+
+section[is=testimonials-section].default .previous-button {
+    justify-self: start
+}
+
+section[is=testimonials-section].default .next-button {
+    justify-self: end
+}
+
+section[is=testimonials-section].default .testimonials-attribution-picture {
+    display: none
+}
+
+@media (prefers-color-scheme: dark) {
+    section[is=testimonials-section].default li.testimonials-content {
+        background-color: var(--color-three)
+    }
+
+    section[is=testimonials-section].default blockquote.testimonial-text {
+        color: var(--color-one)
+    }
+
+    section[is=testimonials-section].default svg path {
+        fill: var(--color-two)
+    }
+
+    section[is=testimonials-section].default button>svg path {
+        fill: var(--color-four);
+        stroke: var(--color-four)
+    }
+}
+
+@media screen and (min-width: 992px) {
+    section[is=testimonials-section].default ul.testimonials {
+        grid-row: 2;
+        grid-column: 2;
+        display: grid
+    }
+
+    section[is=testimonials-section].default li.testimonials-content {
+        display: none;
+        grid-column: 1;
+        grid-row: 1
+    }
+
+    section[is=testimonials-section].default li.testimonials-content.previous {
+        display: grid;
+        opacity: 60%;
+        transform: scale(0.65) translatex(-70%);
+        z-index: 1
+    }
+
+    section[is=testimonials-section].default li.testimonials-content.focus {
+        display: grid;
+        grid-column: 1;
+        grid-row: 1;
+        z-index: 2
+    }
+
+    section[is=testimonials-section].default li.testimonials-content.next {
+        display: grid;
+        opacity: 60%;
+        transform: scale(0.65) translatex(70%);
+        z-index: 1
+    }
+
+    section[is=testimonials-section].default h2 {
+        grid-column: 1/span 3
+    }
+
+    section[is=testimonials-section].default button {
+        grid-row: 2;
+        margin: unset;
+        align-self: center
+    }
+
+    section[is=testimonials-section].default .previous-button {
+        grid-column: 1;
+        justify-self: center
+    }
+
+    section[is=testimonials-section].default .next-button {
+        grid-column: 3;
+        justify-self: center
+    }
+}

@@ -1,0 +1,6 @@
+@import "raw_paragraph_base.css";
+@media screen and (min-width: 992px) {
+    section[is=raw-paragraph-section].alternate-one p {
+        column-count: 2
+    }
+}

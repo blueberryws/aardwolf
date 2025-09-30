@@ -1,0 +1,148 @@
+@import "about_base.css";
+
+section[is=about-section].alternate-five {
+    background: linear-gradient(to bottom, var(--brand-color) calc(100% - var(--standard-padding-bottom)), transparent calc(100% - var(--standard-padding-bottom)), transparent 100%);
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0
+}
+
+section[is=about-section].alternate-five>* {
+    box-sizing: border-box;
+    padding-left: var(--standard-padding-left);
+    padding-right: var(--standard-padding-right);
+    width: 100%
+}
+
+section[is=about-section].alternate-five>h2,
+section[is=about-section].alternate-five>p {
+    padding-right: var(--narrow-padding-right);
+    padding-left: var(--narrow-padding-left);
+    color: var(--brand-contrast-color)
+}
+
+section[is=about-section].alternate-five>h2 {
+    margin-bottom: 25px
+}
+
+section[is=about-section].alternate-five>p {
+    margin-bottom: 60px;
+    font-size: var(--body-font-size-large)
+}
+
+section[is=about-section].alternate-five ul {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    max-width: 100%;
+    scrollbar-width: none;
+    background: linear-gradient(to bottom, transparent 125px, var(--color-one) 125px, var(--color-one) 100%);
+    padding-right: var(--narrow-padding-right);
+    padding-left: var(--narrow-padding-left)
+}
+
+section[is=about-section].alternate-five ul ::-webkit-scrollbar {
+    display: none
+}
+
+section[is=about-section].alternate-five li {
+    flex: 0 0 90%;
+    scroll-snap-align: center;
+    row-gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 60px;
+    background-color: var(--color-two);
+    border-radius: var(--normal-border-radius);
+    padding: 40px 0;
+    flex-basis: 100%;
+    margin-left: 5%;
+    margin-right: 5%
+}
+
+section[is=about-section].alternate-five li:first-of-type {
+    flex: 0 0 100%
+}
+
+section[is=about-section].alternate-five li:last-of-type {
+    flex: 0 0 100%
+}
+
+section[is=about-section].alternate-five li h3,
+section[is=about-section].alternate-five li p {
+    text-align: center;
+    max-width: 250px
+}
+
+section[is=about-section].alternate-five li picture {
+    width: 250px
+}
+
+section[is=about-section].alternate-five li picture img {
+    width: 100%;
+    aspect-ratio: 1/1
+}
+
+@media screen and (min-width: 768px) {
+    section[is=about-section].alternate-five ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow: unset
+    }
+
+    section[is=about-section].alternate-five li,
+    section[is=about-section].alternate-five li:first-of-type,
+    section[is=about-section].alternate-five li:last-of-type {
+        flex: 1 0 28%
+    }
+
+    section[is=about-section].alternate-five h3 {
+        max-width: 80%
+    }
+}
+
+@media screen and (min-width: 992px) {
+    section[is=about-section].alternate-five ul {
+        gap: 40px
+    }
+
+    section[is=about-section].alternate-five li,
+    section[is=about-section].alternate-five li:first-of-type,
+    section[is=about-section].alternate-five li:last-of-type {
+        margin: unset;
+        flex: 0 0 400px
+    }
+}
+
+section[is=about-section].alternate-five source.desktop {
+    max-width: 250px;
+    max-height: 250px
+}
+
+section[is=about-section].alternate-five source.laptop {
+    max-width: 250px;
+    max-height: 250px
+}
+
+section[is=about-section].alternate-five source.notebook {
+    max-width: 250px;
+    max-height: 250px
+}
+
+section[is=about-section].alternate-five source.tablet {
+    max-width: 250px;
+    max-height: 250px
+}
+
+section[is=about-section].alternate-five source.phone {
+    max-width: 250px;
+    max-height: 250px
+}
+
+section[is=about-section].alternate-five source.x-small {
+    max-width: 250px;
+    max-height: 250px
+}

@@ -1,0 +1,9 @@
+@import "embed_base.css";
+
+section[is=embed-section].alternate-three h2 {
+    display: none
+}
+
+section[is=embed-section].alternate-three p {
+    display: none
+}

@@ -1,0 +1,57 @@
+section[is=call-to-action-section] {
+    display: flex;
+    flex-direction: column
+}
+
+section[is=call-to-action-section] h2 {
+    grid-row: 1
+}
+
+section[is=call-to-action-section] img {
+    border-radius: var(--normal-border-radius)
+}
+
+section[is=call-to-action-section] h3 {
+    font-size: var(--header-font-size-small);
+    font-weight: 900;
+    color: var(--color-three)
+}
+
+section[is=call-to-action-section] p {
+    color: var(--color-four)
+}
+
+section[is=call-to-action-section] img {
+    width: 100%;
+    aspect-ratio: 1/1
+}
+
+section[is=call-to-action-section] button {
+    color: var(--brand-contrast-color);
+    background-color: var(--brand-color);
+    border-radius: var(--normal-border-radius)
+}
+
+@media screen and (min-width: 768px) {
+    section[is=call-to-action-section] {
+        display: grid
+    }
+
+    section[is=call-to-action-section] h3 {
+        font-size: calc(var(--header-font-size-medium) * 1.5);
+        font-weight: 500
+    }
+
+    section[is=call-to-action-section] p {
+        font-size: var(--body-font-size-small)
+    }
+
+    section[is=call-to-action-section] button {
+        padding: 10px 50px
+    }
+
+    section[is=call-to-action-section] picture {
+        width: 100%;
+        aspect-ratio: 11/7
+    }
+}

@@ -1,0 +1,65 @@
+@import "hero_base.css";
+
+section[is=hero-section].alternate-one {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    justify-items: start;
+    align-items: center
+}
+
+section[is=hero-section].alternate-one>*,
+section[is=hero-section].alternate-one>div>* {
+    z-index: 10;
+    grid-column: 1;
+    text-align: start;
+    padding: 20px 25px;
+    color: var(--dark-color-four)
+}
+
+section[is=hero-section].alternate-one h1 {
+    align-self: end;
+    grid-row: 1;
+    padding-top: 50px
+}
+
+section[is=hero-section].alternate-one h2 {
+    grid-row: 2;
+    margin-bottom: 0;
+    padding-top: 40px;
+    padding-bottom: 40px
+}
+
+section[is=hero-section].alternate-one p {
+    grid-row: 3
+}
+
+section[is=hero-section].alternate-one a {
+    grid-row: 4;
+    align-self: end;
+    padding-bottom: 50px
+}
+
+section[is=hero-section].alternate-one picture {
+    z-index: 1;
+    position: absolute;
+    height: 100%;
+    padding: 0
+}
+
+section[is=hero-section].alternate-one picture img {
+    z-index: 1;
+    opacity: 65%;
+    filter: brightness(75%)
+}
+
+@media screen and (min-width: 576px) {
+    section[is=hero-section].alternate-one>* {
+        padding: 20px 50px
+    }
+}
+
+@media screen and (min-width: 992px) {
+    section[is=hero-section].alternate-one>* {
+        padding-left: 100px
+    }
+}

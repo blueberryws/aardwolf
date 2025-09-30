@@ -1,0 +1,64 @@
+@import "more_information_base.css";
+
+section[is=more-information-section].default {
+    grid-template-columns: 1fr;
+    justify-items: center
+}
+
+section[is=more-information-section].default picture {
+    margin-bottom: 25px
+}
+
+section[is=more-information-section].default picture img {
+    aspect-ratio: 3/2
+}
+
+@media screen and (min-width: 992px) {
+    section[is=more-information-section].default {
+        grid-template-columns: 1fr 1fr
+    }
+
+    section[is=more-information-section].default h2 {
+        grid-column: 1/span 2
+    }
+
+    section[is=more-information-section].default picture {
+        width: 90%;
+        margin-bottom: unset
+    }
+
+    section[is=more-information-section].default picture img {
+        aspect-ratio: 6/5;
+        width: 100%
+    }
+}
+
+section[is=more-information-section].default source.desktop {
+    max-width: 589px;
+    max-height: 491px
+}
+
+section[is=more-information-section].default source.laptop {
+    max-width: 571px;
+    max-height: 475px
+}
+
+section[is=more-information-section].default source.notebook {
+    max-width: 481px;
+    max-height: 400px
+}
+
+section[is=more-information-section].default source.tablet {
+    max-width: 861px;
+    max-height: 574px
+}
+
+section[is=more-information-section].default source.phone {
+    max-width: 707px;
+    max-height: 471px
+}
+
+section[is=more-information-section].default source.x-small {
+    max-width: 515px;
+    max-height: 343px
+}

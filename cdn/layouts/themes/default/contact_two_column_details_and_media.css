@@ -1,0 +1,91 @@
+@import "contact_base.css";
+
+section[is=contact-form-section].alternate {
+    background-color: var(--color-four)
+}
+
+section[is=contact-form-section].alternate * {
+    z-index: 10;
+    color: var(--color-one)
+}
+
+section[is=contact-form-section].alternate picture {
+    z-index: 1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 45%
+}
+
+section[is=contact-form-section].alternate picture img {
+    height: 100%;
+    width: 100%
+}
+
+section[is=contact-form-section].alternate form input,
+section[is=contact-form-section].alternate form textarea {
+    background-color: var(--color-one);
+    color: var(--color-four);
+    border: none
+}
+
+section[is=contact-form-section].alternate form label {
+    z-index: 12;
+    color: var(--color-four)
+}
+
+section[is=contact-form-section].alternate form button {
+    color: var(--brand-contrast-color)
+}
+
+@media (prefers-color-scheme: dark) {
+    section[is=contact-form-section].alternate {
+        background-color: var(--color-one)
+    }
+
+    section[is=contact-form-section].alternate h2 {
+        color: var(--color-four)
+    }
+
+    section[is=contact-form-section].alternate p {
+        color: var(--color-four)
+    }
+
+    section[is=contact-form-section].alternate form label {
+        color: var(--color-one)
+    }
+
+    section[is=contact-form-section].alternate form input,
+    section[is=contact-form-section].alternate form textarea {
+        background-color: var(--color-four);
+        color: var(--color-one)
+    }
+
+    section[is=contact-form-section].alternate form button {
+        color: var(--color-one)
+    }
+}
+
+section[is=contact-form-section].alternate source.desktop {
+    max-width: 1920px
+}
+
+section[is=contact-form-section].alternate source.laptop {
+    max-width: 1400px
+}
+
+section[is=contact-form-section].alternate source.notebook {
+    max-width: 1200px
+}
+
+section[is=contact-form-section].alternate source.tablet {
+    max-width: 992px
+}
+
+section[is=contact-form-section].alternate source.phone {
+    max-width: 768px
+}
+
+section[is=contact-form-section].alternate source.x-small {
+    max-width: 576px
+}

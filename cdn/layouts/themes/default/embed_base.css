@@ -1,0 +1,26 @@
+section[is=embed-section] {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+section[is=embed-section] div[is=editable-iframe] {
+    width: 1200px;
+    max-width: 100%;
+    position: relative
+}
+
+section[is=embed-section] p {
+    margin-bottom: 15px;
+    color: var(--color-four)
+}
+
+@media screen and (min-width: 768px) {
+    section[is=embed-section] div[is=editable-iframe] {
+        margin-bottom: 100px
+    }
+
+    section[is=embed-section] p {
+        margin-bottom: 35px
+    }
+}

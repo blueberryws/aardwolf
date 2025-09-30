@@ -1,0 +1,10 @@
+@import "more_information_base.css";
+
+section[is=more-information-section].alternate-three h2 {
+    margin-bottom: 25px
+}
+
+section[is=more-information-section].alternate-three picture {
+    margin-top: 50px;
+    grid-row: 3
+}

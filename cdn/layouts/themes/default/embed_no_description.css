@@ -1,0 +1,5 @@
+@import "embed_base.css";
+
+section[is=embed-section].alternate-two p {
+    display: none
+}
