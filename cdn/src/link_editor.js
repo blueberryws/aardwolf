@@ -1,6 +1,6 @@
 // TODO: It'd be cool if this raised the event to make the change, rather than the change itself.
 // Maybe that's a later thing when we get the history API working, though.
-class EditLinkModal extends HTMLElement {
+class EditLinkModal extends HTMLElement { // startfold
     constructor(currentText, currentDestination, saveFunc) {
         super();
         this.saveFunc = saveFunc;
@@ -30,6 +30,7 @@ class EditLinkModal extends HTMLElement {
     }
 }
 customElements.define("edit-link-modal", EditLinkModal);
+// endfold
 
 class LinkController {
   constructor() {

@@ -8,6 +8,16 @@ div[data-editor='embed'] {
 h1, h2, h3, h4, h5, h6, p {
   white-space: pre-wrap;
 }
+.bold {
+  font-weight: 900;
+  color: green;
+}
+.italic {
+  font-style: italic;
+}
+.underline {
+  text-decoration: underline;
+}
 /* end "move" section */
 .section-controller-button {
   position: absolute;

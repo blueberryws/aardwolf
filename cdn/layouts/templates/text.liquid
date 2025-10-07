@@ -1,1 +1,3 @@
-{%- for fragment in fragments -%}<span data-id="{{fragment.id}}">{{fragment.text}}</span>{%- endfor -%}
+{%- for fragment in fragments -%}
+  {% if fragment.link %}<a href="{{fragment.link}}" {% else %}<span {% endif %}
+    data-id="{{fragment.id}}" class='{{ fragment.styles | join }}'>{{fragment.text}}{%- if fragment.link -%}</a>{% else %}</span>{% endif %}{%- endfor -%}
