@@ -10,6 +10,7 @@
   <footer></footer>
   <div id="scratch">
     <link rel="stylesheet" href="src/editor.css" type="text/css">
+    <link rel="stylesheet" href="styles/admin.css" type="text/css">
     <script src="/src/admin_modal.js"></script>
     <script src="/src/section_editor.js"></script>
     <script src="/src/item_editor.js"></script>
@@ -19,6 +20,7 @@
     <script src="/src/text_editor.js"></script>
     <script src="/src/picture_editor.js"></script>
     <script src="/src/liquid.browser.umd.js"></script>
+    <script type="module" src="/src/admin_aside.js"></script>
     <script>
       // TODO:
       //   "focus" and "selection" manager <-- this will preserve state between renders.
@@ -231,6 +233,7 @@
       window.addEventListener("load", async () => { await loadPage(); await loadStyles() });
     </script>
   </div>
+  <admin-aside></admin-aside>
   <div id="styles">
   </div>
 </body>

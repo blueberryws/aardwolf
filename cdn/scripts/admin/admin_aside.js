@@ -10,24 +10,24 @@ import { LOGGER } from "../utils/logger.js";
 export const AdminAsideElementName = "admin-aside";
 
 class AdminAsideEditor {
-    constructor(element) {
-       this.element = element;
-       this.handleTouch = (e) => this.takeFocus(e);
-       this.element.addEventListener("touchend", this.handleTouch);
+  constructor(element) {
+    this.element = element;
+    this.handleTouch = (e) => this.takeFocus(e);
+    this.element.addEventListener("touchend", this.handleTouch);
+  }
+  takeFocus() { // startfold
+    const hadFocus = this.element.classList.contains("focus");
+    const otherSelected = document.querySelectorAll(".focus");
+    otherSelected.forEach(el => {
+      el.editor.removeFocus();
+    });
+    if (!hadFocus) {
+      this.element.classList.add("focus");
     }
-    takeFocus() { // startfold
-        const hadFocus = this.element.classList.contains("focus");
-        const otherSelected = document.querySelectorAll(".focus");
-        otherSelected.forEach(el => {
-            el.editor.removeFocus();
-        });
-        if (!hadFocus) {
-          this.element.classList.add("focus");
-        }
-    } // endfold
-    removeFocus() { // startfold
-        this.element.classList.remove("focus");
-    } // endfold
+  } // endfold
+  removeFocus() { // startfold
+    this.element.classList.remove("focus");
+  } // endfold
 }
 
 export class AdminAside extends HTMLElement { // startfold
@@ -47,10 +47,10 @@ export class AdminAside extends HTMLElement { // startfold
     arrow.innerText = "menu ➤";
     this.appendChild(arrow);
     for (let child of this.children) {
-        this.appendChild(new child());
+      this.appendChild(new child());
     }
     this.editor = new AdminAsideEditor(this);
   } // endfold
 }
-customElements.define(AdminAsideElementName, AdminAside, {extends: "aside"});
+customElements.define(AdminAsideElementName, AdminAside, { extends: "aside" });
 // endfold

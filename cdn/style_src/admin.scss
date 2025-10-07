@@ -556,7 +556,7 @@ text-fragment a {
 /* endfold */
 
 /* aside startfold */
-aside[is="admin-aside"] {
+admin-aside {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -574,14 +574,11 @@ aside[is="admin-aside"] {
     z-index: 1000;
 }
  
-aside[is="admin-aside"]:hover, aside[is="admin-aside"].focus {
+admin-aside:hover, admin-aside.focus {
     transform: translateX(0px);
 }
 
-aside[is="admin-aside"] button {
-}
-
-aside[is="admin-aside"] #aside-arrow {
+admin-aside #aside-arrow {
   position: absolute;
   top: 0;
   right: -85px;
@@ -591,6 +588,21 @@ aside[is="admin-aside"] #aside-arrow {
   border-radius: 2px;
   background-color: #d3d3d3;
 }
+
+edit-palette-button, edit-fonts-button, edit-head-button, edit-favicon-button, open-help-button  {
+  font-family:  sans-serif; //var(--body-font-family);
+  font-size: 14px; //var(--body-font-size-small);
+  font-weight:  bolder; //var(--body-font-weight-small);
+  text-align: center;
+  padding: 12px 25px;
+  border: 20px;
+  outline: 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: black; //var(--brand-contrast-color);
+  background-color: white; //var(--brand-color);
+}
+
 /* endfold */
 /* save-menu startfold */
 save-menu {
@@ -745,8 +757,7 @@ size-selector label {
 size-selector button::selection {
     background: none;
 }
-size-selector[data-selected="true"] {
-}
+
 size-selector[data-selected="false"]:after {
     content: " ⮟";
     font-size: 15px;
@@ -770,9 +781,4 @@ size-selector[data-selected="true"] > button {
     user-select: none;
     border-radius: 0;
     border-bottom: 1px solid black;
-}
-size-selector[data-selected="true"] > button:hover {
-}
-
-startup-wizard h1 {
 }
