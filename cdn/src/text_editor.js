@@ -41,26 +41,84 @@ class UnderlineButton extends HTMLElement { // startfold
 }
 customElements.define('unerline-button', UnderlineButton);
 // endfold
-class LinkButton extends HTMLElement { // startfold
-    constructor(saveHandler) {
+class ClearTextStyleButton extends HTMLElement { // startfold
+    constructor(clickHandler) {
+      super();
+      this.classList.add(TEXT_STYLE);
+      this.textContent = "X";
+      this.addEventListener("mousedown", clickHandler);
+    }
+    focus(text) {
+      const bounds = text.getBoundingClientRect();
+      this.style = `top: ${bounds.top + window.scrollY - 10}px; left: ${bounds.left + window.scrollX + 90}px;`;
+    }
+}
+customElements.define('clear-text-style-button', ClearTextStyleButton);
+// endfold
+class SetFontSizeButton extends HTMLElement { // startfold
+    constructor(clickHandler) {
+      super();
+      this.classList.add(TEXT_STYLE);
+      this.open = false;
+      this.clickHandler = clickHandler;
+      attachHTML(this, `
+        <div data-name="fontSizeSelection" data-state="closed">
+          <div data-value="">Default</div>
+          <div data-value="xlarge">XLarge</div>
+          <div data-value="large">Large</div>
+          <div data-value="medium">Medium</div>
+          <div data-value="small">Small</div>
+        </div>
+      `);
+      this.fontSizeSelection.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        this.fontSizeSelection.dataset.state = this.fontSizeSelection.dataset.state == "closed" ? "open" : "closed";
+        if (e.target.dataset.value != null && e.target.dataset.selected != "true") {
+          this.clickHandler(e.target.dataset.value);
+        }
+      });
+    }
+    focus(text) {
+      const bounds = text.getBoundingClientRect();
+      this.style = `top: ${bounds.top + window.scrollY - 10}px; left: ${bounds.left + window.scrollX + 110}px;`;
+      // clear selection
+      const curSel = this.querySelector("[data-selected='true']");
+      if (curSel != null) {
+        delete curSel.dataset.selected;
+      }
+      // add selection
+      let nextSel = this.querySelector(`[data-value='${text.dataset.fontSize}']`);
+      if (nextSel == null) {
+        nextSel = this.querySelector(`[data-value='']`);
+      }
+      nextSel.dataset.selected = "true";
+    }
+}
+customElements.define('set-font-size-button', SetFontSizeButton);
+// endfold
+class EditLinkButton extends HTMLElement { // startfold
+    constructor(clickHandler) {
       super();
       this.classList.add(TEXT_STYLE);
       this.textContent = "+";
-      this.addEventListener("mousedown", (e) => {
-        new EditTextLinkModal(currentDestination, saveFunc);
-      });
+      this.addEventListener("mousedown", (e) => clickHandler(e))
     }
     focus(text) {
       const bounds = text.getBoundingClientRect();
       this.style = `top: ${bounds.top + window.scrollY - 10}px; left: ${bounds.left + window.scrollX + 70}px;`;
     }
 }
-customElements.define('link-button', LinkButton);
+customElements.define('edit-link-button', EditLinkButton);
 // endfold
 class EditTextLinkModal extends HTMLElement { // startfold
-    constructor(currentDestination, saveFunc) {
+    constructor(
+        currentDestination,
+        cancelFunc,
+        saveFunc
+    ) {
         super();
         this.saveFunc = saveFunc;
+        this.cancelFunc = cancelFunc;
         attachHTML(this, `
             <dialog data-name="modal">
               <h2>Edit Link</h2>
@@ -76,6 +134,7 @@ class EditTextLinkModal extends HTMLElement { // startfold
     }
     handleClick(e) {
       if (e.target == this.cancel) {
+        this.cancelFunc();
         this.remove();
       }
       if (e.target == this.save) {
@@ -87,11 +146,9 @@ class EditTextLinkModal extends HTMLElement { // startfold
 customElements.define("edit-text-link-modal", EditTextLinkModal);
 // endfold
 
-
 // TODO:
-// - links
-// - clear styles
-// - set font size
+// - selection highlighters or whatever
+//   - tooltip for links when highlighted?
 
 function* textWalker(root) { // startfold
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
@@ -155,6 +212,20 @@ class TextController {
         new BoldButton((e) => this.boldSelection(e)),
         new ItalicButton((e) => this.italicizeSelection(e)),
         new UnderlineButton((e) => this.underlineSelection(e)),
+        new ClearTextStyleButton((e) => this.clearSelection(e)),
+        new SetFontSizeButton((size) => this.setFontSize(size)),
+        new EditLinkButton((e) => {
+          e.preventDefault();
+          const selection = this.getSelection();
+          new EditTextLinkModal(
+            "",
+            () => {this.setSelection(selection)},
+            (dest) => {
+              this.setSelection(selection);
+              this.applyStyle("link", dest);
+            },
+          );
+        }),
       ];
       this.text = null;
   }
@@ -182,9 +253,24 @@ class TextController {
   } // endfold
   setSelection(selection) { // startfold
     const sel = window.getSelection();
-    const newRange = offsetsToRange(document.querySelector(`[data-id='${selection.nodeId}']`), selection);
+    const focusNode = document.querySelector(`[data-id='${selection.nodeId}']`);
+    const newRange = offsetsToRange(focusNode, selection);
+    focusNode.focus();
     sel.removeAllRanges();
     sel.addRange(newRange);
+  } // endfold
+  clearSelection(e) { // startfold
+    e.preventDefault();
+    this.applyStyle("clear");
+  } // endfold
+  setFontSize(size) { // startfold
+    const selection = this.getSelection();
+    this.updateData(document.querySelector(`[data-id='${selection.nodeId}']`));
+    const node = dataController.byId(selection.nodeId);
+    node.data.fontSize = size
+    renderDiff(node.id, pageData);
+    attach();
+    this.setSelection(selection);
   } // endfold
   italicizeSelection(e) { // startfold
     e.preventDefault();
@@ -198,7 +284,7 @@ class TextController {
     e.preventDefault();
     this.applyStyle("bold");
   } // endfold
-  applyStyle(styleName) { // startfold
+  applyStyle(styleName, link) { // startfold
     const selection = this.getSelection();
     this.updateData(document.querySelector(`[data-id='${selection.nodeId}']`));
     const node = dataController.byId(selection.nodeId);
@@ -226,7 +312,14 @@ class TextController {
 
     // op == "bold" if all(classes.contain('bold') : "unbold"
     let apply;
-    if (allContain) {
+    if (styleName == "link") {
+      apply = (frag) => {frag.link = link};
+    } else if (styleName == "clear") {
+      apply = (frag) => {
+        frag.styles = []
+        frag.link = null;
+      };
+    } else if (allContain) {
       apply = (frag) => {frag.styles = frag.styles.filter(style => style != styleName)};
     } else {
       apply = (frag) => {
