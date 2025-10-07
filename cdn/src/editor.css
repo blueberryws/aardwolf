@@ -19,6 +19,18 @@ h1, h2, h3, h4, h5, h6, p {
   text-decoration: underline;
 }
 /* end "move" section */
+div[data-name="fontSizeSelection"][data-state="closed"] > * {
+  display: none;
+}
+div[data-name="fontSizeSelection"][data-state="closed"] > div[data-selected="true"] {
+  display: block;
+}
+div[data-name="fontSizeSelection"][data-state="open"] > * {
+  background-color: blue;
+}
+div[data-name="fontSizeSelection"][data-state="closed"] > div[data-selected="true"] {
+  background-color: red;
+}
 .section-controller-button {
   position: absolute;
   background-color: blue;
